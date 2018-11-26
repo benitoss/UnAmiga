@@ -1,6 +1,6 @@
 # UnAmiga FPGA
 
-UnAmiga is a Amiga 1200 computer in a FPGA board. The main core is based in a minimig core of MiST ported  by Jepalza to this FPGA.
+UnAmiga is a Amiga 1200 computer in a FPGA board. The main core is based in a minimig core of MiST ported  by **Jepalza** to this FPGA.
 There is a version AGA of the UnAmiga 1200. 
 
 ![alt text](https://vignette.wikia.nocookie.net/unamiga/images/0/04/Photo_2018-07-23_22-51-46.jpg)
