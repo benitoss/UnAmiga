@@ -26,8 +26,7 @@ FPGA Board with available cores:<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;	Atari800XL<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;	Spectrum 128K<BR>
 &nbsp;&nbsp;&nbsp;&nbsp;	QL<BR>
-&nbsp;&nbsp;&nbsp;&nbsp;	ARCADE<BR>
-	
+
 
 ___________________________________________________________________________<BR><BR>
 For more information, visit [ForoFPGA pages](http://unamiga.forofpga.es).<BR>
