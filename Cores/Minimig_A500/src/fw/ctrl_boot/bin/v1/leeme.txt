@@ -1,0 +1,1 @@
+el ASM de aqui, NO es un ASM, sino la salida del LOG al compilar los fuentes en C originales

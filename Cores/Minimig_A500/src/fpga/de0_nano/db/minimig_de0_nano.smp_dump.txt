@@ -1,0 +1,217 @@
+
+State Machine - |minimig_de0_nano_top|Minimig1:minimig|ciaa:CIAA1|ps2keyboard:kbd1|kstate
+Name kstate.110 kstate.101 kstate.100 kstate.011 kstate.010 kstate.001 kstate.000 
+kstate.000 0 0 0 0 0 0 0 
+kstate.001 0 0 0 0 0 1 1 
+kstate.010 0 0 0 0 1 0 1 
+kstate.011 0 0 0 1 0 0 1 
+kstate.100 0 0 1 0 0 0 1 
+kstate.101 0 1 0 0 0 0 1 
+kstate.110 1 0 0 0 0 0 1 
+
+State Machine - |minimig_de0_nano_top|Minimig1:minimig|userio:USERIO1|osd:osd1|wr_state
+Name wr_state.ST_WR_WRITE wr_state.00 wr_state.ST_WR_WAIT 
+wr_state.00 0 0 0 
+wr_state.ST_WR_WRITE 1 1 0 
+wr_state.ST_WR_WAIT 0 1 1 
+
+State Machine - |minimig_de0_nano_top|Minimig1:minimig|userio:USERIO1|ps2mouse:pm1|mstate
+Name mstate.110 mstate.101 mstate.100 mstate.011 mstate.010 mstate.001 mstate.000 
+mstate.000 0 0 0 0 0 0 0 
+mstate.001 0 0 0 0 0 1 1 
+mstate.010 0 0 0 0 1 0 1 
+mstate.011 0 0 0 1 0 0 1 
+mstate.100 0 0 1 0 0 0 1 
+mstate.101 0 1 0 0 0 0 1 
+mstate.110 1 0 0 0 0 0 1 
+
+State Machine - |minimig_de0_nano_top|Minimig1:minimig|Paula:PAULA1|audio:ad1|audiochannel:ach3|audio_state
+Name audio_state.AUDIO_STATE_2 audio_state.AUDIO_STATE_3 audio_state.AUDIO_STATE_1 audio_state.AUDIO_STATE_0 audio_state.AUDIO_STATE_4 
+audio_state.AUDIO_STATE_0 0 0 0 0 0 
+audio_state.AUDIO_STATE_1 0 0 1 1 0 
+audio_state.AUDIO_STATE_3 0 1 0 1 0 
+audio_state.AUDIO_STATE_2 1 0 0 1 0 
+audio_state.AUDIO_STATE_4 0 0 0 1 1 
+
+State Machine - |minimig_de0_nano_top|Minimig1:minimig|Paula:PAULA1|audio:ad1|audiochannel:ach2|audio_state
+Name audio_state.AUDIO_STATE_2 audio_state.AUDIO_STATE_3 audio_state.AUDIO_STATE_1 audio_state.AUDIO_STATE_0 audio_state.AUDIO_STATE_4 
+audio_state.AUDIO_STATE_0 0 0 0 0 0 
+audio_state.AUDIO_STATE_1 0 0 1 1 0 
+audio_state.AUDIO_STATE_3 0 1 0 1 0 
+audio_state.AUDIO_STATE_2 1 0 0 1 0 
+audio_state.AUDIO_STATE_4 0 0 0 1 1 
+
+State Machine - |minimig_de0_nano_top|Minimig1:minimig|Paula:PAULA1|audio:ad1|audiochannel:ach1|audio_state
+Name audio_state.AUDIO_STATE_2 audio_state.AUDIO_STATE_3 audio_state.AUDIO_STATE_1 audio_state.AUDIO_STATE_0 audio_state.AUDIO_STATE_4 
+audio_state.AUDIO_STATE_0 0 0 0 0 0 
+audio_state.AUDIO_STATE_1 0 0 1 1 0 
+audio_state.AUDIO_STATE_3 0 1 0 1 0 
+audio_state.AUDIO_STATE_2 1 0 0 1 0 
+audio_state.AUDIO_STATE_4 0 0 0 1 1 
+
+State Machine - |minimig_de0_nano_top|Minimig1:minimig|Paula:PAULA1|audio:ad1|audiochannel:ach0|audio_state
+Name audio_state.AUDIO_STATE_2 audio_state.AUDIO_STATE_3 audio_state.AUDIO_STATE_1 audio_state.AUDIO_STATE_0 audio_state.AUDIO_STATE_4 
+audio_state.AUDIO_STATE_0 0 0 0 0 0 
+audio_state.AUDIO_STATE_1 0 0 1 1 0 
+audio_state.AUDIO_STATE_3 0 1 0 1 0 
+audio_state.AUDIO_STATE_2 1 0 0 1 0 
+audio_state.AUDIO_STATE_4 0 0 0 1 1 
+
+State Machine - |minimig_de0_nano_top|Minimig1:minimig|Paula:PAULA1|floppy:pf1|dskstate
+Name dskstate.DISKDMA_ACTIVE dskstate.DISKDMA_IDLE dskstate.DISKDMA_INT 
+dskstate.DISKDMA_IDLE 0 0 0 
+dskstate.DISKDMA_ACTIVE 1 1 0 
+dskstate.DISKDMA_INT 0 1 1 
+
+State Machine - |minimig_de0_nano_top|Minimig1:minimig|Paula:PAULA1|uart:pu1|rx_state
+Name rx_state.RX_IDLE rx_state.RX_SHIFT rx_state.RX_START 
+rx_state.RX_IDLE 0 0 0 
+rx_state.RX_START 1 0 1 
+rx_state.RX_SHIFT 1 1 0 
+
+State Machine - |minimig_de0_nano_top|Minimig1:minimig|Paula:PAULA1|uart:pu1|tx_state
+Name tx_state.TX_SHIFT 
+tx_state.TX_IDLE 0 
+tx_state.TX_SHIFT 1 
+
+State Machine - |minimig_de0_nano_top|Minimig1:minimig|Agnus:AGNUS1|blitter:bl1|blt_state
+Name blt_state.BLT_L2 blt_state.BLT_L3 blt_state.BLT_L1 blt_state.BLT_L4 blt_state.BLT_E blt_state.BLT_B blt_state.BLT_C blt_state.BLT_A blt_state.BLT_D blt_state.BLT_F blt_state.BLT_INIT blt_state.BLT_IDLE 
+blt_state.BLT_IDLE 0 0 0 0 0 0 0 0 0 0 0 0 
+blt_state.BLT_INIT 0 0 0 0 0 0 0 0 0 0 1 1 
+blt_state.BLT_F 0 0 0 0 0 0 0 0 0 1 0 1 
+blt_state.BLT_D 0 0 0 0 0 0 0 0 1 0 0 1 
+blt_state.BLT_A 0 0 0 0 0 0 0 1 0 0 0 1 
+blt_state.BLT_C 0 0 0 0 0 0 1 0 0 0 0 1 
+blt_state.BLT_B 0 0 0 0 0 1 0 0 0 0 0 1 
+blt_state.BLT_E 0 0 0 0 1 0 0 0 0 0 0 1 
+blt_state.BLT_L4 0 0 0 1 0 0 0 0 0 0 0 1 
+blt_state.BLT_L1 0 0 1 0 0 0 0 0 0 0 0 1 
+blt_state.BLT_L3 0 1 0 0 0 0 0 0 0 0 0 1 
+blt_state.BLT_L2 1 0 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |minimig_de0_nano_top|Minimig1:minimig|Agnus:AGNUS1|copper:cp1|copper_state
+Name copper_state.WAITSKIP1 copper_state.WAITSKIP2 copper_state.FETCH2 copper_state.FETCH1 copper_state.RESET 
+copper_state.RESET 0 0 0 0 0 
+copper_state.FETCH1 0 0 0 1 1 
+copper_state.FETCH2 0 0 1 0 1 
+copper_state.WAITSKIP2 0 1 0 0 1 
+copper_state.WAITSKIP1 1 0 0 0 1 
+
+State Machine - |minimig_de0_nano_top|sdram_ctrl:sdram|cpu_cache:cpu_cache|state
+Name state.ST_FILL state.ST_CPU_READ state.ST_CPU_WRITE state.ST_PREP state.ST_IDLE state.000 
+state.000 0 0 0 0 0 0 
+state.ST_IDLE 0 0 0 0 1 1 
+state.ST_PREP 0 0 0 1 0 1 
+state.ST_CPU_WRITE 0 0 1 0 0 1 
+state.ST_CPU_READ 0 1 0 0 0 1 
+state.ST_FILL 1 0 0 0 0 1 
+
+State Machine - |minimig_de0_nano_top|TG68K:tg68k|sync_state
+Name sync_state.sync9 sync_state.sync8 sync_state.sync7 sync_state.sync6 sync_state.sync5 sync_state.sync4 sync_state.sync3 sync_state.sync2 sync_state.sync1 sync_state.sync0 
+sync_state.sync0 0 0 0 0 0 0 0 0 0 0 
+sync_state.sync1 0 0 0 0 0 0 0 0 1 1 
+sync_state.sync2 0 0 0 0 0 0 0 1 0 1 
+sync_state.sync3 0 0 0 0 0 0 1 0 0 1 
+sync_state.sync4 0 0 0 0 0 1 0 0 0 1 
+sync_state.sync5 0 0 0 0 1 0 0 0 0 1 
+sync_state.sync6 0 0 0 1 0 0 0 0 0 1 
+sync_state.sync7 0 0 1 0 0 0 0 0 0 1 
+sync_state.sync8 0 1 0 0 0 0 0 0 0 1 
+sync_state.sync9 1 0 0 0 0 0 0 0 0 1 
+
+State Machine - |minimig_de0_nano_top|TG68K:tg68k|TG68KdotC_Kernel:pf68K_Kernel_inst|micro_state
+Name micro_state.div_end2 micro_state.div_end1 micro_state.div4 micro_state.div3 micro_state.div2 micro_state.div1 micro_state.mul_end2 micro_state.mul_end1 micro_state.mul2 micro_state.mul1 micro_state.bf1 micro_state.rota1 micro_state.movep5 micro_state.movep4 micro_state.movep3 micro_state.movep2 micro_state.movep1 micro_state.movec1 micro_state.trap3 micro_state.trap2 micro_state.trap1 micro_state.trap0 micro_state.rte3 micro_state.rte2 micro_state.rte1 micro_state.int4 micro_state.int3 micro_state.int2 micro_state.int1 micro_state.unlink2 micro_state.unlink1 micro_state.link2 micro_state.link1 micro_state.cmpm micro_state.op_AxAy micro_state.andi micro_state.movem3 micro_state.movem2 micro_state.movem1 micro_state.dbcc1 micro_state.nopnop micro_state.bsr2 micro_state.bsr1 micro_state.bra1 micro_state.st_AnXn2 micro_state.st_AnXn1 micro_state.st_229_4 micro_state.st_229_3 micro_state.st_229_2 micro_state.st_229_1 micro_state.ld_229_4 micro_state.ld_229_3 micro_state.ld_229_2 micro_state.ld_229_1 micro_state.ld_AnXnbd3 micro_state.ld_AnXnbd2 micro_state.ld_AnXnbd1 micro_state.st_dAn1 micro_state.ld_AnXn2 micro_state.ld_AnXn1 micro_state.ld_dAn1 micro_state.st_nn micro_state.idle micro_state.nop micro_state.ld_nn 
+micro_state.ld_nn 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+micro_state.nop 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+micro_state.idle 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+micro_state.st_nn 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+micro_state.ld_dAn1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+micro_state.ld_AnXn1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+micro_state.ld_AnXn2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+micro_state.st_dAn1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+micro_state.ld_AnXnbd1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+micro_state.ld_AnXnbd2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+micro_state.ld_AnXnbd3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+micro_state.ld_229_1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.ld_229_2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.ld_229_3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.ld_229_4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.st_229_1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.st_229_2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.st_229_3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.st_229_4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.st_AnXn1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.st_AnXn2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.bra1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.bsr1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.bsr2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.nopnop 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.dbcc1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.movem1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.movem2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.movem3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.andi 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.op_AxAy 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.cmpm 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.link1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.link2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.unlink1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.unlink2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.int1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.int2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.int3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.int4 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.rte1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.rte2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.rte3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.trap0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.trap1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.trap2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.trap3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.movec1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.movep1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.movep2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.movep3 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.movep4 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.movep5 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.rota1 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.bf1 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.mul1 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.mul2 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.mul_end1 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.mul_end2 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.div1 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.div2 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.div3 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.div4 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.div_end1 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+micro_state.div_end2 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |minimig_de0_nano_top|qmem_bridge:qmem_bridge|state
+Name state.ST_WAIT state.ST_SETUP state.ST_A_WAIT state.000 
+state.000 0 0 0 0 
+state.ST_SETUP 0 1 0 1 
+state.ST_WAIT 1 0 0 1 
+state.ST_A_WAIT 0 0 1 1 
+
+State Machine - |minimig_de0_nano_top|ctrl_top:ctrl_top|mor1kx_wrapper:ctrl_cpu|mor1kx:mor1kx0|mor1kx_cpu:mor1kx_cpu|mor1kx_cpu_cappuccino:cappuccino.mor1kx_cpu|mor1kx_lsu_cappuccino:mor1kx_lsu_cappuccino|state
+Name state.TLB_RELOAD state.WRITE state.READ state.IDLE state.DC_REFILL 
+state.IDLE 0 0 0 0 0 
+state.READ 0 0 1 1 0 
+state.WRITE 0 1 0 1 0 
+state.TLB_RELOAD 1 0 0 1 0 
+state.DC_REFILL 0 0 0 1 1 
+
+State Machine - |minimig_de0_nano_top|ctrl_top:ctrl_top|mor1kx_wrapper:ctrl_cpu|mor1kx:mor1kx0|mor1kx_cpu:mor1kx_cpu|mor1kx_cpu_cappuccino:cappuccino.mor1kx_cpu|mor1kx_fetch_cappuccino:mor1kx_fetch_cappuccino|state
+Name state.IC_REFILL state.TLB_RELOAD state.READ state.IDLE 
+state.IDLE 0 0 0 0 
+state.READ 0 0 1 1 
+state.TLB_RELOAD 0 1 0 1 
+state.IC_REFILL 1 0 0 1 
+
+State Machine - |minimig_de0_nano_top|ctrl_top:ctrl_top|mor1kx_wrapper:ctrl_cpu|mor1kx:mor1kx0|mor1kx_cpu:mor1kx_cpu|mor1kx_cpu_cappuccino:cappuccino.mor1kx_cpu|mor1kx_fetch_cappuccino:mor1kx_fetch_cappuccino|mor1kx_icache:icache_gen.mor1kx_icache|state
+Name state.INVALIDATE state.REFILL state.READ state.IDLE 
+state.IDLE 0 0 0 0 
+state.READ 0 0 1 1 
+state.REFILL 0 1 0 1 
+state.INVALIDATE 1 0 0 1 
