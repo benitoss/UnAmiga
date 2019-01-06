@@ -1,7 +1,8 @@
 # NES (Nintendo Entertainment System)
 
 This is a port of NES to the Altera Cyclone IV board of UnAmiga.
-This Core needs the SRAM addon from [Antonio Villena's store](https://www.antoniovillena.es/store/)
+
+**IMPORTANT:** This Core needs the SRAM addon from [Antonio Villena's store](https://www.antoniovillena.es/store/)
 
 This version is an open source based in fpganes port for ZXUNO (2016 DistWave)
 
