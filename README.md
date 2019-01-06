@@ -19,6 +19,7 @@ There is a version AGA of the UnAmiga 1200.
 - DC input 5V , microUSB and jack 5.5mm X 2.1mm<BR>
 
 **FPGA Board with available cores:**<BR>
+- Minimig Amiga 500<BR>
 - Amiga AGA<BR>
 - MSX2+<BR>
 - PC Next186<BR>
