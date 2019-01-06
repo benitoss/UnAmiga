@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Sat Jan 05 21:05:11 2019
+Quartus Prime Version : 18.0.0 Build 614 04/24/2018 SJ Lite Edition
+Revision Name : nes
+Top-level Entity Name : NES_TOP
+Family : Cyclone IV E
+Total logic elements : 7,739
+    Total combinational functions : 6,078
+    Dedicated logic registers : 3,223
+Total registers : 3223
+Total pins : 112
+Total virtual pins : 0
+Total memory bits : 326,656
+Embedded Multiplier 9-bit elements : 7
+Total PLLs : 1

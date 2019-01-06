@@ -1,0 +1,160 @@
+Flow report for nes
+Sat Jan 05 21:08:28 2019
+Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Flow Summary
+  3. Flow Settings
+  4. Flow Non-Default Global Settings
+  5. Flow Elapsed Time
+  6. Flow OS Summary
+  7. Flow Log
+  8. Flow Messages
+  9. Flow Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2018  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
+
+
+
++----------------------------------------------------------------------------------+
+; Flow Summary                                                                     ;
++------------------------------------+---------------------------------------------+
+; Flow Status                        ; Successful - Sat Jan 05 21:08:28 2019       ;
+; Quartus Prime Version              ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
+; Revision Name                      ; nes                                         ;
+; Top-level Entity Name              ; NES_TOP                                     ;
+; Family                             ; Cyclone IV E                                ;
+; Device                             ; EP4CE22F17C8                                ;
+; Timing Models                      ; Final                                       ;
+; Total logic elements               ; 6,940 / 22,320 ( 31 % )                     ;
+;     Total combinational functions  ; 6,078 / 22,320 ( 27 % )                     ;
+;     Dedicated logic registers      ; 3,215 / 22,320 ( 14 % )                     ;
+; Total registers                    ; 3215                                        ;
+; Total pins                         ; 112 / 154 ( 73 % )                          ;
+; Total virtual pins                 ; 0                                           ;
+; Total memory bits                  ; 326,656 / 608,256 ( 54 % )                  ;
+; Embedded Multiplier 9-bit elements ; 7 / 132 ( 5 % )                             ;
+; Total PLLs                         ; 1 / 4 ( 25 % )                              ;
++------------------------------------+---------------------------------------------+
+
+
++-----------------------------------------+
+; Flow Settings                           ;
++-------------------+---------------------+
+; Option            ; Setting             ;
++-------------------+---------------------+
+; Start date & time ; 01/05/2019 21:04:20 ;
+; Main task         ; Compilation         ;
+; Revision Name     ; nes                 ;
++-------------------+---------------------+
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Flow Non-Default Global Settings                                                                                                                         ;
++-------------------------------------+-------------------------------------------------------------------------+---------------+-------------+------------+
+; Assignment Name                     ; Value                                                                   ; Default Value ; Entity Name ; Section Id ;
++-------------------------------------+-------------------------------------------------------------------------+---------------+-------------+------------+
+; COMPILER_SIGNATURE_ID               ; 159090360127760.154674385906668                                         ; --            ; --          ; --         ;
+; FITTER_EFFORT                       ; Standard Fit                                                            ; Auto Fit      ; --          ; --         ;
+; MAX_CORE_JUNCTION_TEMP              ; 85                                                                      ; --            ; --          ; --         ;
+; MIN_CORE_JUNCTION_TEMP              ; 0                                                                       ; --            ; --          ; --         ;
+; MISC_FILE                           ; nes_clk.cmp                                                             ; --            ; --          ; --         ;
+; MISC_FILE                           ; nes_clk.ppf                                                             ; --            ; --          ; --         ;
+; MISC_FILE                           ; fifo_loader.cmp                                                         ; --            ; --          ; --         ;
+; OPTIMIZE_HOLD_TIMING                ; IO Paths and Minimum TPD Paths                                          ; All Paths     ; --          ; --         ;
+; OUTPUT_IO_TIMING_FAR_END_VMEAS      ; Half Signal Swing                                                       ; --            ; --          ; --         ;
+; OUTPUT_IO_TIMING_FAR_END_VMEAS      ; Half Signal Swing                                                       ; --            ; --          ; --         ;
+; OUTPUT_IO_TIMING_NEAR_END_VMEAS     ; Half Vccio                                                              ; --            ; --          ; --         ;
+; OUTPUT_IO_TIMING_NEAR_END_VMEAS     ; Half Vccio                                                              ; --            ; --          ; --         ;
+; PARTITION_COLOR                     ; -- (Not supported for targeted family)                                  ; --            ; NES_TOP     ; Top        ;
+; PARTITION_FITTER_PRESERVATION_LEVEL ; -- (Not supported for targeted family)                                  ; --            ; NES_TOP     ; Top        ;
+; PARTITION_NETLIST_TYPE              ; -- (Not supported for targeted family)                                  ; --            ; NES_TOP     ; Top        ;
+; POWER_BOARD_THERMAL_MODEL           ; None (CONSERVATIVE)                                                     ; --            ; --          ; --         ;
+; POWER_PRESET_COOLING_SOLUTION       ; 23 MM HEAT SINK WITH 200 LFPM AIRFLOW                                   ; --            ; --          ; --         ;
+; PROJECT_OUTPUT_DIRECTORY            ; output_files                                                            ; --            ; --          ; --         ;
+; SEARCH_PATH                         ; ../../src/device/cycloneii/                                             ; --            ; --          ; --         ;
+; SEARCH_PATH                         ; ../../src/src/component/io/gamecube/                                    ; --            ; --          ; --         ;
+; SEARCH_PATH                         ; ../../src/src/component/io/maple/                                       ; --            ; --          ; --         ;
+; SEARCH_PATH                         ; ../../src/src/component/ps2/                                            ; --            ; --          ; --         ;
+; SEARCH_PATH                         ; ../../src/src/component/toys/                                           ; --            ; --          ; --         ;
+; SEARCH_PATH                         ; ../../src/src/pace/                                                     ; --            ; --          ; --         ;
+; SEARCH_PATH                         ; ../../src/src/pace/stubs/                                               ; --            ; --          ; --         ;
+; SEARCH_PATH                         ; ../../src/src/pace/video/                                               ; --            ; --          ; --         ;
+; SEARCH_PATH                         ; ../../src/src/platform/adventurevision/                                 ; --            ; --          ; --         ;
+; SEARCH_PATH                         ; ../../src/src/platform/adventurevision/unzip/src/                       ; --            ; --          ; --         ;
+; SEARCH_PATH                         ; ../../src/src/platform/adventurevision/unzip/src/board/misc/            ; --            ; --          ; --         ;
+; SEARCH_PATH                         ; ../../src/src/platform/adventurevision/unzip/src/t400/rtl/tech/         ; --            ; --          ; --         ;
+; SEARCH_PATH                         ; ../../src/src/platform/adventurevision/unzip/src/t400/rtl/tech/cyclone/ ; --            ; --          ; --         ;
+; SEARCH_PATH                         ; ../../src/src/platform/adventurevision/unzip/src/t400/rtl/tech/generic/ ; --            ; --          ; --         ;
+; SEARCH_PATH                         ; ../../src/src/platform/adventurevision/unzip/src/t400/rtl/vhdl/         ; --            ; --          ; --         ;
+; SEARCH_PATH                         ; ../../src/src/platform/adventurevision/unzip/src/t400/rtl/vhdl/system/  ; --            ; --          ; --         ;
+; SEARCH_PATH                         ; ../../src/src/platform/adventurevision/unzip/src/t48/rtl/vhdl/          ; --            ; --          ; --         ;
+; SEARCH_PATH                         ; ../../src/src/platform/adventurevision/unzip/src/t48/rtl/vhdl/system/   ; --            ; --          ; --         ;
+; SEARCH_PATH                         ; ../../src/src/platform/adventurevision/unzip/src/tech/                  ; --            ; --          ; --         ;
+; SEARCH_PATH                         ; ../../src/src/platform/adventurevision/unzip/src/tech/cyclone/          ; --            ; --          ; --         ;
+; SEARCH_PATH                         ; ../../src/src/platform/adventurevision/unzip/src/tech/generic/          ; --            ; --          ; --         ;
+; SEARCH_PATH                         ; ../../src/src/platform/adventurevision/unzip/src/video/                 ; --            ; --          ; --         ;
+; SEARCH_PATH                         ; src/target/de1/                                                         ; --            ; --          ; --         ;
+; SEARCH_PATH                         ; src/target/de2/                                                         ; --            ; --          ; --         ;
+; SEED                                ; 2                                                                       ; 1             ; --          ; --         ;
+; TOP_LEVEL_ENTITY                    ; NES_TOP                                                                 ; nes           ; --          ; --         ;
++-------------------------------------+-------------------------------------------------------------------------+---------------+-------------+------------+
+
+
++--------------------------------------------------------------------------------------------------------------------------+
+; Flow Elapsed Time                                                                                                        ;
++----------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
++----------------------+--------------+-------------------------+---------------------+------------------------------------+
+; Analysis & Synthesis ; 00:00:51     ; 1.0                     ; 4928 MB             ; 00:01:02                           ;
+; Fitter               ; 00:00:47     ; 1.1                     ; 5630 MB             ; 00:01:04                           ;
+; Assembler            ; 00:00:02     ; 1.0                     ; 4709 MB             ; 00:00:02                           ;
+; Timing Analyzer      ; 00:00:07     ; 1.5                     ; 4866 MB             ; 00:00:08                           ;
+; Total                ; 00:01:47     ; --                      ; --                  ; 00:02:16                           ;
++----------------------+--------------+-------------------------+---------------------+------------------------------------+
+
+
++------------------------------------------------------------------------------------+
+; Flow OS Summary                                                                    ;
++----------------------+------------------+------------+------------+----------------+
+; Module Name          ; Machine Hostname ; OS Name    ; OS Version ; Processor type ;
++----------------------+------------------+------------+------------+----------------+
+; Analysis & Synthesis ; DESKTOP-SFRJLH5  ; Windows 10 ; 10.0       ; x86_64         ;
+; Fitter               ; DESKTOP-SFRJLH5  ; Windows 10 ; 10.0       ; x86_64         ;
+; Assembler            ; DESKTOP-SFRJLH5  ; Windows 10 ; 10.0       ; x86_64         ;
+; Timing Analyzer      ; DESKTOP-SFRJLH5  ; Windows 10 ; 10.0       ; x86_64         ;
++----------------------+------------------+------------+------------+----------------+
+
+
+------------
+; Flow Log ;
+------------
+quartus_map --read_settings_files=on --write_settings_files=off nes -c nes
+quartus_fit --read_settings_files=off --write_settings_files=off nes -c nes
+quartus_asm --read_settings_files=off --write_settings_files=off nes -c nes
+quartus_sta nes -c nes
+quartus_eda --read_settings_files=on --write_settings_files=off nes -c nes
+
+
+

@@ -1,0 +1,241 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "sram_addr_o[0]",
+					"strict" : false
+				},
+				{
+					"name" : "sram_addr_o[1]",
+					"strict" : false
+				},
+				{
+					"name" : "sram_addr_o[2]",
+					"strict" : false
+				},
+				{
+					"name" : "sram_addr_o[3]",
+					"strict" : false
+				},
+				{
+					"name" : "sram_addr_o[4]",
+					"strict" : false
+				},
+				{
+					"name" : "sram_addr_o[5]",
+					"strict" : false
+				},
+				{
+					"name" : "sram_addr_o[6]",
+					"strict" : false
+				},
+				{
+					"name" : "sram_addr_o[7]",
+					"strict" : false
+				},
+				{
+					"name" : "sram_addr_o[8]",
+					"strict" : false
+				},
+				{
+					"name" : "sram_addr_o[9]",
+					"strict" : false
+				},
+				{
+					"name" : "sram_addr_o[10]",
+					"strict" : false
+				},
+				{
+					"name" : "sram_addr_o[11]",
+					"strict" : false
+				},
+				{
+					"name" : "sram_addr_o[12]",
+					"strict" : false
+				},
+				{
+					"name" : "sram_addr_o[13]",
+					"strict" : false
+				},
+				{
+					"name" : "sram_addr_o[14]",
+					"strict" : false
+				},
+				{
+					"name" : "sram_addr_o[15]",
+					"strict" : false
+				},
+				{
+					"name" : "sram_addr_o[16]",
+					"strict" : false
+				},
+				{
+					"name" : "sram_addr_o[17]",
+					"strict" : false
+				},
+				{
+					"name" : "sram_addr_o[18]",
+					"strict" : false
+				},
+				{
+					"name" : "sram_we_n_o",
+					"strict" : false
+				},
+				{
+					"name" : "sd_cs_n_o",
+					"strict" : false
+				},
+				{
+					"name" : "sd_sclk_o",
+					"strict" : false
+				},
+				{
+					"name" : "sd_mosi_o",
+					"strict" : false
+				},
+				{
+					"name" : "dac_l_o",
+					"strict" : false
+				},
+				{
+					"name" : "dac_r_o",
+					"strict" : false
+				},
+				{
+					"name" : "vga_r_o[0]",
+					"strict" : false
+				},
+				{
+					"name" : "vga_r_o[1]",
+					"strict" : false
+				},
+				{
+					"name" : "vga_r_o[2]",
+					"strict" : false
+				},
+				{
+					"name" : "vga_r_o[3]",
+					"strict" : false
+				},
+				{
+					"name" : "vga_g_o[0]",
+					"strict" : false
+				},
+				{
+					"name" : "vga_g_o[1]",
+					"strict" : false
+				},
+				{
+					"name" : "vga_g_o[2]",
+					"strict" : false
+				},
+				{
+					"name" : "vga_g_o[3]",
+					"strict" : false
+				},
+				{
+					"name" : "vga_b_o[0]",
+					"strict" : false
+				},
+				{
+					"name" : "vga_b_o[1]",
+					"strict" : false
+				},
+				{
+					"name" : "vga_b_o[2]",
+					"strict" : false
+				},
+				{
+					"name" : "vga_b_o[3]",
+					"strict" : false
+				},
+				{
+					"name" : "vga_hsync_n_o",
+					"strict" : false
+				},
+				{
+					"name" : "vga_vsync_n_o",
+					"strict" : false
+				},
+				{
+					"name" : "sram_data_io[0]",
+					"strict" : false
+				},
+				{
+					"name" : "sram_data_io[1]",
+					"strict" : false
+				},
+				{
+					"name" : "sram_data_io[2]",
+					"strict" : false
+				},
+				{
+					"name" : "sram_data_io[3]",
+					"strict" : false
+				},
+				{
+					"name" : "sram_data_io[4]",
+					"strict" : false
+				},
+				{
+					"name" : "sram_data_io[5]",
+					"strict" : false
+				},
+				{
+					"name" : "sram_data_io[6]",
+					"strict" : false
+				},
+				{
+					"name" : "sram_data_io[7]",
+					"strict" : false
+				},
+				{
+					"name" : "ps2_clk_io",
+					"strict" : false
+				},
+				{
+					"name" : "ps2_data_io",
+					"strict" : false
+				},
+				{
+					"name" : "joy1_p6_i",
+					"strict" : false
+				},
+				{
+					"name" : "joy2_p6_i",
+					"strict" : false
+				},
+				{
+					"name" : "joy1_left_i",
+					"strict" : false
+				},
+				{
+					"name" : "joy1_down_i",
+					"strict" : false
+				},
+				{
+					"name" : "joy1_up_i",
+					"strict" : false
+				},
+				{
+					"name" : "btn_n_i[3]",
+					"strict" : false
+				},
+				{
+					"name" : "btn_n_i[4]",
+					"strict" : false
+				},
+				{
+					"name" : "sd_miso_i",
+					"strict" : false
+				},
+				{
+					"name" : "joy1_right_i",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

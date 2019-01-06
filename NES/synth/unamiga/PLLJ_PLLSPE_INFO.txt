@@ -1,0 +1,5 @@
+PLL_Name	nes_clk:clock_21mhz|altpll:altpll_component|nes_clk_altpll:auto_generated|pll1
+PLLJITTER	30
+PLLSPEmax	84
+PLLSPEmin	-53
+

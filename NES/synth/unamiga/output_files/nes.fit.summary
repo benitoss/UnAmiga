@@ -1,0 +1,16 @@
+Fitter Status : Successful - Sat Jan 05 21:06:01 2019
+Quartus Prime Version : 18.0.0 Build 614 04/24/2018 SJ Lite Edition
+Revision Name : nes
+Top-level Entity Name : NES_TOP
+Family : Cyclone IV E
+Device : EP4CE22F17C8
+Timing Models : Final
+Total logic elements : 6,940 / 22,320 ( 31 % )
+    Total combinational functions : 6,078 / 22,320 ( 27 % )
+    Dedicated logic registers : 3,215 / 22,320 ( 14 % )
+Total registers : 3215
+Total pins : 112 / 154 ( 73 % )
+Total virtual pins : 0
+Total memory bits : 326,656 / 608,256 ( 54 % )
+Embedded Multiplier 9-bit elements : 7 / 132 ( 5 % )
+Total PLLs : 1 / 4 ( 25 % )

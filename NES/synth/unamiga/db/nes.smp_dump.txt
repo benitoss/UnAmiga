@@ -1,0 +1,81 @@
+
+State Machine - |NES_TOP|CtrlModule:control|io_ps2_com:mykeyboard|comState
+Name comState.stateWaitHighRecv comState.stateRecvBit comState.stateWaitAck comState.stateClockAndDataLow comState.stateWaitClockHigh comState.stateWaitClockLow comState.stateWait100 comState.stateIdle 
+comState.stateIdle 0 0 0 0 0 0 0 0 
+comState.stateWait100 0 0 0 0 0 0 1 1 
+comState.stateWaitClockLow 0 0 0 0 0 1 0 1 
+comState.stateWaitClockHigh 0 0 0 0 1 0 0 1 
+comState.stateClockAndDataLow 0 0 0 1 0 0 0 1 
+comState.stateWaitAck 0 0 1 0 0 0 0 1 
+comState.stateRecvBit 0 1 0 0 0 0 0 1 
+comState.stateWaitHighRecv 1 0 0 0 0 0 0 1 
+
+State Machine - |NES_TOP|CtrlModule:control|zpu_core_flex:zpu|decodedOpcode
+Name decodedOpcode.Decoded_Shift decodedOpcode.Decoded_Call decodedOpcode.Decoded_EqBranch decodedOpcode.Decoded_EqNeq decodedOpcode.Decoded_Comparison decodedOpcode.Decoded_Sub decodedOpcode.Decoded_Mult decodedOpcode.Decoded_Interrupt decodedOpcode.Decoded_PopSP decodedOpcode.Decoded_StoreBH decodedOpcode.Decoded_Store decodedOpcode.Decoded_Flip decodedOpcode.Decoded_Xor decodedOpcode.Decoded_Not decodedOpcode.Decoded_LoadBH decodedOpcode.Decoded_Load decodedOpcode.Decoded_And decodedOpcode.Decoded_Or decodedOpcode.Decoded_Add decodedOpcode.Decoded_PopPC decodedOpcode.Decoded_PushSP decodedOpcode.Decoded_Break decodedOpcode.Decoded_Emulate decodedOpcode.Decoded_AddSP decodedOpcode.Decoded_StoreSP decodedOpcode.Decoded_LoadSP decodedOpcode.Decoded_ImShift decodedOpcode.Decoded_Im decodedOpcode.Decoded_Nop 
+decodedOpcode.Decoded_Nop 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+decodedOpcode.Decoded_Im 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+decodedOpcode.Decoded_ImShift 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+decodedOpcode.Decoded_LoadSP 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+decodedOpcode.Decoded_StoreSP 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+decodedOpcode.Decoded_AddSP 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+decodedOpcode.Decoded_Emulate 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+decodedOpcode.Decoded_Break 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+decodedOpcode.Decoded_PushSP 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+decodedOpcode.Decoded_PopPC 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+decodedOpcode.Decoded_Add 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+decodedOpcode.Decoded_Or 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+decodedOpcode.Decoded_And 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+decodedOpcode.Decoded_Load 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+decodedOpcode.Decoded_LoadBH 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+decodedOpcode.Decoded_Not 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+decodedOpcode.Decoded_Xor 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+decodedOpcode.Decoded_Flip 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+decodedOpcode.Decoded_Store 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+decodedOpcode.Decoded_StoreBH 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+decodedOpcode.Decoded_PopSP 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+decodedOpcode.Decoded_Interrupt 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+decodedOpcode.Decoded_Mult 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+decodedOpcode.Decoded_Sub 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+decodedOpcode.Decoded_Comparison 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+decodedOpcode.Decoded_EqNeq 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+decodedOpcode.Decoded_EqBranch 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+decodedOpcode.Decoded_Call 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+decodedOpcode.Decoded_Shift 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |NES_TOP|CtrlModule:control|zpu_core_flex:zpu|state
+Name state.State_Shift state.State_IncSP state.State_Sub state.State_EqNeq state.State_Comparison state.State_Mult state.State_Interrupt state.State_Fetch state.State_Decode state.State_StoreAndDecode state.State_ReadIODone state.State_AddSP2 state.State_AddSP state.State_FetchNext state.State_Load state.State_WriteIOBH state.State_WriteIO state.State_ReadIOBH state.State_ReadIO state.State_Store state.State_Xor state.State_And state.State_Or state.State_Add state.State_StoreToStack state.State_Execute state.State_WriteIODone state.State_Resync 
+state.State_Resync 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 
+state.State_WriteIODone 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 
+state.State_Execute 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 1 
+state.State_StoreToStack 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 1 
+state.State_Add 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 1 
+state.State_Or 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 1 
+state.State_And 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 1 
+state.State_Xor 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 1 
+state.State_Store 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 1 
+state.State_ReadIO 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 1 
+state.State_ReadIOBH 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 1 
+state.State_WriteIO 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 1 
+state.State_WriteIOBH 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 1 
+state.State_Load 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.State_FetchNext 0 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.State_AddSP 0 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.State_AddSP2 0 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.State_ReadIODone 0 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.State_StoreAndDecode 0 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.State_Decode 0 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.State_Fetch 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.State_Interrupt 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.State_Mult 0 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.State_Comparison 0 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.State_EqNeq 0 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.State_Sub 0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.State_IncSP 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+state.State_Shift 1 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 
+
+State Machine - |NES_TOP|GameLoader:loader|state
+Name state.11 state.10 state.01 state.00 
+state.00 0 0 0 0 
+state.01 0 0 1 1 
+state.10 0 1 0 1 
+state.11 1 0 0 1 
