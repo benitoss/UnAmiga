@@ -309,8 +309,14 @@ module NES_TOP
   wire p_start = !host_start;
   
   // 1 if the button was pressed, 0 otherwise.
-  assign joystick1 = {~joy1_right_i, ~joy1_left_i, ~joy1_down_i, ~joy1_up_i, ~btn_n_i[1], ~btn_n_i[2], ~joy1_p9_i, ~joy1_p6_i};
+  //assign joystick1 = {~joy1_right_i, ~joy1_left_i, ~joy1_down_i, ~joy1_up_i, ~btn_n_i[1], ~btn_n_i[2], ~joy1_p9_i, ~joy1_p6_i};
+  //assign joystick2 = {~joy2_right_i, ~joy2_left_i, ~joy2_down_i, ~joy2_up_i, ~btn_n_i[3], ~btn_n_i[4], ~joy2_p9_i, ~joy2_p6_i};
+  // Case 1: 
+  assign joystick1 = {~joy1_right_i, ~joy1_left_i, ~joy1_down_i, ~joy1_up_i, p_start, p_sel, ~joy1_p9_i, ~joy1_p6_i};
   assign joystick2 = {~joy2_right_i, ~joy2_left_i, ~joy2_down_i, ~joy2_up_i, ~btn_n_i[3], ~btn_n_i[4], ~joy2_p9_i, ~joy2_p6_i};
+  // Case 2: 
+  //assign joystick1 = {~joy1_right_i, ~joy1_left_i, ~joy1_down_i, ~joy1_up_i, ~p_start, ~p_sel, ~joy1_p9_i, ~joy1_p6_i};
+  //assign joystick2 = {~joy2_right_i, ~joy2_left_i, ~joy2_down_i, ~joy2_up_i, ~btn_n_i[3], ~btn_n_i[4], ~joy2_p9_i, ~joy2_p6_i};
   
 	
 	always @(posedge clk) begin

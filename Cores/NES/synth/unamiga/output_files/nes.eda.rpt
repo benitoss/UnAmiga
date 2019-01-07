@@ -1,5 +1,5 @@
 EDA Netlist Writer report for nes
-Sat Jan 05 21:08:28 2019
+Sun Jan 06 18:06:16 2019
 Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 
 
@@ -34,7 +34,7 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; EDA Netlist Writer Summary                                                       ;
 +---------------------------+------------------------------------------------------+
-; EDA Netlist Writer Status ; No Output Files Generated - Sat Jan 05 21:08:28 2019 ;
+; EDA Netlist Writer Status ; No Output Files Generated - Sun Jan 06 18:06:16 2019 ;
 ; Revision Name             ; nes                                                  ;
 ; Top-level Entity Name     ; NES_TOP                                              ;
 ; Family                    ; Cyclone IV E                                         ;
@@ -47,14 +47,14 @@ refer to the applicable agreement for further details.
 Info: *******************************************************************
 Info: Running Quartus Prime EDA Netlist Writer
     Info: Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
-    Info: Processing started: Sat Jan 05 21:08:27 2019
+    Info: Processing started: Sun Jan 06 18:06:14 2019
 Info: Command: quartus_eda --read_settings_files=on --write_settings_files=off nes -c nes
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Warning (199027): Can't generate output files. Specify command-line options to generate output files, or update EDA tool settings using GUI or Tcl script.
 Info: Quartus Prime EDA Netlist Writer was successful. 0 errors, 2 warnings
     Info: Peak virtual memory: 4661 megabytes
-    Info: Processing ended: Sat Jan 05 21:08:28 2019
-    Info: Elapsed time: 00:00:01
+    Info: Processing ended: Sun Jan 06 18:06:16 2019
+    Info: Elapsed time: 00:00:02
     Info: Total CPU time (on all processors): 00:00:02
 
 
