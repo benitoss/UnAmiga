@@ -1,0 +1,14 @@
+Jepalza, agosto 2018 (Joseba Epalza, Sopelana, Vizcaya, España)
+---------------------------------------------------------------
+version MIST AGA con menú OSD por "soft", en lugar de "hard" mediante ARM como lleva la placa MIST.
+
+En este caso he partido de la versión "minimig del DE0-Nano" (http://www.minimig.net/viewtopic.php?f=9&t=647)
+empleando partes de código de esta página --> http://meditation.somuch.guru/minimig/files/misc/
+y la parte AGA y 68020 de la placa MIST -->  http://somuch.guru/minimig/minimig-mist/ 
+(códigos github --> https://github.com/mist-devel)
+
+Con una mezcla de todo un poco, he introducido el Menú OSD del Minimig en la version AGA de la MIST, logrando de ese modo un Minimig AGA A1200 con 20megas de ram.
+El menú OSD es el mismo empleado en las Minimig (DE1_BOOT.BIN -->  http://meditation.somuch.guru/minimig/files/misc/)  pero traducido a Español.
+Para que funcione el A1200 AGA, es necesario formatear la SD de 4gb en adelante con el programa SD_FORMATTER (https://www.sdcard.org/downloads/formatter_4/)
+y copiar en la tarjeta el fichero de menú DE1_BOOT.BIN y al menos un "kickstart" desde Amiga 500 nombrado como KICK.ROM de 512k V1.3 (mínimo)
+Para instrucciones de Uso, acudir a las páginas oficiales de Minimig o MIST.
