@@ -1,0 +1,30 @@
+New release OCM on DE1 from 16/02/13
+===============================================
+Switch of Mode:
+======
+Sw(9) - Memory		'0' : 2048 Kb	   '1': 4096 Kb
+
+Sw(8) - MegaRAM 	'0' : Free Slot 1  '1': 512 Kb MegaRAM in Slot 1
+
+Sw(7) - Turbo		'0' : Normal	   '1': Turbo	 Togle [F12]
+
+Sw(6) - Kmap		'0' : English-101  '1':Japanese-106
+
+Sw(5) - SCC2		'00': Free Slot 2 '01': SCC-I 1024 Kb
+Sw(4) - SCC2		'10': ASCII 8	  '11': ASCII 16
+
+Sw(3) - SCC1		'0' : Free Slot 1  '1': SCC-I 1024 Kb
+
+Sw(2) - SD		'0' : SD ON	   '1': SD OFF
+
+Sw(1) - Vide0		'10': RGB 15KHz	  '11': TV 15 KHz  Togle [PrintScreen] 
+Sw(0) - Video		'01': VGA 50 Hz   '00': VGA 60 Hz
+====================================================
+Button:
+======
+Key(0) - RESET
+
+
+caro
+k2k@list.ru
+

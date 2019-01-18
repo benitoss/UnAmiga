@@ -1,0 +1,10 @@
+PLL_Name	system:sys_inst|dcm:dcm_system|altpll:altpll_component|dcm_altpll:auto_generated|pll1
+PLLJITTER	52
+PLLSPEmax	84
+PLLSPEmin	-53
+
+PLL_Name	system:sys_inst|dcm_cpu:dcm_cpu_inst|altpll:altpll_component|dcm_cpu_altpll:auto_generated|pll1
+PLLJITTER	40
+PLLSPEmax	84
+PLLSPEmin	-53
+

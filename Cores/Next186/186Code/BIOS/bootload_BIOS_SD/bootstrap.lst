@@ -1,0 +1,526 @@
+Microsoft (R) Macro Assembler Version 6.14.8444		    07/29/18 19:24:04
+bootstrap.asm						     Page 1 - 1
+
+
+				; This file is part of the Next186 SoC PC project
+				; http://opencores.org/project,next186
+
+				; Filename: bootstrap.asm
+				; Description: Part of the Next186 SoC PC project, bootstrap "ROM" code (RAM initialized with cache)
+				; Version 1.0
+				; Creation date: Jun2013
+
+				; Author: Nicolae Dumitrache 
+				; e-mail: ndumitrache@opencores.org
+
+				; -------------------------------------------------------------------------------------
+				 
+				; Copyright (C) 2013 Nicolae Dumitrache
+				 
+				; This source file may be used and distributed without 
+				; restriction provided that this copyright statement is not 
+				; removed from the file and that any derivative work contains 
+				; the original copyright notice and the associated disclaimer.
+				 
+				; This source file is free software; you can redistribute it 
+				; and/or modify it under the terms of the GNU Lesser General 
+				; Public License as published by the Free Software Foundation;
+				; either version 2.1 of the License, or (at your option) any 
+				; later version. 
+				 
+				; This source is distributed in the hope that it will be 
+				; useful, but WITHOUT ANY WARRANTY; without even the implied 
+				; warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR 
+				; PURPOSE. See the GNU Lesser General Public License for more 
+				; details. 
+				 
+				; You should have received a copy of the GNU Lesser General 
+				; Public License along with this source; if not, download it 
+				; from http://www.opencores.org/lgpl.shtml 
+				 
+				; -----------------------------------------------------------------------
+
+				; Additional Comments: 
+				; Assembled with MASM v6.14.8444
+				; No hardware resources are required for the bootstrap ROM, I use only the initial value of the cache memory
+				; BIOS will be read from the last BIOSSIZE sectors of SD Card and placed in DRAM at F000:(-BIOSSIZE*512)
+				; SD HC card required
+
+
+
+				.186
+				.model tiny
+ 0000				.code
+
+
+ = 0010				BIOSSIZE    EQU     16      ; sectors
+ = FC00				BOOTOFFSET  EQU     0fc00h  ; bootstrap code offset in segment 0f000h
+
+				; this code is for bootstrap deployment only, it will not be present in ROM (cache)
+				;---------------- EXECUTE -----------------
+						org		100h        ; this code is loaded at 0f000h:100h
+ 0100				exec    label near
+
+ 0100  BE 0200 R				mov		si, begin
+ 0103  BF FC00					mov		di, BOOTOFFSET
+ 0106  B9 0200					mov		cx, 256*4/2 ; last 4 cache lines (from total 8)
+ 0109  F3/ A5					rep		movsw
+ 010B  EA					db		0eah
+ 010C  0000 FFFF				dw		0, -1       ; CPU reset, execute bootstrap
+
+
+				; Loads BIOS (8K = 16 sectors) from last sectors of SD card (if present)
+				; If no SD card detected, wait on RS232 115200bps and load program at F000:100h
+				; the following code is placed in the last 1kB of cache (last 4 lines), each with the dirty bit set
+				; the corresponding position in RAM will be F000:BOOTOFFSET
+				; ----------------- RS232 bootstrap - last 256byte cache line ---------------
+				        org     200h
+ 0200				begin label far               ; this code is placed at F000:BOOTOFFSET
+
+ 0200  FA					cli
+ 0201  FC					cld
+ 0202  8C C8					mov		ax, cs        ; cs = 0f000h
+ 0204  8E D8					mov		ds, ax
+ 0206  8E C0					mov		es, ax
+ 0208  8E D0					mov		ss, ax
+ 020A  BC FC00					mov		sp, BOOTOFFSET
+ 020D  33 C0					xor		ax, ax        ; map seg0
+ 020F  E7 80					out		80h, ax
+ 0211  B0 0B					mov		al, 0bh       ; map text segB
+ 0213  E7 8B					out		8bh, ax
+ 0215  B0 0F					mov		al, 0fh       ; map ROM segF
+ 0217  E7 8F					out		8fh, ax
+ 0219  B0 34					mov		al, 34h
+ 021B  E6 43					out		43h, al
+ 021D  32 C0					xor		al, al
+ 021F  E6 40					out		40h, al
+ 0221  E6 40					out		40h, al       ; program PIT for RS232
+				;jepalza, anulo acceso bios por serie, no lo uso
+				;		call		sdinit_
+				;		test		ax, ax
+				;		jz		short RS232
+				; jealza, nuevo desde aqui, hasta....
+ 0223  68 A000			    push  0a000h
+ 0226  1F			    pop   ds
+ 0227  33 F6			    xor   si, si
+				;    push  0e000h
+				;    pop   di
+ 0229  33 FF			    xor   di, di
+ 022B  B9 1000			    mov   cx, 1000h
+ 022E  F3/ A5			    rep   movsw
+ 0230  8C C1			    mov		cx, es
+ 0232  8E D9			    mov		ds, cx
+ 0234  BB 2000			    mov   bx, 2000h
+ 0237  81 3E 0000 654E				cmp		word ptr ds:[0], 'eN'
+ 023D  75 05					jne		short sdbios
+ 023F  E8 0168					call		sdinit_             
+ 0242  EB 39			    jmp   short lastcheck ; nos saltamos el resto, ya no sirve
+ 0244				sdbios:
+ 0244  E8 0163					call		sdinit_
+ 0247  85 C0					test		ax, ax
+ 0249  74 3A					jz		short RS232
+				; .... hasta aqui , es nuevo
+ 024B  8B D0					mov		dx, ax
+ 024D  C1 EA 06					shr		dx, 6
+ 0250  C1 E0 0A					shl		ax, 10
+ 0253  B9 0010					mov		cx, BIOSSIZE       ;  sectors
+ 0256  2B C1					sub		ax, cx
+ 0258  83 DA 00					sbb		dx, 0
+ 025B  33 DB					xor		bx, bx       ; read BIOSSIZE/2 KB BIOS at 0f000h:0h
+ 025D				nextsect:      
+ 025D  50					push		ax
+ 025E  52					push		dx
+ 025F  51					push		cx
+ 0260  E8 010D					call		sdread_
+ 0263  49					dec		cx
+ 0264  59					pop		cx
+ 0265  5A					pop		dx
+ 0266  58					pop		ax
+ 0267  75 1C					jnz		short RS232  ; cx was not 1
+ 0269  83 C0 01					add		ax, 1
+ 026C  83 D2 00					adc		dx, 0
+ 026F  81 C3 0200				add		bx, 512    
+ 0273  E2 E8					loop		nextsect
+ 0275  81 3E 0000 654E				cmp		word ptr ds:[0], 'eN'
+ 027B  75 08					jne		short RS232           
+ 027D				lastcheck: 		
+ 027D  81 3E 0002 7478				cmp		word ptr ds:[2], 'tx'
+ 0283  74 72					je		short   BIOSOK
+
+ 0285				RS232: 
+ 0285  BA 03C0					mov		dx, 3c0h
+ 0288  B0 10					mov		al, 10h
+ 028A  EE					out		dx, al
+ 028B  B0 08					mov		al, 8h
+ 028D  EE					out		dx, al      ; set text mode
+ 028E  BA 03D4					mov		dx, 3d4h
+ 0291  B0 0A					mov		al, 0ah
+ 0293  EE					out		dx, al
+ 0294  42					inc		dx
+ 0295  B0 20					mov		al, 1 shl 5 ; hide cursor
+ 0297  EE					out		dx, al
+ 0298  4A					dec		dx
+ 0299  B0 0C					mov		al, 0ch
+ 029B  EE					out		dx, al
+ 029C  42					inc		dx
+ 029D  B0 00					mov		al, 0
+ 029F  EE					out		dx, al
+ 02A0  4A					dec		dx
+ 02A1  B0 0D					mov		al, 0dh
+ 02A3  EE					out		dx, al
+ 02A4  42					inc		dx
+ 02A5  B0 00					mov		al, 0
+ 02A7  EE					out		dx, al      ; reset video offset
+				      
+ 02A8  68 B800					push		0b800h      ; clear screen
+ 02AB  07					pop		es
+ 02AC  33 FF					xor		di, di
+ 02AE  B9 07D0					mov		cx, 25*80
+ 02B1  33 C0					xor		ax, ax
+ 02B3  F3/ AB					rep		stosw
+						
+ 02B5  BA 03C8					mov		dx, 3c8h    ; set palette entry 1
+ 02B8  B8 0101					mov		ax, 101h
+ 02BB  EE					out		dx, al
+ 02BC  42					inc		dx
+ 02BD  B0 2A					mov		al, 2ah
+ 02BF  EE					out		dx, al
+ 02C0  EE					out		dx, al
+ 02C1  EE					out		dx, al
+						
+ 02C2  33 FF					xor		di, di      
+ 02C4  BE FE30					mov		si, booterrmsg + BOOTOFFSET - begin
+ 02C7  AC					lodsb
+ 02C8				nextchar:      
+ 02C8  AB					stosw
+ 02C9  AC					lodsb
+ 02CA  84 C0					test		al, al
+ 02CC  75 FA					jnz		short nextchar
+
+ 02CE  BB 4000					mov		bx, 4000h
+ 02D1				flush:        
+ 02D1  8A 07					mov		al, [bx]
+ 02D3  83 EB 40					sub		bx, 40h
+ 02D6  75 F9					jnz		flush
+					
+ 02D8  BE 0100					mov		si, 100h
+ 02DB  E8 0034					call		srecb
+ 02DE  8A FC					mov		bh, ah
+ 02E0  E8 002F					call		srecb
+ 02E3  8A DC					mov		bl, ah
+
+ 02E5				sloop:	
+ 02E5  E8 002A					call		srecb
+ 02E8  88 24					mov		[si], ah
+ 02EA  46					inc		si
+ 02EB  4B					dec		bx
+ 02EC  75 F7					jnz		sloop
+ 02EE  33 E4					xor		sp, sp
+ 02F0  8E D4					mov		ss, sp
+ 02F2  EA					db		0eah
+ 02F3  0100 F000				dw		100h,0f000h ; execute loaded program
+					
+ 02F7				BIOSOK:
+ 02F7  BE FD0B					mov		si, reloc + BOOTOFFSET - begin
+ 02FA  8B FB					mov		di, bx
+ 02FC  B9 0007					mov		cx, endreloc - reloc
+ 02FF  F3/ A4					rep		movsb       ; relocate code from reloc to endreloc after loaded BIOS
+ 0301  BF E000					mov		di, -BIOSSIZE*512
+ 0304  33 F6					xor		si, si
+ 0306  B9 1000					mov		cx, BIOSSIZE*512/2
+ 0309  FF E3					jmp		bx
+ 030B				reloc:      
+ 030B  F3/ A5					rep		movsw
+ 030D  EA					db		0eah
+ 030E  0000 FFFF				dw		0, -1       ; CPU reset, execute BIOS
+ 0312				endreloc:
+				      
+
+				; ----------------  serial receive byte 115200 bps --------------
+ 0312				srecb:  
+ 0312  B4 80					mov		ah, 80h
+ 0314  BA 03DA					mov		dx, 3dah
+ 0317  B9 FA52					mov		cx, -5aeh ; (half start bit)
+ 031A				srstb:  
+ 031A  EC					in		al, dx
+ 031B  C0 E8 02					shr		al, 2
+ 031E  72 FA					jc		srstb
+
+ 0320  E4 40					in		al, 40h ; lo counter
+ 0322  02 E8					add		ch, al
+ 0324  E4 40					in		al, 40h ; hi counter, ignore
+ 0326				l1:
+ 0326  E8 0008					call		dlybit
+ 0329  EC					in		al, dx
+ 032A  C0 E8 02					shr		al, 2
+ 032D  D0 DC					rcr		ah, 1
+ 032F  73 F5					jnc		l1
+ 0331				dlybit:
+ 0331  81 E9 0A5B				sub		cx, 0a5bh  ;  (full bit)
+ 0335				dly1:
+ 0335  E4 40					in		al, 40h
+ 0337  38 E8					cmp		al, ch
+ 0339  E4 40					in		al, 40h
+ 033B  75 F8					jnz		dly1
+ 033D  C3					ret
+
+				;---------------------  read/write byte ----------------------
+ 033E				sdrb:   
+ 033E  B0 FF					mov		al, 0ffh
+ 0340				sdsb:               ; in AL=byte, DX = 03dah, out AX=result
+ 0340  B4 01					mov		ah, 1
+ 0342				sdsb1:
+ 0342  EE					out		dx, al
+ 0343  03 C0					add		ax, ax
+ 0345  73 FB					jnc		sdsb1
+ 0347  ED					in		ax, dx
+ 0348  C3					ret
+
+				;---------------------  write block ----------------------
+ 0349				sdwblk:              ; in DS:SI=data ptr, DX=03dah, CX=size
+ 0349  AC					lodsb
+ 034A  E8 FFF3					call		sdsb
+ 034D  E2 FA					loop		sdwblk
+ 034F  C3					ret
+
+				;---------------------  read block ----------------------
+ 0350				sdrblk:              ; in DS:DI=data ptr, DX=03dah, CX=size
+ 0350  E8 FFEB					call		sdrb
+ 0353  88 25					mov		[di], ah
+ 0355  47					inc		di
+ 0356  E2 F8					loop		sdrblk
+ 0358  C3					ret
+
+				;---------------------  write command ----------------------
+ 0359				sdcmd8T:
+ 0359  E8 FFE2					call	sdrb
+ 035C				sdcmd:              ; in DS:SI=6 bytes cmd buffer, DX=03dah, out AH = 0ffh on error
+ 035C  B9 0006					mov		cx, 6
+ 035F  E8 FFE7					call		sdwblk
+ 0362				sdresp:
+ 0362  33 F6					xor		si, si
+ 0364				sdresp1:
+ 0364  E8 FFD7					call		sdrb
+ 0367  46					inc		si
+ 0368  74 05					jz		sdcmd1
+ 036A  80 FC FF					cmp		ah, 0ffh
+ 036D  74 F5					je		sdresp1
+ 036F				sdcmd1: 
+ 036F  C3					ret         
+
+				;---------------------  read one sector ----------------------
+ 0370				sdread_ proc near   ; DX:AX sector, DS:BX buffer, returns CX=read sectors
+ 0370  50					push		ax
+ 0371  8A C2					mov		al, dl
+ 0373  50					push		ax
+ 0374  B2 51					mov		dl, 51h     ; CMD17
+ 0376  52					push		dx
+ 0377  8B F4					mov		si, sp
+
+ 0379  BA 03DA					mov		dx, 3dah
+ 037C  B4 01					mov		ah, 1
+ 037E  EF					out		dx, ax      ; CS on
+ 037F  C6 44 05 FF				mov		byte ptr [si+5], 0ffh ; checksum
+ 0383  E8 FFD6					call		sdcmd
+ 0386  83 C4 06					add		sp, 6
+ 0389  0A E4					or		ah, ah
+ 038B  75 16					jnz		sdr1        ; error (cx=0)
+ 038D  E8 FFD2					call		sdresp      ; wait for 0feh token
+ 0390  80 FC FE					cmp		ah, 0feh
+ 0393  75 0E					jne		sdr1        ; read token error (cx=0)
+ 0395  B5 02					mov		ch, 2       ; 512 bytes
+ 0397  8B FB					mov		di, bx
+ 0399  E8 FFB4					call		sdrblk
+ 039C  E8 FF9F					call		sdrb        ; ignore CRC
+ 039F  E8 FF9C					call		sdrb        ; ignore CRC
+ 03A2  41					inc		cx          ; 1 block
+ 03A3				 sdr1:       
+ 03A3  33 C0					xor		ax, ax
+ 03A5  EF					out		dx, ax
+ 03A6  E8 FF95					call		sdrb        ; 8T
+ 03A9  C3					ret     
+ 03AA				sdread_ endp
+				        
+				;---------------------  init SD ----------------------
+ 03AA				sdinit_ proc near       ; returns AX = num kilosectors
+ 03AA  BA 03DA					mov		dx, 3dah
+ 03AD  B9 000A					mov		cx, 10
+ 03B0				sdinit1:                   ; send 80T
+ 03B0  E8 FF8B					call		sdrb
+ 03B3  E2 FB					loop		sdinit1
+
+ 03B5  B4 01					mov		ah, 1
+ 03B7  EF					out		dx, ax       ; select SD
+
+ 03B8  BE FE80					mov		si, SD_CMD0 + BOOTOFFSET - begin
+ 03BB  E8 FF9E					call		sdcmd
+ 03BE  FE CC					dec		ah
+ 03C0  75 65					jnz		sdexit      ; error
+						
+ 03C2  BE FE86					mov		si, SD_CMD8 + BOOTOFFSET - begin
+ 03C5  E8 FF91					call		sdcmd8T
+ 03C8  FE CC					dec		ah
+ 03CA  75 5B					jnz		sdexit      ; error
+ 03CC  B1 04					mov		cl, 4
+ 03CE  2B E1					sub		sp, cx
+ 03D0  8B FC					mov		di, sp
+ 03D2  E8 FF7B					call		sdrblk
+ 03D5  58					pop		ax
+ 03D6  58					pop		ax
+ 03D7  80 FC AA					cmp		ah, 0aah
+ 03DA  75 4B					jne		sdexit      ; CMD8 error
+ 03DC				repinit:        
+ 03DC  BE FE98					mov		si, SD_CMD55 + BOOTOFFSET - begin
+ 03DF  E8 FF77					call		sdcmd8T
+ 03E2  E8 FF59					call		sdrb
+ 03E5  BE FE92					mov		si, SD_CMD41 + BOOTOFFSET - begin
+ 03E8  E8 FF71					call		sdcmd
+ 03EB  FE CC					dec		ah
+ 03ED  74 ED					jz		repinit
+						
+ 03EF  BE FE9E					mov		si, SD_CMD58 + BOOTOFFSET - begin
+ 03F2  E8 FF64					call		sdcmd8T
+ 03F5  B1 04					mov		cl, 4
+ 03F7  2B E1					sub		sp, cx
+ 03F9  8B FC					mov		di, sp
+ 03FB  E8 FF52					call		sdrblk
+ 03FE  58					pop		ax
+ 03FF  A8 40					test		al, 40h     ; test OCR bit 30 (CCS)
+ 0401  58					pop		ax
+ 0402  74 23					jz		sdexit      ; no SDHC
+
+ 0404  BE FE8C					mov		si, SD_CMD9 + BOOTOFFSET - begin ; get size info
+ 0407  E8 FF4F					call		sdcmd8T
+ 040A  0A E4					or		ah, ah
+ 040C  75 19					jnz		sdexit
+ 040E  E8 FF51					call		sdresp      ; wait for 0feh token
+ 0411  80 FC FE					cmp		ah, 0feh
+ 0414  75 11					jne		sdexit
+ 0416  B1 12					mov		cl, 18      ; 16bytes + 2bytes CRC
+ 0418  2B E1					sub		sp, cx
+ 041A  8B FC					mov		di, sp
+ 041C  E8 FF31					call		sdrblk
+ 041F  8B 4D F6					mov		cx, [di-10]
+ 0422  86 CD					xchg		cl, ch
+ 0424  41					inc		cx
+ 0425  8B E7					mov		sp, di
+ 0427				sdexit: 
+ 0427  33 C0					xor		ax, ax      ; raise CS
+ 0429  EF					out		dx, ax
+ 042A  E8 FF11					call	sdrb
+ 042D  8B C1					mov		ax, cx       
+ 042F  C3					ret
+ 0430				sdinit_ endp
+
+				    
+ 0430 42 49 4F 53 20 6E		booterrmsg  db  'BIOS not present on SDCard last 8KB, waiting on RS232 (115200bps, f000:100) ...', 0
+       6F 74 20 70 72 65
+       73 65 6E 74 20 6F
+       6E 20 53 44 43 61
+       72 64 20 6C 61 73
+       74 20 38 4B 42 2C
+       20 77 61 69 74 69
+       6E 67 20 6F 6E 20
+       52 53 32 33 32 20
+       28 31 31 35 32 30
+       30 62 70 73 2C 20
+       66 30 30 30 3A 31
+       30 30 29 20 2E 2E
+       2E 00
+ 0480 40 00 00 00 00 95		SD_CMD0		db		40h, 0, 0, 0, 0, 95h
+ 0486 48 00 00 01 AA 87		SD_CMD8		db		48h, 0, 0, 1, 0aah, 087h
+ 048C 49 00 00 00 00 FF		SD_CMD9		db		49h, 0, 0, 0, 0, 0ffh
+ 0492 69 40 00 00 00 FF		SD_CMD41	db		69h, 40h, 0, 0, 0, 0ffh
+ 0498 77 00 00 00 00 FF		SD_CMD55	db		77h, 0, 0, 0, 0, 0ffh
+ 049E 7A 00 00 00 00 FF		SD_CMD58	db		7ah, 0, 0, 0, 0, 0ffh
+
+
+				; ---------------- RESET ------------------
+						org 05f0h
+ 05F0				start:
+ 05F0  EA					db		0eah
+ 05F1  FC00 F000				dw		BOOTOFFSET, 0f000h
+ 05F5  00 00 00 00 00 00			db		0,0,0,0,0,0,0,0,0,0,0
+       00 00 00 00 00
+				       
+				end exec
+Microsoft (R) Macro Assembler Version 6.14.8444		    07/29/18 19:24:04
+bootstrap.asm						     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+DGROUP . . . . . . . . . . . . .	GROUP
+_TEXT  . . . . . . . . . . . . .	16 Bit	 0600	  Word	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	16 Bit	 0000	  Word	  Public  'DATA'	
+
+
+Procedures,  parameters and locals:
+
+                N a m e                 Type     Value    Attr
+
+sdinit_  . . . . . . . . . . . .	P Near	 03AA	  _TEXT	Length= 0086 Public
+  sdinit1  . . . . . . . . . . .	L Near	 03B0	  _TEXT	
+  repinit  . . . . . . . . . . .	L Near	 03DC	  _TEXT	
+  sdexit . . . . . . . . . . . .	L Near	 0427	  _TEXT	
+sdread_  . . . . . . . . . . . .	P Near	 0370	  _TEXT	Length= 003A Public
+  sdr1 . . . . . . . . . . . . .	L Near	 03A3	  _TEXT	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0000h	 
+@Model . . . . . . . . . . . . .	Number	 0001h	 
+@code  . . . . . . . . . . . . .	Text   	 DGROUP
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+BIOSOK . . . . . . . . . . . . .	L Near	 02F7	  _TEXT	
+BIOSSIZE . . . . . . . . . . . .	Number	 0010h	 
+BOOTOFFSET . . . . . . . . . . .	Number	 FC00h	 
+RS232  . . . . . . . . . . . . .	L Near	 0285	  _TEXT	
+SD_CMD0  . . . . . . . . . . . .	Byte	 0480	  _TEXT	
+SD_CMD41 . . . . . . . . . . . .	Byte	 0492	  _TEXT	
+SD_CMD55 . . . . . . . . . . . .	Byte	 0498	  _TEXT	
+SD_CMD58 . . . . . . . . . . . .	Byte	 049E	  _TEXT	
+SD_CMD8  . . . . . . . . . . . .	Byte	 0486	  _TEXT	
+SD_CMD9  . . . . . . . . . . . .	Byte	 048C	  _TEXT	
+begin  . . . . . . . . . . . . .	L Far	 0200	  _TEXT	
+booterrmsg . . . . . . . . . . .	Byte	 0430	  _TEXT	
+dly1 . . . . . . . . . . . . . .	L Near	 0335	  _TEXT	
+dlybit . . . . . . . . . . . . .	L Near	 0331	  _TEXT	
+endreloc . . . . . . . . . . . .	L Near	 0312	  _TEXT	
+exec . . . . . . . . . . . . . .	L Near	 0100	  _TEXT	
+flush  . . . . . . . . . . . . .	L Near	 02D1	  _TEXT	
+l1 . . . . . . . . . . . . . . .	L Near	 0326	  _TEXT	
+lastcheck  . . . . . . . . . . .	L Near	 027D	  _TEXT	
+nextchar . . . . . . . . . . . .	L Near	 02C8	  _TEXT	
+nextsect . . . . . . . . . . . .	L Near	 025D	  _TEXT	
+reloc  . . . . . . . . . . . . .	L Near	 030B	  _TEXT	
+sdbios . . . . . . . . . . . . .	L Near	 0244	  _TEXT	
+sdcmd1 . . . . . . . . . . . . .	L Near	 036F	  _TEXT	
+sdcmd8T  . . . . . . . . . . . .	L Near	 0359	  _TEXT	
+sdcmd  . . . . . . . . . . . . .	L Near	 035C	  _TEXT	
+sdrblk . . . . . . . . . . . . .	L Near	 0350	  _TEXT	
+sdrb . . . . . . . . . . . . . .	L Near	 033E	  _TEXT	
+sdresp1  . . . . . . . . . . . .	L Near	 0364	  _TEXT	
+sdresp . . . . . . . . . . . . .	L Near	 0362	  _TEXT	
+sdsb1  . . . . . . . . . . . . .	L Near	 0342	  _TEXT	
+sdsb . . . . . . . . . . . . . .	L Near	 0340	  _TEXT	
+sdwblk . . . . . . . . . . . . .	L Near	 0349	  _TEXT	
+sloop  . . . . . . . . . . . . .	L Near	 02E5	  _TEXT	
+srecb  . . . . . . . . . . . . .	L Near	 0312	  _TEXT	
+srstb  . . . . . . . . . . . . .	L Near	 031A	  _TEXT	
+start  . . . . . . . . . . . . .	L Near	 05F0	  _TEXT	
+
+	   0 Warnings
+	   0 Errors

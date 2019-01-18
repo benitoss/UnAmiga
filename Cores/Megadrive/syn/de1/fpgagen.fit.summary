@@ -1,0 +1,16 @@
+Fitter Status : Successful - Wed Aug 15 21:36:11 2018
+Quartus Prime Version : 17.1.0 Build 590 10/25/2017 SJ Lite Edition
+Revision Name : fpgagen
+Top-level Entity Name : DE1_Toplevel
+Family : Cyclone IV E
+Device : EP4CE22F17C8
+Timing Models : Final
+Total logic elements : 16,520 / 22,320 ( 74 % )
+    Total combinational functions : 14,379 / 22,320 ( 64 % )
+    Dedicated logic registers : 7,481 / 22,320 ( 34 % )
+Total registers : 7497
+Total pins : 88 / 154 ( 57 % )
+Total virtual pins : 0
+Total memory bits : 335,903 / 608,256 ( 55 % )
+Embedded Multiplier 9-bit elements : 6 / 132 ( 5 % )
+Total PLLs : 1 / 4 ( 25 % )

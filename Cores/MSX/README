@@ -1,0 +1,21 @@
+This is a fork of Caro's DE1 OneChipMSX Port.  The biggest change is that I
+have attempted to abstract the core away from the board-specific toplevel
+in order to make core easier to port to other boards.
+
+My initial target platforms are the DE1, Turbo Chameleon 64 and MIST boards,
+with DE2 to follow as time allows.
+Board-specific RTL, PLL and constraint files are in Board/<board>/*, while
+project files are found in fpga/<board>/*
+This fork contains an extra CPU (ZPUFlex), pulled in as a submodule, so
+having checked out the repo you'll also need to pull in the submodules with
+git submodule init
+git submodule update
+
+The extra CPU is used to load the BIOS from SD card at bootup, avoiding the
+problem of the core needing to be booted from an EPCS4 or compatible flash
+device.
+
+The other submodule is z80asm, which is used to build the
+InitialProgramLoader firmware if you make any changes to it.
+
+

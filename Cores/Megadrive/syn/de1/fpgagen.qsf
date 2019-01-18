@@ -1,0 +1,337 @@
+# -------------------------------------------------------------------------- #
+#
+# Copyright (C) 1991-2011 Altera Corporation
+# Your use of Altera Corporation's design tools, logic functions
+# and other software and tools, and its AMPP partner logic
+# functions, and any output files from any of the foregoing
+# (including device programming or simulation files), and any
+# associated documentation or information are expressly subject
+# to the terms and conditions of the Altera Program License
+# Subscription Agreement, Altera MegaCore Function License
+# Agreement, or other applicable license agreement, including,
+# without limitation, that your use is for the sole purpose of
+# programming logic devices manufactured by Altera and sold by
+# Altera or its authorized distributors.  Please refer to the
+# applicable agreement for further details.
+#
+# -------------------------------------------------------------------------- #
+#
+# Quartus II 32-bit
+# Version 11.1 Build 216 11/23/2011 Service Pack 1 SJ Web Edition
+# Date created = 08:47:41  April 09, 2012
+#
+# -------------------------------------------------------------------------- #
+#
+# Notes:
+#
+# 1) The default values for assignments are stored in the file:
+#		ZPUTest_DE1_assignment_defaults.qdf
+#    If this file doesn't exist, see file:
+#		assignment_defaults.qdf
+#
+# 2) Altera recommends that you do not modify this file. This
+#    file is updated automatically by the Quartus II software
+#    and any changes you make may be lost or overwritten.
+#
+# -------------------------------------------------------------------------- #
+
+set_global_assignment -name FAMILY "Cyclone IV E"
+set_global_assignment -name DEVICE EP4CE22F17C8
+set_global_assignment -name TOP_LEVEL_ENTITY DE1_Toplevel
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 9.1
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "17:15:18  FEBRUARY 13, 2011"
+set_global_assignment -name LAST_QUARTUS_VERSION "17.1.0 Lite Edition"
+set_global_assignment -name USE_GENERATED_PHYSICAL_CONSTRAINTS OFF -section_id eda_blast_fpga
+set_global_assignment -name DEVICE_FILTER_PIN_COUNT 256
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+#
+set_location_assignment PIN_E1 -to CLOCK_50
+set_instance_assignment -name IO_STANDARD LVTTL -to CLOCK_50
+#
+# botones en placa, de momento como "start" de la megadrive
+set_location_assignment PIN_J16 -to KEY[0]
+set_location_assignment PIN_J15 -to KEY[1]
+#
+set_location_assignment PIN_E7 -to PS2_CLK
+set_location_assignment PIN_F1 -to PS2_DAT
+#
+# RATON
+set_location_assignment PIN_T4 -to PS2_MCLK
+set_location_assignment PIN_R5 -to PS2_MDAT
+#
+set_location_assignment PIN_T15 -to UART_RXD
+set_location_assignment PIN_D15 -to UART_TXD
+#
+# LED HD, FD, sistema
+set_location_assignment PIN_C2 -to LEDS[0]
+set_location_assignment PIN_B1 -to LEDS[1]
+set_location_assignment PIN_M8 -to LEDS[2]
+#
+set_instance_assignment -name IO_STANDARD LVTTL -to UART_RXD
+set_instance_assignment -name IO_STANDARD LVTTL -to UART_TXD
+#
+set_location_assignment PIN_F3 -to SD_CLK
+set_location_assignment PIN_F2 -to SD_CMD
+set_location_assignment PIN_G2 -to SD_DAT
+set_location_assignment PIN_D1 -to SD_DAT3
+#
+# VGA 666 (LA MARCA DEL DIABLO)
+set_location_assignment PIN_F8 -to VGA_R6[0]
+set_location_assignment PIN_G1 -to VGA_R6[1]
+set_location_assignment PIN_L3 -to VGA_R6[2]
+set_location_assignment PIN_E6 -to VGA_R6[3]
+set_location_assignment PIN_G5 -to VGA_R6[4]
+set_location_assignment PIN_L4 -to VGA_R6[5]
+#
+set_location_assignment PIN_L8 -to VGA_B6[0]
+set_location_assignment PIN_K5 -to VGA_B6[1]
+set_location_assignment PIN_L1 -to VGA_B6[2]
+set_location_assignment PIN_N1 -to VGA_B6[3]
+set_location_assignment PIN_P1 -to VGA_B6[4]
+set_location_assignment PIN_R1 -to VGA_B6[5]
+#
+set_location_assignment PIN_L7 -to VGA_G6[0]
+set_location_assignment PIN_M10 -to VGA_G6[1]
+set_location_assignment PIN_L2 -to VGA_G6[2]
+set_location_assignment PIN_N2 -to VGA_G6[3]
+set_location_assignment PIN_P2 -to VGA_G6[4]
+set_location_assignment PIN_T2 -to VGA_G6[5]
+#
+set_location_assignment PIN_K1 -to VGA_HS
+set_location_assignment PIN_K2 -to VGA_VS
+#
+set_instance_assignment -name IO_STANDARD LVTTL -to VGA_R[0]
+set_instance_assignment -name IO_STANDARD LVTTL -to VGA_R[1]
+set_instance_assignment -name IO_STANDARD LVTTL -to VGA_R[2]
+set_instance_assignment -name IO_STANDARD LVTTL -to VGA_R[3]
+set_instance_assignment -name IO_STANDARD LVTTL -to VGA_G[0]
+set_instance_assignment -name IO_STANDARD LVTTL -to VGA_G[1]
+set_instance_assignment -name IO_STANDARD LVTTL -to VGA_G[2]
+set_instance_assignment -name IO_STANDARD LVTTL -to VGA_G[3]
+set_instance_assignment -name IO_STANDARD LVTTL -to VGA_B[0]
+set_instance_assignment -name IO_STANDARD LVTTL -to VGA_B[1]
+set_instance_assignment -name IO_STANDARD LVTTL -to VGA_B[2]
+set_instance_assignment -name IO_STANDARD LVTTL -to VGA_B[3]
+set_instance_assignment -name IO_STANDARD LVTTL -to VGA_HS
+set_instance_assignment -name IO_STANDARD LVTTL -to VGA_VS
+#
+# SONIDO
+set_location_assignment PIN_J2 -to AUDIO_L
+set_location_assignment PIN_J1 -to AUDIO_R
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to AUDIO_L
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to AUDIO_R
+#
+# MANDO 1
+set_location_assignment PIN_N11 -to MANDO1[0]
+set_location_assignment PIN_T10 -to MANDO1[1]
+set_location_assignment PIN_P9 -to MANDO1[2]
+set_location_assignment PIN_N8 -to MANDO1[3]
+set_location_assignment PIN_P8 -to MANDO1[4]
+set_location_assignment PIN_P11 -to MANDO1[5]
+# MANDO 2
+set_location_assignment PIN_P3 -to MANDO2[0]
+set_location_assignment PIN_N5 -to MANDO2[1]
+set_location_assignment PIN_R3 -to MANDO2[2]
+set_location_assignment PIN_R4 -to MANDO2[3]
+set_location_assignment PIN_N3 -to MANDO2[4]
+set_location_assignment PIN_T3 -to MANDO2[5]
+#
+set_location_assignment PIN_B10 -to DRAM_ADDR[0]
+set_location_assignment PIN_A11 -to DRAM_ADDR[1]
+set_location_assignment PIN_B11 -to DRAM_ADDR[2]
+set_location_assignment PIN_A12 -to DRAM_ADDR[3]
+set_location_assignment PIN_D14 -to DRAM_ADDR[4]
+set_location_assignment PIN_D12 -to DRAM_ADDR[5]
+set_location_assignment PIN_D11 -to DRAM_ADDR[6]
+set_location_assignment PIN_C14 -to DRAM_ADDR[7]
+set_location_assignment PIN_C11 -to DRAM_ADDR[8]
+set_location_assignment PIN_C9 -to DRAM_ADDR[9]
+set_location_assignment PIN_A10 -to DRAM_ADDR[10]
+set_location_assignment PIN_C8 -to DRAM_ADDR[11]
+#
+set_location_assignment PIN_A2 -to DRAM_DQ[0]
+set_location_assignment PIN_B3 -to DRAM_DQ[1]
+set_location_assignment PIN_A3 -to DRAM_DQ[2]
+set_location_assignment PIN_B4 -to DRAM_DQ[3]
+set_location_assignment PIN_A4 -to DRAM_DQ[4]
+set_location_assignment PIN_B5 -to DRAM_DQ[5]
+set_location_assignment PIN_A5 -to DRAM_DQ[6]
+set_location_assignment PIN_B6 -to DRAM_DQ[7]
+set_location_assignment PIN_A14 -to DRAM_DQ[8]
+set_location_assignment PIN_B13 -to DRAM_DQ[9]
+set_location_assignment PIN_A13 -to DRAM_DQ[10]
+set_location_assignment PIN_B12 -to DRAM_DQ[11]
+set_location_assignment PIN_D6 -to DRAM_DQ[12]
+set_location_assignment PIN_D5 -to DRAM_DQ[13]
+set_location_assignment PIN_C3 -to DRAM_DQ[14]
+set_location_assignment PIN_D3 -to DRAM_DQ[15]
+#
+set_location_assignment PIN_E9 -to DRAM_BA_0
+set_location_assignment PIN_D9 -to DRAM_BA_1
+set_location_assignment PIN_A7 -to DRAM_CAS_N
+set_location_assignment PIN_A15 -to DRAM_CKE
+set_location_assignment PIN_B14 -to DRAM_CLK
+set_location_assignment PIN_E8 -to DRAM_CS_N
+set_location_assignment PIN_A6 -to DRAM_LDQM
+set_location_assignment PIN_D8 -to DRAM_RAS_N
+set_location_assignment PIN_E11 -to DRAM_UDQM
+set_location_assignment PIN_B7 -to DRAM_WE_N
+#
+#
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to MANDO1[0]
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to MANDO1[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to MANDO1[1]
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to MANDO1[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to MANDO1[2]
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to MANDO1[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to MANDO1[3]
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to MANDO1[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to MANDO1[4]
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to MANDO1[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to MANDO1[5]
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to MANDO1[5]
+#
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to MANDO2[0]
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to MANDO2[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to MANDO2[1]
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to MANDO2[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to MANDO2[2]
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to MANDO2[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to MANDO2[3]
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to MANDO2[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to MANDO2[4]
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to MANDO2[4]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to MANDO2[5]
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to MANDO2[5]
+#
+#
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to PS2_CLK
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to PS2_CLK
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to PS2_DAT
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to PS2_DAT
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to PS2_MCLK
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to PS2_MCLK
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to PS2_MDAT
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to PS2_MDAT
+#
+set_global_assignment -name CYCLONEII_OPTIMIZATION_TECHNIQUE BALANCED
+set_global_assignment -name SYNTH_TIMING_DRIVEN_SYNTHESIS ON
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "3.3-V LVTTL"
+set_global_assignment -name USE_CONFIGURATION_DEVICE ON
+set_global_assignment -name RESERVE_ALL_UNUSED_PINS "AS OUTPUT DRIVING GROUND"
+set_global_assignment -name TIMEQUEST_MULTICORNER_ANALYSIS ON
+set_global_assignment -name SMART_RECOMPILE ON
+set_global_assignment -name PHYSICAL_SYNTHESIS_COMBO_LOGIC ON
+set_global_assignment -name PHYSICAL_SYNTHESIS_REGISTER_RETIMING ON
+set_global_assignment -name PHYSICAL_SYNTHESIS_COMBO_LOGIC_FOR_AREA ON
+
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_global_assignment -name LL_ROOT_REGION ON -section_id "Root Region"
+set_global_assignment -name LL_MEMBER_STATE LOCKED -section_id "Root Region"
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+
+
+
+
+set_global_assignment -name CYCLONEII_RESERVE_NCEO_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name RESERVE_ASDO_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name AUTO_RAM_TO_LCELL_CONVERSION ON
+set_global_assignment -name DEVICE_FILTER_PACKAGE FBGA
+set_global_assignment -name DEVICE_FILTER_SPEED_GRADE 8
+#
+#
+
+#
+#
+#
+#
+#
+#
+
+#
+#
+set_global_assignment -name VHDL_FILE ../../Board/de1/DE1_Toplevel.vhd
+set_global_assignment -name SYSTEMVERILOG_FILE ../../src/compressor.sv
+set_global_assignment -name VERILOG_FILE ../../src/audio_mixer.v
+set_global_assignment -name VERILOG_FILE ../../jt12/hdl/jt12_fir_ram.v
+set_global_assignment -name VERILOG_FILE ../../jt12/hdl/jt12_interpol.v
+set_global_assignment -name VERILOG_FILE ../../jt12/hdl/jt12_fir4.v
+set_global_assignment -name VERILOG_FILE ../../jt12/hdl/jt12_fir.v
+set_global_assignment -name VERILOG_FILE ../../jt12/hdl/jt12_mixer.v
+set_global_assignment -name VERILOG_FILE ../../jt12/hdl/jt12_dac2.v
+set_global_assignment -name VERILOG_FILE ../../jt12/hdl/jt12_top.v
+set_global_assignment -name VERILOG_FILE ../../jt12/hdl/jt12_syn.v
+set_global_assignment -name VERILOG_FILE ../../jt12/hdl/jt12_mod.v
+set_global_assignment -name VERILOG_FILE ../../jt12/hdl/jt12_sh_tl.v
+set_global_assignment -name VERILOG_FILE ../../jt12/hdl/jt12_phrom.v
+set_global_assignment -name VERILOG_FILE ../../jt12/hdl/jt12_exprom.v
+set_global_assignment -name VERILOG_FILE ../../jt12/hdl/jt12_opram.v
+set_global_assignment -name VERILOG_FILE ../../jt12/hdl/jt12_timers.v
+set_global_assignment -name VERILOG_FILE ../../jt12/hdl/jt12_sumch.v
+set_global_assignment -name VERILOG_FILE ../../jt12/hdl/jt12_sh_rst.v
+set_global_assignment -name VERILOG_FILE ../../jt12/hdl/jt12_sh24.v
+set_global_assignment -name VERILOG_FILE ../../jt12/hdl/jt12_sh.v
+set_global_assignment -name VERILOG_FILE ../../jt12/hdl/jt12_reg.v
+set_global_assignment -name VERILOG_FILE ../../jt12/hdl/jt12_pg.v
+set_global_assignment -name VERILOG_FILE ../../jt12/hdl/jt12_op.v
+set_global_assignment -name VERILOG_FILE ../../jt12/hdl/jt12_mmr.v
+set_global_assignment -name VERILOG_FILE ../../jt12/hdl/jt12_lfo.v
+set_global_assignment -name VERILOG_FILE ../../jt12/hdl/jt12_kon.v
+set_global_assignment -name VERILOG_FILE ../../jt12/hdl/jt12_eg.v
+set_global_assignment -name VERILOG_FILE ../../jt12/hdl/jt12_dac.v
+set_global_assignment -name VERILOG_FILE ../../jt12/hdl/jt12_clksync.v
+set_global_assignment -name VERILOG_FILE ../../jt12/hdl/jt12_acc.v
+set_global_assignment -name VERILOG_FILE ../../jt12/hdl/jt12.v
+set_global_assignment -name VHDL_FILE ../../src/psg/psg_tone.vhd
+set_global_assignment -name VHDL_FILE ../../src/psg/psg_noise.vhd
+set_global_assignment -name VHDL_FILE ../../src/psg/psg.vhd
+set_global_assignment -name VERILOG_FILE ../../src/hybrid_pwm_sd.v
+set_global_assignment -name QIP_FILE ../../Board/de1/pll.qip
+set_global_assignment -name SDC_FILE ../../Board/de1/de1.sdc
+set_global_assignment -name VHDL_FILE ../../src/virtual_toplevel.vhd
+set_global_assignment -name VHDL_FILE ../../src/video_vga_dither.vhd
+set_global_assignment -name VHDL_FILE ../../src/T80/T80se.vhd
+set_global_assignment -name VHDL_FILE ../../src/T80/T80_Reg.vhd
+set_global_assignment -name VHDL_FILE ../../src/T80/T80_Pack.vhd
+set_global_assignment -name VHDL_FILE ../../src/T80/T80_MCode.vhd
+set_global_assignment -name VHDL_FILE ../../src/T80/T80_ALU.vhd
+set_global_assignment -name VHDL_FILE ../../src/T80/T80.vhd
+set_global_assignment -name VHDL_FILE ../../src/TG68_fast.vhd
+set_global_assignment -name VHDL_FILE ../../src/TG68.vhd
+set_global_assignment -name VHDL_FILE ../../src/vdp_common.vhd
+set_global_assignment -name VHDL_FILE ../../src/vdp.vhd
+set_global_assignment -name VHDL_FILE ../../src/sdram_controller.vhd
+set_global_assignment -name VHDL_FILE ../../src/os_rom.vhd
+set_global_assignment -name VHDL_FILE ../../src/gen_io.vhd
+set_global_assignment -name VHDL_FILE ../../src/gen_fm.vhd
+set_global_assignment -name VHDL_FILE ../../src/chameleon_gen_sdram.vhd
+set_global_assignment -name VHDL_FILE ../../src/vdp_colinfo.vhd
+set_global_assignment -name VHDL_FILE ../../src/vdp_objinfo.vhd
+set_global_assignment -name VHDL_FILE ../../src/zram.vhd
+set_global_assignment -name VHDL_FILE ../../CtrlModule/RTL/OnScreenDisplay.vhd
+set_global_assignment -name VHDL_FILE ../../CtrlModule/RTL/OSD_Overlay.vhd
+set_global_assignment -name VHDL_FILE ../../CtrlModule/RTL/DualPortRAM_2Read_Unreg.vhd
+set_global_assignment -name VHDL_FILE ../../CtrlModule/RTL/spi.vhd
+set_global_assignment -name VHDL_FILE ../../CtrlModule/RTL/simple_uart.vhd
+set_global_assignment -name VHDL_FILE ../../CtrlModule/RTL/io_ps2_com.vhd
+set_global_assignment -name VHDL_FILE ../../CtrlModule/RTL/interrupt_controller.vhd
+set_global_assignment -name VHDL_FILE ../../CtrlModule/RTL/CtrlModule.vhd
+set_global_assignment -name VHDL_FILE ../../ZPUFlex/RTL/zpupkg.vhd
+set_global_assignment -name VHDL_FILE ../../ZPUFlex/RTL/zpu_core_flex.vhd
+set_global_assignment -name VHDL_FILE ../../Firmware/CtrlROM/CtrlROM_ROM.vhd
+set_global_assignment -name VHDL_FILE ../../CtrlModule/CharROM/CharROM_ROM.vhd
+set_global_assignment -name VERILOG_FILE ../../Board/de1/A_CODEC2.V
+set_global_assignment -name VERILOG_FILE ../../Board/de1/audio_shifter.v
+set_global_assignment -name VERILOG_FILE ../../Board/de1/audio_top.v
+set_global_assignment -name VERILOG_FILE ../../Board/de1/I2C_Controller.v
+set_global_assignment -name VERILOG_FILE ../../Board/de1/I2C_AV_Config.v
+set_global_assignment -name VHDL_FILE ../../CtrlModule/RTL/MergeROM.vhd
+set_global_assignment -name VHDL_FILE ../../CtrlModule/RTL/CtrlROM.vhd
+set_global_assignment -name VHDL_FILE ../../Firmware/CtrlROM/CtrlROM_ROM2.vhd
+set_global_assignment -name VHDL_FILE ../../Firmware/CtrlROM/CtrlROM_ROM1.vhd
+set_global_assignment -name VERILOG_FILE "C:/Users/joseba/Downloads/Genesis_MiSTer-master/Genesis_MiSTer-master/audio_mixer.v"
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

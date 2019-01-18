@@ -1,0 +1,14 @@
+Analysis & Synthesis Status : Successful - Wed Aug 15 21:34:09 2018
+Quartus Prime Version : 17.1.0 Build 590 10/25/2017 SJ Lite Edition
+Revision Name : fpgagen
+Top-level Entity Name : DE1_Toplevel
+Family : Cyclone IV E
+Total logic elements : 18,641
+    Total combinational functions : 14,370
+    Dedicated logic registers : 7,497
+Total registers : 7497
+Total pins : 88
+Total virtual pins : 0
+Total memory bits : 335,903
+Embedded Multiplier 9-bit elements : 6
+Total PLLs : 1

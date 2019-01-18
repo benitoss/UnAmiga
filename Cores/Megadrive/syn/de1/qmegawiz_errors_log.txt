@@ -1,0 +1,46 @@
+
+
+E:/Altera/proyectos/fpgagen/src/Board/de1/pll.vhd
+
+Aug 05 06PM:43:18>: Error in CNX file format.
+
+Error messages are listed in file
+E:/Altera/proyectos/fpgagen/src/Board/de1/pll.cnxerr.
+
+Can't create the custom megafunction variation file(s)
+
+E:/Altera/proyectos/fpgagen/src/Board/de1/pll.vhd
+
+Aug 05 06PM:44:08>: Error in CNX file format.
+
+Error messages are listed in file
+E:/Altera/proyectos/fpgagen/src/Board/de1/pll.cnxerr.
+
+Can't create the custom megafunction variation file(s)
+
+E:/Altera/proyectos/fpgagen/src/Board/de1/pll.vhd
+
+Aug 05 07PM:31:03>: Error in CNX file format.
+
+Error messages are listed in file
+E:/Altera/proyectos/fpgagen/src/Board/de1/pll.cnxerr.
+
+Can't create the custom megafunction variation file(s)
+
+E:/Altera/proyectos/fpgagen/src/Board/de1/pll.vhd
+
+Aug 07 04PM:49:26>: Error in CNX file format.
+
+Error messages are listed in file
+E:/Altera/proyectos/fpgagen/src/Board/de1/pll.cnxerr.
+
+Can't create the custom megafunction variation file(s)
+
+E:/Altera/proyectos/fpgagen/src/Board/de1/pll.vhd
+
+Aug 07 04PM:49:30>: Error in CNX file format.
+
+Error messages are listed in file
+E:/Altera/proyectos/fpgagen/src/Board/de1/pll.cnxerr.
+
+Can't create the custom megafunction variation file(s)

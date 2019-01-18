@@ -1,0 +1,20 @@
+include "sys.h"
+
+int main()
+{
+	int c,d;
+	int in = fopen("d:opl3.com", "rb");
+//	fseek(in, 0, SEEK_END);
+//	c = ftell(in);
+//	fseek(in, c - 49*49*4, SEEK_SET);
+	do
+	{
+		c = fgetc(in);
+		if(c == -1) break;
+		printf("%02X,", c&0xff);
+		d = d + 1;
+		if(!(d & 31)) printf("\xa");
+	}
+	while(1);
+	fclose(in);
+}

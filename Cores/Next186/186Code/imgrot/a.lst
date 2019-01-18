@@ -1,0 +1,404 @@
+Microsoft (R) Macro Assembler Version 6.14.8444		    07/01/15 14:21:05
+a.asm							     Page 1 - 1
+
+
+				.186
+				.model tiny
+ 0000				.code
+				        org 100h
+ 0100				start: 
+ 0100  33 ED			        xor bp,bp
+ 0102  C7 46 20 02EE R		        mov word ptr [bp+8*4], offset inth
+ 0107  8C 4E 22			        mov [bp+8*4+2],cs
+ 010A  C7 46 24 02EE R		        mov word ptr [bp+9*4], offset inth
+ 010F  8C 4E 26			        mov [bp+9*4+2],cs
+ 0112  C7 86 01D0 02EE R	        mov word ptr [bp+74h*4], offset inth
+ 0118  8C 8E 01D2		        mov [bp+74h*4+2],cs
+ 011C  32 C0			        xor al,al
+ 011E  E6 00			        out 0,al
+ 0120  B0 00			        mov al,0h
+ 0122  E6 21			        out 21h,al
+
+ 0124  B8 000A				mov ax,0ah
+ 0127  E7 8A				out 8ah,ax
+ 0129  40				inc ax
+ 012A  E7 8B				out 8bh,ax
+ 012C  40				inc ax
+ 012D  E7 8C				out 8ch,ax
+ 012F  40				inc ax
+ 0130  E7 8D				out 8dh,ax
+ 0132  40				inc ax
+ 0133  E7 8E				out 8eh,ax
+				 
+ 0135  BA 03C0			  	mov dx,3c0h
+ 0138  B0 10			    	mov al,10h
+ 013A  EE			    	out dx,al
+ 013B  B0 01			    	mov al,01h
+ 013D  EE			    	out dx,al   ; // VGA 640*480
+
+					
+ 013E  B0 13				mov	al, 13h
+ 0140  EE				out 	dx, al
+ 0141  B0 00				mov	al, 0
+ 0143  EE				out	dx, al		; 0 pan
+
+ 0144  BA 03D4				mov dx, 3d4h
+ 0147  B8 0006				mov ax, 6h
+ 014A  EF				out dx, ax
+ 014B  B8 5013				mov ax, 5013h
+ 014E  EF				out dx, ax
+
+
+ 014F  BA 03C4				mov	dx, 3c4h
+ 0152  B8 0F02				mov	ax, 0f02h
+ 0155  EF				out	dx, ax		; enable all write planes
+ 0156  B8 0804				mov	ax, 0804h
+ 0159  EF				out	dx, ax		; clear planar mode
+ 015A  B2 CE				mov	dl, 0ceh
+ 015C  B8 0001				mov	ax, 0001h
+ 015F  EF				out	dx, ax		; disable set/reset
+ 0160  B8 0003				mov	ax, 0003h
+ 0163  EF				out	dx, ax		; reset logical op and rotate count
+ 0164  B8 0005				mov	ax, 0005h
+ 0167  EF				out	dx, ax		; set write mode to 00 (CPU access)
+ 0168  B8 FF08				mov	ax, 0ff08h
+ 016B  EF				out	dx, ax		; set bitmask to CPU access
+
+ 016C  FB			        sti
+ 016D  E8 00FA			        call defpal
+				;        call cls
+
+
+
+ 0170				newscreen:
+ 0170  33 F6			        xor si,si
+
+ 0172				screen:
+ 0172  0E			        push cs
+ 0173  1F			        pop ds
+ 0174  56			        push si
+ 0175  8B 84 0210 R		        mov ax,sintable[si]
+ 0179  C1 F8 03			        sar ax,3
+ 017C  A3 01C0 R		        mov [p1+2],ax
+ 017F  A3 01F0 R		        mov [p3+2],ax
+ 0182  8B D8			        mov bx,ax
+ 0184  03 C0			        add ax,ax
+ 0186  A3 01CA R		        mov [p2+2],ax
+ 0189  03 C3			        add ax,bx
+ 018B  A3 01D5 R		        mov [p1a+2],ax
+ 018E  03 C3			        add ax,bx
+ 0190  A3 01DF R		        mov [p2a+2],ax
+ 0193  69 EB FEC0		        imul bp,bx,-320
+ 0197  69 D3 00F0		        imul dx,bx,240
+ 019B  8B B4 0222 R		        mov si,sintable[si+18]
+ 019F  C1 FE 03			        sar si,3
+ 01A2  69 C6 FF10		        imul ax,si,-240
+ 01A6  03 E8			        add bp,ax
+ 01A8  69 C6 FEC0		        imul ax,si,-320
+ 01AC  03 D0			        add dx,ax
+
+
+ 01AE  68 A000			        push 0a000h;0b2c0h
+ 01B1  07			        pop es 
+ 01B2  68 1000			        push 01000h
+ 01B5  1F			        pop ds 
+
+ 01B6				line:
+ 01B6  BF 0000			        mov di,0
+ 01B9  B9 00A0			        mov cx,160
+ 01BC  55			        push bp
+ 01BD  52			        push dx
+ 01BE				pixel:
+ 01BE				p1 label word
+ 01BE  8D 9E 04D2		        lea bx,[bp+1234]
+ 01C2  03 D6			        add dx,si
+ 01C4  8A DE			        mov bl,dh
+ 01C6  8A 07			        mov al,[bx]
+ 01C8				p2 label word        
+ 01C8  8D 9E 04D2		        lea bx,[bp+1234]
+ 01CC  03 D6			        add dx,si
+ 01CE  8A DE			        mov bl,dh
+ 01D0  8A 27			        mov ah,[bx]
+ 01D2  AB			        stosw
+ 01D3				p1a label word
+ 01D3  8D 9E 04D2		        lea bx,[bp+1234]
+ 01D7  03 D6			        add dx,si
+ 01D9  8A DE			        mov bl,dh
+ 01DB  8A 07			        mov al,[bx]
+ 01DD				p2a label word        
+ 01DD  8D 9E 04D2		        lea bx,[bp+1234]
+ 01E1  03 D6			        add dx,si
+ 01E3  8B EB			        mov bp,bx
+ 01E5  8A DE			        mov bl,dh
+ 01E7  8A 27			        mov ah,[bx]
+ 01E9  AB			        stosw
+ 01EA  E2 D2			        loop pixel
+ 01EC  5A			        pop dx
+ 01ED  5D			        pop bp
+ 01EE				p3 label word        
+ 01EE  81 EA 1234		        sub dx,1234h
+ 01F2  03 EE			        add bp,si
+ 01F4  8C C0			        mov ax,es
+ 01F6  83 C0 28			        add ax,40
+ 01F9  8E C0			        mov es,ax
+ 01FB  3D EB00			        cmp ax,0eb00h;0d840h;0eb00h
+ 01FE  75 B6			        jne line
+ 0200  5E			        pop si
+ 0201  83 C6 02			        add si,2
+ 0204  83 FE 48			        cmp si, 72
+ 0207  74 03 E9 FF66		        jnz screen
+ 020C  E9 FF61			        jmp newscreen   
+
+				even
+ 0210 0000 002C 0057 0080	sintable    dw 0,44,87,128,164,196,221,240,252,256,252,240,221,196,164,128,87,44,0
+       00A4 00C4 00DD
+       00F0 00FC 0100
+       00FC 00F0 00DD
+       00C4 00A4 0080
+       0057 002C 0000
+ 0236  FFD4 FFA9 FF80		            dw -44,-87,-128,-164,-196,-221,-240,-252,-256,-252,-240,-221,-196,-164,-128,-87,-44
+       FF5C FF3C FF23
+       FF10 FF04 FF00
+       FF04 FF10 FF23
+       FF3C FF5C FF80
+       FFA9 FFD4
+ 0258  0000 002C 0057		            dw 0,44,87,128,164,196,221,240,252
+       0080 00A4 00C4
+       00DD 00F0 00FC
+
+
+				;------------------------------ set default palette ---------
+ 026A				defpal proc near
+ 026A  BA 03C8			        mov dx,3c8h
+ 026D  33 C0			        xor ax,ax
+ 026F  EE			        out dx,al
+ 0270  42			        inc dx
+ 0271				lop:    
+ 0271  8A C4			        mov al,ah
+ 0273  24 07			        and al,7
+ 0275  C0 E0 03			        shl al,3
+ 0278  EE			        out dx,al
+ 0279  8A C4			        mov al,ah
+ 027B  24 38			        and al,38h
+ 027D  EE			        out dx,al
+ 027E  8A C4			        mov al,ah
+ 0280  C0 C8 02			        ror al,2
+ 0283  24 30			        and al,30h
+ 0285  3C 30			        cmp al,30h
+ 0287  75 02			        jne nob
+ 0289  0C 08			        or al,8
+ 028B				nob:
+ 028B  EE			        out dx,al
+ 028C  FE C4			        inc ah
+ 028E  75 E1			        jnz lop
+ 0290  C3			        ret
+ 0291				defpal endp
+
+				;------------------------------ get palette ------------------
+ 0291				getpal proc near    ; es:di = mem palette, al=start color, cx = num colors
+ 0291  BA 03C7			        mov dx,3c7h
+ 0294  EE			        out dx,al
+ 0295  42			        inc dx
+ 0296  42			        inc dx
+ 0297  6B C9 03			        imul cx,3
+ 029A  F3/ 6C			        rep insb
+ 029C  C3			        ret
+ 029D				getpal endp
+
+
+				;------------------------------ set palette ------------------
+ 029D				setpal proc near    ; ds:si = mem palette, al=start color, cx = num colors
+ 029D  BA 03C8			        mov dx, 3c8h
+ 02A0  EE			        out dx,al
+ 02A1  42			        inc dx
+ 02A2  6B C9 03			        imul cx,3
+ 02A5  F3/ 6E			        rep outsb
+ 02A7  C3			        ret
+ 02A8				setpal endp
+
+
+
+				;------------------------------- copy screen ------------------
+ 02A8				copyscr proc near   ; ax = src screen segment
+ 02A8  8E D8			        mov ds,ax
+ 02AA  B8 A000			        mov ax,0a000h
+ 02AD  8E C0			        mov es,ax
+ 02AF  BA 0030			        mov dx,48
+ 02B2				copy1:
+ 02B2  B9 0C80			        mov cx,3200
+ 02B5  33 F6			        xor si,si
+ 02B7  33 FF			        xor di,di
+ 02B9  F3/ A5			        rep movsw
+ 02BB  8C D8			        mov ax,ds
+ 02BD  05 0190			        add ax,400
+ 02C0  8E D8			        mov ds,ax
+ 02C2  8C C0			        mov ax,es
+ 02C4  05 0190			        add ax,400
+ 02C7  8E C0			        mov es,ax
+ 02C9  4A			        dec dx
+ 02CA  75 E6			        jne copy1
+ 02CC  C3			        ret
+
+ 02CD				copyscr endp
+
+				;------------------------------- putpixel ----------------------
+ 02CD				putpixel proc near  ;cl=color, ax=y, bx=x
+ 02CD  1E			        push ds
+ 02CE  BA 0280			        mov dx,640
+ 02D1  F7 E2			        mul dx
+ 02D3  03 D8			        add bx,ax
+ 02D5  80 D2 0A			        adc dl,0ah
+ 02D8  C1 CA 04			        ror dx,4
+ 02DB  8E DA			        mov ds,dx
+ 02DD  88 0F			        mov [bx],cl
+ 02DF  1F			        pop ds
+ 02E0  C3			        ret
+ 02E1				putpixel endp
+
+
+				;------------------------------- flush --------------------------
+ 02E1  1E			flush:  push ds
+ 02E2  B7 08			        mov bh,8
+ 02E4  8E DB			        mov ds,bx
+ 02E6				flush1:        
+ 02E6  8A 07			        mov al,[bx]
+ 02E8  FE CF			        dec bh
+ 02EA  75 FA			        jnz flush1
+ 02EC  1F			        pop ds
+ 02ED  C3			        ret  
+				    
+
+				;---------------------- Timer interrupt 08 ------------------
+ 02EE				inth:  
+ 02EE  50			        push ax
+ 02EF  55			        push bp
+ 02F0  8B EC			        mov bp,sp
+ 02F2  8B 46 04			        mov ax,[bp+4]
+ 02F5  E6 00			        out 0,al
+ 02F7  5D			        pop bp
+ 02F8  58			        pop ax
+ 02F9  CF			        iret
+
+				; ----------------  serial receive byte 115200 bps --------------
+ 02FA FF26			srecb   dw  0ff26h  
+
+
+				;----------------------------------- vertical scroll ------------------------
+ 02FC				vscroll proc near   ; al = lines
+ 02FC  BE 9FD8			        mov si,0a000h-40
+ 02FF  8E C6			        mov es,si
+ 0301  32 E4			        xor ah,ah
+ 0303  BA 01E0				  mov dx,480
+ 0306  2B D0				  sub dx,ax
+ 0308  6B C0 28			        imul ax,ax,40
+ 030B  03 C6			        add ax,si
+ 030D  8E D8			        mov ds,ax
+ 030F				vsc1:
+ 030F  8C C0			        mov ax,es
+ 0311  83 C0 28			        add ax,40
+ 0314  8E C0			        mov es,ax
+ 0316  8C D8			        mov ax,ds
+ 0318  83 C0 28			        add ax,40
+ 031B  8E D8			        mov ds,ax
+ 031D  B9 0140			        mov cx,320
+ 0320  33 F6			        xor si,si
+ 0322  33 FF			        xor di,di
+ 0324  F3/ A5			        rep movsw
+ 0326  4A			        dec dx
+ 0327  75 E6			        jnz vsc1
+ 0329  C3			        ret
+ 032A				vscroll endp
+
+
+				;----------------------------------- CLS -------------------------------------
+ 032A				cls proc near   ; al = color
+ 032A  8A E0			        mov ah,al
+ 032C  BB A000			        mov bx,0a000h
+ 032F  B2 04			        mov dl,4
+ 0331				cls1:
+ 0331  B9 8000			        mov cx,8000h
+ 0334  E8 000A			        call clseg
+ 0337  80 C7 10			        add bh,10h
+ 033A  FE CA			        dec dl
+ 033C  75 F3			        jnz cls1
+ 033E  B9 5800			        mov cx,22528
+ 0341				clseg:
+ 0341  06			        push es
+ 0342  33 FF			        xor di,di
+ 0344  8E C3			        mov es,bx    
+ 0346  F3/ AB			        rep stosw
+ 0348  07			        pop es
+ 0349  C3			        ret
+ 034A				cls endp
+				       
+				even
+ 034A				buf     label byte
+
+
+				end start
+Microsoft (R) Macro Assembler Version 6.14.8444		    07/01/15 14:21:05
+a.asm							     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+DGROUP . . . . . . . . . . . . .	GROUP
+_TEXT  . . . . . . . . . . . . .	16 Bit	 034A	  Word	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	16 Bit	 0000	  Word	  Public  'DATA'	
+
+
+Procedures,  parameters and locals:
+
+                N a m e                 Type     Value    Attr
+
+cls  . . . . . . . . . . . . . .	P Near	 032A	  _TEXT	Length= 0020 Public
+  cls1 . . . . . . . . . . . . .	L Near	 0331	  _TEXT	
+  clseg  . . . . . . . . . . . .	L Near	 0341	  _TEXT	
+copyscr  . . . . . . . . . . . .	P Near	 02A8	  _TEXT	Length= 0025 Public
+  copy1  . . . . . . . . . . . .	L Near	 02B2	  _TEXT	
+defpal . . . . . . . . . . . . .	P Near	 026A	  _TEXT	Length= 0027 Public
+  lop  . . . . . . . . . . . . .	L Near	 0271	  _TEXT	
+  nob  . . . . . . . . . . . . .	L Near	 028B	  _TEXT	
+getpal . . . . . . . . . . . . .	P Near	 0291	  _TEXT	Length= 000C Public
+putpixel . . . . . . . . . . . .	P Near	 02CD	  _TEXT	Length= 0014 Public
+setpal . . . . . . . . . . . . .	P Near	 029D	  _TEXT	Length= 000B Public
+vscroll  . . . . . . . . . . . .	P Near	 02FC	  _TEXT	Length= 002E Public
+  vsc1 . . . . . . . . . . . . .	L Near	 030F	  _TEXT	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0000h	 
+@Model . . . . . . . . . . . . .	Number	 0001h	 
+@code  . . . . . . . . . . . . .	Text   	 DGROUP
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+buf  . . . . . . . . . . . . . .	Byte	 034A	  _TEXT	
+flush1 . . . . . . . . . . . . .	L Near	 02E6	  _TEXT	
+flush  . . . . . . . . . . . . .	L Near	 02E1	  _TEXT	
+inth . . . . . . . . . . . . . .	L Near	 02EE	  _TEXT	
+line . . . . . . . . . . . . . .	L Near	 01B6	  _TEXT	
+newscreen  . . . . . . . . . . .	L Near	 0170	  _TEXT	
+p1a  . . . . . . . . . . . . . .	Word	 01D3	  _TEXT	
+p1 . . . . . . . . . . . . . . .	Word	 01BE	  _TEXT	
+p2a  . . . . . . . . . . . . . .	Word	 01DD	  _TEXT	
+p2 . . . . . . . . . . . . . . .	Word	 01C8	  _TEXT	
+p3 . . . . . . . . . . . . . . .	Word	 01EE	  _TEXT	
+pixel  . . . . . . . . . . . . .	L Near	 01BE	  _TEXT	
+screen . . . . . . . . . . . . .	L Near	 0172	  _TEXT	
+sintable . . . . . . . . . . . .	Word	 0210	  _TEXT	
+srecb  . . . . . . . . . . . . .	Word	 02FA	  _TEXT	
+start  . . . . . . . . . . . . .	L Near	 0100	  _TEXT	
+
+	   0 Warnings
+	   0 Errors

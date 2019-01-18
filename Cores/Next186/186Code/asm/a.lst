@@ -1,0 +1,65 @@
+Microsoft (R) Macro Assembler Version 6.14.8444		    04/11/14 11:07:51
+a.asm							     Page 1 - 1
+
+
+				.186
+				.model tiny
+ 0000				.code
+				        org 100h
+ 0100				start: 
+ 0100  68 B800			        push    0b800h
+ 0103  1F			        pop     ds
+ 0104  BA 0080			        mov     dx, 80h
+ 0107  33 FF			        xor     di, di
+ 0109				lop:        
+ 0109  ED			        in      ax, dx
+ 010A  04 41			        add     al, 'A'
+ 010C  88 05			        mov     [di], al
+ 010E  47			        inc     di
+ 010F  47			        inc     di
+ 0110  42			        inc     dx
+ 0111  F6 C2 0F			        test    dl, 15
+ 0114  75 F3			        jnz     short lop
+				        
+ 0116  BF 00A0			        mov     di, 160
+ 0119  1E			        push    ds
+ 011A  07			        pop     es
+ 011B  B9 1000			        mov     cx, 1000h
+ 011E  B8 1234			        mov     ax, 1234h
+ 0121  F3/ AB			        rep     stosw
+ 0123  F4			        hlt
+				        
+				end start
+Microsoft (R) Macro Assembler Version 6.14.8444		    04/11/14 11:07:51
+a.asm							     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+DGROUP . . . . . . . . . . . . .	GROUP
+_TEXT  . . . . . . . . . . . . .	16 Bit	 0124	  Word	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	16 Bit	 0000	  Word	  Public  'DATA'	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0000h	 
+@Model . . . . . . . . . . . . .	Number	 0001h	 
+@code  . . . . . . . . . . . . .	Text   	 DGROUP
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+lop  . . . . . . . . . . . . . .	L Near	 0109	  _TEXT	
+start  . . . . . . . . . . . . .	L Near	 0100	  _TEXT	
+
+	   0 Warnings
+	   0 Errors

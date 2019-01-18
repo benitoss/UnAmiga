@@ -1,0 +1,256 @@
+$00	BRK		OK
+$01	ORA (zp,X)	OK
+$02	SXY		OK
+$03	ST0 imm		OK
+$04	TSB zp		OK
+$05	ORA zp		OK
+$06	ASL zp		OK
+$07	RMB0 zp		OK
+$08	PHP		OK
+$09	ORA imm		OK
+$0A	ASL A		OK
+$0B	***		OK
+$0C	TSB abs		OK
+$0D	ORA abs		OK
+$0E	ASL abs		OK
+$0F	BBR0 zp,rel	OK
+$10	BPL rel		OK
+$11	ORA (zp),Y	OK
+$12	ORA (zp)	OK
+$13	ST1 imm		OK
+$14	TRB zp		OK
+$15	ORA zp,X	OK
+$16	ASL zp,X	OK
+$17	RMB1 zp		OK
+$18	CLC		OK
+$19	ORA abs,Y	OK
+$1A	INC A		OK
+$1B	***		OK
+$1C	TRB abs		OK
+$1D	ORA abs,X	OK
+$1E	ASL abs,X	OK
+$1F	BBR1 zp,rel	OK
+$20	JSR abs		OK
+$21	AND (zp,X)	OK
+$22	SAX		OK
+$23	ST2 imm		OK
+$24	BIT zp		OK
+$25	AND zp		OK
+$26	ROL zp		OK
+$27	RMB2 zp		OK
+$28	PLP		OK
+$29	AND imm		OK
+$2A	ROL A		OK
+$2B	***		OK
+$2C	BIT abs		OK
+$2D	AND abs		OK
+$2E	ROL abs		OK
+$2F	BBR2 zp,rel	OK
+$30	BMI rel		OK
+$31	AND (zp),Y	OK
+$32	AND (zp)	OK
+$33	***		OK
+$34	BIT zp,X	OK
+$35	AND zp,X	OK
+$36	ROL zp,X	OK
+$37	RMB3 zp		OK
+$38	SEC		OK
+$39	AND abs,Y	OK
+$3A	DEC A		OK
+$3B	***		OK
+$3C	BIT abs,X	OK
+$3D	AND abs,X	OK
+$3E	ROL abs,X	OK
+$3F	BBR3 zp,rel	OK
+$40	RTI		OK
+$41	EOR (zp,X)	OK
+$42	SAY		OK
+$43	TMA		OK
+$44	BSR		OK
+$45	EOR zp		OK
+$46	LSR zp		OK
+$47	RMB4 zp		OK
+$48	PHA		OK
+$49	EOR imm		OK
+$4A	LSR A		OK
+$4B	***		OK
+$4C	JMP abs		OK
+$4D	EOR abs		OK
+$4E	LSR abs		OK
+$4F	BBR4 zp,rel	OK
+$50	BVC rel		OK
+$51	EOR (zp),Y	OK
+$52	EOR (zp)	OK
+$53	TAM		OK
+$54	CSL		OK
+$55	EOR zp,X	OK
+$56	LSR zp,X	OK
+$57	RMB5 zp		OK
+$58	CLI		OK
+$59	EOR abs,Y	OK
+$5A	PHY		OK
+$5B	***		OK
+$5C	***		OK
+$5D	EOR abs,X	OK
+$5E	LSR abs,X	OK
+$5F	BBR5 zp,rel	OK
+$60	RTS		OK
+$61	ADC (zp,X)	OK
+$62	CLA		OK
+$63	***		OK
+$64	STZ zp		OK
+$65	ADC zp		OK
+$66	ROR zp		OK
+$67	RMB6 zp		OK
+$68	PLA		OK
+$69	ADC imm		OK
+$6A	ROR A		OK
+$6B	***		OK
+$6C	JMP (abs)	OK
+$6D	ADC abs		OK
+$6E	ROR abs		OK
+$6F	BBR6 zp,rel	OK
+$70	BVS rel		OK
+$71	ADC (zp),Y	OK
+$72	ADC (zp)	OK
+$73	TII block	OK
+$74	STZ zp,X	OK
+$75	ADC zp,X	OK
+$76	ROR zp,X	OK
+$77	RMB7 zp		OK
+$78	SEI		OK
+$79	ADC abs,Y	OK
+$7A	PLY		OK
+$7B	***		OK
+$7C	JMP (abs,X)	OK
+$7D	ADC abs,X	OK
+$7E	ROR abs,X	OK
+$7F	BBR7 zp,rel	OK
+$80	BRA rel		OK
+$81	STA (zp,X)	OK
+$82	CLX		OK
+$83	TST imm,zp	OK
+$84	STY zp		OK
+$85	STA zp		OK
+$86	STX zp		OK
+$87	SMB0 zp		OK
+$88	DEY		OK
+$89	BIT imm		OK
+$8A	TXA		OK
+$8B	***		OK
+$8C	STY abs		OK
+$8D	STA abs		OK
+$8E	STX abs		OK
+$8F	BBS0 zp,rel	OK
+$90	BCC rel		OK
+$91	STA (zp),Y	OK
+$92	STA (zp)	OK
+$93	TST imm,abs	OK
+$94	STY zp,X	OK
+$95	STA zp,X	OK
+$96	STX zp,Y	OK
+$97	SMB1 zp		OK
+$98	TYA		OK
+$99	STA abs,Y	OK
+$9A	TXS		OK
+$9B	***		OK
+$9C	STZ abs		OK
+$9D	STA abs,X	OK
+$9E	STZ abs,X	OK
+$9F	BBS1 zp,rel	OK
+$A0	LDY imm		OK
+$A1	LDA (zp,X)	OK
+$A2	LDX imm		OK
+$A3	TST imm,zp,X	OK
+$A4	LDY zp		OK
+$A5	LDA zp		OK
+$A6	LDX zp		OK
+$A7	SMB2 zp		OK
+$A8	TAY		OK
+$A9	LDA imm		OK
+$AA	TAX		OK
+$AB	***		OK
+$AC	LDY abs		OK
+$AD	LDA abs		OK
+$AE	LDX abs		OK
+$AF	BBS2 zp,rel	OK
+$B0	BCS rel		OK
+$B1	LDA (zp),Y	OK
+$B2	LDA (zp)	OK
+$B3	TST imm,abs,X	OK
+$B4	LDY zp,X	OK
+$B5	LDA zp,X	OK
+$B6	LDX zp,Y	OK
+$B7	SMB3 zp		OK
+$B8	CLV		OK
+$B9	LDA abs,Y	OK
+$BA	TSX		OK
+$BB	***		OK
+$BC	LDY abs,X	OK
+$BD	LDA abs,X	OK
+$BE	LDX abs,Y	OK
+$BF	BBS3 zp,rel	OK
+$C0	CPY imm		OK
+$C1	CMP (zp,X)	OK
+$C2	CLY		OK
+$C3	TDD block	OK
+$C4	CPY zp		OK
+$C5	CMP zp		OK
+$C6	DEC zp		OK
+$C7	SMB4 zp		OK
+$C8	INY		OK
+$C9	CMP imm		OK
+$CA	DEX		OK
+$CB	***		OK
+$CC	CPY abs		OK
+$CD	CMP abs		OK
+$CE	DEC abs		OK
+$CF	BBS4 zp,rel	OK
+$D0	BNE rel		OK
+$D1	CMP (zp),Y	OK
+$D2	CMP (zp)	OK
+$D3	TIN block	OK
+$D4	CSH		OK
+$D5	CMP zp,X	OK
+$D6	DEC zp,X	OK
+$D7	SMB5 zp		OK
+$D8	CLD		OK
+$D9	CMP abs,Y	OK
+$DA	PHX		OK
+$DB	***		OK
+$DC	***		OK
+$DD	CMP abs,X	OK
+$DE	DEC abs,X	OK
+$DF	BBS5 zp,rel	OK
+$E0	CPX imm		OK
+$E1	SBC (zp,X)	OK
+$E2	***		OK
+$E3	TIA block	OK
+$E4	CPX zp		OK
+$E5	SBC zp		OK
+$E6	INC zp		OK
+$E7	SMB6 zp		OK
+$E8	INX		OK
+$E9	SBC imm		OK
+$EA	NOP		OK
+$EB	***		OK
+$EC	CPX abs		OK
+$ED	SBC abs		OK
+$EE	INC abs		OK
+$EF	BBS6 zp,rel	OK
+$F0	BEQ rel		OK
+$F1	SBC (zp),Y	OK
+$F2	SBC (zp)	OK
+$F3	TAI block	OK
+$F4	SET		OK
+$F5	SBC zp,X	OK
+$F6	INC zp,X	OK
+$F7	SMB7 zp		OK
+$F8	SED		OK
+$F9	SBC abs,Y	OK
+$FA	PLX		OK
+$FB	***		OK
+$FC	***		OK
+$FD	SBC abs,X	OK
+$FE	INC abs,X	OK
+$FF	BBS7 zp,rel	OK

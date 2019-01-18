@@ -1,0 +1,107 @@
+EDA Netlist Writer report for Next186_SoC
+Sun Jul 29 21:27:07 2018
+Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. EDA Netlist Writer Summary
+  3. Simulation Settings
+  4. Simulation Generated Files
+  5. EDA Netlist Writer Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2017  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
+
+
+
++-------------------------------------------------------------------+
+; EDA Netlist Writer Summary                                        ;
++---------------------------+---------------------------------------+
+; EDA Netlist Writer Status ; Successful - Sun Jul 29 21:27:07 2018 ;
+; Revision Name             ; Next186_SoC                           ;
+; Top-level Entity Name     ; Next186_SoC                           ;
+; Family                    ; Cyclone IV E                          ;
+; Simulation Files Creation ; Successful                            ;
++---------------------------+---------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------+
+; Simulation Settings                                                                                                    ;
++---------------------------------------------------------------------------------------------------+--------------------+
+; Option                                                                                            ; Setting            ;
++---------------------------------------------------------------------------------------------------+--------------------+
+; Tool Name                                                                                         ; ModelSim (Verilog) ;
+; Generate functional simulation netlist                                                            ; Off                ;
+; Time scale                                                                                        ; 1 ps               ;
+; Truncate long hierarchy paths                                                                     ; Off                ;
+; Map illegal HDL characters                                                                        ; Off                ;
+; Flatten buses into individual nodes                                                               ; Off                ;
+; Maintain hierarchy                                                                                ; Off                ;
+; Bring out device-wide set/reset signals as ports                                                  ; Off                ;
+; Enable glitch filtering                                                                           ; Off                ;
+; Do not write top level VHDL entity                                                                ; Off                ;
+; Disable detection of setup and hold time violations in the input registers of bi-directional pins ; Off                ;
+; Architecture name in VHDL output netlist                                                          ; structure          ;
+; Generate third-party EDA tool command script for RTL functional simulation                        ; Off                ;
+; Generate third-party EDA tool command script for gate-level simulation                            ; Off                ;
++---------------------------------------------------------------------------------------------------+--------------------+
+
+
++--------------------------------------------------------------------------------------------------+
+; Simulation Generated Files                                                                       ;
++--------------------------------------------------------------------------------------------------+
+; Generated Files                                                                                  ;
++--------------------------------------------------------------------------------------------------+
+; E:/Altera/proyectos/Next186/Next186_SoC/simulation/modelsim/Next186_SoC_8_1200mv_85c_slow.vo     ;
+; E:/Altera/proyectos/Next186/Next186_SoC/simulation/modelsim/Next186_SoC_8_1200mv_0c_slow.vo      ;
+; E:/Altera/proyectos/Next186/Next186_SoC/simulation/modelsim/Next186_SoC_min_1200mv_0c_fast.vo    ;
+; E:/Altera/proyectos/Next186/Next186_SoC/simulation/modelsim/Next186_SoC.vo                       ;
+; E:/Altera/proyectos/Next186/Next186_SoC/simulation/modelsim/Next186_SoC_8_1200mv_85c_v_slow.sdo  ;
+; E:/Altera/proyectos/Next186/Next186_SoC/simulation/modelsim/Next186_SoC_8_1200mv_0c_v_slow.sdo   ;
+; E:/Altera/proyectos/Next186/Next186_SoC/simulation/modelsim/Next186_SoC_min_1200mv_0c_v_fast.sdo ;
+; E:/Altera/proyectos/Next186/Next186_SoC/simulation/modelsim/Next186_SoC_v.sdo                    ;
++--------------------------------------------------------------------------------------------------+
+
+
++-----------------------------+
+; EDA Netlist Writer Messages ;
++-----------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime EDA Netlist Writer
+    Info: Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
+    Info: Processing started: Sun Jul 29 21:26:53 2018
+Info: Command: quartus_eda --read_settings_files=off --write_settings_files=off Next186_SoC -c Next186_SoC
+Info (204019): Generated file Next186_SoC_8_1200mv_85c_slow.vo in folder "E:/Altera/proyectos/Next186/Next186_SoC/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file Next186_SoC_8_1200mv_0c_slow.vo in folder "E:/Altera/proyectos/Next186/Next186_SoC/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file Next186_SoC_min_1200mv_0c_fast.vo in folder "E:/Altera/proyectos/Next186/Next186_SoC/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file Next186_SoC.vo in folder "E:/Altera/proyectos/Next186/Next186_SoC/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file Next186_SoC_8_1200mv_85c_v_slow.sdo in folder "E:/Altera/proyectos/Next186/Next186_SoC/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file Next186_SoC_8_1200mv_0c_v_slow.sdo in folder "E:/Altera/proyectos/Next186/Next186_SoC/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file Next186_SoC_min_1200mv_0c_v_fast.sdo in folder "E:/Altera/proyectos/Next186/Next186_SoC/simulation/modelsim/" for EDA simulation tool
+Info (204019): Generated file Next186_SoC_v.sdo in folder "E:/Altera/proyectos/Next186/Next186_SoC/simulation/modelsim/" for EDA simulation tool
+Info: Quartus Prime EDA Netlist Writer was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 663 megabytes
+    Info: Processing ended: Sun Jul 29 21:27:08 2018
+    Info: Elapsed time: 00:00:15
+    Info: Total CPU time (on all processors): 00:00:13
+
+

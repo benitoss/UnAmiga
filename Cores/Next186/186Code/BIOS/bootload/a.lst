@@ -1,0 +1,106 @@
+Microsoft (R) Macro Assembler Version 6.14.8444		    10/21/16 13:25:10
+a.asm							     Page 1 - 1
+
+
+				.186
+				.model tiny
+ 0000				.code
+				        org 100h
+ 0100				start: 
+ 0100  FA			      cli
+ 0101  B8 0030			      mov ax,30h
+ 0104  8E D0			      mov ss,ax
+ 0106  BC 0100			      mov sp,100h
+ 0109  68 F000			      push 0f000h
+ 010C  1F				pop ds
+ 010D  B0 34			      mov al,34h
+ 010F  E6 43			      out 43h,al
+ 0111  32 C0			      xor al,al
+ 0113  E6 40			      out 40h,al
+ 0115  E6 40			      out 40h,al 
+				      
+					
+ 0117  BE E000				mov si,0e000h
+ 011A  E8 0015				call srecb
+ 011D  8A FC				mov bh,ah
+ 011F  E8 0010				call srecb
+ 0122  8A DC				mov bl,ah
+
+ 0124				sloop:	
+ 0124  E8 000B				call srecb
+ 0127  88 24				mov [si],ah
+ 0129  46				inc si
+ 012A  4B				dec bx
+ 012B  75 F7				jnz sloop
+ 012D  EA				db 0eah
+ 012E  0000 FFFF		      dw 0,-1    
+
+
+				; ----------------  serial receive byte 115200 bps --------------
+ 0132  B4 80			srecb:  mov ah,80h
+ 0134  BA 03DA			        mov dx,3dah
+ 0137  B9 FA52			        mov cx,-5aeh ; (half start bit)
+ 013A  EC			srstb:  in al,dx
+ 013B  C0 E8 02				  shr al,2
+ 013E  72 FA				  jc srstb
+
+ 0140  E4 40			        in al,40h ; lo counter
+ 0142  02 E8			        add ch,al
+ 0144  E4 40			        in al,40h ; hi counter, ignore
+
+ 0146				l1:
+ 0146  E8 0008			        call dlybit
+ 0149  EC				  in al,dx
+ 014A  C0 E8 02			        shr al,2
+ 014D  D0 DC				  rcr ah,1
+ 014F  73 F5				  jnc l1
+
+ 0151				dlybit:
+ 0151  81 E9 0A5B		        sub cx,0a5bh  ;  (full bit)
+ 0155				dly1:
+ 0155  E4 40			        in al,40h
+ 0157  38 E8			        cmp al,ch
+ 0159  E4 40			        in al,40h
+ 015B  75 F8			        jnz dly1
+ 015D  C3			        ret
+
+
+				end start
+Microsoft (R) Macro Assembler Version 6.14.8444		    10/21/16 13:25:10
+a.asm							     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+DGROUP . . . . . . . . . . . . .	GROUP
+_TEXT  . . . . . . . . . . . . .	16 Bit	 015E	  Word	  Public  'CODE'	
+_DATA  . . . . . . . . . . . . .	16 Bit	 0000	  Word	  Public  'DATA'	
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0000h	 
+@Model . . . . . . . . . . . . .	Number	 0001h	 
+@code  . . . . . . . . . . . . .	Text   	 DGROUP
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+dly1 . . . . . . . . . . . . . .	L Near	 0155	  _TEXT	
+dlybit . . . . . . . . . . . . .	L Near	 0151	  _TEXT	
+l1 . . . . . . . . . . . . . . .	L Near	 0146	  _TEXT	
+sloop  . . . . . . . . . . . . .	L Near	 0124	  _TEXT	
+srecb  . . . . . . . . . . . . .	L Near	 0132	  _TEXT	
+srstb  . . . . . . . . . . . . .	L Near	 013A	  _TEXT	
+start  . . . . . . . . . . . . .	L Near	 0100	  _TEXT	
+
+	   0 Warnings
+	   0 Errors

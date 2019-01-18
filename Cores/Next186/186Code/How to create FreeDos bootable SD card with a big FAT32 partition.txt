@@ -1,0 +1,10 @@
+1 - Use Rufus with fd11src.iso (in PC_BIOS\DOS\FreeDos), use FAT32
+2 - Use MiniTool Partition Wizard to shrink to left the FAT 32 partition and create a little primary FAT16 partition to the right (~100MB)
+3 - Copy the <bin> folder from ke86f32.zip (in PC_BIOS\DOS\FreeDos) to the FAT32 big partition on SD card
+4 - Launch WMware, create a new virtual machine, delete the default harddisk, create a harddisk over the SD card (use entire disk) and boot from it
+5 - terminate the install batch job (CTRL+C)
+5 - go to c:, cd bin and aunch sys d:
+6 - power off the virtual machine, go to MiniTool Partition Wizard and make the small FAT16 partition active (Modify/Set Active)
+
+That's all
+

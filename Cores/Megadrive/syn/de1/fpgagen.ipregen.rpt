@@ -1,0 +1,71 @@
+IP Upgrade report for fpgagen
+Sun Aug 05 18:45:54 2018
+Quartus Prime Version 17.1.0 Build 590 10/25/2017 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. IP Upgrade Summary
+  3. Failed Upgrade IP Components
+  4. IP Upgrade Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2017  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
+
+
+
++----------------------------------------------------------------------------+
+; IP Upgrade Summary                                                         ;
++------------------------------+---------------------------------------------+
+; IP Components Upgrade Status ; Failed - Sun Aug 05 18:45:54 2018           ;
+; Quartus Prime Version        ; 17.1.0 Build 590 10/25/2017 SJ Lite Edition ;
+; Revision Name                ; fpgagen                                     ;
+; Top-level Entity Name        ; DE1_Toplevel                                ;
+; Family                       ; Cyclone IV E                                ;
++------------------------------+---------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Failed Upgrade IP Components                                                                                                                                           ;
++-------------+----------------+---------+-------------------------+-------------------------+-----------------+---------------------------------------------------------+
+; Entity Name ; Component Name ; Version ; Original Source File    ; Generation File Path    ; New Source File ; Message                                                 ;
++-------------+----------------+---------+-------------------------+-------------------------+-----------------+---------------------------------------------------------+
+; pll         ; ALTPLL         ; 13.0    ; ../../Board/de1/pll.qip ; ../../Board/de1/pll.vhd ;                 ; Error upgrading IP component "../../Board/de1/pll.vhd". ;
++-------------+----------------+---------+-------------------------+-------------------------+-----------------+---------------------------------------------------------+
+
+
++---------------------+
+; IP Upgrade Messages ;
++---------------------+
+Info (11902): Backing up file "../../Board/de1/pll.vhd" to "../../Board/de1/pll.BAK.vhd"
+Info (11837): Started upgrading IP component ALTPLL with file "../../Board/de1/pll.vhd"
+Info (11904): Restoring file "../../Board/de1/pll.BAK.vhd" to "../../Board/de1/pll.vhd"
+Error (14921): Error upgrading IP component "../../Board/de1/pll.vhd".
+Error (11133): IP component ALTPLL with file "../../Board/de1/pll.vhd" upgrade failed
+Error (11889): IP component upgrade failed
+Error (23031): Evaluation of Tcl script e:/altera/quartus17/quartus/common/tcl/internal/ip_regen/ip_regen.tcl unsuccessful
+Error: Quartus Prime Shell was unsuccessful. 4 errors, 0 warnings
+    Error: Peak virtual memory: 675 megabytes
+    Error: Processing ended: Sun Aug 05 18:45:54 2018
+    Error: Elapsed time: 00:00:11
+    Error: Total CPU time (on all processors): 00:00:28
+
+

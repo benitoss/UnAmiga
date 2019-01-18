@@ -1,0 +1,16 @@
+Fitter Status : Successful - Sun Jul 29 21:26:31 2018
+Quartus Prime Version : 17.1.0 Build 590 10/25/2017 SJ Lite Edition
+Revision Name : Next186_SoC
+Top-level Entity Name : Next186_SoC
+Family : Cyclone IV E
+Device : EP4CE22F17C8
+Timing Models : Final
+Total logic elements : 13,678 / 22,320 ( 61 % )
+    Total combinational functions : 12,114 / 22,320 ( 54 % )
+    Dedicated logic registers : 5,460 / 22,320 ( 24 % )
+Total registers : 5530
+Total pins : 76 / 154 ( 49 % )
+Total virtual pins : 0
+Total memory bits : 510,736 / 608,256 ( 84 % )
+Embedded Multiplier 9-bit elements : 12 / 132 ( 9 % )
+Total PLLs : 2 / 4 ( 50 % )

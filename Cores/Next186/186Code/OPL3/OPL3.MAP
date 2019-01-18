@@ -1,0 +1,91 @@
+Linker command line:
+
+-z -h+C:\HTC\PROJECTS\OPL3\OPL3.SYM -mC:\HTC\PROJECTS\OPL3\OPL3.MAP \
+  -pvectors=0,lowtext,text,strings,const,im2vecs,data,bss -pnvram=bss,heap \
+  -oC:\WINDOWS\TEMP\L.OBJ C:\HTC\LIB\RTZ80-C.OBJ MAIN.OBJ YMF262.OBJ \
+  C:\HTC\LIB\z80-cc.lib 
+
+Object code version is 2.4
+
+Machine type is Z80
+
+		Name         Link     Load   Length Selector Space Scale
+C:\HTC\LIB\RTZ80-C.OBJ
+		vectors         0        0      100       0     0
+		bss          1CBD     1CBD        2       0     0
+		const        13D1     13D1       1C       0     0
+		text          100      100       95       0     0
+MAIN.OBJ        text          195      195       32       0     0
+YMF262.OBJ      const        13ED     13ED      1FC       0     0
+		data         15EA     15EA      6D3       0     0
+		text          1C7      1C7     107C       0     0
+
+C:\HTC\LIB\z80-cc.lib
+aslor.obj       text         1243     1243        9       0     0
+land.obj        text         124C     124C       15       0     0
+llrsh.obj       text         1261     1261       14       0     0
+lor.obj         text         1275     1275       15       0     0
+lmul.obj        text         128A     128A       3F       0     0
+start1.obj      bss          1CBF     1CBF        2       0     0
+		text         12C9     12C9        3       0     0
+start2.obj      const        15E9     15E9        1       0     0
+		text         12CC     12CC       52       0     0
+allsh.obj       text         131E     131E       11       0     0
+exit.obj        text         132F     132F       20       0     0
+iregset.obj     text         134F     134F       26       0     0
+fastb.obj       
+imul.obj        text         1375     1375       1F       0     0
+fakeclean.obj   text         1394     1394        1       0     0
+_exit.obj       text         1395     1395        B       0     0
+fakecpcln.obj   text         13A0     13A0        1       0     0
+pshlng.obj      text         13A1     13A1       13       0     0
+shll.obj        text         13B4     13B4        D       0     0
+shlr.obj        text         13C1     13C1       10       0     0
+
+TOTAL		Name         Link     Load   Length
+	CLASS	CODE    
+		vectors         0        0      100
+		const        13D1     13D1      219
+		text          100      100     12D1
+
+	CLASS	DATA    
+		bss          1CBD     1CBD        4
+		data         15EA     15EA      6D3
+
+
+
+SEGMENTS	Name		Load	Length	 Top	Selector    Space Class
+
+		vectors         000000	001CC1	001CC1	       0       0  CODE
+
+
+                                  Symbol Table
+
+_OPL3ResetChip     text    112F  _OPL3Write         text    11F0
+__Hbss             bss     1CC1  __Hconst           const   15EA
+__Hdata            data    1CBD  __Hheap            heap    1CC1
+__Him2vecs         im2vecs 15EA  __Hlowtext         lowtext 0100
+__Hnvram           nvram   1CC1  __Hstrings         strings 13D1
+__Htext            text    13D1  __Hvectors         vectors 0100
+__Lbss             bss     1CBD  __Lconst           const   13D1
+__Ldata            data    15EA  __Lheap            heap    1CC1
+__Lim2vecs         im2vecs 15EA  __Llowtext         lowtext 0100
+__Lnvram           nvram   1CC1  __Lstrings         strings 13D1
+__Ltext            text    0100  __Lvectors         vectors 0000
+__argc_            bss     1CBF  __cleanup          text    1394
+__cpm_clean        text    13A0  __exit             text    1395
+__getargs          text    12CC  _chip              data    15EA
+_errno             bss     1CBD  _exit              text    132F
+_fn_a0             text    06D5  _main              text    0195
+_packptr16         text    0AD0  aland              text    124C
+allsh              text    131E  almul              text    128A
+alor               text    1275  amul               text    1375
+asalor             text    1243  asllor             text    1243
+float_or_long_used (abs)   0001  iregset            text    134F
+iregstore          text    1369  lland              text    124C
+lllsh              text    131E  llmul              text    128A
+llor               text    1275  llrsh              text    1261
+lmul               text    1375  push_long          text    13A1
+shal               text    13B4  shll               text    13B4
+shlr               text    13C1  small_model        (abs)   0001
+start              text    0100  startup            text    12C9
