@@ -1,6 +1,6 @@
 Flow report for nes
-Sun Jan 06 18:06:16 2019
-Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
+Sun Jan 20 10:48:57 2019
+Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
 ---------------------
@@ -40,18 +40,18 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------------+
 ; Flow Summary                                                                     ;
 +------------------------------------+---------------------------------------------+
-; Flow Status                        ; Successful - Sun Jan 06 18:06:16 2019       ;
-; Quartus Prime Version              ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
+; Flow Status                        ; Successful - Sun Jan 20 10:48:47 2019       ;
+; Quartus Prime Version              ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                      ; nes                                         ;
 ; Top-level Entity Name              ; NES_TOP                                     ;
 ; Family                             ; Cyclone IV E                                ;
 ; Device                             ; EP4CE22F17C8                                ;
 ; Timing Models                      ; Final                                       ;
-; Total logic elements               ; 6,940 / 22,320 ( 31 % )                     ;
-;     Total combinational functions  ; 6,078 / 22,320 ( 27 % )                     ;
-;     Dedicated logic registers      ; 3,215 / 22,320 ( 14 % )                     ;
-; Total registers                    ; 3215                                        ;
-; Total pins                         ; 112 / 154 ( 73 % )                          ;
+; Total logic elements               ; 6,938 / 22,320 ( 31 % )                     ;
+;     Total combinational functions  ; 6,109 / 22,320 ( 27 % )                     ;
+;     Dedicated logic registers      ; 3,231 / 22,320 ( 14 % )                     ;
+; Total registers                    ; 3231                                        ;
+; Total pins                         ; 113 / 154 ( 73 % )                          ;
 ; Total virtual pins                 ; 0                                           ;
 ; Total memory bits                  ; 326,656 / 608,256 ( 54 % )                  ;
 ; Embedded Multiplier 9-bit elements ; 7 / 132 ( 5 % )                             ;
@@ -64,7 +64,7 @@ refer to the applicable agreement for further details.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 01/06/2019 17:37:34 ;
+; Start date & time ; 01/20/2019 10:46:36 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; nes                 ;
 +-------------------+---------------------+
@@ -75,7 +75,7 @@ refer to the applicable agreement for further details.
 +-------------------------------------+-------------------------------------------------------------------------+---------------+-------------+------------+
 ; Assignment Name                     ; Value                                                                   ; Default Value ; Entity Name ; Section Id ;
 +-------------------------------------+-------------------------------------------------------------------------+---------------+-------------+------------+
-; COMPILER_SIGNATURE_ID               ; 159090360127760.154681785309988                                         ; --            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID               ; 159090360127760.154800279504924                                         ; --            ; --          ; --         ;
 ; FITTER_EFFORT                       ; Standard Fit                                                            ; Auto Fit      ; --          ; --         ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                                                      ; --            ; --          ; --         ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                                                       ; --            ; --          ; --         ;
@@ -127,11 +127,11 @@ refer to the applicable agreement for further details.
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
-; Analysis & Synthesis ; 00:01:03     ; 1.0                     ; 4922 MB             ; 00:01:05                           ;
-; Fitter               ; 00:00:59     ; 1.1                     ; 5633 MB             ; 00:01:08                           ;
-; Assembler            ; 00:00:02     ; 1.0                     ; 4711 MB             ; 00:00:02                           ;
-; Timing Analyzer      ; 00:00:09     ; 1.4                     ; 4867 MB             ; 00:00:08                           ;
-; Total                ; 00:02:13     ; --                      ; --                  ; 00:02:23                           ;
+; Analysis & Synthesis ; 00:01:01     ; 1.0                     ; 4928 MB             ; 00:01:05                           ;
+; Fitter               ; 00:00:51     ; 1.1                     ; 5638 MB             ; 00:01:07                           ;
+; Assembler            ; 00:00:03     ; 1.0                     ; 4710 MB             ; 00:00:02                           ;
+; Timing Analyzer      ; 00:00:07     ; 1.5                     ; 4869 MB             ; 00:00:08                           ;
+; Total                ; 00:02:02     ; --                      ; --                  ; 00:02:22                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -154,7 +154,6 @@ quartus_map --read_settings_files=on --write_settings_files=off nes -c nes
 quartus_fit --read_settings_files=off --write_settings_files=off nes -c nes
 quartus_asm --read_settings_files=off --write_settings_files=off nes -c nes
 quartus_sta nes -c nes
-quartus_eda --read_settings_files=on --write_settings_files=off nes -c nes
 
 
 

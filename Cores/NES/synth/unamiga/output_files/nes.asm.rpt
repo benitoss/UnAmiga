@@ -1,6 +1,6 @@
 Assembler report for nes
-Sun Jan 06 17:39:53 2019
-Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
+Sun Jan 20 10:48:47 2019
+Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
 ---------------------
@@ -10,8 +10,8 @@ Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
   2. Assembler Summary
   3. Assembler Settings
   4. Assembler Generated Files
-  5. Assembler Device Options: C:/Users/benit/Downloads/GitHub/UnAmiga/Cores/NES/synth/unamiga/output_files/nes.sof
-  6. Assembler Device Options: C:/Users/benit/Downloads/GitHub/UnAmiga/Cores/NES/synth/unamiga/output_files/nes.rbf
+  5. Assembler Device Options: C:/Users/benit/Downloads/UnAmiga/Cores/NES_from_MC2/synth/UnAmiga/output_files/nes.sof
+  6. Assembler Device Options: C:/Users/benit/Downloads/UnAmiga/Cores/NES_from_MC2/synth/UnAmiga/output_files/nes.rbf
   7. Assembler Messages
 
 
@@ -38,7 +38,7 @@ refer to the applicable agreement for further details.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Sun Jan 06 17:39:53 2019 ;
+; Assembler Status      ; Successful - Sun Jan 20 10:48:47 2019 ;
 ; Revision Name         ; nes                                   ;
 ; Top-level Entity Name ; NES_TOP                               ;
 ; Family                ; Cyclone IV E                          ;
@@ -53,34 +53,34 @@ refer to the applicable agreement for further details.
 +--------+---------+---------------+
 
 
-+--------------------------------------------------------------------------------------+
-; Assembler Generated Files                                                            ;
-+--------------------------------------------------------------------------------------+
-; File Name                                                                            ;
-+--------------------------------------------------------------------------------------+
-; C:/Users/benit/Downloads/GitHub/UnAmiga/Cores/NES/synth/unamiga/output_files/nes.sof ;
-; C:/Users/benit/Downloads/GitHub/UnAmiga/Cores/NES/synth/unamiga/output_files/nes.rbf ;
-+--------------------------------------------------------------------------------------+
++----------------------------------------------------------------------------------------+
+; Assembler Generated Files                                                              ;
++----------------------------------------------------------------------------------------+
+; File Name                                                                              ;
++----------------------------------------------------------------------------------------+
+; C:/Users/benit/Downloads/UnAmiga/Cores/NES_from_MC2/synth/UnAmiga/output_files/nes.sof ;
+; C:/Users/benit/Downloads/UnAmiga/Cores/NES_from_MC2/synth/UnAmiga/output_files/nes.rbf ;
++----------------------------------------------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------+
-; Assembler Device Options: C:/Users/benit/Downloads/GitHub/UnAmiga/Cores/NES/synth/unamiga/output_files/nes.sof ;
-+----------------+-----------------------------------------------------------------------------------------------+
-; Option         ; Setting                                                                                       ;
-+----------------+-----------------------------------------------------------------------------------------------+
-; JTAG usercode  ; 0x006E384E                                                                                    ;
-; Checksum       ; 0x006E384E                                                                                    ;
-+----------------+-----------------------------------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------------------------+
+; Assembler Device Options: C:/Users/benit/Downloads/UnAmiga/Cores/NES_from_MC2/synth/UnAmiga/output_files/nes.sof ;
++----------------+-------------------------------------------------------------------------------------------------+
+; Option         ; Setting                                                                                         ;
++----------------+-------------------------------------------------------------------------------------------------+
+; JTAG usercode  ; 0x006DAACC                                                                                      ;
+; Checksum       ; 0x006DAACC                                                                                      ;
++----------------+-------------------------------------------------------------------------------------------------+
 
 
-+----------------------------------------------------------------------------------------------------------------+
-; Assembler Device Options: C:/Users/benit/Downloads/GitHub/UnAmiga/Cores/NES/synth/unamiga/output_files/nes.rbf ;
-+---------------------+------------------------------------------------------------------------------------------+
-; Option              ; Setting                                                                                  ;
-+---------------------+------------------------------------------------------------------------------------------+
-; Raw Binary File     ;                                                                                          ;
-;  Compression Ratio  ; 1                                                                                        ;
-+---------------------+------------------------------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------------------------+
+; Assembler Device Options: C:/Users/benit/Downloads/UnAmiga/Cores/NES_from_MC2/synth/UnAmiga/output_files/nes.rbf ;
++---------------------+--------------------------------------------------------------------------------------------+
+; Option              ; Setting                                                                                    ;
++---------------------+--------------------------------------------------------------------------------------------+
+; Raw Binary File     ;                                                                                            ;
+;  Compression Ratio  ; 2                                                                                          ;
++---------------------+--------------------------------------------------------------------------------------------+
 
 
 +--------------------+
@@ -88,16 +88,16 @@ refer to the applicable agreement for further details.
 +--------------------+
 Info: *******************************************************************
 Info: Running Quartus Prime Assembler
-    Info: Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
-    Info: Processing started: Sun Jan 06 17:39:51 2019
+    Info: Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+    Info: Processing started: Sun Jan 20 10:48:44 2019
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off nes -c nes
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (115031): Writing out detailed assembly data for power analysis
 Info (115030): Assembler is generating device programming files
 Info: Quartus Prime Assembler was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 4711 megabytes
-    Info: Processing ended: Sun Jan 06 17:39:53 2019
-    Info: Elapsed time: 00:00:02
+    Info: Peak virtual memory: 4710 megabytes
+    Info: Processing ended: Sun Jan 20 10:48:47 2019
+    Info: Elapsed time: 00:00:03
     Info: Total CPU time (on all processors): 00:00:02
 
 

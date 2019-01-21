@@ -4,7 +4,8 @@ This is a port of NES to the Altera Cyclone IV board of UnAmiga.
 
 **IMPORTANT:** This Core needs the SRAM addon from [Antonio Villena's store](https://www.antoniovillena.es/store/)
 
-**The actual core needs to be updated to implement the Start and Select buttons in the Keyboard.**
+**UPDATED: The actual core has been updated to implement the Start and 
+Select buttons in the Keyboard. Enjoy it**
 
 This version is an open source based in fpganes port for ZXUNO (2016 DistWave)
 

@@ -1,4 +1,4 @@
-BASE	= /home/vtrucco/zpugcc/toolchain/install/bin/zpu-elf
+BASE	= /home/fm0105/zpugcc/toolchain/install/bin/zpu-elf
 CC      = $(BASE)-gcc
 LD      = $(BASE)-gcc
 AS      = $(BASE)-as
@@ -7,6 +7,7 @@ DUMP    = $(BASE)-objdump
 
 
 # A utility to convert binary ROM files into VHDL
+# ZPUFLEXDIR = /home/fm0105/Downloads/QM_CycloneV_5CEFA2_SDRAM/Cores/NES_from_MC2/src/CtrlModule/ZPUFlex
 ZPUFLEXDIR = ../../ZPUFlex
 ROMGEN = $(ZPUFLEXDIR)/Firmware/zpuromgen
 

@@ -1,6 +1,6 @@
 IP Upgrade report for nes
-Sat Jan 05 19:10:41 2019
-Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
+Sun Jan 20 01:16:14 2019
+Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
 
 
 ---------------------
@@ -8,7 +8,8 @@ Quartus Prime Version 18.0.0 Build 614 04/24/2018 SJ Lite Edition
 ---------------------
   1. Legal Notice
   2. IP Upgrade Summary
-  3. IP Upgrade Messages
+  3. Successfully Upgraded IP Components
+  4. IP Upgrade Messages
 
 
 
@@ -34,22 +35,38 @@ refer to the applicable agreement for further details.
 +----------------------------------------------------------------------------+
 ; IP Upgrade Summary                                                         ;
 +------------------------------+---------------------------------------------+
-; IP Components Upgrade Status ; Failed - Sat Jan 05 19:10:41 2019           ;
-; Quartus Prime Version        ; 18.0.0 Build 614 04/24/2018 SJ Lite Edition ;
+; IP Components Upgrade Status ; Passed - Sun Jan 20 01:16:14 2019           ;
+; Quartus Prime Version        ; 18.1.0 Build 625 09/12/2018 SJ Lite Edition ;
 ; Revision Name                ; nes                                         ;
 ; Top-level Entity Name        ; NES_TOP                                     ;
 ; Family                       ; Cyclone IV E                                ;
 +------------------------------+---------------------------------------------+
 
 
++------------------------------------------------------------------------------------------------------------------+
+; Successfully Upgraded IP Components                                                                              ;
++-------------+----------------+---------+----------------------+----------------------+-----------------+---------+
+; Entity Name ; Component Name ; Version ; Original Source File ; Generation File Path ; New Source File ; Message ;
++-------------+----------------+---------+----------------------+----------------------+-----------------+---------+
+; nes_clk     ; ALTPLL         ; 18.0    ; nes_clk.qip          ; nes_clk.vhd          ; nes_clk.qip     ;         ;
+; fifo_loader ; FIFO           ; 18.0    ; fifo_loader.qip      ; fifo_loader.vhd      ; fifo_loader.qip ;         ;
++-------------+----------------+---------+----------------------+----------------------+-----------------+---------+
+
+
 +---------------------+
 ; IP Upgrade Messages ;
 +---------------------+
-Info (23030): Evaluation of Tcl script c:/intelfpga_lite/18.0/quartus/common/tcl/internal/ip_regen/ip_regen.tcl was successful
+Info (11902): Backing up file "nes_clk.vhd" to "nes_clk.BAK.vhd"
+Info (11837): Started upgrading IP component ALTPLL with file "nes_clk.vhd"
+Info (11902): Backing up file "fifo_loader.vhd" to "fifo_loader.BAK.vhd"
+Info (11837): Started upgrading IP component FIFO with file "fifo_loader.vhd"
+Info (11131): Completed upgrading IP component ALTPLL with file "nes_clk.vhd"
+Info (11131): Completed upgrading IP component FIFO with file "fifo_loader.vhd"
+Info (23030): Evaluation of Tcl script c:/intelfpga_lite/18.1/quartus/common/tcl/internal/ip_regen/ip_regen.tcl was successful
 Info: Quartus Prime Shell was successful. 0 errors, 0 warnings
-    Info: Peak virtual memory: 4817 megabytes
-    Info: Processing ended: Sat Jan 05 19:10:41 2019
-    Info: Elapsed time: 00:00:13
-    Info: Total CPU time (on all processors): 00:00:25
+    Info: Peak virtual memory: 4809 megabytes
+    Info: Processing ended: Sun Jan 20 01:16:14 2019
+    Info: Elapsed time: 00:00:18
+    Info: Total CPU time (on all processors): 00:00:26
 
 

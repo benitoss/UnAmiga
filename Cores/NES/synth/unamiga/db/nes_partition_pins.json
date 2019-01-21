@@ -208,6 +208,18 @@
 					"strict" : false
 				},
 				{
+					"name" : "joy1_p9_i",
+					"strict" : false
+				},
+				{
+					"name" : "joy2_p9_i",
+					"strict" : false
+				},
+				{
+					"name" : "btn_n_i[4]",
+					"strict" : false
+				},
+				{
 					"name" : "joy1_left_i",
 					"strict" : false
 				},
@@ -224,15 +236,27 @@
 					"strict" : false
 				},
 				{
-					"name" : "btn_n_i[4]",
-					"strict" : false
-				},
-				{
 					"name" : "sd_miso_i",
 					"strict" : false
 				},
 				{
 					"name" : "joy1_right_i",
+					"strict" : false
+				},
+				{
+					"name" : "joy2_up_i",
+					"strict" : false
+				},
+				{
+					"name" : "joy2_down_i",
+					"strict" : false
+				},
+				{
+					"name" : "joy2_left_i",
+					"strict" : false
+				},
+				{
+					"name" : "joy2_right_i",
 					"strict" : false
 				}
 			]
