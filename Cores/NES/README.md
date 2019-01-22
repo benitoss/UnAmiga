@@ -1,6 +1,6 @@
 # NES (Nintendo Entertainment System)
 
-This is a port of NES to the Altera Cyclone IV board of UnAmiga.
+This is a port of NES to the Altera Cyclone IV board of UnAmiga from Multicore 2 of Vicor Trucco.
 
 **IMPORTANT:** This Core needs the SRAM addon from [Antonio Villena's store](https://www.antoniovillena.es/store/)
 
