@@ -27,7 +27,9 @@ There is a version AGA of the UnAmiga 1200.
 - Atari800XL<BR>
 - Spectrum 128K<BR>
 - QL<BR>
-
+- NES
+- Colecovision
+- SMS
 
 ___________________________________________________________________________<BR><BR>
 For more information, visit [ForoFPGA pages](http://unamiga.forofpga.es).<BR>
