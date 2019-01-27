@@ -1,0 +1,761 @@
+Release 14.7 Map P.20131013 (nt64)
+Xilinx Mapping Report File for Design 'next_top'
+
+Design Information
+------------------
+Command Line   : map -filter
+D:/Documentacao/Eletronica/FPGA/Multicore/SRC/Multicore/ColecovisionFPGA/synth/n
+ext/iseconfig/filter.filter -intstyle ise -p xc6slx16-ftg256-2 -w -logic_opt off
+-ol high -xe n -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off
+-ir off -pr off -lc off -power off -o next_top_map.ncd next_top.ngd next_top.pcf
+ 
+Target Device  : xc6slx16
+Target Package : ftg256
+Target Speed   : -2
+Mapper Version : spartan6 -- $Revision: 1.55 $
+Mapped Date    : Fri Feb 16 08:34:04 2018
+
+Design Summary
+--------------
+Number of errors:      0
+Number of warnings:   57
+Slice Logic Utilization:
+  Number of Slice Registers:                 1,061 out of  18,224    5%
+    Number used as Flip Flops:               1,054
+    Number used as Latches:                      1
+    Number used as Latch-thrus:                  0
+    Number used as AND/OR logics:                6
+  Number of Slice LUTs:                      2,598 out of   9,112   28%
+    Number used as logic:                    2,554 out of   9,112   28%
+      Number using O6 output only:           2,085
+      Number using O5 output only:             101
+      Number using O5 and O6:                  368
+      Number used as ROM:                        0
+    Number used as Memory:                      36 out of   2,176    1%
+      Number used as Dual Port RAM:             36
+        Number using O6 output only:            12
+        Number using O5 output only:             4
+        Number using O5 and O6:                 20
+      Number used as Single Port RAM:            0
+      Number used as Shift Register:             0
+    Number used exclusively as route-thrus:      8
+      Number with same-slice register load:      1
+      Number with same-slice carry load:         7
+      Number with other load:                    0
+
+Slice Logic Distribution:
+  Number of occupied Slices:                   959 out of   2,278   42%
+  Number of MUXCYs used:                       348 out of   4,556    7%
+  Number of LUT Flip Flop pairs used:        2,745
+    Number with an unused Flip Flop:         1,724 out of   2,745   62%
+    Number with an unused LUT:                 147 out of   2,745    5%
+    Number of fully used LUT-FF pairs:         874 out of   2,745   31%
+    Number of unique control sets:             144
+    Number of slice register sites lost
+      to control set restrictions:             649 out of  18,224    3%
+
+  A LUT Flip Flop pair for this architecture represents one LUT paired with
+  one Flip Flop within a slice.  A control set is a unique combination of
+  clock, reset, set, and enable signals for a registered element.
+  The Slice Logic Distribution report is not meaningful if the design is
+  over-mapped for a non-slice resource or if Placement fails.
+
+IO Utilization:
+  Number of bonded IOBs:                       146 out of     186   78%
+    Number of LOCed IOBs:                      146 out of     146  100%
+    IOB Flip Flops:                              1
+    IOB Master Pads:                             4
+    IOB Slave Pads:                              4
+
+Specific Feature Utilization:
+  Number of RAMB16BWERs:                        20 out of      32   62%
+  Number of RAMB8BWERs:                          0 out of      64    0%
+  Number of BUFIO2/BUFIO2_2CLKs:                 1 out of      32    3%
+    Number used as BUFIO2s:                      1
+    Number used as BUFIO2_2CLKs:                 0
+  Number of BUFIO2FB/BUFIO2FB_2CLKs:             1 out of      32    3%
+    Number used as BUFIO2FBs:                    1
+    Number used as BUFIO2FB_2CLKs:               0
+  Number of BUFG/BUFGMUXs:                       5 out of      16   31%
+    Number used as BUFGs:                        5
+    Number used as BUFGMUX:                      0
+  Number of DCM/DCM_CLKGENs:                     0 out of       4    0%
+  Number of ILOGIC2/ISERDES2s:                   0 out of     248    0%
+  Number of IODELAY2/IODRP2/IODRP2_MCBs:         0 out of     248    0%
+  Number of OLOGIC2/OSERDES2s:                   1 out of     248    1%
+    Number used as OLOGIC2s:                     1
+    Number used as OSERDES2s:                    0
+  Number of BSCANs:                              0 out of       4    0%
+  Number of BUFHs:                               0 out of     128    0%
+  Number of BUFPLLs:                             0 out of       8    0%
+  Number of BUFPLL_MCBs:                         0 out of       4    0%
+  Number of DSP48A1s:                            2 out of      32    6%
+  Number of ICAPs:                               0 out of       1    0%
+  Number of MCBs:                                0 out of       2    0%
+  Number of PCILOGICSEs:                         0 out of       2    0%
+  Number of PLL_ADVs:                            1 out of       2   50%
+  Number of PMVs:                                0 out of       1    0%
+  Number of STARTUPs:                            0 out of       1    0%
+  Number of SUSPEND_SYNCs:                       0 out of       1    0%
+
+Average Fanout of Non-Clock Nets:                4.59
+
+Peak Memory Usage:  461 MB
+Total REAL time to MAP completion:  17 secs 
+Total CPU time to MAP completion:   14 secs 
+
+Table of Contents
+-----------------
+Section 1 - Errors
+Section 2 - Warnings
+Section 3 - Informational
+Section 4 - Removed Logic Summary
+Section 5 - Removed Logic
+Section 6 - IOB Properties
+Section 7 - RPMs
+Section 8 - Guide Report
+Section 9 - Area Group and Partition Summary
+Section 10 - Timing Report
+Section 11 - Configuration String Information
+Section 12 - Control Set Information
+Section 13 - Utilization by Hierarchy
+
+Section 1 - Errors
+------------------
+
+Section 2 - Warnings
+--------------------
+WARNING:MapLib:701 - Signal ram_data_io<15> connected to top level port
+   ram_data_io<15> has been removed.
+WARNING:MapLib:701 - Signal ram_data_io<14> connected to top level port
+   ram_data_io<14> has been removed.
+WARNING:MapLib:701 - Signal ram_data_io<13> connected to top level port
+   ram_data_io<13> has been removed.
+WARNING:MapLib:701 - Signal ram_data_io<12> connected to top level port
+   ram_data_io<12> has been removed.
+WARNING:MapLib:701 - Signal ram_data_io<11> connected to top level port
+   ram_data_io<11> has been removed.
+WARNING:MapLib:701 - Signal ram_data_io<10> connected to top level port
+   ram_data_io<10> has been removed.
+WARNING:MapLib:701 - Signal ram_data_io<9> connected to top level port
+   ram_data_io<9> has been removed.
+WARNING:MapLib:701 - Signal ram_data_io<8> connected to top level port
+   ram_data_io<8> has been removed.
+WARNING:MapLib:701 - Signal flash_wp_o connected to top level port flash_wp_o
+   has been removed.
+WARNING:MapLib:701 - Signal flash_hold_o connected to top level port
+   flash_hold_o has been removed.
+WARNING:MapLib:701 - Signal accel_io_27 connected to top level port accel_io_27
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_26 connected to top level port accel_io_26
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_25 connected to top level port accel_io_25
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_24 connected to top level port accel_io_24
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_23 connected to top level port accel_io_23
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_22 connected to top level port accel_io_22
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_21 connected to top level port accel_io_21
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_20 connected to top level port accel_io_20
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_19 connected to top level port accel_io_19
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_18 connected to top level port accel_io_18
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_17 connected to top level port accel_io_17
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_16 connected to top level port accel_io_16
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_15 connected to top level port accel_io_15
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_14 connected to top level port accel_io_14
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_13 connected to top level port accel_io_13
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_12 connected to top level port accel_io_12
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_11 connected to top level port accel_io_11
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_10 connected to top level port accel_io_10
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_9 connected to top level port accel_io_9
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_8 connected to top level port accel_io_8
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_7 connected to top level port accel_io_7
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_6 connected to top level port accel_io_6
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_5 connected to top level port accel_io_5
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_4 connected to top level port accel_io_4
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_3 connected to top level port accel_io_3
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_2 connected to top level port accel_io_2
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_1 connected to top level port accel_io_1
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_0 connected to top level port accel_io_0
+   has been removed.
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   ps2if_inst/ps2kbd_inst/Rst_n_inv is sourced by a combinatorial pin. This is
+   not good design practice. Use the CE pin to control the loading of data into
+   the flip-flop.
+WARNING:PhysDesignRules:367 - The signal <vg/cpu/u0/Regs/Mram_RegsL11_RAMD_D1_O>
+   is incomplete. The signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal <vg/cpu/u0/Regs/Mram_RegsH11_RAMD_D1_O>
+   is incomplete. The signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q10) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q11) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q12) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q13) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q14) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q15) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q16) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q1) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q2) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q3) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q4) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q5) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q6) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q7) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q8) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q9) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+
+Section 3 - Informational
+-------------------------
+INFO:LIT:243 - Logical network keyb_col_i<4>_IBUF has no load.
+INFO:LIT:395 - The above info message is repeated 24 more times for the
+   following (max. 5 shown):
+   keyb_col_i<3>_IBUF,
+   keyb_col_i<2>_IBUF,
+   keyb_col_i<1>_IBUF,
+   keyb_col_i<0>_IBUF,
+   flash_miso_i_IBUF
+   To see the details of these info messages, please use the -detail switch.
+INFO:MapLib:562 - No environment variables are currently set.
+INFO:Pack:1716 - Initializing temperature to 85.000 Celsius. (default - Range:
+   0.000 to 85.000 Celsius)
+INFO:Pack:1720 - Initializing voltage to 1.140 Volts. (default - Range: 1.140 to
+   1.260 Volts)
+INFO:Map:215 - The Interim Design Summary has been generated in the MAP Report
+   (.mrp).
+INFO:Pack:1650 - Map created a placed design.
+
+Section 4 - Removed Logic Summary
+---------------------------------
+ 102 block(s) removed
+   2 block(s) optimized away
+  63 signal(s) removed
+
+Section 5 - Removed Logic
+-------------------------
+
+The trimmed logic report below shows the logic removed from your design due to
+sourceless or loadless signals, and VCC or ground connections.  If the removal
+of a signal or symbol results in the subsequent removal of an additional signal
+or symbol, the message explaining that second removal will be indented.  This
+indentation will be repeated as a chain of related logic is removed.
+
+To quickly locate the original cause for the removal of a chain of logic, look
+above the place where that logic is listed in the trimming report, then locate
+the lines that are least indented (begin at the leftmost edge).
+
+Loadless block "ADDERTREE_INTERNAL_Madd27" (ROM) removed.
+Loadless block "pll_1/clkout4_buf" (CKBUF) removed.
+ The signal "pll_1/clkout3" is loadless and has been removed.
+
+The trimmed logic reported below is either:
+   1. part of a cycle
+   2. part of disabled logic
+   3. a side-effect of other trimmed logic
+
+The signal "ram_data_io<15>" is unused and has been removed.
+ Unused block "ram_data_io<15>" (PAD) removed.
+ Unused block "ram_data_io_15_IOBUF/OBUFT" (TRI) removed.
+  The signal "sram0/sram_data_io<15>" is unused and has been removed.
+   Unused block "sram0/sram_data_io_15" (FF) removed.
+    The signal "sram0/n0235<15>" is unused and has been removed.
+     Unused block "sram0/Mmux_n023571" (ROM) removed.
+      The signal "N452" is unused and has been removed.
+       Unused block "ram_data_io_15_IOBUF/IBUF" (BUF) removed.
+The signal "ram_data_io<14>" is unused and has been removed.
+ Unused block "ram_data_io<14>" (PAD) removed.
+ Unused block "ram_data_io_14_IOBUF/OBUFT" (TRI) removed.
+  The signal "sram0/sram_data_io<14>" is unused and has been removed.
+   Unused block "sram0/sram_data_io_14" (FF) removed.
+    The signal "sram0/n0235<14>" is unused and has been removed.
+     Unused block "sram0/Mmux_n023561" (ROM) removed.
+      The signal "N453" is unused and has been removed.
+       Unused block "ram_data_io_14_IOBUF/IBUF" (BUF) removed.
+The signal "ram_data_io<13>" is unused and has been removed.
+ Unused block "ram_data_io<13>" (PAD) removed.
+ Unused block "ram_data_io_13_IOBUF/OBUFT" (TRI) removed.
+  The signal "sram0/sram_data_io<13>" is unused and has been removed.
+   Unused block "sram0/sram_data_io_13" (FF) removed.
+    The signal "sram0/n0235<13>" is unused and has been removed.
+     Unused block "sram0/Mmux_n023551" (ROM) removed.
+      The signal "N454" is unused and has been removed.
+       Unused block "ram_data_io_13_IOBUF/IBUF" (BUF) removed.
+The signal "ram_data_io<12>" is unused and has been removed.
+ Unused block "ram_data_io<12>" (PAD) removed.
+ Unused block "ram_data_io_12_IOBUF/OBUFT" (TRI) removed.
+  The signal "sram0/sram_data_io<12>" is unused and has been removed.
+   Unused block "sram0/sram_data_io_12" (FF) removed.
+    The signal "sram0/n0235<12>" is unused and has been removed.
+     Unused block "sram0/Mmux_n023541" (ROM) removed.
+      The signal "N455" is unused and has been removed.
+       Unused block "ram_data_io_12_IOBUF/IBUF" (BUF) removed.
+The signal "ram_data_io<11>" is unused and has been removed.
+ Unused block "ram_data_io<11>" (PAD) removed.
+ Unused block "ram_data_io_11_IOBUF/OBUFT" (TRI) removed.
+  The signal "sram0/sram_data_io<11>" is unused and has been removed.
+   Unused block "sram0/sram_data_io_11" (FF) removed.
+    The signal "sram0/n0235<11>" is unused and has been removed.
+     Unused block "sram0/Mmux_n023531" (ROM) removed.
+      The signal "N456" is unused and has been removed.
+       Unused block "ram_data_io_11_IOBUF/IBUF" (BUF) removed.
+The signal "ram_data_io<10>" is unused and has been removed.
+ Unused block "ram_data_io<10>" (PAD) removed.
+ Unused block "ram_data_io_10_IOBUF/OBUFT" (TRI) removed.
+  The signal "sram0/sram_data_io<10>" is unused and has been removed.
+   Unused block "sram0/sram_data_io_10" (FF) removed.
+    The signal "sram0/n0235<10>" is unused and has been removed.
+     Unused block "sram0/Mmux_n023521" (ROM) removed.
+      The signal "N457" is unused and has been removed.
+       Unused block "ram_data_io_10_IOBUF/IBUF" (BUF) removed.
+The signal "ram_data_io<9>" is unused and has been removed.
+ Unused block "ram_data_io<9>" (PAD) removed.
+ Unused block "ram_data_io_9_IOBUF/OBUFT" (TRI) removed.
+  The signal "sram0/sram_data_io<9>" is unused and has been removed.
+   Unused block "sram0/sram_data_io_9" (FF) removed.
+    The signal "sram0/n0235<9>" is unused and has been removed.
+     Unused block "sram0/Mmux_n0235161" (ROM) removed.
+      The signal "N458" is unused and has been removed.
+       Unused block "ram_data_io_9_IOBUF/IBUF" (BUF) removed.
+The signal "ram_data_io<8>" is unused and has been removed.
+ Unused block "ram_data_io<8>" (PAD) removed.
+ Unused block "ram_data_io_8_IOBUF/OBUFT" (TRI) removed.
+  The signal "sram0/sram_data_io<8>" is unused and has been removed.
+   Unused block "sram0/sram_data_io_8" (FF) removed.
+    The signal "sram0/n0235<8>" is unused and has been removed.
+     Unused block "sram0/Mmux_n0235151" (ROM) removed.
+      The signal "N459" is unused and has been removed.
+       Unused block "ram_data_io_8_IOBUF/IBUF" (BUF) removed.
+The signal "accel_io_0" is unused and has been removed.
+ Unused block "accel_io_0_OBUFT" (TRI) removed.
+The signal "accel_io_1" is unused and has been removed.
+ Unused block "accel_io_1_OBUFT" (TRI) removed.
+The signal "accel_io_2" is unused and has been removed.
+ Unused block "accel_io_2_OBUFT" (TRI) removed.
+The signal "accel_io_3" is unused and has been removed.
+ Unused block "accel_io_3_OBUFT" (TRI) removed.
+The signal "accel_io_4" is unused and has been removed.
+ Unused block "accel_io_4_OBUFT" (TRI) removed.
+The signal "accel_io_5" is unused and has been removed.
+ Unused block "accel_io_5_OBUFT" (TRI) removed.
+The signal "accel_io_6" is unused and has been removed.
+ Unused block "accel_io_6_OBUFT" (TRI) removed.
+The signal "accel_io_7" is unused and has been removed.
+ Unused block "accel_io_7_OBUFT" (TRI) removed.
+The signal "accel_io_8" is unused and has been removed.
+ Unused block "accel_io_8_OBUFT" (TRI) removed.
+The signal "accel_io_9" is unused and has been removed.
+ Unused block "accel_io_9_OBUFT" (TRI) removed.
+The signal "accel_io_10" is unused and has been removed.
+ Unused block "accel_io_10_OBUFT" (TRI) removed.
+The signal "accel_io_11" is unused and has been removed.
+ Unused block "accel_io_11_OBUFT" (TRI) removed.
+The signal "accel_io_12" is unused and has been removed.
+ Unused block "accel_io_12_OBUFT" (TRI) removed.
+The signal "accel_io_13" is unused and has been removed.
+ Unused block "accel_io_13_OBUFT" (TRI) removed.
+The signal "accel_io_14" is unused and has been removed.
+ Unused block "accel_io_14_OBUFT" (TRI) removed.
+The signal "accel_io_15" is unused and has been removed.
+ Unused block "accel_io_15_OBUFT" (TRI) removed.
+The signal "accel_io_16" is unused and has been removed.
+ Unused block "accel_io_16_OBUFT" (TRI) removed.
+The signal "accel_io_17" is unused and has been removed.
+ Unused block "accel_io_17_OBUFT" (TRI) removed.
+The signal "accel_io_18" is unused and has been removed.
+ Unused block "accel_io_18_OBUFT" (TRI) removed.
+The signal "accel_io_19" is unused and has been removed.
+ Unused block "accel_io_19_OBUFT" (TRI) removed.
+The signal "accel_io_20" is unused and has been removed.
+ Unused block "accel_io_20_OBUFT" (TRI) removed.
+The signal "accel_io_21" is unused and has been removed.
+ Unused block "accel_io_21_OBUFT" (TRI) removed.
+The signal "accel_io_22" is unused and has been removed.
+ Unused block "accel_io_22_OBUFT" (TRI) removed.
+The signal "accel_io_23" is unused and has been removed.
+ Unused block "accel_io_23_OBUFT" (TRI) removed.
+The signal "accel_io_24" is unused and has been removed.
+ Unused block "accel_io_24_OBUFT" (TRI) removed.
+The signal "accel_io_25" is unused and has been removed.
+ Unused block "accel_io_25_OBUFT" (TRI) removed.
+The signal "accel_io_26" is unused and has been removed.
+ Unused block "accel_io_26_OBUFT" (TRI) removed.
+The signal "accel_io_27" is unused and has been removed.
+ Unused block "accel_io_27_OBUFT" (TRI) removed.
+The signal "flash_hold_o" is unused and has been removed.
+ Unused block "flash_hold_o_OBUFT" (TRI) removed.
+The signal "flash_wp_o" is unused and has been removed.
+ Unused block "flash_wp_o_OBUFT" (TRI) removed.
+Unused block "accel_io_0" (PAD) removed.
+Unused block "accel_io_1" (PAD) removed.
+Unused block "accel_io_10" (PAD) removed.
+Unused block "accel_io_11" (PAD) removed.
+Unused block "accel_io_12" (PAD) removed.
+Unused block "accel_io_13" (PAD) removed.
+Unused block "accel_io_14" (PAD) removed.
+Unused block "accel_io_15" (PAD) removed.
+Unused block "accel_io_16" (PAD) removed.
+Unused block "accel_io_17" (PAD) removed.
+Unused block "accel_io_18" (PAD) removed.
+Unused block "accel_io_19" (PAD) removed.
+Unused block "accel_io_2" (PAD) removed.
+Unused block "accel_io_20" (PAD) removed.
+Unused block "accel_io_21" (PAD) removed.
+Unused block "accel_io_22" (PAD) removed.
+Unused block "accel_io_23" (PAD) removed.
+Unused block "accel_io_24" (PAD) removed.
+Unused block "accel_io_25" (PAD) removed.
+Unused block "accel_io_26" (PAD) removed.
+Unused block "accel_io_27" (PAD) removed.
+Unused block "accel_io_3" (PAD) removed.
+Unused block "accel_io_4" (PAD) removed.
+Unused block "accel_io_5" (PAD) removed.
+Unused block "accel_io_6" (PAD) removed.
+Unused block "accel_io_7" (PAD) removed.
+Unused block "accel_io_8" (PAD) removed.
+Unused block "accel_io_9" (PAD) removed.
+Unused block "flash_hold_o" (PAD) removed.
+Unused block "flash_wp_o" (PAD) removed.
+
+Optimized Block(s):
+TYPE 		BLOCK
+GND 		XST_GND
+VCC 		XST_VCC
+
+To enable printing of redundant blocks removed and signals merged, set the
+detailed map report option and rerun map.
+
+Section 6 - IOB Properties
+--------------------------
+
++---------------------------------------------------------------------------------------------------------------------------------------------------------+
+| IOB Name                           | Type             | Direction | IO Standard          | Diff  | Drive    | Slew | Reg (s)      | Resistor | IOB      |
+|                                    |                  |           |                      | Term  | Strength | Rate |              |          | Delay    |
++---------------------------------------------------------------------------------------------------------------------------------------------------------+
+| audioext_l_o                       | IOB              | OUTPUT    | LVCMOS33             |       | 16       | SLOW |              |          |          |
+| audioext_r_o                       | IOB              | OUTPUT    | LVCMOS33             |       | 16       | SLOW |              |          |          |
+| audioint_o                         | IOB              | OUTPUT    | LVCMOS33             |       | 16       | SLOW |              |          |          |
+| btn_divmmc_n_i                     | IOB              | INPUT     | LVCMOS33             |       |          |      |              | PULLUP   |          |
+| btn_multiface_n_i                  | IOB              | INPUT     | LVCMOS33             |       |          |      |              | PULLUP   |          |
+| btn_reset_n_i                      | IOB              | INPUT     | LVCMOS33             |       |          |      |              | PULLUP   |          |
+| bus_addr_o<0>                      | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              |          |          |
+| bus_addr_o<1>                      | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              |          |          |
+| bus_addr_o<2>                      | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              |          |          |
+| bus_addr_o<3>                      | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              |          |          |
+| bus_addr_o<4>                      | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              |          |          |
+| bus_addr_o<5>                      | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              |          |          |
+| bus_addr_o<6>                      | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              |          |          |
+| bus_addr_o<7>                      | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              |          |          |
+| bus_addr_o<8>                      | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              |          |          |
+| bus_addr_o<9>                      | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              |          |          |
+| bus_addr_o<10>                     | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              |          |          |
+| bus_addr_o<11>                     | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              |          |          |
+| bus_addr_o<12>                     | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              |          |          |
+| bus_addr_o<13>                     | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              |          |          |
+| bus_addr_o<14>                     | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              |          |          |
+| bus_addr_o<15>                     | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              |          |          |
+| bus_busack_n_o                     | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              |          |          |
+| bus_busreq_n_i                     | IOB              | INPUT     | LVCMOS33             |       |          |      |              | PULLUP   |          |
+| bus_clk35_o                        | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              |          |          |
+| bus_data_io<0>                     | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              | PULLUP   |          |
+| bus_data_io<1>                     | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              | PULLUP   |          |
+| bus_data_io<2>                     | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              | PULLUP   |          |
+| bus_data_io<3>                     | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              | PULLUP   |          |
+| bus_data_io<4>                     | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              | PULLUP   |          |
+| bus_data_io<5>                     | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              | PULLUP   |          |
+| bus_data_io<6>                     | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              | PULLUP   |          |
+| bus_data_io<7>                     | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              | PULLUP   |          |
+| bus_halt_n_o                       | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              |          |          |
+| bus_int_n_i                        | IOB              | INPUT     | LVCMOS33             |       |          |      |              | PULLUP   |          |
+| bus_iorq_n_o                       | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              |          |          |
+| bus_iorqula_n_i                    | IOB              | INPUT     | LVCMOS33             |       |          |      |              | PULLDOWN |          |
+| bus_m1_n_o                         | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              |          |          |
+| bus_mreq_n_o                       | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              |          |          |
+| bus_nmi_n_i                        | IOB              | INPUT     | LVCMOS33             |       |          |      |              |          |          |
+| bus_ramcs_i                        | IOB              | INPUT     | LVCMOS33             |       |          |      |              | PULLDOWN |          |
+| bus_rd_n_o                         | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              |          |          |
+| bus_rfsh_n_o                       | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              |          |          |
+| bus_romcs_i                        | IOB              | INPUT     | LVCMOS33             |       |          |      |              |          |          |
+| bus_rst_n_io                       | IOB              | OUTPUT    | LVCMOS33             |       | 16       | SLOW |              | PULLUP   |          |
+| bus_wait_n_i                       | IOB              | INPUT     | LVCMOS33             |       |          |      |              | PULLUP   |          |
+| bus_wr_n_o                         | IOB              | OUTPUT    | LVCMOS33             |       | 4        | SLOW |              |          |          |
+| clock_50_i                         | IOB              | INPUT     | LVCMOS33             |       |          |      |              |          |          |
+| csync_o                            | IOB              | OUTPUT    | LVTTL                |       | 8        | FAST |              |          |          |
+| ear_port_i                         | IOB              | INPUT     | LVCMOS33             |       |          |      |              |          |          |
+| esp_gpio0_io                       | IOB              | OUTPUT    | LVCMOS33             |       | 12       | SLOW |              | PULLUP   |          |
+| esp_gpio2_io                       | IOB              | OUTPUT    | LVCMOS33             |       | 12       | SLOW |              | PULLUP   |          |
+| esp_rx_i                           | IOB              | INPUT     | LVCMOS33             |       |          |      |              | PULLUP   |          |
+| esp_tx_o                           | IOB              | OUTPUT    | LVCMOS33             |       | 12       | SLOW |              |          |          |
+| extras_io<0>                       | IOB              | INPUT     | LVTTL                |       |          |      |              |          |          |
+| extras_io<1>                       | IOB              | INPUT     | LVTTL                |       |          |      |              |          |          |
+| extras_io<2>                       | IOB              | INPUT     | LVTTL                |       |          |      |              |          |          |
+| flash_cs_n_o                       | IOB              | OUTPUT    | LVCMOS33             |       | 12       | SLOW |              |          |          |
+| flash_miso_i                       | IOB              | INPUT     | LVCMOS33             |       |          |      |              |          |          |
+| flash_mosi_o                       | IOB              | OUTPUT    | LVCMOS33             |       | 12       | SLOW |              |          |          |
+| flash_sclk_o                       | IOB              | OUTPUT    | LVCMOS33             |       | 12       | SLOW |              |          |          |
+| hdmi_n_o<0>                        | IOBS             | OUTPUT    | TMDS_33              |       |          |      |              |          |          |
+| hdmi_n_o<1>                        | IOBS             | OUTPUT    | TMDS_33              |       |          |      |              |          |          |
+| hdmi_n_o<2>                        | IOBS             | OUTPUT    | TMDS_33              |       |          |      |              |          |          |
+| hdmi_n_o<3>                        | IOBS             | OUTPUT    | TMDS_33              |       |          |      |              |          |          |
+| hdmi_p_o<0>                        | IOBM             | OUTPUT    | TMDS_33              |       |          |      |              |          |          |
+| hdmi_p_o<1>                        | IOBM             | OUTPUT    | TMDS_33              |       |          |      |              |          |          |
+| hdmi_p_o<2>                        | IOBM             | OUTPUT    | TMDS_33              |       |          |      |              |          |          |
+| hdmi_p_o<3>                        | IOBM             | OUTPUT    | TMDS_33              |       |          |      |              |          |          |
+| hsync_o                            | IOB              | OUTPUT    | LVTTL                |       | 8        | FAST |              |          |          |
+| i2c_scl_io                         | IOB              | OUTPUT    | LVTTL                |       | 4        | SLOW |              | PULLUP   |          |
+| i2c_sda_io                         | IOB              | OUTPUT    | LVTTL                |       | 4        | SLOW |              | PULLUP   |          |
+| joyp1_i                            | IOB              | INPUT     | LVCMOS33             |       |          |      |              | PULLUP   |          |
+| joyp2_i                            | IOB              | INPUT     | LVCMOS33             |       |          |      |              | PULLUP   |          |
+| joyp3_i                            | IOB              | INPUT     | LVCMOS33             |       |          |      |              | PULLUP   |          |
+| joyp4_i                            | IOB              | INPUT     | LVCMOS33             |       |          |      |              | PULLUP   |          |
+| joyp6_i                            | IOB              | INPUT     | LVCMOS33             |       |          |      |              | PULLUP   |          |
+| joyp7_o                            | IOB              | OUTPUT    | LVCMOS33             |       | 12       | SLOW |              |          |          |
+| joyp9_i                            | IOB              | INPUT     | LVCMOS33             |       |          |      |              | PULLUP   |          |
+| joysel_o                           | IOB              | OUTPUT    | LVCMOS33             |       | 12       | SLOW |              |          |          |
+| keyb_col_i<0>                      | IOB              | INPUT     | LVTTL                |       |          |      |              | PULLUP   |          |
+| keyb_col_i<1>                      | IOB              | INPUT     | LVTTL                |       |          |      |              | PULLUP   |          |
+| keyb_col_i<2>                      | IOB              | INPUT     | LVTTL                |       |          |      |              | PULLUP   |          |
+| keyb_col_i<3>                      | IOB              | INPUT     | LVTTL                |       |          |      |              | PULLUP   |          |
+| keyb_col_i<4>                      | IOB              | INPUT     | LVTTL                |       |          |      |              | PULLUP   |          |
+| keyb_row_o<0>                      | IOB              | OUTPUT    | LVTTL                |       | 8        | SLOW |              |          |          |
+| keyb_row_o<1>                      | IOB              | OUTPUT    | LVTTL                |       | 8        | SLOW |              |          |          |
+| keyb_row_o<2>                      | IOB              | OUTPUT    | LVTTL                |       | 8        | SLOW |              |          |          |
+| keyb_row_o<3>                      | IOB              | OUTPUT    | LVTTL                |       | 8        | SLOW |              |          |          |
+| keyb_row_o<4>                      | IOB              | OUTPUT    | LVTTL                |       | 8        | SLOW |              |          |          |
+| keyb_row_o<5>                      | IOB              | OUTPUT    | LVTTL                |       | 8        | SLOW |              |          |          |
+| keyb_row_o<6>                      | IOB              | OUTPUT    | LVTTL                |       | 8        | SLOW |              |          |          |
+| keyb_row_o<7>                      | IOB              | OUTPUT    | LVTTL                |       | 8        | SLOW |              |          |          |
+| mic_port_o                         | IOB              | OUTPUT    | LVCMOS33             |       | 12       | SLOW |              |          |          |
+| ps2_clk_io                         | IOB              | INPUT     | LVCMOS33             |       |          |      |              | PULLUP   |          |
+| ps2_data_io                        | IOB              | INPUT     | LVCMOS33             |       |          |      |              | PULLUP   |          |
+| ps2_pin2_io                        | IOB              | INPUT     | LVCMOS33             |       |          |      |              | PULLUP   |          |
+| ps2_pin6_io                        | IOB              | INPUT     | LVCMOS33             |       |          |      |              | PULLUP   |          |
+| ram_addr_o<0>                      | IOB              | OUTPUT    | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_addr_o<1>                      | IOB              | OUTPUT    | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_addr_o<2>                      | IOB              | OUTPUT    | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_addr_o<3>                      | IOB              | OUTPUT    | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_addr_o<4>                      | IOB              | OUTPUT    | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_addr_o<5>                      | IOB              | OUTPUT    | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_addr_o<6>                      | IOB              | OUTPUT    | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_addr_o<7>                      | IOB              | OUTPUT    | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_addr_o<8>                      | IOB              | OUTPUT    | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_addr_o<9>                      | IOB              | OUTPUT    | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_addr_o<10>                     | IOB              | OUTPUT    | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_addr_o<11>                     | IOB              | OUTPUT    | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_addr_o<12>                     | IOB              | OUTPUT    | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_addr_o<13>                     | IOB              | OUTPUT    | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_addr_o<14>                     | IOB              | OUTPUT    | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_addr_o<15>                     | IOB              | OUTPUT    | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_addr_o<16>                     | IOB              | OUTPUT    | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_addr_o<17>                     | IOB              | OUTPUT    | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_addr_o<18>                     | IOB              | OUTPUT    | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_ce_n_o<0>                      | IOB              | OUTPUT    | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_ce_n_o<1>                      | IOB              | OUTPUT    | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_ce_n_o<2>                      | IOB              | OUTPUT    | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_ce_n_o<3>                      | IOB              | OUTPUT    | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_data_io<0>                     | IOB              | BIDIR     | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_data_io<1>                     | IOB              | BIDIR     | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_data_io<2>                     | IOB              | BIDIR     | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_data_io<3>                     | IOB              | BIDIR     | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_data_io<4>                     | IOB              | BIDIR     | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_data_io<5>                     | IOB              | BIDIR     | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_data_io<6>                     | IOB              | BIDIR     | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_data_io<7>                     | IOB              | BIDIR     | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_oe_n_o                         | IOB              | OUTPUT    | LVCMOS33             |       | 4        | FAST |              |          |          |
+| ram_we_n_o                         | IOB              | OUTPUT    | LVCMOS33             |       | 4        | FAST |              |          |          |
+| rgb_b_o<0>                         | IOB              | OUTPUT    | LVTTL                |       | 8        | FAST |              |          |          |
+| rgb_b_o<1>                         | IOB              | OUTPUT    | LVTTL                |       | 8        | FAST |              |          |          |
+| rgb_b_o<2>                         | IOB              | OUTPUT    | LVTTL                |       | 8        | FAST |              |          |          |
+| rgb_g_o<0>                         | IOB              | OUTPUT    | LVTTL                |       | 8        | FAST |              |          |          |
+| rgb_g_o<1>                         | IOB              | OUTPUT    | LVTTL                |       | 8        | FAST |              |          |          |
+| rgb_g_o<2>                         | IOB              | OUTPUT    | LVTTL                |       | 8        | FAST |              |          |          |
+| rgb_r_o<0>                         | IOB              | OUTPUT    | LVTTL                |       | 8        | FAST |              |          |          |
+| rgb_r_o<1>                         | IOB              | OUTPUT    | LVTTL                |       | 8        | FAST |              |          |          |
+| rgb_r_o<2>                         | IOB              | OUTPUT    | LVTTL                |       | 8        | FAST |              |          |          |
+| sd_cs0_n_o                         | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW | OFF          |          |          |
+| sd_cs1_n_o                         | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| sd_miso_i                          | IOB              | INPUT     | LVTTL                |       |          |      |              | PULLUP   |          |
+| sd_mosi_o                          | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| sd_sclk_o                          | IOB              | OUTPUT    | LVTTL                |       | 12       | SLOW |              |          |          |
+| vsync_o                            | IOB              | OUTPUT    | LVTTL                |       | 8        | FAST |              |          |          |
++---------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+Section 7 - RPMs
+----------------
+
+Section 8 - Guide Report
+------------------------
+Guide not run on this design.
+
+Section 9 - Area Group and Partition Summary
+--------------------------------------------
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+Area Group Information
+----------------------
+
+  No area groups were found in this design.
+
+----------------------
+
+Section 10 - Timing Report
+--------------------------
+A logic-level (pre-route) timing report can be generated by using Xilinx static
+timing analysis tools, Timing Analyzer (GUI) or TRCE (command line), with the
+mapped NCD and PCF files. Please note that this timing report will be generated
+using estimated delay information. For accurate numbers, please generate a
+timing report with the post Place and Route NCD file.
+
+For more information about the Timing Analyzer, consult the Xilinx Timing
+Analyzer Reference Manual; for more information about TRCE, consult the Xilinx
+Command Line Tools User Guide "TRACE" chapter.
+
+Section 11 - Configuration String Details
+-----------------------------------------
+Use the "-detail" map option to print out Configuration Strings
+
+Section 12 - Control Set Information
+------------------------------------
+Use the "-detail" map option to print out Control Set Information.
+
+Section 13 - Utilization by Hierarchy
+-------------------------------------
+Use the "-detail" map option to print out the Utilization by Hierarchy section.

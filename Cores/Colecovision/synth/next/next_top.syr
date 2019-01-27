@@ -1,0 +1,2272 @@
+Release 14.7 - xst P.20131013 (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+--> Parameter TMPDIR set to xst/projnav.tmp
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.09 secs
+ 
+--> Parameter xsthdpdir set to xst
+
+
+Total REAL time to Xst completion: 0.00 secs
+Total CPU time to Xst completion: 0.09 secs
+ 
+--> Reading design: next_top.prj
+
+TABLE OF CONTENTS
+  1) Synthesis Options Summary
+  2) HDL Parsing
+  3) HDL Elaboration
+  4) HDL Synthesis
+       4.1) HDL Synthesis Report
+  5) Advanced HDL Synthesis
+       5.1) Advanced HDL Synthesis Report
+  6) Low Level Synthesis
+  7) Partition Report
+  8) Design Summary
+       8.1) Primitive and Black Box Usage
+       8.2) Device utilization summary
+       8.3) Partition Resource Summary
+       8.4) Timing Report
+            8.4.1) Clock Information
+            8.4.2) Asynchronous Control Signals Information
+            8.4.3) Timing Summary
+            8.4.4) Timing Details
+            8.4.5) Cross Clock Domains Report
+
+
+=========================================================================
+*                      Synthesis Options Summary                        *
+=========================================================================
+---- Source Parameters
+Input File Name                    : "next_top.prj"
+Ignore Synthesis Constraint File   : NO
+
+---- Target Parameters
+Output File Name                   : "next_top"
+Output Format                      : NGC
+Target Device                      : xc6slx16-2-ftg256
+
+---- Source Options
+Top Module Name                    : next_top
+Automatic FSM Extraction           : YES
+FSM Encoding Algorithm             : Auto
+Safe Implementation                : No
+FSM Style                          : LUT
+RAM Extraction                     : Yes
+RAM Style                          : Auto
+ROM Extraction                     : Yes
+Shift Register Extraction          : YES
+ROM Style                          : Auto
+Resource Sharing                   : YES
+Asynchronous To Synchronous        : NO
+Shift Register Minimum Size        : 2
+Use DSP Block                      : Auto
+Automatic Register Balancing       : No
+
+---- Target Options
+LUT Combining                      : Auto
+Reduce Control Sets                : Auto
+Add IO Buffers                     : YES
+Global Maximum Fanout              : 100000
+Add Generic Clock Buffer(BUFG)     : 16
+Register Duplication               : YES
+Optimize Instantiated Primitives   : NO
+Use Clock Enable                   : Auto
+Use Synchronous Set                : Auto
+Use Synchronous Reset              : Auto
+Pack IO Registers into IOBs        : Auto
+Equivalent register Removal        : YES
+
+---- General Options
+Optimization Goal                  : Speed
+Optimization Effort                : 2
+Power Reduction                    : NO
+Keep Hierarchy                     : No
+Netlist Hierarchy                  : As_Optimized
+RTL Output                         : Yes
+Global Optimization                : AllClockNets
+Read Cores                         : YES
+Write Timing Constraints           : NO
+Cross Clock Analysis               : NO
+Hierarchy Separator                : /
+Bus Delimiter                      : <>
+Case Specifier                     : Maintain
+Slice Utilization Ratio            : 100
+BRAM Utilization Ratio             : 100
+DSP48 Utilization Ratio            : 100
+Auto BRAM Packing                  : NO
+Slice Utilization Ratio Delta      : 5
+
+---- Other Options
+Cores Search Directories           : {"ipcore_dir"  }
+
+=========================================================================
+
+
+=========================================================================
+*                          HDL Parsing                                  *
+=========================================================================
+Analyzing Verilog file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\synth\next\ipcore_dir\pll1.v" into library work
+Parsing module <pll1>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_pack-p.vhd" into library work
+Parsing package <vdp18_pack>.
+Parsing package body <vdp18_pack>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_col_pack-p.vhd" into library work
+Parsing package <vdp18_col_pack>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\cpu\t80_reg.vhd" into library work
+Parsing entity <T80_Reg>.
+Parsing architecture <rtl> of entity <t80_reg>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\cpu\t80_pack.vhd" into library work
+Parsing package <T80_Pack>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\cpu\t80_mcode.vhd" into library work
+Parsing entity <T80_MCode>.
+Parsing architecture <rtl> of entity <t80_mcode>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\cpu\t80_alu.vhd" into library work
+Parsing entity <T80_ALU>.
+Parsing architecture <rtl> of entity <t80_alu>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\audio\sn76489\sn76489_attenuator.vhd" into library work
+Parsing entity <sn76489_attenuator>.
+Parsing architecture <rtl> of entity <sn76489_attenuator>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_sprite.vhd" into library work
+Parsing entity <vdp18_sprite>.
+Parsing architecture <rtl> of entity <vdp18_sprite>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_pattern.vhd" into library work
+Parsing entity <vdp18_pattern>.
+Parsing architecture <rtl> of entity <vdp18_pattern>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_hor_vert.vhd" into library work
+Parsing entity <vdp18_hor_vert>.
+Parsing architecture <rtl> of entity <vdp18_hor_vert>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_ctrl.vhd" into library work
+Parsing entity <vdp18_ctrl>.
+Parsing architecture <rtl> of entity <vdp18_ctrl>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_cpuio.vhd" into library work
+Parsing entity <vdp18_cpuio>.
+Parsing architecture <rtl> of entity <vdp18_cpuio>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_comp_pack-p.vhd" into library work
+Parsing package <vdp18_comp_pack>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_col_mux.vhd" into library work
+Parsing entity <vdp18_col_mux>.
+Parsing architecture <rtl> of entity <vdp18_col_mux>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_addr_mux.vhd" into library work
+Parsing entity <vdp18_addr_mux>.
+Parsing architecture <rtl> of entity <vdp18_addr_mux>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\cpu\t80.vhd" into library work
+Parsing entity <T80>.
+Parsing architecture <rtl> of entity <t80>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\audio\sn76489\sn76489_tone.vhd" into library work
+Parsing entity <sn76489_tone>.
+Parsing architecture <rtl> of entity <sn76489_tone>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\audio\sn76489\sn76489_noise.vhd" into library work
+Parsing entity <sn76489_noise>.
+Parsing architecture <rtl> of entity <sn76489_noise>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\audio\sn76489\sn76489_latch_ctrl.vhd" into library work
+Parsing entity <sn76489_latch_ctrl>.
+Parsing architecture <rtl> of entity <sn76489_latch_ctrl>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\audio\sn76489\sn76489_clock_div.vhd" into library work
+Parsing entity <sn76489_clock_div>.
+Parsing architecture <rtl> of entity <sn76489_clock_div>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_core.vhd" into library work
+Parsing entity <vdp18_core>.
+Parsing architecture <struct> of entity <vdp18_core>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\rom\loaderrom.vhd" into library work
+Parsing entity <loaderrom>.
+Parsing architecture <rtl> of entity <loaderrom>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\ram\dpram.vhd" into library work
+Parsing entity <dpram>.
+Parsing architecture <rtl> of entity <dpram>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\peripheral\spi.vhd" into library work
+Parsing entity <spi>.
+Parsing architecture <rtl> of entity <spi>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\peripheral\ps2kbd_pkg.vhd" into library work
+Parsing package <kbd_pkg>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\peripheral\ps2kbd.vhd" into library work
+Parsing entity <ps2kbd>.
+Parsing architecture <rtl> of entity <ps2kbd>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\peripheral\cv_ctrl.vhd" into library work
+Parsing entity <cv_ctrl>.
+Parsing architecture <rtl> of entity <cv_ctrl>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\cpu\t80a.vhd" into library work
+Parsing entity <T80a>.
+Parsing architecture <rtl> of entity <t80a>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\audio\sn76489\sn76489_top.vhd" into library work
+Parsing entity <sn76489_top>.
+Parsing architecture <struct> of entity <sn76489_top>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vga.vhd" into library work
+Parsing entity <vga>.
+Parsing architecture <rtl> of entity <vga>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\shared\debounce.vhd" into library work
+Parsing entity <debounce>.
+Parsing architecture <logic> of entity <debounce>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\ram\dpSRAM_4x512x16.vhd" into library work
+Parsing entity <dpSRAM_4x512x16>.
+Parsing architecture <Behavior> of entity <dpsram_4x512x16>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\peripheral\keyboard.vhd" into library work
+Parsing entity <colecoKeyboard>.
+Parsing architecture <SYN> of entity <colecokeyboard>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\peripheral\cv_keys_pack.vhd" into library work
+Parsing package <cv_keys_pack>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\colecovision.vhd" into library work
+Parsing entity <colecovision>.
+Parsing architecture <Behavior> of entity <colecovision>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\clocks.vhd" into library work
+Parsing entity <clocks>.
+Parsing architecture <rtl> of entity <clocks>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\audio\dac.vhd" into library work
+Parsing entity <dac>.
+Parsing architecture <rtl> of entity <dac>.
+Parsing VHDL file "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\syn-next\next_top.vhd" into library work
+Parsing entity <next_top>.
+Parsing architecture <behavior> of entity <next_top>.
+WARNING:HDLCompiler:946 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\syn-next\next_top.vhd" Line 299: Actual for formal port por_i is neither a static name nor a globally static expression
+WARNING:HDLCompiler:946 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\syn-next\next_top.vhd" Line 376: Actual for formal port port0_addr_i is neither a static name nor a globally static expression
+WARNING:HDLCompiler:946 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\syn-next\next_top.vhd" Line 383: Actual for formal port port1_addr_i is neither a static name nor a globally static expression
+
+=========================================================================
+*                            HDL Elaboration                            *
+=========================================================================
+
+Elaborating entity <next_top> (architecture <behavior>) with generics from library <work>.
+Going to verilog side to elaborate module pll1
+
+Elaborating module <pll1>.
+
+Elaborating module <IBUFG>.
+
+Elaborating module <PLL_BASE(BANDWIDTH="OPTIMIZED",CLK_FEEDBACK="CLKFBOUT",COMPENSATION="SYSTEM_SYNCHRONOUS",DIVCLK_DIVIDE=1,CLKFBOUT_MULT=20,CLKFBOUT_PHASE=0.0,CLKOUT0_DIVIDE=46,CLKOUT0_PHASE=0.0,CLKOUT0_DUTY_CYCLE=0.5,CLKOUT1_DIVIDE=23,CLKOUT1_PHASE=0.0,CLKOUT1_DUTY_CYCLE=0.5,CLKOUT2_DIVIDE=40,CLKOUT2_PHASE=0.0,CLKOUT2_DUTY_CYCLE=0.5,CLKOUT3_DIVIDE=8,CLKOUT3_PHASE=0.0,CLKOUT3_DUTY_CYCLE=0.5,CLKIN_PERIOD=20.0,REF_JITTER=0.01)>.
+WARNING:HDLCompiler:1127 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\synth\next\ipcore_dir\pll1.v" Line 129: Assignment to clkout4_unused ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\synth\next\ipcore_dir\pll1.v" Line 130: Assignment to clkout5_unused ignored, since the identifier is never used
+WARNING:HDLCompiler:1127 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\synth\next\ipcore_dir\pll1.v" Line 131: Assignment to locked_unused ignored, since the identifier is never used
+
+Elaborating module <BUFG>.
+Back to vhdl to continue elaboration
+
+Elaborating entity <clocks> (architecture <rtl>) from library <work>.
+
+Elaborating entity <colecovision> (architecture <Behavior>) with generics from library <work>.
+
+Elaborating entity <T80a> (architecture <rtl>) with generics from library <work>.
+
+Elaborating entity <T80> (architecture <rtl>) with generics from library <work>.
+
+Elaborating entity <T80_MCode> (architecture <rtl>) with generics from library <work>.
+
+Elaborating entity <T80_ALU> (architecture <rtl>) with generics from library <work>.
+
+Elaborating entity <T80_Reg> (architecture <rtl>) from library <work>.
+
+Elaborating entity <loaderrom> (architecture <rtl>) from library <work>.
+
+Elaborating entity <vdp18_core> (architecture <struct>) with generics from library <work>.
+INFO:HDLCompiler:679 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_pack-p.vhd" Line 217. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_pack-p.vhd" Line 217. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_pack-p.vhd" Line 217. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_pack-p.vhd" Line 217. Case statement is complete. others clause is never selected
+
+Elaborating entity <vdp18_hor_vert> (architecture <rtl>) from library <work>.
+
+Elaborating entity <vdp18_ctrl> (architecture <rtl>) from library <work>.
+
+Elaborating entity <vdp18_cpuio> (architecture <rtl>) from library <work>.
+INFO:HDLCompiler:679 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_cpuio.vhd" Line 463. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_cpuio.vhd" Line 501. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_pack-p.vhd" Line 217. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_pack-p.vhd" Line 217. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_pack-p.vhd" Line 217. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_pack-p.vhd" Line 217. Case statement is complete. others clause is never selected
+INFO:HDLCompiler:679 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_pack-p.vhd" Line 217. Case statement is complete. others clause is never selected
+
+Elaborating entity <vdp18_addr_mux> (architecture <rtl>) from library <work>.
+INFO:HDLCompiler:679 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_addr_mux.vhd" Line 169. Case statement is complete. others clause is never selected
+
+Elaborating entity <vdp18_pattern> (architecture <rtl>) from library <work>.
+INFO:HDLCompiler:679 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_pattern.vhd" Line 218. Case statement is complete. others clause is never selected
+
+Elaborating entity <vdp18_sprite> (architecture <rtl>) from library <work>.
+
+Elaborating entity <vdp18_col_mux> (architecture <rtl>) with generics from library <work>.
+
+Elaborating entity <sn76489_top> (architecture <struct>) with generics from library <work>.
+
+Elaborating entity <sn76489_clock_div> (architecture <rtl>) with generics from library <work>.
+
+Elaborating entity <sn76489_latch_ctrl> (architecture <rtl>) from library <work>.
+
+Elaborating entity <sn76489_tone> (architecture <rtl>) from library <work>.
+
+Elaborating entity <sn76489_attenuator> (architecture <rtl>) from library <work>.
+
+Elaborating entity <sn76489_noise> (architecture <rtl>) from library <work>.
+
+Elaborating entity <cv_ctrl> (architecture <rtl>) from library <work>.
+
+Elaborating entity <spi> (architecture <rtl>) from library <work>.
+
+Elaborating entity <dpSRAM_4x512x16> (architecture <Behavior>) from library <work>.
+
+Elaborating entity <dac> (architecture <rtl>) with generics from library <work>.
+
+Elaborating entity <colecoKeyboard> (architecture <SYN>) from library <work>.
+
+Elaborating entity <ps2kbd> (architecture <rtl>) from library <work>.
+
+Elaborating entity <debounce> (architecture <logic>) with generics from library <work>.
+
+Elaborating entity <vga> (architecture <rtl>) from library <work>.
+
+Elaborating entity <dpram> (architecture <rtl>) with generics from library <work>.
+WARNING:HDLCompiler:1127 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\syn-next\next_top.vhd" Line 600: Assignment to rgb_r_s ignored, since the identifier is never used
+WARNING:Xst:2972 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\syn-next\next_top.vhd" line 424. All outputs of instance <btnscl> of block <debounce> are unconnected in block <next_top>. Underlying logic will be removed.
+
+=========================================================================
+*                           HDL Synthesis                               *
+=========================================================================
+
+Synthesizing Unit <next_top>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\syn-next\next_top.vhd".
+        hdmi_output_g = false
+WARNING:Xst:647 - Input <keyb_col_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <flash_miso_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <ear_port_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <bus_int_n_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <bus_nmi_n_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <bus_ramcs_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <bus_romcs_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <bus_wait_n_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <bus_busreq_n_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <bus_iorqula_n_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <esp_rx_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+INFO:Xst:3210 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\syn-next\next_top.vhd" line 286: Output port <CLK_OUT4> of the instance <pll_1> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\syn-next\next_top.vhd" line 305: Output port <cart_addr_o> of the instance <vg> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\syn-next\next_top.vhd" line 305: Output port <audio_o> of the instance <vg> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\syn-next\next_top.vhd" line 305: Output port <rgb_r_o> of the instance <vg> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\syn-next\next_top.vhd" line 305: Output port <rgb_g_o> of the instance <vg> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\syn-next\next_top.vhd" line 305: Output port <rgb_b_o> of the instance <vg> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\syn-next\next_top.vhd" line 305: Output port <D_cpu_addr> of the instance <vg> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\syn-next\next_top.vhd" line 305: Output port <cart_oe_n_o> of the instance <vg> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\syn-next\next_top.vhd" line 305: Output port <cart_en_80_n_o> of the instance <vg> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\syn-next\next_top.vhd" line 305: Output port <cart_en_a0_n_o> of the instance <vg> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\syn-next\next_top.vhd" line 305: Output port <cart_en_c0_n_o> of the instance <vg> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\syn-next\next_top.vhd" line 305: Output port <cart_en_e0_n_o> of the instance <vg> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\syn-next\next_top.vhd" line 305: Output port <hsync_n_o> of the instance <vg> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\syn-next\next_top.vhd" line 305: Output port <vsync_n_o> of the instance <vg> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\syn-next\next_top.vhd" line 305: Output port <comp_sync_n_o> of the instance <vg> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\syn-next\next_top.vhd" line 410: Output port <core_reload_o> of the instance <ps2if_inst> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\syn-next\next_top.vhd" line 410: Output port <home_o> of the instance <ps2if_inst> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\syn-next\next_top.vhd" line 424: Output port <result_o> of the instance <btnscl> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\syn-next\next_top.vhd" line 571: Output port <O_BLANK> of the instance <vga> is unconnected or connected to loadless signal.
+WARNING:Xst:2935 - Signal 'flash_cs_n_o', unconnected in block 'next_top', is tied to its initial value (1).
+WARNING:Xst:2935 - Signal 'flash_sclk_o', unconnected in block 'next_top', is tied to its initial value (0).
+WARNING:Xst:2935 - Signal 'flash_mosi_o', unconnected in block 'next_top', is tied to its initial value (0).
+WARNING:Xst:2935 - Signal 'joyp7_o', unconnected in block 'next_top', is tied to its initial value (1).
+WARNING:Xst:2935 - Signal 'esp_tx_o', unconnected in block 'next_top', is tied to its initial value (0).
+    Found 3-bit register for signal <vga_r_s<7:5>>.
+    Found 3-bit register for signal <vga_g_s<7:5>>.
+    Found 3-bit register for signal <vga_b_s<7:5>>.
+    Found 3-bit register for signal <state_v>.
+    Found 6-bit register for signal <joy2_s>.
+    Found 1-bit register for signal <joysel_o>.
+    Found 6-bit register for signal <joy1_s>.
+    Found 8-bit register for signal <por_cnt_s>.
+    Found 8-bit adder for signal <audio_s> created at line 1253.
+    Found 3-bit adder for signal <state_v[2]_GND_5_o_add_73_OUT> created at line 1241.
+    Found 8-bit subtractor for signal <GND_5_o_GND_5_o_sub_2_OUT<7:0>> created at line 1308.
+    Found 16x24-bit Read Only RAM for signal <_n0335>
+    Found 1-bit tristate buffer for signal <accel_io_0> created at line 690
+    Found 1-bit tristate buffer for signal <accel_io_1> created at line 691
+    Found 1-bit tristate buffer for signal <accel_io_2> created at line 692
+    Found 1-bit tristate buffer for signal <accel_io_3> created at line 693
+    Found 1-bit tristate buffer for signal <accel_io_4> created at line 694
+    Found 1-bit tristate buffer for signal <accel_io_5> created at line 695
+    Found 1-bit tristate buffer for signal <accel_io_6> created at line 696
+    Found 1-bit tristate buffer for signal <accel_io_7> created at line 697
+    Found 1-bit tristate buffer for signal <accel_io_8> created at line 698
+    Found 1-bit tristate buffer for signal <accel_io_9> created at line 699
+    Found 1-bit tristate buffer for signal <accel_io_10> created at line 700
+    Found 1-bit tristate buffer for signal <accel_io_11> created at line 701
+    Found 1-bit tristate buffer for signal <accel_io_12> created at line 702
+    Found 1-bit tristate buffer for signal <accel_io_13> created at line 703
+    Found 1-bit tristate buffer for signal <accel_io_14> created at line 704
+    Found 1-bit tristate buffer for signal <accel_io_15> created at line 705
+    Found 1-bit tristate buffer for signal <accel_io_16> created at line 706
+    Found 1-bit tristate buffer for signal <accel_io_17> created at line 707
+    Found 1-bit tristate buffer for signal <accel_io_18> created at line 708
+    Found 1-bit tristate buffer for signal <accel_io_19> created at line 709
+    Found 1-bit tristate buffer for signal <accel_io_20> created at line 710
+    Found 1-bit tristate buffer for signal <accel_io_21> created at line 711
+    Found 1-bit tristate buffer for signal <accel_io_22> created at line 712
+    Found 1-bit tristate buffer for signal <accel_io_23> created at line 713
+    Found 1-bit tristate buffer for signal <accel_io_24> created at line 714
+    Found 1-bit tristate buffer for signal <accel_io_25> created at line 715
+    Found 1-bit tristate buffer for signal <accel_io_26> created at line 716
+    Found 1-bit tristate buffer for signal <accel_io_27> created at line 717
+    Found 1-bit tristate buffer for signal <bus_data_io<7>> created at line 727
+    Found 1-bit tristate buffer for signal <bus_data_io<6>> created at line 727
+    Found 1-bit tristate buffer for signal <bus_data_io<5>> created at line 727
+    Found 1-bit tristate buffer for signal <bus_data_io<4>> created at line 727
+    Found 1-bit tristate buffer for signal <bus_data_io<3>> created at line 727
+    Found 1-bit tristate buffer for signal <bus_data_io<2>> created at line 727
+    Found 1-bit tristate buffer for signal <bus_data_io<1>> created at line 727
+    Found 1-bit tristate buffer for signal <bus_data_io<0>> created at line 727
+    Found 1-bit tristate buffer for signal <bus_rst_n_io> created at line 734
+    Found 1-bit tristate buffer for signal <esp_gpio0_io> created at line 741
+    Found 1-bit tristate buffer for signal <esp_gpio2_io> created at line 742
+    Found 1-bit tristate buffer for signal <flash_hold_o> created at line 745
+    Found 1-bit tristate buffer for signal <flash_wp_o> created at line 746
+    Found 1-bit tristate buffer for signal <i2c_scl_io> created at line 754
+    Found 1-bit tristate buffer for signal <i2c_sda_io> created at line 755
+    Summary:
+	inferred   1 RAM(s).
+	inferred   3 Adder/Subtractor(s).
+	inferred  33 D-type flip-flop(s).
+	inferred  49 Multiplexer(s).
+	inferred  43 Tristate(s).
+Unit <next_top> synthesized.
+
+Synthesizing Unit <pll1>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\synth\next\ipcore_dir\pll1.v".
+    Summary:
+	no macro.
+Unit <pll1> synthesized.
+
+Synthesizing Unit <clocks>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\clocks.vhd".
+    Found 2-bit register for signal <clk2_cnt_q>.
+    Found 2-bit register for signal <clk1_cnt_q>.
+    Found 1-bit register for signal <clock_vdp_en_s>.
+    Found 1-bit register for signal <clock_5m_en_s>.
+    Found 2-bit adder for signal <clk1_cnt_q[1]_GND_13_o_add_1_OUT> created at line 1241.
+    Found 2-bit subtractor for signal <GND_13_o_GND_13_o_sub_7_OUT<1:0>> created at line 1308.
+    Found 4x1-bit Read Only RAM for signal <clk1_cnt_q[1]_PWR_13_o_Mux_3_o>
+    Summary:
+	inferred   1 RAM(s).
+	inferred   2 Adder/Subtractor(s).
+	inferred   6 D-type flip-flop(s).
+	inferred   3 Multiplexer(s).
+Unit <clocks> synthesized.
+
+Synthesizing Unit <colecovision>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\colecovision.vhd".
+        num_maq_g = 6
+        compat_rgb_g = 0
+INFO:Xst:3210 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\colecovision.vhd" line 201: Output port <halt_n_o> of the instance <cpu> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\colecovision.vhd" line 201: Output port <busak_n_o> of the instance <cpu> is unconnected or connected to loadless signal.
+    Found 1-bit register for signal <loader_q>.
+    Found 1-bit register for signal <ext_cart_en_q>.
+    Found 8-bit register for signal <cfg_page_r>.
+    Found 1-bit register for signal <multcart_q>.
+    Found 1-bit register for signal <m1_wait_q>.
+    Summary:
+	inferred  12 D-type flip-flop(s).
+	inferred  24 Multiplexer(s).
+Unit <colecovision> synthesized.
+
+Synthesizing Unit <T80a>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\cpu\t80a.vhd".
+        mode_g = 0
+INFO:Xst:3210 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\cpu\t80a.vhd" line 153: Output port <IntE> of the instance <u0> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\cpu\t80a.vhd" line 153: Output port <Stop> of the instance <u0> is unconnected or connected to loadless signal.
+    Found 1-bit register for signal <iorq_n_s>.
+    Found 1-bit register for signal <wr_n_s>.
+    Found 1-bit register for signal <reset_s>.
+    Found 1-bit register for signal <req_inhibit_s>.
+    Found 1-bit register for signal <mreq_inhibit_s>.
+    Found 1-bit register for signal <rd_s>.
+    Found 1-bit register for signal <mreq_s>.
+    Found 8-bit register for signal <data_r>.
+    Found 1-bit register for signal <ireq_inhibit_n_s>.
+    Found 1-bit tristate buffer for signal <mreq_n_o> created at line 136
+    Found 1-bit tristate buffer for signal <iorq_n_o> created at line 137
+    Found 1-bit tristate buffer for signal <rd_n_o> created at line 138
+    Found 1-bit tristate buffer for signal <wr_n_o> created at line 139
+    Found 1-bit tristate buffer for signal <refresh_n_o> created at line 140
+    Found 1-bit tristate buffer for signal <address_o<15>> created at line 141
+    Found 1-bit tristate buffer for signal <address_o<14>> created at line 141
+    Found 1-bit tristate buffer for signal <address_o<13>> created at line 141
+    Found 1-bit tristate buffer for signal <address_o<12>> created at line 141
+    Found 1-bit tristate buffer for signal <address_o<11>> created at line 141
+    Found 1-bit tristate buffer for signal <address_o<10>> created at line 141
+    Found 1-bit tristate buffer for signal <address_o<9>> created at line 141
+    Found 1-bit tristate buffer for signal <address_o<8>> created at line 141
+    Found 1-bit tristate buffer for signal <address_o<7>> created at line 141
+    Found 1-bit tristate buffer for signal <address_o<6>> created at line 141
+    Found 1-bit tristate buffer for signal <address_o<5>> created at line 141
+    Found 1-bit tristate buffer for signal <address_o<4>> created at line 141
+    Found 1-bit tristate buffer for signal <address_o<3>> created at line 141
+    Found 1-bit tristate buffer for signal <address_o<2>> created at line 141
+    Found 1-bit tristate buffer for signal <address_o<1>> created at line 141
+    Found 1-bit tristate buffer for signal <address_o<0>> created at line 141
+    Summary:
+	inferred  16 D-type flip-flop(s).
+	inferred  13 Multiplexer(s).
+	inferred  21 Tristate(s).
+Unit <T80a> synthesized.
+
+Synthesizing Unit <T80>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\cpu\t80.vhd".
+        Mode = 0
+        IOWait = 1
+        Flag_C = 0
+        Flag_N = 1
+        Flag_P = 2
+        Flag_X = 3
+        Flag_H = 4
+        Flag_Y = 5
+        Flag_Z = 6
+        Flag_S = 7
+    Found 1-bit register for signal <RFSH_n>.
+    Found 1-bit register for signal <M1_n>.
+    Found 1-bit register for signal <Alternate>.
+    Found 1-bit register for signal <Arith16_r>.
+    Found 1-bit register for signal <BTR_r>.
+    Found 1-bit register for signal <Z16_r>.
+    Found 1-bit register for signal <ALU_cpi_r>.
+    Found 1-bit register for signal <Save_ALU_r>.
+    Found 1-bit register for signal <PreserveC_r>.
+    Found 1-bit register for signal <XY_Ind>.
+    Found 1-bit register for signal <BusReq_s>.
+    Found 1-bit register for signal <INT_s>.
+    Found 1-bit register for signal <NMI_s>.
+    Found 1-bit register for signal <OldNMI_n>.
+    Found 1-bit register for signal <Halt_FF>.
+    Found 1-bit register for signal <BusAck>.
+    Found 1-bit register for signal <NMICycle>.
+    Found 1-bit register for signal <IntCycle>.
+    Found 1-bit register for signal <IntE_FF1>.
+    Found 1-bit register for signal <IntE_FF2>.
+    Found 1-bit register for signal <No_BTR>.
+    Found 1-bit register for signal <Auto_Wait_t1>.
+    Found 1-bit register for signal <Auto_Wait_t2>.
+    Found 16-bit register for signal <SP>.
+    Found 8-bit register for signal <F>.
+    Found 8-bit register for signal <Ap>.
+    Found 8-bit register for signal <Fp>.
+    Found 8-bit register for signal <ACC>.
+    Found 16-bit register for signal <A>.
+    Found 16-bit register for signal <TmpAddr>.
+    Found 16-bit register for signal <PC>.
+    Found 8-bit register for signal <IR>.
+    Found 8-bit register for signal <DO>.
+    Found 8-bit register for signal <I>.
+    Found 8-bit register for signal <R>.
+    Found 2-bit register for signal <ISet>.
+    Found 2-bit register for signal <XY_State>.
+    Found 2-bit register for signal <IStatus>.
+    Found 3-bit register for signal <MCycles>.
+    Found 3-bit register for signal <TState>.
+    Found 3-bit register for signal <Pre_XY_F_M>.
+    Found 5-bit register for signal <Read_To_Reg_r>.
+    Found 4-bit register for signal <ALU_Op_r>.
+    Found 3-bit register for signal <MCycle>.
+    Found 3-bit register for signal <RegAddrA_r>.
+    Found 3-bit register for signal <RegAddrB_r>.
+    Found 3-bit register for signal <RegAddrC>.
+    Found 1-bit register for signal <IncDecZ>.
+    Found 16-bit register for signal <RegBusA_r>.
+    Found 8-bit register for signal <BusB>.
+    Found 8-bit register for signal <BusA>.
+    Found 7-bit adder for signal <R[6]_GND_38_o_add_15_OUT> created at line 1241.
+    Found 16-bit adder for signal <TmpAddr[15]_GND_38_o_add_46_OUT> created at line 1241.
+    Found 16-bit adder for signal <PC[15]_DI_Reg[7]_add_69_OUT> created at line 568.
+    Found 16-bit adder for signal <PC[15]_GND_38_o_add_70_OUT> created at line 1241.
+    Found 16-bit adder for signal <RegBusC[15]_DI_Reg[7]_add_81_OUT> created at line 581.
+    Found 16-bit adder for signal <SP[15]_GND_38_o_add_88_OUT> created at line 1241.
+    Found 16-bit adder for signal <RegBusA[15]_GND_38_o_add_215_OUT> created at line 1253.
+    Found 3-bit adder for signal <Pre_XY_F_M[2]_GND_38_o_add_268_OUT> created at line 1241.
+    Found 3-bit adder for signal <MCycle[2]_GND_38_o_add_273_OUT> created at line 1241.
+    Found 3-bit adder for signal <TState[2]_GND_38_o_add_281_OUT> created at line 1241.
+    Found 16-bit subtractor for signal <GND_38_o_GND_38_o_sub_74_OUT<15:0>> created at line 1308.
+    Found 16-bit subtractor for signal <GND_38_o_GND_38_o_sub_88_OUT<15:0>> created at line 1308.
+    Found 16-bit subtractor for signal <RegBusA[15]_GND_38_o_sub_217_OUT<15:0>> created at line 1320.
+    Found 16-bit 7-to-1 multiplexer for signal <Set_Addr_To[2]_I[7]_mux_49_OUT> created at line 487.
+    Found 8-bit 3-to-1 multiplexer for signal <Special_LD[1]_ACC[7]_wide_mux_110_OUT> created at line 617.
+    Found 8-bit 11-to-1 multiplexer for signal <Set_BusB_To[3]_X_38_o_wide_mux_243_OUT> created at line 863.
+    Found 8-bit 3-to-1 multiplexer for signal <_n1681> created at line 617.
+    Found 3-bit comparator equal for signal <T_Res> created at line 345
+    Found 3-bit comparator equal for signal <MCycles[2]_MCycle[2]_equal_270_o> created at line 1051
+    Summary:
+	inferred  10 Adder/Subtractor(s).
+	inferred 214 D-type flip-flop(s).
+	inferred   2 Comparator(s).
+	inferred 238 Multiplexer(s).
+Unit <T80> synthesized.
+
+Synthesizing Unit <T80_MCode>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\cpu\t80_mcode.vhd".
+        Mode = 0
+        Flag_C = 0
+        Flag_N = 1
+        Flag_P = 2
+        Flag_X = 3
+        Flag_H = 4
+        Flag_Y = 5
+        Flag_Z = 6
+        Flag_S = 7
+WARNING:Xst:647 - Input <F<1:1>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <F<5:3>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 1-bit 8-to-1 multiplexer for signal <IR[5]_F[7]_Mux_192_o> created at line 174.
+    Found 4-bit 3-to-1 multiplexer for signal <ISet[1]_IR[7]_wide_mux_506_OUT> created at line 253.
+    Found 4-bit 3-to-1 multiplexer for signal <Set_BusA_To> created at line 253.
+    Found 1-bit 3-to-1 multiplexer for signal <Read_To_Reg> created at line 253.
+    Found 3-bit 3-to-1 multiplexer for signal <MCycles> created at line 253.
+    Found 1-bit 3-to-1 multiplexer for signal <ISet[1]_IR[7]_Mux_511_o> created at line 253.
+    Found 3-bit 3-to-1 multiplexer for signal <ISet[1]_IR[7]_wide_mux_512_OUT> created at line 253.
+    Found 1-bit 3-to-1 multiplexer for signal <Write> created at line 253.
+    Found 1-bit 3-to-1 multiplexer for signal <Read_To_Acc> created at line 253.
+    Found 1-bit 3-to-1 multiplexer for signal <LDZ> created at line 253.
+    Found 1-bit 3-to-1 multiplexer for signal <LDW> created at line 253.
+    Found 1-bit 3-to-1 multiplexer for signal <Inc_WZ> created at line 253.
+    Found 3-bit 3-to-1 multiplexer for signal <ISet[1]_IR[7]_wide_mux_518_OUT> created at line 253.
+    Found 4-bit 3-to-1 multiplexer for signal <IncDec_16> created at line 253.
+    Found 1-bit 3-to-1 multiplexer for signal <Save_ALU> created at line 253.
+    Found 1-bit 3-to-1 multiplexer for signal <PreserveC> created at line 253.
+    Found 4-bit 3-to-1 multiplexer for signal <ALU_Op> created at line 253.
+    Found 1-bit 3-to-1 multiplexer for signal <Jump> created at line 253.
+    Found 1-bit 3-to-1 multiplexer for signal <ISet[1]_IR[7]_Mux_534_o> created at line 253.
+    Found 1-bit 3-to-1 multiplexer for signal <IORQ> created at line 253.
+    Summary:
+	inferred 400 Multiplexer(s).
+Unit <T80_MCode> synthesized.
+
+Synthesizing Unit <T80_ALU>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\cpu\t80_alu.vhd".
+        Mode = 0
+        Flag_C = 0
+        Flag_N = 1
+        Flag_P = 2
+        Flag_X = 3
+        Flag_H = 4
+        Flag_Y = 5
+        Flag_Z = 6
+        Flag_S = 7
+    Found 6-bit adder for signal <n0127> created at line 107.
+    Found 5-bit adder for signal <n0126> created at line 107.
+    Found 3-bit adder for signal <n0125> created at line 107.
+    Found 6-bit adder for signal <n0128> created at line 107.
+    Found 9-bit adder for signal <GND_40_o_GND_40_o_add_23_OUT> created at line 1241.
+    Found 9-bit adder for signal <GND_40_o_GND_40_o_add_26_OUT> created at line 1241.
+    Found 8-bit subtractor for signal <GND_40_o_GND_40_o_sub_31_OUT<7:0>> created at line 1308.
+    Found 9-bit subtractor for signal <GND_40_o_GND_40_o_sub_34_OUT<8:0>> created at line 1308.
+    Found 8-bit 8-to-1 multiplexer for signal <IR[5]_GND_40_o_wide_mux_44_OUT> created at line 299.
+    Found 5-bit comparator greater for signal <GND_40_o_GND_40_o_LessThan_26_o> created at line 225
+    Found 4-bit comparator greater for signal <PWR_20_o_BusA[3]_LessThan_29_o> created at line 230
+    Found 4-bit comparator greater for signal <GND_40_o_BusA[3]_LessThan_30_o> created at line 231
+    Found 8-bit comparator greater for signal <PWR_20_o_BusA[7]_LessThan_33_o> created at line 236
+    Summary:
+	inferred   8 Adder/Subtractor(s).
+	inferred   4 Comparator(s).
+	inferred  59 Multiplexer(s).
+Unit <T80_ALU> synthesized.
+
+Synthesizing Unit <T80_Reg>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\cpu\t80_reg.vhd".
+    Found 8x8-bit dual-port RAM <Mram_RegsH> for signal <RegsH>.
+    Found 8x8-bit dual-port RAM <Mram_RegsL> for signal <RegsL>.
+    Summary:
+	inferred   4 RAM(s).
+Unit <T80_Reg> synthesized.
+
+Synthesizing Unit <loaderrom>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\rom\loaderrom.vhd".
+    Found 8-bit register for signal <data>.
+    Found 8192x8-bit Read Only RAM for signal <addr[12]_PWR_30_o_wide_mux_0_OUT>
+    Summary:
+	inferred   1 RAM(s).
+	inferred   8 D-type flip-flop(s).
+Unit <loaderrom> synthesized.
+
+Synthesizing Unit <vdp18_core>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_core.vhd".
+        compat_rgb_g = 0
+INFO:Xst:3210 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_core.vhd" line 251: Output port <cd_oe_o> of the instance <cpu_io_b> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_core.vhd" line 251: Output port <reg_ev_o> of the instance <cpu_io_b> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_core.vhd" line 251: Output port <reg_16k_o> of the instance <cpu_io_b> is unconnected or connected to loadless signal.
+    Summary:
+Unit <vdp18_core> synthesized.
+
+Synthesizing Unit <vdp18_hor_vert>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_hor_vert.vhd".
+    Found 9-bit register for signal <cnt_hor_s>.
+    Found 8-bit register for signal <cnt_ver_s>.
+    Found 9-bit register for signal <cnt_hor_q>.
+    Found 9-bit register for signal <cnt_vert_q>.
+    Found 1-bit register for signal <hsync_n_o>.
+    Found 1-bit register for signal <vsync_n_o>.
+    Found 1-bit register for signal <hblank_q>.
+    Found 1-bit register for signal <vblank_q>.
+    Found 9-bit adder for signal <cnt_hor_q[0]_GND_50_o_add_6_OUT> created at line 1253.
+    Found 9-bit adder for signal <cnt_vert_q[0]_GND_50_o_add_9_OUT> created at line 1253.
+    Found 9-bit adder for signal <cnt_hor_s[8]_GND_50_o_add_34_OUT> created at line 1241.
+    Found 8-bit adder for signal <cnt_ver_s[7]_GND_50_o_add_37_OUT> created at line 1241.
+    Found 9-bit comparator equal for signal <cnt_hor_q[0]_last_pix_s[0]_equal_6_o> created at line 146
+    Summary:
+	inferred   4 Adder/Subtractor(s).
+	inferred  39 D-type flip-flop(s).
+	inferred   1 Comparator(s).
+	inferred   4 Multiplexer(s).
+Unit <vdp18_hor_vert> synthesized.
+
+Synthesizing Unit <vdp18_ctrl>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_ctrl.vhd".
+    Found 1-bit register for signal <sprite_active_q>.
+    Found 1-bit register for signal <sprite_line_act_q>.
+    Found 1-bit register for signal <hor_active_q>.
+    Found 1-bit register for signal <vert_active_q>.
+    Found 1-bit register for signal <vram_ce_o>.
+    Found 1-bit register for signal <vram_oe_o>.
+    Found 1-bit register for signal <vram_ctrl.read_b_v>.
+    Found 9-bit adder for signal <decode_access.num_pix_plus_6_v> created at line 1253.
+    Found 9-bit adder for signal <n0643> created at line 1253.
+    Found 9-bit adder for signal <n0644> created at line 1253.
+    Found 256x9-bit Read Only RAM for signal <_n1016>
+    Summary:
+	inferred   1 RAM(s).
+	inferred   3 Adder/Subtractor(s).
+	inferred   7 D-type flip-flop(s).
+	inferred  29 Multiplexer(s).
+Unit <vdp18_ctrl> synthesized.
+
+Synthesizing Unit <vdp18_cpuio>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_cpuio.vhd".
+    Found 1-bit register for signal <int_n_q>.
+    Found 8-bit register for signal <buffer_q>.
+    Found 8-bit register for signal <tmp_q>.
+    Found 8-bit register for signal <ctrl_reg_q<6>>.
+    Found 8-bit register for signal <ctrl_reg_q<5>>.
+    Found 8-bit register for signal <ctrl_reg_q<4>>.
+    Found 8-bit register for signal <ctrl_reg_q<0>>.
+    Found 14-bit register for signal <addr_q>.
+    Found 8-bit register for signal <ctrl_reg_q<3>>.
+    Found 8-bit register for signal <ctrl_reg_q<2>>.
+    Found 8-bit register for signal <ctrl_reg_q<1>>.
+    Found 5-bit register for signal <sprite_5th_num_q>.
+    Found 4-bit register for signal <state_q>.
+    Found 8-bit register for signal <ctrl_reg_q<7>>.
+    Found 1-bit register for signal <rdvram_sched_q>.
+    Found 1-bit register for signal <rdvram_q>.
+    Found 1-bit register for signal <wrvram_sched_q>.
+    Found 1-bit register for signal <wrvram_q>.
+    Found 1-bit register for signal <status_reg_s<2>>.
+    Found 1-bit register for signal <status_reg_s<1>>.
+    Found finite state machine <FSM_0> for signal <state_q>.
+    -----------------------------------------------------------------------
+    | States             | 9                                              |
+    | Transitions        | 39                                             |
+    | Inputs             | 7                                              |
+    | Outputs            | 8                                              |
+    | Clock              | clock_i (rising_edge)                          |
+    | Reset              | reset_i (positive)                             |
+    | Reset type         | asynchronous                                   |
+    | Reset State        | st_idle                                        |
+    | Power Up State     | st_idle                                        |
+    | Encoding           | auto                                           |
+    | Implementation     | LUT                                            |
+    -----------------------------------------------------------------------
+    Found 14-bit adder for signal <addr_q[0]_GND_54_o_add_3_OUT> created at line 1241.
+    Found 8x2-bit Read Only RAM for signal <opmode_o>
+    Summary:
+	inferred   1 RAM(s).
+	inferred   1 Adder/Subtractor(s).
+	inferred 106 D-type flip-flop(s).
+	inferred  16 Multiplexer(s).
+	inferred   1 Finite State Machine(s).
+Unit <vdp18_cpuio> synthesized.
+
+Synthesizing Unit <vdp18_addr_mux>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_addr_mux.vhd".
+WARNING:Xst:647 - Input <num_line_i<0:0>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+WARNING:Xst:647 - Input <num_line_i<3:3>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 14-bit 3-to-1 multiplexer for signal <opmode_i[1]_GND_56_o_wide_mux_2_OUT> created at line 117.
+    Found 14-bit 13-to-1 multiplexer for signal <vram_a_o> created at line 105.
+    Summary:
+	inferred  17 Multiplexer(s).
+Unit <vdp18_addr_mux> synthesized.
+
+Synthesizing Unit <vdp18_pattern>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_pattern.vhd".
+WARNING:Xst:647 - Input <num_line_i<1:5>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 8-bit register for signal <pat_name_q>.
+    Found 8-bit register for signal <pat_tmp_q>.
+    Found 8-bit register for signal <pat_shift_q>.
+    Found 8-bit register for signal <pat_col_q>.
+    Found 10-bit register for signal <pat_cnt_q>.
+    Found 10-bit adder for signal <pat_cnt_q[0]_GND_57_o_add_0_OUT> created at line 1241.
+    Found 10-bit subtractor for signal <GND_57_o_GND_57_o_sub_16_OUT<9:0>> created at line 1308.
+    Found 10-bit subtractor for signal <GND_57_o_GND_57_o_sub_19_OUT<9:0>> created at line 1308.
+    Summary:
+	inferred   3 Adder/Subtractor(s).
+	inferred  42 D-type flip-flop(s).
+	inferred  19 Multiplexer(s).
+Unit <vdp18_pattern> synthesized.
+
+Synthesizing Unit <vdp18_sprite>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_sprite.vhd".
+    Found 5-bit register for signal <sprite_numbers_q<1>>.
+    Found 5-bit register for signal <sprite_numbers_q<2>>.
+    Found 5-bit register for signal <sprite_numbers_q<3>>.
+    Found 5-bit register for signal <sprite_num_q>.
+    Found 5-bit register for signal <sprite_numbers_q<0>>.
+    Found 3-bit register for signal <sprite_idx_q>.
+    Found 4-bit register for signal <sprite_line_q>.
+    Found 4-bit register for signal <sprite_cols_q<0>>.
+    Found 4-bit register for signal <sprite_cols_q<1>>.
+    Found 4-bit register for signal <sprite_cols_q<2>>.
+    Found 4-bit register for signal <sprite_cols_q<3>>.
+    Found 4-bit register for signal <sprite_ec_q>.
+    Found 4-bit register for signal <sprite_xtog_q>.
+    Found 8-bit register for signal <sprite_name_q>.
+    Found 8-bit register for signal <sprite_xpos_q<0>>.
+    Found 8-bit register for signal <sprite_xpos_q<1>>.
+    Found 8-bit register for signal <sprite_xpos_q<2>>.
+    Found 8-bit register for signal <sprite_xpos_q<3>>.
+    Found 16-bit register for signal <sprite_pats_q<0>>.
+    Found 16-bit register for signal <sprite_pats_q<1>>.
+    Found 16-bit register for signal <sprite_pats_q<2>>.
+    Found 16-bit register for signal <sprite_pats_q<3>>.
+    Found 10-bit subtractor for signal <n0526> created at line 304.
+    Found 3-bit adder for signal <sprite_idx_q[0]_GND_58_o_add_0_OUT> created at line 1241.
+    Found 5-bit adder for signal <sprite_num_q[0]_GND_58_o_add_59_OUT> created at line 1241.
+    Found 3-bit adder for signal <GND_58_o_GND_58_o_add_203_OUT> created at line 1241.
+    Found 3-bit adder for signal <GND_58_o_GND_58_o_add_207_OUT> created at line 1241.
+    Found 3-bit adder for signal <GND_58_o_GND_58_o_add_211_OUT> created at line 1241.
+    Found 3-bit subtractor for signal <GND_58_o_GND_58_o_sub_2_OUT<2:0>> created at line 1308.
+    Found 8-bit subtractor for signal <GND_58_o_GND_58_o_sub_8_OUT<7:0>> created at line 1308.
+    Found 8-bit subtractor for signal <GND_58_o_GND_58_o_sub_13_OUT<7:0>> created at line 1308.
+    Found 8-bit subtractor for signal <GND_58_o_GND_58_o_sub_18_OUT<7:0>> created at line 1308.
+    Found 8-bit subtractor for signal <GND_58_o_GND_58_o_sub_23_OUT<7:0>> created at line 1308.
+    Found 5-bit 4-to-1 multiplexer for signal <sprite_idx_q[1]_sprite_numbers_q[3][0]_wide_mux_216_OUT> created at line 437.
+    Found 3-bit comparator greater for signal <GND_58_o_sprite_idx_q[0]_LessThan_4_o> created at line 151
+    Found 3-bit comparator greater for signal <sprite_idx_q[0]_PWR_41_o_LessThan_61_o> created at line 217
+    Found 9-bit comparator greater for signal <PWR_41_o_vram_d_i[0]_LessThan_181_o> created at line 299
+    Found 9-bit comparator lessequal for signal <n0307> created at line 311
+    Found 9-bit comparator greater for signal <GND_58_o_num_line_i[0]_LessThan_184_o> created at line 314
+    Found 9-bit comparator greater for signal <GND_58_o_num_line_i[0]_LessThan_185_o> created at line 319
+    Found 3-bit comparator greater for signal <spr_coll_o> created at line 426
+    Summary:
+	inferred  11 Adder/Subtractor(s).
+	inferred 160 D-type flip-flop(s).
+	inferred   7 Comparator(s).
+	inferred 148 Multiplexer(s).
+Unit <vdp18_sprite> synthesized.
+
+Synthesizing Unit <vdp18_col_mux>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vdp18\vdp18_col_mux.vhd".
+        compat_rgb_g = 0
+    Found 8-bit register for signal <rgb_g_o>.
+    Found 8-bit register for signal <rgb_b_o>.
+    Found 8-bit register for signal <rgb_r_o>.
+    Found 16x24-bit Read Only RAM for signal <_n0074>
+    Summary:
+	inferred   1 RAM(s).
+	inferred  24 D-type flip-flop(s).
+	inferred   7 Multiplexer(s).
+Unit <vdp18_col_mux> synthesized.
+
+Synthesizing Unit <sn76489_top>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\audio\sn76489\sn76489_top.vhd".
+        clock_div_16_g = 1
+INFO:Xst:3210 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\audio\sn76489\sn76489_top.vhd" line 137: Output port <ff_o> of the instance <tone1_b> is unconnected or connected to loadless signal.
+INFO:Xst:3210 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\audio\sn76489\sn76489_top.vhd" line 152: Output port <ff_o> of the instance <tone2_b> is unconnected or connected to loadless signal.
+    Found 8-bit adder for signal <n0014> created at line 195.
+    Found 8-bit adder for signal <n0017> created at line 195.
+    Found 8-bit adder for signal <aout_o> created at line 195.
+    Summary:
+	inferred   3 Adder/Subtractor(s).
+Unit <sn76489_top> synthesized.
+
+Synthesizing Unit <sn76489_clock_div>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\audio\sn76489\sn76489_clock_div.vhd".
+        clock_div_16_g = 1
+    Found 4-bit register for signal <cnt_q>.
+    Found 4-bit subtractor for signal <GND_61_o_GND_61_o_sub_3_OUT<3:0>> created at line 1308.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred   4 D-type flip-flop(s).
+	inferred   2 Multiplexer(s).
+Unit <sn76489_clock_div> synthesized.
+
+Synthesizing Unit <sn76489_latch_ctrl>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\audio\sn76489\sn76489_latch_ctrl.vhd".
+WARNING:Xst:647 - Input <d_i<4:7>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 3-bit register for signal <reg_q>.
+    Found 1-bit register for signal <we_q>.
+    Found 1-bit register for signal <ready_q>.
+    Summary:
+	inferred   5 D-type flip-flop(s).
+	inferred   1 Multiplexer(s).
+Unit <sn76489_latch_ctrl> synthesized.
+
+Synthesizing Unit <sn76489_tone>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\audio\sn76489\sn76489_tone.vhd".
+WARNING:Xst:647 - Input <d_i<1:1>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 4-bit register for signal <a_q>.
+    Found 10-bit register for signal <freq_cnt_q>.
+    Found 10-bit register for signal <f_q>.
+    Found 1-bit register for signal <freq_ff_q>.
+    Found 10-bit subtractor for signal <GND_63_o_GND_63_o_sub_9_OUT<9:0>> created at line 1308.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred  25 D-type flip-flop(s).
+	inferred  12 Multiplexer(s).
+Unit <sn76489_tone> synthesized.
+
+Synthesizing Unit <sn76489_attenuator>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\audio\sn76489\sn76489_attenuator.vhd".
+    Found 8-bit subtractor for signal <GND_64_o_unary_minus_2_OUT<7:0>> created at line 0.
+    Found 8-bit 4-to-1 multiplexer for signal <product_o> created at line 101.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred   1 Multiplexer(s).
+Unit <sn76489_attenuator> synthesized.
+
+Synthesizing Unit <sn76489_noise>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\audio\sn76489\sn76489_noise.vhd".
+WARNING:Xst:647 - Input <d_i<0:3>> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 4-bit register for signal <a_q>.
+    Found 7-bit register for signal <freq_cnt_q>.
+    Found 16-bit register for signal <lfsr_q>.
+    Found 2-bit register for signal <nf_q>.
+    Found 1-bit register for signal <fb_q>.
+    Found 1-bit register for signal <freq_ff_q>.
+    Found 1-bit register for signal <shift_source_q>.
+    Found 7-bit subtractor for signal <GND_67_o_GND_67_o_sub_9_OUT<6:0>> created at line 1308.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred  32 D-type flip-flop(s).
+	inferred   5 Multiplexer(s).
+Unit <sn76489_noise> synthesized.
+
+Synthesizing Unit <cv_ctrl>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\peripheral\cv_ctrl.vhd".
+WARNING:Xst:647 - Input <ctrl_p9_i> is never used. This port will be preserved and left unconnected if it belongs to a top-level block or it belongs to a sub-block and the hierarchy of this sub-block is preserved.
+    Found 1-bit register for signal <sel_q>.
+    Summary:
+	inferred   1 D-type flip-flop(s).
+	inferred   5 Multiplexer(s).
+Unit <cv_ctrl> synthesized.
+
+Synthesizing Unit <spi>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\peripheral\spi.vhd".
+    Found 1-bit register for signal <spi_cs_o>.
+    Found 4-bit register for signal <counter_s>.
+    Found 8-bit register for signal <port51_r>.
+    Found 9-bit register for signal <shift_r>.
+    Found 1-bit register for signal <sck_delayed_s>.
+    Found 4-bit adder for signal <counter_s[3]_GND_70_o_add_6_OUT> created at line 1241.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred  23 D-type flip-flop(s).
+	inferred   7 Multiplexer(s).
+Unit <spi> synthesized.
+
+Synthesizing Unit <dpSRAM_4x512x16>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\ram\dpSRAM_4x512x16.vhd".
+    Found 1-bit register for signal <p0_ce_v<0>>.
+    Found 1-bit register for signal <p1_ce_v<0>>.
+    Found 1-bit register for signal <p0_req_v>.
+    Found 1-bit register for signal <p0_we_v>.
+    Found 21-bit register for signal <p0_addr_v>.
+    Found 8-bit register for signal <p0_data_v>.
+    Found 1-bit register for signal <p1_req_v>.
+    Found 1-bit register for signal <p1_we_v>.
+    Found 21-bit register for signal <p1_addr_v>.
+    Found 8-bit register for signal <p1_data_v>.
+    Found 16-bit register for signal <sram_data_io[15]_dff_40_OUT>.
+    Found 4-bit register for signal <sram_ce_n_o>.
+    Found 1-bit register for signal <sram_we_s>.
+    Found 19-bit register for signal <sram_addr_o>.
+    Found 1-bit register for signal <sram_oe_s>.
+    Found 1-bit register for signal <sram0_n_v>.
+    Found 1-bit register for signal <state_v>.
+    Found 1-bit register for signal <sram1_n_v>.
+    Found 8-bit register for signal <port0_data_o>.
+    Found 8-bit register for signal <port1_data_o>.
+    Found 1-bit register for signal <p1_req_v_clk_i_DFF_195>.
+    Found 1-bit register for signal <p1_req_v_clk_i_DFF_196>.
+    Found 1-bit register for signal <p1_req_v_clk_i_DFF_197>.
+    Found 1-bit register for signal <p1_req_v_clk_i_DFF_198>.
+    Found 1-bit register for signal <p1_req_v_clk_i_DFF_199>.
+    Found 1-bit register for signal <p1_req_v_clk_i_DFF_200>.
+    Found 1-bit register for signal <p1_req_v_clk_i_DFF_201>.
+    Found 1-bit register for signal <p1_req_v_clk_i_DFF_202>.
+    Found 1-bit register for signal <p1_req_v_clk_i_DFF_203>.
+    Found 1-bit register for signal <p1_req_v_clk_i_DFF_204>.
+    Found 1-bit register for signal <p1_req_v_clk_i_DFF_205>.
+    Found 1-bit register for signal <p1_req_v_clk_i_DFF_206>.
+    Found 1-bit register for signal <p1_req_v_clk_i_DFF_207>.
+    Found 1-bit register for signal <p1_req_v_clk_i_DFF_208>.
+    Found 1-bit register for signal <p1_req_v_clk_i_DFF_209>.
+    Found 1-bit register for signal <p1_req_v_clk_i_DFF_210>.
+    Found 1-bit register for signal <sram_we_n_o>.
+    Found 1-bit tristate buffer for signal <sram_data_io<15>> created at line 88
+    Found 1-bit tristate buffer for signal <sram_data_io<14>> created at line 88
+    Found 1-bit tristate buffer for signal <sram_data_io<13>> created at line 88
+    Found 1-bit tristate buffer for signal <sram_data_io<12>> created at line 88
+    Found 1-bit tristate buffer for signal <sram_data_io<11>> created at line 88
+    Found 1-bit tristate buffer for signal <sram_data_io<10>> created at line 88
+    Found 1-bit tristate buffer for signal <sram_data_io<9>> created at line 88
+    Found 1-bit tristate buffer for signal <sram_data_io<8>> created at line 88
+    Found 1-bit tristate buffer for signal <sram_data_io<7>> created at line 88
+    Found 1-bit tristate buffer for signal <sram_data_io<6>> created at line 88
+    Found 1-bit tristate buffer for signal <sram_data_io<5>> created at line 88
+    Found 1-bit tristate buffer for signal <sram_data_io<4>> created at line 88
+    Found 1-bit tristate buffer for signal <sram_data_io<3>> created at line 88
+    Found 1-bit tristate buffer for signal <sram_data_io<2>> created at line 88
+    Found 1-bit tristate buffer for signal <sram_data_io<1>> created at line 88
+    Found 1-bit tristate buffer for signal <sram_data_io<0>> created at line 88
+    Summary:
+	inferred 141 D-type flip-flop(s).
+	inferred  54 Multiplexer(s).
+	inferred  16 Tristate(s).
+Unit <dpSRAM_4x512x16> synthesized.
+
+Synthesizing Unit <dac>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\audio\dac.vhd".
+        msbi_g = 7
+    Found 10-bit register for signal <SigmaLatch_q>.
+    Found 1-bit register for signal <DACout_q>.
+    Found 10-bit adder for signal <DeltaAdder_s> created at line 53.
+    Found 10-bit adder for signal <SigmaAdder_s> created at line 55.
+    Summary:
+	inferred   2 Adder/Subtractor(s).
+	inferred  11 D-type flip-flop(s).
+Unit <dac> synthesized.
+
+Synthesizing Unit <colecoKeyboard>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\peripheral\keyboard.vhd".
+    Found 5-bit register for signal <count>.
+    Found 16-bit register for signal <keys>.
+    Found 16-bit register for signal <joy>.
+    Found 1-bit register for signal <core_reload_o>.
+    Found 1-bit register for signal <home_s>.
+    Found 1-bit register for signal <tick1us>.
+    Found 1-bit register for signal <ctrl_s>.
+    Found 1-bit register for signal <alt_s>.
+    Found 5-bit adder for signal <count[4]_GND_115_o_add_1_OUT> created at line 108.
+    Summary:
+	inferred   1 Adder/Subtractor(s).
+	inferred  42 D-type flip-flop(s).
+	inferred  43 Multiplexer(s).
+Unit <colecoKeyboard> synthesized.
+
+Synthesizing Unit <ps2kbd>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\peripheral\ps2kbd.vhd".
+    Found 1-bit register for signal <PS2_Clk_State>.
+    Found 1-bit register for signal <PS2_Data_s>.
+    Found 1-bit register for signal <RX_Received>.
+    Found 1-bit register for signal <Press>.
+    Found 1-bit register for signal <Release>.
+    Found 1-bit register for signal <Reset>.
+    Found 1-bit register for signal <RX_Release>.
+    Found 1-bit register for signal <PS2_Sample>.
+    Found 2-bit register for signal <PS2_Clk_r>.
+    Found 2-bit register for signal <PS2_Data_r>.
+    Found 4-bit register for signal <RX_Bit_Cnt>.
+    Found 8-bit register for signal <RX_ShiftReg>.
+    Found 32-bit register for signal <Cnt>.
+    Found 4-bit adder for signal <RX_Bit_Cnt[3]_GND_116_o_add_15_OUT> created at line 1241.
+    Found 32-bit adder for signal <Cnt[31]_GND_116_o_add_25_OUT> created at line 161.
+    Summary:
+	inferred   2 Adder/Subtractor(s).
+	inferred  56 D-type flip-flop(s).
+	inferred  21 Multiplexer(s).
+Unit <ps2kbd> synthesized.
+
+Synthesizing Unit <vga>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vga.vhd".
+INFO:Xst:3210 - "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\video\vga.vhd" line 63: Output port <data_a_o> of the instance <frbuff> is unconnected or connected to loadless signal.
+    Found 10-bit register for signal <hcnt>.
+    Found 10-bit register for signal <window_hcnt>.
+    Found 10-bit register for signal <vcnt>.
+    Found 9-bit register for signal <window_vcnt>.
+    Found 10-bit register for signal <h>.
+    Found 10-bit adder for signal <h[9]_GND_119_o_add_1_OUT> created at line 86.
+    Found 10-bit adder for signal <hcnt[9]_GND_119_o_add_4_OUT> created at line 92.
+    Found 10-bit adder for signal <window_hcnt[9]_GND_119_o_add_6_OUT> created at line 96.
+    Found 10-bit adder for signal <vcnt[9]_GND_119_o_add_12_OUT> created at line 103.
+    Found 9-bit adder for signal <window_vcnt[8]_GND_119_o_add_14_OUT> created at line 107.
+    Found 17-bit adder for signal <wr_result_v> created at line 118.
+    Found 17-bit adder for signal <rd_result_v> created at line 119.
+    Found 8x9-bit multiplier for signal <n0104> created at line 118.
+    Found 8x9-bit multiplier for signal <n0107> created at line 119.
+    Found 9-bit comparator greater for signal <I_HCNT[8]_PWR_92_o_LessThan_32_o> created at line 124
+    Found 8-bit comparator greater for signal <I_VCNT[7]_PWR_92_o_LessThan_33_o> created at line 124
+    Found 10-bit comparator greater for signal <PWR_92_o_hcnt[9]_LessThan_34_o> created at line 127
+    Found 10-bit comparator greater for signal <GND_119_o_vcnt[9]_LessThan_35_o> created at line 127
+    Found 10-bit comparator greater for signal <GND_119_o_hcnt[9]_LessThan_36_o> created at line 128
+    Found 10-bit comparator greater for signal <hcnt[9]_PWR_92_o_LessThan_37_o> created at line 128
+    Found 10-bit comparator greater for signal <GND_119_o_vcnt[9]_LessThan_38_o> created at line 128
+    Found 10-bit comparator greater for signal <vcnt[9]_GND_119_o_LessThan_39_o> created at line 128
+    Found 10-bit comparator lessequal for signal <n0045> created at line 130
+    Found 10-bit comparator greater for signal <PWR_92_o_hcnt[9]_LessThan_41_o> created at line 130
+    Found 10-bit comparator lessequal for signal <n0049> created at line 131
+    Found 10-bit comparator greater for signal <GND_119_o_vcnt[9]_LessThan_43_o> created at line 131
+    Summary:
+	inferred   2 Multiplier(s).
+	inferred   7 Adder/Subtractor(s).
+	inferred  49 D-type flip-flop(s).
+	inferred  12 Comparator(s).
+	inferred   1 Multiplexer(s).
+Unit <vga> synthesized.
+
+Synthesizing Unit <dpram>.
+    Related source file is "D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\src\ram\dpram.vhd".
+        addr_width_g = 16
+        data_width_g = 4
+    Found 65536x4-bit dual-port RAM <Mram_ram_q> for signal <ram_q>.
+    Found 4-bit register for signal <data_b_o>.
+    Found 4-bit register for signal <data_a_o>.
+    Summary:
+	inferred   1 RAM(s).
+	inferred   8 D-type flip-flop(s).
+Unit <dpram> synthesized.
+
+=========================================================================
+HDL Synthesis Report
+
+Macro Statistics
+# RAMs                                                 : 11
+ 16x24-bit single-port Read Only RAM                   : 2
+ 256x9-bit single-port Read Only RAM                   : 1
+ 4x1-bit single-port Read Only RAM                     : 1
+ 65536x4-bit dual-port RAM                             : 1
+ 8192x8-bit single-port Read Only RAM                  : 1
+ 8x2-bit single-port Read Only RAM                     : 1
+ 8x8-bit dual-port RAM                                 : 4
+# Multipliers                                          : 2
+ 9x8-bit multiplier                                    : 2
+# Adders/Subtractors                                   : 70
+ 10-bit adder                                          : 7
+ 10-bit subtractor                                     : 6
+ 14-bit adder                                          : 1
+ 16-bit adder                                          : 4
+ 16-bit addsub                                         : 2
+ 16-bit subtractor                                     : 1
+ 17-bit adder                                          : 2
+ 2-bit adder                                           : 1
+ 2-bit subtractor                                      : 1
+ 3-bit adder                                           : 8
+ 3-bit subtractor                                      : 1
+ 32-bit adder                                          : 1
+ 4-bit adder                                           : 2
+ 4-bit subtractor                                      : 1
+ 5-bit adder                                           : 3
+ 6-bit adder                                           : 2
+ 7-bit adder                                           : 1
+ 7-bit subtractor                                      : 1
+ 8-bit adder                                           : 5
+ 8-bit subtractor                                      : 10
+ 9-bit adder                                           : 9
+ 9-bit subtractor                                      : 1
+# Registers                                            : 233
+ 1-bit register                                        : 106
+ 10-bit register                                       : 12
+ 14-bit register                                       : 1
+ 16-bit register                                       : 13
+ 19-bit register                                       : 1
+ 2-bit register                                        : 7
+ 21-bit register                                       : 2
+ 3-bit register                                        : 13
+ 32-bit register                                       : 1
+ 4-bit register                                        : 18
+ 5-bit register                                        : 8
+ 6-bit register                                        : 2
+ 7-bit register                                        : 1
+ 8-bit register                                        : 43
+ 9-bit register                                        : 5
+# Comparators                                          : 26
+ 10-bit comparator greater                             : 8
+ 10-bit comparator lessequal                           : 2
+ 3-bit comparator equal                                : 2
+ 3-bit comparator greater                              : 3
+ 4-bit comparator greater                              : 2
+ 5-bit comparator greater                              : 1
+ 8-bit comparator greater                              : 2
+ 9-bit comparator equal                                : 1
+ 9-bit comparator greater                              : 4
+ 9-bit comparator lessequal                            : 1
+# Multiplexers                                         : 1205
+ 1-bit 2-to-1 multiplexer                              : 604
+ 1-bit 3-to-1 multiplexer                              : 12
+ 1-bit 8-to-1 multiplexer                              : 1
+ 10-bit 2-to-1 multiplexer                             : 11
+ 14-bit 13-to-1 multiplexer                            : 1
+ 14-bit 2-to-1 multiplexer                             : 1
+ 14-bit 3-to-1 multiplexer                             : 1
+ 16-bit 2-to-1 multiplexer                             : 74
+ 16-bit 7-to-1 multiplexer                             : 1
+ 17-bit 2-to-1 multiplexer                             : 7
+ 19-bit 2-to-1 multiplexer                             : 1
+ 2-bit 2-to-1 multiplexer                              : 9
+ 21-bit 2-to-1 multiplexer                             : 2
+ 3-bit 2-to-1 multiplexer                              : 138
+ 3-bit 3-to-1 multiplexer                              : 3
+ 32-bit 2-to-1 multiplexer                             : 2
+ 4-bit 2-to-1 multiplexer                              : 196
+ 4-bit 3-to-1 multiplexer                              : 4
+ 5-bit 2-to-1 multiplexer                              : 7
+ 5-bit 4-to-1 multiplexer                              : 1
+ 7-bit 2-to-1 multiplexer                              : 2
+ 8-bit 11-to-1 multiplexer                             : 1
+ 8-bit 2-to-1 multiplexer                              : 106
+ 8-bit 3-to-1 multiplexer                              : 2
+ 8-bit 4-to-1 multiplexer                              : 4
+ 8-bit 8-to-1 multiplexer                              : 1
+ 9-bit 2-to-1 multiplexer                              : 13
+# Tristates                                            : 80
+ 1-bit tristate buffer                                 : 80
+# FSMs                                                 : 1
+# Xors                                                 : 11
+ 1-bit xor2                                            : 5
+ 1-bit xor8                                            : 5
+ 8-bit xor2                                            : 1
+
+=========================================================================
+INFO:Xst:1767 - HDL ADVISOR - Resource sharing has identified that some arithmetic operations in this design can share the same physical resources for reduced device utilization. For improved clock frequency you may try to disable resource sharing.
+
+=========================================================================
+*                       Advanced HDL Synthesis                          *
+=========================================================================
+
+INFO:Xst:2261 - The FF/Latch <vram_ctrl.read_b_v> in Unit <ctrl_b> is equivalent to the following FF/Latch, which will be removed : <vram_ce_o> 
+INFO:Xst:2261 - The FF/Latch <p1_req_v_clk_i_DFF_203> in Unit <sram0> is equivalent to the following 7 FFs/Latches, which will be removed : <p1_req_v_clk_i_DFF_204> <p1_req_v_clk_i_DFF_207> <p1_req_v_clk_i_DFF_205> <p1_req_v_clk_i_DFF_206> <p1_req_v_clk_i_DFF_208> <p1_req_v_clk_i_DFF_209> <p1_req_v_clk_i_DFF_210> 
+INFO:Xst:2261 - The FF/Latch <p1_req_v_clk_i_DFF_197> in Unit <sram0> is equivalent to the following 7 FFs/Latches, which will be removed : <p1_req_v_clk_i_DFF_195> <p1_req_v_clk_i_DFF_196> <p1_req_v_clk_i_DFF_200> <p1_req_v_clk_i_DFF_198> <p1_req_v_clk_i_DFF_199> <p1_req_v_clk_i_DFF_201> <p1_req_v_clk_i_DFF_202> 
+WARNING:Xst:2677 - Node <joy_5> of sequential type is unconnected in block <ps2if_inst>.
+WARNING:Xst:2677 - Node <joy_6> of sequential type is unconnected in block <ps2if_inst>.
+WARNING:Xst:2677 - Node <joy_7> of sequential type is unconnected in block <ps2if_inst>.
+WARNING:Xst:2677 - Node <joy_8> of sequential type is unconnected in block <ps2if_inst>.
+WARNING:Xst:2677 - Node <joy_9> of sequential type is unconnected in block <ps2if_inst>.
+WARNING:Xst:2677 - Node <joy_10> of sequential type is unconnected in block <ps2if_inst>.
+WARNING:Xst:2677 - Node <joy_11> of sequential type is unconnected in block <ps2if_inst>.
+WARNING:Xst:2677 - Node <joy_12> of sequential type is unconnected in block <ps2if_inst>.
+WARNING:Xst:2677 - Node <joy_13> of sequential type is unconnected in block <ps2if_inst>.
+WARNING:Xst:2677 - Node <joy_14> of sequential type is unconnected in block <ps2if_inst>.
+WARNING:Xst:2677 - Node <joy_15> of sequential type is unconnected in block <ps2if_inst>.
+WARNING:Xst:2677 - Node <keys_4> of sequential type is unconnected in block <ps2if_inst>.
+WARNING:Xst:2677 - Node <keys_15> of sequential type is unconnected in block <ps2if_inst>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_5_0> of sequential type is unconnected in block <cpu_io_b>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_6_4> of sequential type is unconnected in block <cpu_io_b>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_6_3> of sequential type is unconnected in block <cpu_io_b>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_6_2> of sequential type is unconnected in block <cpu_io_b>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_6_1> of sequential type is unconnected in block <cpu_io_b>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_6_0> of sequential type is unconnected in block <cpu_io_b>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_4_4> of sequential type is unconnected in block <cpu_io_b>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_4_3> of sequential type is unconnected in block <cpu_io_b>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_4_2> of sequential type is unconnected in block <cpu_io_b>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_4_1> of sequential type is unconnected in block <cpu_io_b>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_4_0> of sequential type is unconnected in block <cpu_io_b>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_0_7> of sequential type is unconnected in block <cpu_io_b>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_0_5> of sequential type is unconnected in block <cpu_io_b>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_0_4> of sequential type is unconnected in block <cpu_io_b>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_0_3> of sequential type is unconnected in block <cpu_io_b>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_0_2> of sequential type is unconnected in block <cpu_io_b>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_0_1> of sequential type is unconnected in block <cpu_io_b>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_0_0> of sequential type is unconnected in block <cpu_io_b>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_2_3> of sequential type is unconnected in block <cpu_io_b>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_2_2> of sequential type is unconnected in block <cpu_io_b>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_2_1> of sequential type is unconnected in block <cpu_io_b>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_2_0> of sequential type is unconnected in block <cpu_io_b>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_1_5> of sequential type is unconnected in block <cpu_io_b>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_1_0> of sequential type is unconnected in block <cpu_io_b>.
+
+Synthesizing (advanced) Unit <T80>.
+The following registers are absorbed into counter <TState>: 1 register on signal <TState>.
+Unit <T80> synthesized (advanced).
+
+Synthesizing (advanced) Unit <T80_Reg>.
+INFO:Xst:3231 - The small RAM <Mram_RegsH1> will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 8-word x 8-bit                      |          |
+    |     clkA           | connected to signal <Clk>           | rise     |
+    |     weA            | connected to signal <WEH_1>         | high     |
+    |     addrA          | connected to signal <AddrA>         |          |
+    |     diA            | connected to signal <DIH>           |          |
+    -----------------------------------------------------------------------
+    | Port B                                                              |
+    |     aspect ratio   | 8-word x 8-bit                      |          |
+    |     addrB          | connected to signal <AddrC>         |          |
+    |     doB            | connected to signal <DOCH>          |          |
+    -----------------------------------------------------------------------
+INFO:Xst:3231 - The small RAM <Mram_RegsL1> will be implemented on LUTs in order to maximize performance and save block RAM resources. If you want to force its implementation on block, use option/constraint ram_style.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 8-word x 8-bit                      |          |
+    |     clkA           | connected to signal <Clk>           | rise     |
+    |     weA            | connected to signal <WEL_1>         | high     |
+    |     addrA          | connected to signal <AddrA>         |          |
+    |     diA            | connected to signal <DIL>           |          |
+    -----------------------------------------------------------------------
+    | Port B                                                              |
+    |     aspect ratio   | 8-word x 8-bit                      |          |
+    |     addrB          | connected to signal <AddrC>         |          |
+    |     doB            | connected to signal <DOCL>          |          |
+    -----------------------------------------------------------------------
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram_RegsH> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 8-word x 8-bit                      |          |
+    |     clkA           | connected to signal <Clk>           | rise     |
+    |     weA            | connected to signal <WEH_0>         | high     |
+    |     addrA          | connected to signal <AddrA>         |          |
+    |     diA            | connected to signal <DIH>           |          |
+    |     doA            | connected to signal <DOAH>          |          |
+    -----------------------------------------------------------------------
+    | Port B                                                              |
+    |     aspect ratio   | 8-word x 8-bit                      |          |
+    |     addrB          | connected to signal <AddrB>         |          |
+    |     doB            | connected to signal <DOBH>          |          |
+    -----------------------------------------------------------------------
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram_RegsL> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 8-word x 8-bit                      |          |
+    |     clkA           | connected to signal <Clk>           | rise     |
+    |     weA            | connected to signal <WEL_0>         | high     |
+    |     addrA          | connected to signal <AddrA>         |          |
+    |     diA            | connected to signal <DIL>           |          |
+    |     doA            | connected to signal <DOAL>          |          |
+    -----------------------------------------------------------------------
+    | Port B                                                              |
+    |     aspect ratio   | 8-word x 8-bit                      |          |
+    |     addrB          | connected to signal <AddrB>         |          |
+    |     doB            | connected to signal <DOBL>          |          |
+    -----------------------------------------------------------------------
+Unit <T80_Reg> synthesized (advanced).
+
+Synthesizing (advanced) Unit <clocks>.
+The following registers are absorbed into counter <clk1_cnt_q>: 1 register on signal <clk1_cnt_q>.
+The following registers are absorbed into counter <clk2_cnt_q>: 1 register on signal <clk2_cnt_q>.
+INFO:Xst:3217 - HDL ADVISOR - Register <clock_5m_en_s> currently described with an asynchronous reset, could be combined with distributed RAM <Mram_clk1_cnt_q[1]_PWR_13_o_Mux_3_o> for implementation on block RAM resources if you made this reset synchronous instead.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 4-word x 1-bit                      |          |
+    |     weA            | connected to signal <GND>           | high     |
+    |     addrA          | connected to signal <clk1_cnt_q>    |          |
+    |     diA            | connected to signal <GND>           |          |
+    |     doA            | connected to internal node          |          |
+    -----------------------------------------------------------------------
+Unit <clocks> synthesized (advanced).
+
+Synthesizing (advanced) Unit <colecoKeyboard>.
+The following registers are absorbed into counter <count>: 1 register on signal <count>.
+Unit <colecoKeyboard> synthesized (advanced).
+
+Synthesizing (advanced) Unit <dac>.
+The following registers are absorbed into accumulator <SigmaLatch_q>: 1 register on signal <SigmaLatch_q>.
+Unit <dac> synthesized (advanced).
+
+Synthesizing (advanced) Unit <dpram>.
+INFO:Xst:3226 - The RAM <Mram_ram_q> will be implemented as a BLOCK RAM, absorbing the following register(s): <data_a_o> <data_b_o>
+    -----------------------------------------------------------------------
+    | ram_type           | Block                               |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 65536-word x 4-bit                  |          |
+    |     mode           | read-first                          |          |
+    |     clkA           | connected to signal <clk_a_i>       | rise     |
+    |     weA            | connected to signal <we_i>          | high     |
+    |     addrA          | connected to signal <addr_a_i>      |          |
+    |     diA            | connected to signal <data_a_i>      |          |
+    |     doA            | connected to signal <data_a_o>      |          |
+    -----------------------------------------------------------------------
+    | optimization       | speed                               |          |
+    -----------------------------------------------------------------------
+    | Port B                                                              |
+    |     aspect ratio   | 65536-word x 4-bit                  |          |
+    |     mode           | write-first                         |          |
+    |     clkB           | connected to signal <clk_b_i>       | rise     |
+    |     addrB          | connected to signal <addr_b_i>      |          |
+    |     doB            | connected to signal <data_b_o>      |          |
+    -----------------------------------------------------------------------
+    | optimization       | speed                               |          |
+    -----------------------------------------------------------------------
+Unit <dpram> synthesized (advanced).
+
+Synthesizing (advanced) Unit <loaderrom>.
+INFO:Xst:3226 - The RAM <Mram_addr[12]_PWR_30_o_wide_mux_0_OUT> will be implemented as a BLOCK RAM, absorbing the following register(s): <data>
+    -----------------------------------------------------------------------
+    | ram_type           | Block                               |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 8192-word x 8-bit                   |          |
+    |     mode           | write-first                         |          |
+    |     clkA           | connected to signal <clk>           | rise     |
+    |     weA            | connected to signal <GND>           | high     |
+    |     addrA          | connected to signal <addr>          |          |
+    |     diA            | connected to signal <GND>           |          |
+    |     doA            | connected to signal <data>          |          |
+    -----------------------------------------------------------------------
+    | optimization       | speed                               |          |
+    -----------------------------------------------------------------------
+Unit <loaderrom> synthesized (advanced).
+
+Synthesizing (advanced) Unit <next_top>.
+The following registers are absorbed into counter <state_v>: 1 register on signal <state_v>.
+The following registers are absorbed into counter <por_cnt_s>: 1 register on signal <por_cnt_s>.
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram__n0335> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 16-word x 24-bit                    |          |
+    |     weA            | connected to signal <GND>           | high     |
+    |     addrA          | connected to signal <vga_col_s>     |          |
+    |     diA            | connected to signal <GND>           |          |
+    -----------------------------------------------------------------------
+Unit <next_top> synthesized (advanced).
+
+Synthesizing (advanced) Unit <sn76489_clock_div>.
+The following registers are absorbed into counter <cnt_q>: 1 register on signal <cnt_q>.
+Unit <sn76489_clock_div> synthesized (advanced).
+
+Synthesizing (advanced) Unit <sn76489_noise>.
+The following registers are absorbed into counter <freq_cnt_q>: 1 register on signal <freq_cnt_q>.
+Unit <sn76489_noise> synthesized (advanced).
+
+Synthesizing (advanced) Unit <sn76489_tone>.
+The following registers are absorbed into counter <freq_cnt_q>: 1 register on signal <freq_cnt_q>.
+Unit <sn76489_tone> synthesized (advanced).
+
+Synthesizing (advanced) Unit <sn76489_top>.
+	The following adders/subtractors are grouped into adder tree <Madd_aout_o1> :
+ 	<Madd_n0014> in block <sn76489_top>, 	<Madd_n0017> in block <sn76489_top>, 	<Madd_aout_o> in block <sn76489_top>.
+Unit <sn76489_top> synthesized (advanced).
+
+Synthesizing (advanced) Unit <spi>.
+The following registers are absorbed into counter <counter_s>: 1 register on signal <counter_s>.
+Unit <spi> synthesized (advanced).
+
+Synthesizing (advanced) Unit <vdp18_col_mux>.
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram__n0074> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 16-word x 24-bit                    |          |
+    |     weA            | connected to signal <GND>           | high     |
+    |     addrA          | connected to signal <col_s>         |          |
+    |     diA            | connected to signal <GND>           |          |
+    |     doA            | connected to internal node          |          |
+    -----------------------------------------------------------------------
+Unit <vdp18_col_mux> synthesized (advanced).
+
+Synthesizing (advanced) Unit <vdp18_cpuio>.
+The following registers are absorbed into counter <addr_q>: 1 register on signal <addr_q>.
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram_opmode_o> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 8-word x 2-bit                      |          |
+    |     weA            | connected to signal <GND>           | high     |
+    |     addrA          | connected to signal <(ctrl_reg_q<1><3:4>,ctrl_reg_q<0><6>)> |          |
+    |     diA            | connected to signal <GND>           |          |
+    |     doA            | connected to signal <opmode_o>      |          |
+    -----------------------------------------------------------------------
+Unit <vdp18_cpuio> synthesized (advanced).
+
+Synthesizing (advanced) Unit <vdp18_ctrl>.
+INFO:Xst:3218 - HDL ADVISOR - The RAM <Mram__n1016> will be implemented on LUTs either because you have described an asynchronous read or because of currently unsupported block RAM features. If you have described an asynchronous read, making it synchronous would allow you to take advantage of available block RAM resources, for optimized device usage and improved timings. Please refer to your documentation for coding guidelines.
+    -----------------------------------------------------------------------
+    | ram_type           | Distributed                         |          |
+    -----------------------------------------------------------------------
+    | Port A                                                              |
+    |     aspect ratio   | 256-word x 9-bit                    |          |
+    |     weA            | connected to signal <GND>           | high     |
+    |     addrA          | connected to signal <decode_access.num_pix_plus_6_v<1:8>> |          |
+    |     diA            | connected to signal <GND>           |          |
+    |     doA            | connected to internal node          |          |
+    -----------------------------------------------------------------------
+Unit <vdp18_ctrl> synthesized (advanced).
+
+Synthesizing (advanced) Unit <vdp18_hor_vert>.
+The following registers are absorbed into counter <cnt_hor_s>: 1 register on signal <cnt_hor_s>.
+The following registers are absorbed into counter <cnt_ver_s>: 1 register on signal <cnt_ver_s>.
+The following registers are absorbed into counter <cnt_hor_q>: 1 register on signal <cnt_hor_q>.
+The following registers are absorbed into counter <cnt_vert_q>: 1 register on signal <cnt_vert_q>.
+Unit <vdp18_hor_vert> synthesized (advanced).
+
+Synthesizing (advanced) Unit <vdp18_sprite>.
+The following registers are absorbed into counter <sprite_num_q>: 1 register on signal <sprite_num_q>.
+Unit <vdp18_sprite> synthesized (advanced).
+
+Synthesizing (advanced) Unit <vga>.
+The following registers are absorbed into counter <hcnt>: 1 register on signal <hcnt>.
+The following registers are absorbed into counter <h>: 1 register on signal <h>.
+The following registers are absorbed into counter <window_hcnt>: 1 register on signal <window_hcnt>.
+The following registers are absorbed into counter <vcnt>: 1 register on signal <vcnt>.
+The following registers are absorbed into counter <window_vcnt>: 1 register on signal <window_vcnt>.
+	Multiplier <Mmult_n0107> in block <vga> and adder/subtractor <Madd_rd_result_v_Madd> in block <vga> are combined into a MAC<Maddsub_n0107>.
+	Multiplier <Mmult_n0104> in block <vga> and adder/subtractor <Madd_wr_result_v_Madd> in block <vga> are combined into a MAC<Maddsub_n0104>.
+Unit <vga> synthesized (advanced).
+WARNING:Xst:2677 - Node <ctrl_reg_q_6_4> of sequential type is unconnected in block <vdp18_cpuio>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_6_3> of sequential type is unconnected in block <vdp18_cpuio>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_6_2> of sequential type is unconnected in block <vdp18_cpuio>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_6_1> of sequential type is unconnected in block <vdp18_cpuio>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_6_0> of sequential type is unconnected in block <vdp18_cpuio>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_5_0> of sequential type is unconnected in block <vdp18_cpuio>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_4_4> of sequential type is unconnected in block <vdp18_cpuio>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_4_3> of sequential type is unconnected in block <vdp18_cpuio>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_4_2> of sequential type is unconnected in block <vdp18_cpuio>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_4_1> of sequential type is unconnected in block <vdp18_cpuio>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_4_0> of sequential type is unconnected in block <vdp18_cpuio>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_2_3> of sequential type is unconnected in block <vdp18_cpuio>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_2_2> of sequential type is unconnected in block <vdp18_cpuio>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_2_1> of sequential type is unconnected in block <vdp18_cpuio>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_2_0> of sequential type is unconnected in block <vdp18_cpuio>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_0_5> of sequential type is unconnected in block <vdp18_cpuio>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_0_4> of sequential type is unconnected in block <vdp18_cpuio>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_0_3> of sequential type is unconnected in block <vdp18_cpuio>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_0_2> of sequential type is unconnected in block <vdp18_cpuio>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_0_1> of sequential type is unconnected in block <vdp18_cpuio>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_0_0> of sequential type is unconnected in block <vdp18_cpuio>.
+WARNING:Xst:2677 - Node <ctrl_reg_q_1_5> of sequential type is unconnected in block <vdp18_cpuio>.
+
+=========================================================================
+Advanced HDL Synthesis Report
+
+Macro Statistics
+# RAMs                                                 : 11
+ 16x24-bit single-port distributed Read Only RAM       : 2
+ 256x9-bit single-port distributed Read Only RAM       : 1
+ 4x1-bit single-port distributed Read Only RAM         : 1
+ 65536x4-bit dual-port block RAM                       : 1
+ 8192x8-bit single-port block Read Only RAM            : 1
+ 8x2-bit single-port distributed Read Only RAM         : 1
+ 8x8-bit dual-port distributed RAM                     : 4
+# MACs                                                 : 2
+ 9x8-to-16-bit MAC                                     : 2
+# Adders/Subtractors                                   : 42
+ 10-bit adder                                          : 2
+ 10-bit subtractor                                     : 2
+ 16-bit adder                                          : 4
+ 16-bit addsub                                         : 2
+ 16-bit subtractor                                     : 1
+ 3-bit adder                                           : 7
+ 3-bit subtractor                                      : 1
+ 32-bit adder                                          : 1
+ 4-bit adder                                           : 1
+ 5-bit adder                                           : 2
+ 6-bit adder                                           : 1
+ 7-bit adder                                           : 1
+ 8-bit adder                                           : 1
+ 8-bit subtractor                                      : 9
+ 9-bit adder                                           : 5
+ 9-bit subtractor                                      : 2
+# Adder Trees                                          : 1
+ 8-bit / 4-inputs adder tree                           : 1
+# Counters                                             : 23
+ 10-bit down counter                                   : 3
+ 10-bit up counter                                     : 4
+ 14-bit up counter                                     : 1
+ 2-bit down counter                                    : 1
+ 2-bit up counter                                      : 1
+ 3-bit up counter                                      : 2
+ 4-bit down counter                                    : 1
+ 4-bit up counter                                      : 1
+ 5-bit up counter                                      : 2
+ 7-bit down counter                                    : 1
+ 8-bit down counter                                    : 1
+ 8-bit up counter                                      : 1
+ 9-bit up counter                                      : 4
+# Accumulators                                         : 1
+ 10-bit up accumulator                                 : 1
+# Registers                                            : 895
+ Flip-Flops                                            : 895
+# Comparators                                          : 26
+ 10-bit comparator greater                             : 8
+ 10-bit comparator lessequal                           : 2
+ 3-bit comparator equal                                : 2
+ 3-bit comparator greater                              : 3
+ 4-bit comparator greater                              : 2
+ 5-bit comparator greater                              : 1
+ 8-bit comparator greater                              : 2
+ 9-bit comparator equal                                : 1
+ 9-bit comparator greater                              : 4
+ 9-bit comparator lessequal                            : 1
+# Multiplexers                                         : 1219
+ 1-bit 2-to-1 multiplexer                              : 639
+ 1-bit 3-to-1 multiplexer                              : 12
+ 1-bit 8-to-1 multiplexer                              : 1
+ 10-bit 2-to-1 multiplexer                             : 8
+ 14-bit 13-to-1 multiplexer                            : 1
+ 14-bit 3-to-1 multiplexer                             : 1
+ 16-bit 2-to-1 multiplexer                             : 74
+ 16-bit 7-to-1 multiplexer                             : 1
+ 17-bit 2-to-1 multiplexer                             : 7
+ 19-bit 2-to-1 multiplexer                             : 1
+ 2-bit 2-to-1 multiplexer                              : 7
+ 21-bit 2-to-1 multiplexer                             : 2
+ 3-bit 2-to-1 multiplexer                              : 137
+ 3-bit 3-to-1 multiplexer                              : 3
+ 32-bit 2-to-1 multiplexer                             : 2
+ 4-bit 2-to-1 multiplexer                              : 194
+ 4-bit 3-to-1 multiplexer                              : 4
+ 5-bit 2-to-1 multiplexer                              : 5
+ 5-bit 4-to-1 multiplexer                              : 1
+ 7-bit 2-to-1 multiplexer                              : 1
+ 8-bit 11-to-1 multiplexer                             : 1
+ 8-bit 2-to-1 multiplexer                              : 100
+ 8-bit 3-to-1 multiplexer                              : 2
+ 8-bit 4-to-1 multiplexer                              : 4
+ 8-bit 8-to-1 multiplexer                              : 1
+ 9-bit 2-to-1 multiplexer                              : 10
+# FSMs                                                 : 1
+# Xors                                                 : 11
+ 1-bit xor2                                            : 5
+ 1-bit xor8                                            : 5
+ 8-bit xor2                                            : 1
+
+=========================================================================
+
+=========================================================================
+*                         Low Level Synthesis                           *
+=========================================================================
+INFO:Xst:2261 - The FF/Latch <vram_ce_o> in Unit <vdp18_ctrl> is equivalent to the following FF/Latch, which will be removed : <vram_ctrl.read_b_v> 
+INFO:Xst:2261 - The FF/Latch <p1_req_v_clk_i_DFF_203> in Unit <dpSRAM_4x512x16> is equivalent to the following 7 FFs/Latches, which will be removed : <p1_req_v_clk_i_DFF_204> <p1_req_v_clk_i_DFF_205> <p1_req_v_clk_i_DFF_206> <p1_req_v_clk_i_DFF_209> <p1_req_v_clk_i_DFF_207> <p1_req_v_clk_i_DFF_208> <p1_req_v_clk_i_DFF_210> 
+INFO:Xst:2261 - The FF/Latch <p1_req_v_clk_i_DFF_196> in Unit <dpSRAM_4x512x16> is equivalent to the following 7 FFs/Latches, which will be removed : <p1_req_v_clk_i_DFF_195> <p1_req_v_clk_i_DFF_199> <p1_req_v_clk_i_DFF_197> <p1_req_v_clk_i_DFF_198> <p1_req_v_clk_i_DFF_202> <p1_req_v_clk_i_DFF_200> <p1_req_v_clk_i_DFF_201> 
+Analyzing FSM <MFsm> for best encoding.
+Optimizing FSM <vg/vdp18_b/cpu_io_b/FSM_0> on signal <state_q[1:4]> with user encoding.
+------------------------------------
+ State                  | Encoding
+------------------------------------
+ st_idle                | 0000
+ st_rd_mode0            | 0001
+ st_wr_mode0            | 0010
+ st_rd_mode1            | 0011
+ st_wr_mode1_1st        | 0100
+ st_wr_mode1_1st_idle   | 0101
+ st_wr_mode1_2nd_vread  | 0110
+ st_wr_mode1_2nd_vwrite | 0111
+ st_wr_mode1_2nd_rwrite | 1000
+------------------------------------
+WARNING:Xst:1710 - FF/Latch <keys_4> (without init value) has a constant value of 0 in block <colecoKeyboard>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <keys_15> (without init value) has a constant value of 0 in block <colecoKeyboard>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <joy_5> (without init value) has a constant value of 0 in block <colecoKeyboard>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <joy_6> (without init value) has a constant value of 0 in block <colecoKeyboard>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <joy_7> (without init value) has a constant value of 0 in block <colecoKeyboard>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <joy_8> (without init value) has a constant value of 0 in block <colecoKeyboard>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <joy_9> (without init value) has a constant value of 0 in block <colecoKeyboard>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <joy_10> (without init value) has a constant value of 0 in block <colecoKeyboard>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <joy_11> (without init value) has a constant value of 0 in block <colecoKeyboard>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <joy_12> (without init value) has a constant value of 0 in block <colecoKeyboard>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <joy_13> (without init value) has a constant value of 0 in block <colecoKeyboard>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <joy_14> (without init value) has a constant value of 0 in block <colecoKeyboard>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <joy_15> (without init value) has a constant value of 0 in block <colecoKeyboard>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1710 - FF/Latch <p0_addr_v_17> (without init value) has a constant value of 0 in block <dpSRAM_4x512x16>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <p0_addr_v_18> (without init value) has a constant value of 0 in block <dpSRAM_4x512x16>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <p0_addr_v_19> (without init value) has a constant value of 0 in block <dpSRAM_4x512x16>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <p0_addr_v_20> (without init value) has a constant value of 0 in block <dpSRAM_4x512x16>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <p1_addr_v_14> (without init value) has a constant value of 1 in block <dpSRAM_4x512x16>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <p1_addr_v_15> (without init value) has a constant value of 1 in block <dpSRAM_4x512x16>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <p1_addr_v_16> (without init value) has a constant value of 1 in block <dpSRAM_4x512x16>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <p1_addr_v_17> (without init value) has a constant value of 1 in block <dpSRAM_4x512x16>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <p1_addr_v_18> (without init value) has a constant value of 1 in block <dpSRAM_4x512x16>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <p1_addr_v_19> (without init value) has a constant value of 0 in block <dpSRAM_4x512x16>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <p1_addr_v_20> (without init value) has a constant value of 0 in block <dpSRAM_4x512x16>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <sram0_n_v> (without init value) has a constant value of 0 in block <dpSRAM_4x512x16>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <sram1_n_v> (without init value) has a constant value of 0 in block <dpSRAM_4x512x16>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1895 - Due to other FF/Latch trimming, FF/Latch <p1_req_v_clk_i_DFF_196> (without init value) has a constant value of 0 in block <dpSRAM_4x512x16>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1293 - FF/Latch <sram_ce_n_o_1> has a constant value of 1 in block <dpSRAM_4x512x16>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <sram_ce_n_o_2> has a constant value of 1 in block <dpSRAM_4x512x16>. This FF/Latch will be trimmed during the optimization process.
+WARNING:Xst:1896 - Due to other FF/Latch trimming, FF/Latch <sram_ce_n_o_3> has a constant value of 1 in block <dpSRAM_4x512x16>. This FF/Latch will be trimmed during the optimization process.
+INFO:Xst:1901 - Instance pll_1/pll_base_inst in unit pll_1/pll_base_inst of type PLL_BASE has been replaced by PLL_ADV
+INFO:Xst:2261 - The FF/Latch <sram_addr_o_17> in Unit <dpSRAM_4x512x16> is equivalent to the following FF/Latch, which will be removed : <sram_addr_o_18> 
+WARNING:Xst:3002 - This design contains one or more registers/latches that are directly
+   incompatible with the Spartan6 architecture. The two primary causes of this is
+   either a register or latch described with both an asynchronous set and
+   asynchronous reset, or a register or latch described with an asynchronous
+   set or reset which however has an initialization value of the opposite 
+   polarity (i.e. asynchronous reset with an initialization value of 1).
+    While this circuit can be built, it creates a sub-optimal implementation
+   in terms of area, power and performance. For a more optimal implementation
+   Xilinx highly recommends one of the following:
+
+          1) Remove either the set or reset from all registers and latches
+             if not needed for required functionality
+          2) Modify the code in order to produce a synchronous set
+             and/or reset (both is preferred)
+          3) Ensure all registers have the same initialization value as the
+             described asynchronous set or reset polarity
+          4) Use the -async_to_sync option to transform the asynchronous
+             set/reset to synchronous operation
+             (timing simulation highly recommended when using this option)
+
+  Please refer to http://www.xilinx.com search string "Spartan6 asynchronous set/reset" for more details.
+
+  List of register instances with asynchronous set or reset and opposite initialization value:
+    Cnt_31 in unit <ps2kbd>
+
+WARNING:Xst:2042 - Unit T80a: 21 internal tristates are replaced by logic (pull-up yes): address_o<0>, address_o<10>, address_o<11>, address_o<12>, address_o<13>, address_o<14>, address_o<15>, address_o<1>, address_o<2>, address_o<3>, address_o<4>, address_o<5>, address_o<6>, address_o<7>, address_o<8>, address_o<9>, iorq_n_o, mreq_n_o, rd_n_o, refresh_n_o, wr_n_o.
+
+Optimizing unit <next_top> ...
+
+Optimizing unit <colecoKeyboard> ...
+
+Optimizing unit <ps2kbd> ...
+
+Optimizing unit <cv_ctrl> ...
+
+Optimizing unit <vdp18_core> ...
+
+Optimizing unit <vdp18_cpuio> ...
+
+Optimizing unit <vdp18_pattern> ...
+
+Optimizing unit <vdp18_sprite> ...
+
+Optimizing unit <vdp18_hor_vert> ...
+
+Optimizing unit <vdp18_ctrl> ...
+
+Optimizing unit <vdp18_col_mux> ...
+
+Optimizing unit <vdp18_addr_mux> ...
+
+Optimizing unit <T80a> ...
+
+Optimizing unit <T80> ...
+
+Optimizing unit <T80_ALU> ...
+
+Optimizing unit <T80_MCode> ...
+
+Optimizing unit <sn76489_latch_ctrl> ...
+
+Optimizing unit <sn76489_attenuator> ...
+
+Optimizing unit <sn76489_noise> ...
+
+Optimizing unit <spi> ...
+
+Optimizing unit <clocks> ...
+
+Optimizing unit <vga> ...
+WARNING:Xst:2677 - Node <ps2if_inst/alt_s> of sequential type is unconnected in block <next_top>.
+WARNING:Xst:2677 - Node <ps2if_inst/home_s> of sequential type is unconnected in block <next_top>.
+WARNING:Xst:2677 - Node <ps2if_inst/ctrl_s> of sequential type is unconnected in block <next_top>.
+WARNING:Xst:2677 - Node <ps2if_inst/core_reload_o> of sequential type is unconnected in block <next_top>.
+WARNING:Xst:2677 - Node <vg/vdp18_b/cpu_io_b/ctrl_reg_q_1_0> of sequential type is unconnected in block <next_top>.
+WARNING:Xst:2677 - Node <vg/vdp18_b/cpu_io_b/ctrl_reg_q_0_7> of sequential type is unconnected in block <next_top>.
+WARNING:Xst:2677 - Node <vg/vdp18_b/hor_vert_b/hsync_n_o> of sequential type is unconnected in block <next_top>.
+WARNING:Xst:2677 - Node <vg/vdp18_b/col_mux_b/rgb_b_o_0> of sequential type is unconnected in block <next_top>.
+WARNING:Xst:2677 - Node <vg/vdp18_b/col_mux_b/rgb_b_o_1> of sequential type is unconnected in block <next_top>.
+WARNING:Xst:2677 - Node <vg/vdp18_b/col_mux_b/rgb_b_o_2> of sequential type is unconnected in block <next_top>.
+WARNING:Xst:2677 - Node <vg/vdp18_b/col_mux_b/rgb_b_o_3> of sequential type is unconnected in block <next_top>.
+WARNING:Xst:2677 - Node <vg/vdp18_b/col_mux_b/rgb_b_o_4> of sequential type is unconnected in block <next_top>.
+WARNING:Xst:2677 - Node <vg/vdp18_b/col_mux_b/rgb_b_o_5> of sequential type is unconnected in block <next_top>.
+WARNING:Xst:2677 - Node <vg/vdp18_b/col_mux_b/rgb_b_o_6> of sequential type is unconnected in block <next_top>.
+WARNING:Xst:2677 - Node <vg/vdp18_b/col_mux_b/rgb_b_o_7> of sequential type is unconnected in block <next_top>.
+WARNING:Xst:2677 - Node <vg/vdp18_b/col_mux_b/rgb_g_o_0> of sequential type is unconnected in block <next_top>.
+WARNING:Xst:2677 - Node <vg/vdp18_b/col_mux_b/rgb_g_o_1> of sequential type is unconnected in block <next_top>.
+WARNING:Xst:2677 - Node <vg/vdp18_b/col_mux_b/rgb_g_o_2> of sequential type is unconnected in block <next_top>.
+WARNING:Xst:2677 - Node <vg/vdp18_b/col_mux_b/rgb_g_o_3> of sequential type is unconnected in block <next_top>.
+WARNING:Xst:2677 - Node <vg/vdp18_b/col_mux_b/rgb_g_o_4> of sequential type is unconnected in block <next_top>.
+WARNING:Xst:2677 - Node <vg/vdp18_b/col_mux_b/rgb_g_o_5> of sequential type is unconnected in block <next_top>.
+WARNING:Xst:2677 - Node <vg/vdp18_b/col_mux_b/rgb_g_o_6> of sequential type is unconnected in block <next_top>.
+WARNING:Xst:2677 - Node <vg/vdp18_b/col_mux_b/rgb_g_o_7> of sequential type is unconnected in block <next_top>.
+WARNING:Xst:2677 - Node <vg/vdp18_b/col_mux_b/rgb_r_o_0> of sequential type is unconnected in block <next_top>.
+WARNING:Xst:2677 - Node <vg/vdp18_b/col_mux_b/rgb_r_o_1> of sequential type is unconnected in block <next_top>.
+WARNING:Xst:2677 - Node <vg/vdp18_b/col_mux_b/rgb_r_o_2> of sequential type is unconnected in block <next_top>.
+WARNING:Xst:2677 - Node <vg/vdp18_b/col_mux_b/rgb_r_o_3> of sequential type is unconnected in block <next_top>.
+WARNING:Xst:2677 - Node <vg/vdp18_b/col_mux_b/rgb_r_o_4> of sequential type is unconnected in block <next_top>.
+WARNING:Xst:2677 - Node <vg/vdp18_b/col_mux_b/rgb_r_o_5> of sequential type is unconnected in block <next_top>.
+WARNING:Xst:2677 - Node <vg/vdp18_b/col_mux_b/rgb_r_o_6> of sequential type is unconnected in block <next_top>.
+WARNING:Xst:2677 - Node <vg/vdp18_b/col_mux_b/rgb_r_o_7> of sequential type is unconnected in block <next_top>.
+WARNING:Xst:2677 - Node <vg/cpu/u0/IntE_FF1> of sequential type is unconnected in block <next_top>.
+INFO:Xst:2261 - The FF/Latch <joysel_o> in Unit <next_top> is equivalent to the following FF/Latch, which will be removed : <state_v_2> 
+
+Mapping all equations...
+Building and optimizing final netlist ...
+Found area constraint ratio of 100 (+ 5) on block next_top, actual ratio is 36.
+WARNING:Xst:1426 - The value init of the FF/Latch ps2if_inst/ps2kbd_inst/Cnt_31_LD hinder the constant cleaning in the block next_top.
+   You should achieve better results by setting this init to 0.
+FlipFlop vg/cpu/u0/A_6 has been replicated 1 time(s)
+FlipFlop vg/cpu/u0/F_0 has been replicated 1 time(s)
+FlipFlop vg/cpu/u0/IR_0 has been replicated 5 time(s)
+FlipFlop vg/cpu/u0/IR_1 has been replicated 5 time(s)
+FlipFlop vg/cpu/u0/IR_2 has been replicated 6 time(s)
+FlipFlop vg/cpu/u0/IR_3 has been replicated 4 time(s)
+FlipFlop vg/cpu/u0/IR_4 has been replicated 4 time(s)
+FlipFlop vg/cpu/u0/IR_5 has been replicated 6 time(s)
+FlipFlop vg/cpu/u0/IR_6 has been replicated 6 time(s)
+FlipFlop vg/cpu/u0/IR_7 has been replicated 5 time(s)
+FlipFlop vg/cpu/u0/ISet_0 has been replicated 2 time(s)
+FlipFlop vg/cpu/u0/ISet_1 has been replicated 3 time(s)
+FlipFlop vg/cpu/u0/MCycle_0 has been replicated 4 time(s)
+FlipFlop vg/cpu/u0/MCycle_1 has been replicated 2 time(s)
+FlipFlop vg/cpu/u0/MCycle_2 has been replicated 3 time(s)
+FlipFlop vg/cpu/u0/NMICycle has been replicated 1 time(s)
+FlipFlop vg/cpu/wr_n_s has been replicated 1 time(s)
+
+Final Macro Processing ...
+
+=========================================================================
+Final Register Report
+
+Macro Statistics
+# Registers                                            : 1063
+ Flip-Flops                                            : 1063
+
+=========================================================================
+
+=========================================================================
+*                           Partition Report                            *
+=========================================================================
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+=========================================================================
+*                            Design Summary                             *
+=========================================================================
+
+Top Level Output File Name         : next_top.ngc
+
+Primitive and Black Box Usage:
+------------------------------
+# BELS                             : 3511
+#      GND                         : 1
+#      INV                         : 44
+#      LUT1                        : 108
+#      LUT2                        : 164
+#      LUT3                        : 285
+#      LUT4                        : 325
+#      LUT5                        : 616
+#      LUT6                        : 1309
+#      MUXCY                       : 288
+#      MUXF7                       : 56
+#      VCC                         : 1
+#      XORCY                       : 314
+# FlipFlops/Latches                : 1064
+#      FD                          : 86
+#      FD_1                        : 1
+#      FDC                         : 135
+#      FDCE                        : 548
+#      FDCE_1                      : 3
+#      FDE                         : 93
+#      FDE_1                       : 8
+#      FDP                         : 11
+#      FDPE                        : 117
+#      FDPE_1                      : 3
+#      FDR                         : 26
+#      FDRE                        : 29
+#      FDSE                        : 3
+#      LD                          : 1
+# RAMS                             : 42
+#      RAM16X1D                    : 20
+#      RAM32M                      : 2
+#      RAMB16BWER                  : 20
+# Clock Buffers                    : 6
+#      BUFG                        : 6
+# IO Buffers                       : 159
+#      IBUF                        : 11
+#      IBUFG                       : 1
+#      IOBUF                       : 16
+#      OBUF                        : 84
+#      OBUFDS                      : 4
+#      OBUFT                       : 43
+# DSPs                             : 2
+#      DSP48A1                     : 2
+# Others                           : 1
+#      PLL_ADV                     : 1
+
+Device utilization summary:
+---------------------------
+
+Selected Device : 6slx16ftg256-2 
+
+
+Slice Logic Utilization: 
+ Number of Slice Registers:            1063  out of  18224     5%  
+ Number of Slice LUTs:                 2899  out of   9112    31%  
+    Number used as Logic:              2851  out of   9112    31%  
+    Number used as Memory:               48  out of   2176     2%  
+       Number used as RAM:               48
+
+Slice Logic Distribution: 
+ Number of LUT Flip Flop pairs used:   3172
+   Number with an unused Flip Flop:    2109  out of   3172    66%  
+   Number with an unused LUT:           273  out of   3172     8%  
+   Number of fully used LUT-FF pairs:   790  out of   3172    24%  
+   Number of unique control sets:       141
+
+IO Utilization: 
+ Number of IOs:                         184
+ Number of bonded IOBs:                 163  out of    186    87%  
+    IOB Flip Flops/Latches:               1
+
+Specific Feature Utilization:
+ Number of Block RAM/FIFO:               20  out of     32    62%  
+    Number using Block RAM only:         20
+ Number of BUFG/BUFGCTRLs:                6  out of     16    37%  
+ Number of DSP48A1s:                      2  out of     32     6%  
+ Number of PLL_ADVs:                      1  out of      2    50%  
+
+---------------------------
+Partition Resource Summary:
+---------------------------
+
+  No Partitions were found in this design.
+
+---------------------------
+
+
+=========================================================================
+Timing Report
+
+NOTE: THESE TIMING NUMBERS ARE ONLY A SYNTHESIS ESTIMATE.
+      FOR ACCURATE TIMING INFORMATION PLEASE REFER TO THE TRACE REPORT
+      GENERATED AFTER PLACE-and-ROUTE.
+
+Clock Information:
+------------------
+----------------------------------------------------------------+------------------------------------------+-------+
+Clock Signal                                                    | Clock buffer(FF name)                    | Load  |
+----------------------------------------------------------------+------------------------------------------+-------+
+pll_1/pll_base_inst/CLKOUT0                                     | BUFG                                     | 913   |
+pll_1/pll_base_inst/CLKOUT2                                     | BUFG                                     | 77    |
+pll_1/pll_base_inst/CLKOUT1                                     | BUFG                                     | 109   |
+clock_3m_en_s(clks/Mmux_clock_3m_en_s11:O)                      | BUFG(*)(vg/sd/counter_s_3)               | 23    |
+ps2if_inst/ps2kbd_inst/Rst_n_inv(vg/reset_i_por_n_i_OR_210_o1:O)| NONE(*)(ps2if_inst/ps2kbd_inst/Cnt_31_LD)| 1     |
+----------------------------------------------------------------+------------------------------------------+-------+
+(*) These 2 clock signal(s) are generated by combinatorial logic,
+and XST is not able to identify which are the primary clock signals.
+Please use the CLOCK_SIGNAL constraint to specify the clock signal(s) generated by combinatorial logic.
+INFO:Xst:2169 - HDL ADVISOR - Some clock signals were not automatically buffered by XST with BUFG/BUFR resources. Please use the buffer_type constraint in order to insert these buffers to the clock signals to help prevent skew problems.
+
+Asynchronous Control Signals Information:
+----------------------------------------
+No asynchronous control signals found in this design
+
+Timing Summary:
+---------------
+Speed Grade: -2
+
+   Minimum period: 14.836ns (Maximum Frequency: 67.404MHz)
+   Minimum input arrival time before clock: 8.988ns
+   Maximum output required time after clock: 6.460ns
+   Maximum combinational path delay: No path found
+
+Timing Details:
+---------------
+All values displayed in nanoseconds (ns)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'pll_1/pll_base_inst/CLKOUT0'
+  Clock period: 14.836ns (frequency: 67.404MHz)
+  Total number of paths / destination ports: 2620385 / 2870
+-------------------------------------------------------------------------
+Delay:               7.418ns (Levels of Logic = 6)
+  Source:            vg/cpu/u0/A_7 (FF)
+  Destination:       vg/cpu/data_r_2 (FF)
+  Source Clock:      pll_1/pll_base_inst/CLKOUT0 rising
+  Destination Clock: pll_1/pll_base_inst/CLKOUT0 falling
+
+  Data Path: vg/cpu/u0/A_7 to vg/cpu/data_r_2
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDCE:C->Q            14   0.525   1.235  vg/cpu/u0/A_7 (vg/cpu/u0/A_7)
+     LUT2:I0->O            1   0.250   0.682  vg/_n0201_inv1_SW0 (N22)
+     LUT6:I5->O           13   0.254   1.098  vg/_n0201_inv1 (vg/_n0201_inv1)
+     LUT3:I2->O            6   0.254   0.876  vg/spi_cs_s1 (vg/spi_cs_s)
+     LUT6:I5->O            2   0.254   0.726  vg/Mmux_d_to_cpu_s94 (vg/Mmux_d_to_cpu_s93)
+     LUT6:I5->O            1   0.254   0.682  vg/Mmux_d_to_cpu_s96 (vg/d_to_cpu_s<2>)
+     LUT5:I4->O            1   0.254   0.000  vg/cpu/data_r_2_dpot (vg/cpu/data_r_2_dpot)
+     FDE_1:D                   0.074          vg/cpu/data_r_2
+    ----------------------------------------
+    Total                      7.418ns (2.119ns logic, 5.299ns route)
+                                       (28.6% logic, 71.4% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'pll_1/pll_base_inst/CLKOUT2'
+  Clock period: 8.949ns (frequency: 111.744MHz)
+  Total number of paths / destination ports: 6063 / 373
+-------------------------------------------------------------------------
+Delay:               8.949ns (Levels of Logic = 6)
+  Source:            vga/hcnt_9 (FF)
+  Destination:       vga_r_s_5 (FF)
+  Source Clock:      pll_1/pll_base_inst/CLKOUT2 rising
+  Destination Clock: pll_1/pll_base_inst/CLKOUT2 rising
+
+  Data Path: vga/hcnt_9 to vga_r_s_5
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDR:C->Q             11   0.525   1.267  vga/hcnt_9 (vga/hcnt_9)
+     LUT3:I0->O            1   0.235   1.137  vga/picture6 (vga/picture6)
+     LUT6:I0->O            1   0.254   0.958  vga/picture7 (vga/picture7)
+     LUT6:I2->O            5   0.254   1.069  vga/picture8 (vga/picture8)
+     LUT3:I0->O            2   0.235   1.181  vga/picture10 (vga/picture)
+     LUT6:I0->O            9   0.254   1.252  vga/Mmux_O_COLOR3 (vga_col_s<2>)
+     LUT4:I0->O            1   0.254   0.000  Mram__n033581 (Mram__n03358)
+     FD:D                      0.074          vga_b_s_7
+    ----------------------------------------
+    Total                      8.949ns (2.085ns logic, 6.864ns route)
+                                       (23.3% logic, 76.7% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'pll_1/pll_base_inst/CLKOUT1'
+  Clock period: 7.416ns (frequency: 134.836MHz)
+  Total number of paths / destination ports: 555 / 134
+-------------------------------------------------------------------------
+Delay:               7.416ns (Levels of Logic = 4)
+  Source:            sram0/p0_ce_v (FF)
+  Destination:       sram0/sram_addr_o_15 (FF)
+  Source Clock:      pll_1/pll_base_inst/CLKOUT1 rising
+  Destination Clock: pll_1/pll_base_inst/CLKOUT1 rising
+
+  Data Path: sram0/p0_ce_v to sram0/sram_addr_o_15
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDR:C->Q             50   0.525   1.929  sram0/p0_ce_v (sram0/p0_ce_v)
+     LUT2:I0->O           27   0.250   1.891  sram0/GND_73_o_p0_ce_v[0]_equal_1_o<0>1 (sram0/GND_73_o_p0_ce_v[0]_equal_1_o)
+     LUT6:I0->O            4   0.254   1.259  sram0/Mmux_p0_addr_v[20]_port0_addr_i[20]_mux_2_OUT811 (sram0/Mmux_p0_addr_v[20]_port0_addr_i[20]_mux_2_OUT81)
+     LUT6:I0->O            2   0.254   0.726  sram0/Mmux_p0_addr_v[20]_port0_addr_i[20]_mux_2_OUT7 (sram0/p0_addr_v[20]_port0_addr_i[20]_mux_2_OUT<15>)
+     LUT4:I3->O            1   0.254   0.000  sram0/Mmux_sram_addr_o[18]_p0_addr_v[20]_mux_15_OUT71 (sram0/sram_addr_o[18]_p0_addr_v[20]_mux_15_OUT<15>)
+     FDE:D                     0.074          sram0/sram_addr_o_15
+    ----------------------------------------
+    Total                      7.416ns (1.611ns logic, 5.805ns route)
+                                       (21.7% logic, 78.3% route)
+
+=========================================================================
+Timing constraint: Default period analysis for Clock 'clock_3m_en_s'
+  Clock period: 3.813ns (frequency: 262.261MHz)
+  Total number of paths / destination ports: 136 / 34
+-------------------------------------------------------------------------
+Delay:               3.813ns (Levels of Logic = 2)
+  Source:            vg/sd/counter_s_3 (FF)
+  Destination:       vg/sd/shift_r_7 (FF)
+  Source Clock:      clock_3m_en_s rising
+  Destination Clock: clock_3m_en_s rising
+
+  Data Path: vg/sd/counter_s_3 to vg/sd/shift_r_7
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDPE:C->Q             3   0.525   1.042  vg/sd/counter_s_3 (vg/sd/counter_s_3)
+     LUT4:I0->O           17   0.254   1.664  vg/sd/counter_s[3]_PWR_55_o_equal_3_o<3>1 (vg/sd/counter_s[3]_PWR_55_o_equal_3_o)
+     LUT6:I0->O            1   0.254   0.000  vg/sd/Mmux_shift_r[7]_PWR_55_o_mux_9_OUT8 (vg/sd/shift_r[7]_PWR_55_o_mux_9_OUT<7>)
+     FDP:D                     0.074          vg/sd/shift_r_7
+    ----------------------------------------
+    Total                      3.813ns (1.107ns logic, 2.706ns route)
+                                       (29.0% logic, 71.0% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'pll_1/pll_base_inst/CLKOUT0'
+  Total number of paths / destination ports: 788 / 574
+-------------------------------------------------------------------------
+Offset:              8.988ns (Levels of Logic = 4)
+  Source:            btn_reset_n_i (PAD)
+  Destination:       vg/multcart_q (FF)
+  Destination Clock: pll_1/pll_base_inst/CLKOUT0 rising
+
+  Data Path: btn_reset_n_i to vg/multcart_q
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O             1   1.328   0.790  btn_reset_n_i_IBUF (btn_reset_n_i_IBUF)
+     LUT4:I2->O            1   0.250   0.682  por_cnt_s[7]_btn_reset_n_i_OR_289_o_SW0 (N18)
+     LUT6:I5->O          349   0.254   2.550  por_cnt_s[7]_btn_reset_n_i_OR_289_o (por_n_s_inv)
+     LUT3:I1->O          235   0.250   2.425  vg/reset_i_por_n_i_OR_210_o1 (ps2if_inst/ps2kbd_inst/Rst_n_inv)
+     FDCE:CLR                  0.459          ps2if_inst/ps2kbd_inst/RX_Release
+    ----------------------------------------
+    Total                      8.988ns (2.541ns logic, 6.447ns route)
+                                       (28.3% logic, 71.7% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'pll_1/pll_base_inst/CLKOUT1'
+  Total number of paths / destination ports: 33 / 32
+-------------------------------------------------------------------------
+Offset:              2.635ns (Levels of Logic = 3)
+  Source:            ram_data_io<7> (PAD)
+  Destination:       sram0/sram_data_io_7 (FF)
+  Destination Clock: pll_1/pll_base_inst/CLKOUT1 rising
+
+  Data Path: ram_data_io<7> to sram0/sram_data_io_7
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IOBUF:IO->O           4   1.328   0.804  ram_data_io_7_IOBUF (N460)
+     LUT5:I4->O            1   0.254   0.000  sram0/Mmux_n0235142_G (N894)
+     MUXF7:I1->O           1   0.175   0.000  sram0/Mmux_n0235142 (sram0/n0235<7>)
+     FD:D                      0.074          sram0/sram_data_io_7
+    ----------------------------------------
+    Total                      2.635ns (1.831ns logic, 0.804ns route)
+                                       (69.5% logic, 30.5% route)
+
+=========================================================================
+Timing constraint: Default OFFSET IN BEFORE for Clock 'clock_3m_en_s'
+  Total number of paths / destination ports: 47 / 24
+-------------------------------------------------------------------------
+Offset:              8.988ns (Levels of Logic = 4)
+  Source:            btn_reset_n_i (PAD)
+  Destination:       vg/sd/counter_s_3 (FF)
+  Destination Clock: clock_3m_en_s rising
+
+  Data Path: btn_reset_n_i to vg/sd/counter_s_3
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     IBUF:I->O             1   1.328   0.790  btn_reset_n_i_IBUF (btn_reset_n_i_IBUF)
+     LUT4:I2->O            1   0.250   0.682  por_cnt_s[7]_btn_reset_n_i_OR_289_o_SW0 (N18)
+     LUT6:I5->O          349   0.254   2.550  por_cnt_s[7]_btn_reset_n_i_OR_289_o (por_n_s_inv)
+     LUT3:I1->O          235   0.250   2.425  vg/reset_i_por_n_i_OR_210_o1 (ps2if_inst/ps2kbd_inst/Rst_n_inv)
+     FDPE:PRE                  0.459          vg/sd/spi_cs_o
+    ----------------------------------------
+    Total                      8.988ns (2.541ns logic, 6.447ns route)
+                                       (28.3% logic, 71.7% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'pll_1/pll_base_inst/CLKOUT1'
+  Total number of paths / destination ports: 46 / 38
+-------------------------------------------------------------------------
+Offset:              5.316ns (Levels of Logic = 2)
+  Source:            sram0/p1_req_v_clk_i_DFF_203 (FF)
+  Destination:       ram_data_io<7> (PAD)
+  Source Clock:      pll_1/pll_base_inst/CLKOUT1 rising
+
+  Data Path: sram0/p1_req_v_clk_i_DFF_203 to ram_data_io<7>
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDE:C->Q              1   0.525   0.681  sram0/p1_req_v_clk_i_DFF_203 (sram0/p1_req_v_clk_i_DFF_203)
+     INV:I->O              8   0.255   0.943  sram0/p1_req_v_clk_i_DFF_203_inv1_INV_0 (sram0/p1_req_v_clk_i_DFF_203_inv)
+     IOBUF:T->IO               2.912          ram_data_io_7_IOBUF (ram_data_io<7>)
+    ----------------------------------------
+    Total                      5.316ns (3.692ns logic, 1.624ns route)
+                                       (69.5% logic, 30.5% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'pll_1/pll_base_inst/CLKOUT2'
+  Total number of paths / destination ports: 24 / 11
+-------------------------------------------------------------------------
+Offset:              6.460ns (Levels of Logic = 3)
+  Source:            vga/vcnt_9 (FF)
+  Destination:       vsync_o (PAD)
+  Source Clock:      pll_1/pll_base_inst/CLKOUT2 rising
+
+  Data Path: vga/vcnt_9 to vsync_o
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDRE:C->Q             6   0.525   1.152  vga/vcnt_9 (vga/vcnt_9)
+     LUT4:I0->O            1   0.254   0.682  vga/O_VSYNC_SW0 (N450)
+     LUT6:I5->O            1   0.254   0.681  vga/O_VSYNC (vsync_o_OBUF)
+     OBUF:I->O                 2.912          vsync_o_OBUF (vsync_o)
+    ----------------------------------------
+    Total                      6.460ns (3.945ns logic, 2.515ns route)
+                                       (61.1% logic, 38.9% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'clock_3m_en_s'
+  Total number of paths / destination ports: 3 / 3
+-------------------------------------------------------------------------
+Offset:              4.444ns (Levels of Logic = 1)
+  Source:            vg/sd/sck_delayed_s (FF)
+  Destination:       sd_sclk_o (PAD)
+  Source Clock:      clock_3m_en_s rising
+
+  Data Path: vg/sd/sck_delayed_s to sd_sclk_o
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDC:C->Q             10   0.525   1.007  vg/sd/sck_delayed_s (vg/sd/sck_delayed_s)
+     OBUF:I->O                 2.912          sd_sclk_o_OBUF (sd_sclk_o)
+    ----------------------------------------
+    Total                      4.444ns (3.437ns logic, 1.007ns route)
+                                       (77.3% logic, 22.7% route)
+
+=========================================================================
+Timing constraint: Default OFFSET OUT AFTER for Clock 'pll_1/pll_base_inst/CLKOUT0'
+  Total number of paths / destination ports: 3 / 3
+-------------------------------------------------------------------------
+Offset:              4.240ns (Levels of Logic = 1)
+  Source:            joysel_o (FF)
+  Destination:       joysel_o (PAD)
+  Source Clock:      pll_1/pll_base_inst/CLKOUT0 rising
+
+  Data Path: joysel_o to joysel_o
+                                Gate     Net
+    Cell:in->out      fanout   Delay   Delay  Logical Name (Net Name)
+    ----------------------------------------  ------------
+     FDE:C->Q              4   0.525   0.803  joysel_o (Madd_state_v[2]_GND_5_o_add_73_OUT_lut<2>)
+     OBUF:I->O                 2.912          joysel_o_OBUF (joysel_o)
+    ----------------------------------------
+    Total                      4.240ns (3.437ns logic, 0.803ns route)
+                                       (81.1% logic, 18.9% route)
+
+=========================================================================
+
+Cross Clock Domains Report:
+--------------------------
+
+Clock to Setup on destination clock clock_3m_en_s
+---------------------------+---------+---------+---------+---------+
+                           | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock               |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------------------+---------+---------+---------+---------+
+clock_3m_en_s              |    3.813|         |         |         |
+pll_1/pll_base_inst/CLKOUT0|    8.441|    7.640|         |         |
+---------------------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock pll_1/pll_base_inst/CLKOUT0
+--------------------------------+---------+---------+---------+---------+
+                                | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock                    |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+--------------------------------+---------+---------+---------+---------+
+clock_3m_en_s                   |    4.458|         |    5.394|         |
+pll_1/pll_base_inst/CLKOUT0     |   14.087|    6.729|    7.533|         |
+pll_1/pll_base_inst/CLKOUT1     |    9.685|         |    4.182|         |
+ps2if_inst/ps2kbd_inst/Rst_n_inv|         |    5.166|         |         |
+--------------------------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock pll_1/pll_base_inst/CLKOUT1
+---------------------------+---------+---------+---------+---------+
+                           | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock               |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------------------+---------+---------+---------+---------+
+pll_1/pll_base_inst/CLKOUT0|   15.614|   12.961|         |         |
+pll_1/pll_base_inst/CLKOUT1|    7.416|         |    1.280|         |
+---------------------------+---------+---------+---------+---------+
+
+Clock to Setup on destination clock pll_1/pll_base_inst/CLKOUT2
+---------------------------+---------+---------+---------+---------+
+                           | Src:Rise| Src:Fall| Src:Rise| Src:Fall|
+Source Clock               |Dest:Rise|Dest:Rise|Dest:Fall|Dest:Fall|
+---------------------------+---------+---------+---------+---------+
+pll_1/pll_base_inst/CLKOUT2|    8.949|         |         |         |
+---------------------------+---------+---------+---------+---------+
+
+=========================================================================
+
+
+Total REAL time to Xst completion: 44.00 secs
+Total CPU time to Xst completion: 44.09 secs
+ 
+--> 
+
+Total memory usage is 437904 kilobytes
+
+Number of errors   :    0 (   0 filtered)
+Number of warnings :  157 (   0 filtered)
+Number of infos    :   51 (   0 filtered)
+

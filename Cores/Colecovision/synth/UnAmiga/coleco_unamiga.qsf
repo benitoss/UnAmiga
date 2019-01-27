@@ -1,0 +1,272 @@
+# -------------------------------------------------------------------------- #
+#
+# Copyright (C) 1991-2013 Altera Corporation
+# Your use of Altera Corporation's design tools, logic functions 
+# and other software and tools, and its AMPP partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Altera Program License 
+# Subscription Agreement, Altera MegaCore Function License 
+# Agreement, or other applicable license agreement, including, 
+# without limitation, that your use is for the sole purpose of 
+# programming logic devices manufactured by Altera and sold by 
+# Altera or its authorized distributors.  Please refer to the 
+# applicable agreement for further details.
+#
+# -------------------------------------------------------------------------- #
+#
+# Quartus II 64-Bit
+# Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
+# Date created = 16:43:40  November 03, 2016
+#
+# -------------------------------------------------------------------------- #
+
+
+
+set_global_assignment -name FAMILY "Cyclone IV E"
+set_global_assignment -name DEVICE EP4CE22F17C8
+set_global_assignment -name TOP_LEVEL_ENTITY unamiga_top
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION "13.0 SP1"
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "16:43:40  NOVEMBER 03, 2016"
+set_global_assignment -name LAST_QUARTUS_VERSION "18.1.0 Lite Edition"
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name DEVICE_FILTER_SPEED_GRADE 8
+set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 1
+set_global_assignment -name STRATIX_DEVICE_IO_STANDARD "2.5 V"
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name USE_CONFIGURATION_DEVICE OFF
+set_global_assignment -name CRC_ERROR_OPEN_DRAIN OFF
+set_global_assignment -name CYCLONEII_RESERVE_NCEO_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -rise
+set_global_assignment -name OUTPUT_IO_TIMING_NEAR_END_VMEAS "HALF VCCIO" -fall
+set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -rise
+set_global_assignment -name OUTPUT_IO_TIMING_FAR_END_VMEAS "HALF SIGNAL SWING" -fall
+set_global_assignment -name RESERVE_DATA0_AFTER_CONFIGURATION "AS INPUT TRI-STATED"
+set_global_assignment -name RESERVE_DATA1_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name RESERVE_FLASH_NCE_AFTER_CONFIGURATION "USE AS REGULAR IO"
+set_global_assignment -name RESERVE_DCLK_AFTER_CONFIGURATION "USE AS PROGRAMMING PIN"
+set_global_assignment -name FORCE_CONFIGURATION_VCCIO ON
+set_global_assignment -name CYCLONEII_OPTIMIZATION_TECHNIQUE BALANCED
+set_global_assignment -name SYNTH_TIMING_DRIVEN_SYNTHESIS ON
+set_global_assignment -name ALLOW_POWER_UP_DONT_CARE OFF
+
+
+set_location_assignment PIN_E1 -to clock_50_i
+
+set_location_assignment PIN_C6 -to sdram_ad_o[12]
+set_location_assignment PIN_C8 -to sdram_ad_o[11]
+set_location_assignment PIN_A10 -to sdram_ad_o[10]
+set_location_assignment PIN_C9 -to sdram_ad_o[9]
+set_location_assignment PIN_C11 -to sdram_ad_o[8]
+set_location_assignment PIN_C14 -to sdram_ad_o[7]
+set_location_assignment PIN_D11 -to sdram_ad_o[6]
+set_location_assignment PIN_D12 -to sdram_ad_o[5]
+set_location_assignment PIN_D14 -to sdram_ad_o[4]
+set_location_assignment PIN_A12 -to sdram_ad_o[3]
+set_location_assignment PIN_B11 -to sdram_ad_o[2]
+set_location_assignment PIN_A11 -to sdram_ad_o[1]
+set_location_assignment PIN_B10 -to sdram_ad_o[0]
+set_location_assignment PIN_D9 -to sdram_ba_o[1]
+set_location_assignment PIN_E9 -to sdram_ba_o[0]
+set_location_assignment PIN_A7 -to sdram_cas_o
+set_location_assignment PIN_A15 -to sdram_cke_o
+set_location_assignment PIN_B14 -to sdram_clk_o
+set_location_assignment PIN_E8 -to sdram_cs_o
+set_location_assignment PIN_D3 -to sdram_da_io[15]
+set_location_assignment PIN_C3 -to sdram_da_io[14]
+set_location_assignment PIN_D5 -to sdram_da_io[13]
+set_location_assignment PIN_D6 -to sdram_da_io[12]
+set_location_assignment PIN_B12 -to sdram_da_io[11]
+set_location_assignment PIN_A13 -to sdram_da_io[10]
+set_location_assignment PIN_B13 -to sdram_da_io[9]
+set_location_assignment PIN_A14 -to sdram_da_io[8]
+set_location_assignment PIN_B6 -to sdram_da_io[7]
+set_location_assignment PIN_A5 -to sdram_da_io[6]
+set_location_assignment PIN_B5 -to sdram_da_io[5]
+set_location_assignment PIN_A4 -to sdram_da_io[4]
+set_location_assignment PIN_B4 -to sdram_da_io[3]
+set_location_assignment PIN_A3 -to sdram_da_io[2]
+set_location_assignment PIN_B3 -to sdram_da_io[1]
+set_location_assignment PIN_A2 -to sdram_da_io[0]
+set_location_assignment PIN_E11 -to sdram_dqm_o[1]
+set_location_assignment PIN_A6 -to sdram_dqm_o[0]
+set_location_assignment PIN_D8 -to sdram_ras_o
+set_location_assignment PIN_B7 -to sdram_we_o
+
+set_location_assignment PIN_L4 -to vga_r_o[4]
+set_location_assignment PIN_G5 -to vga_r_o[3]
+set_location_assignment PIN_E6 -to vga_r_o[2]
+set_location_assignment PIN_L3 -to vga_r_o[1]
+set_location_assignment PIN_G1 -to vga_r_o[0]
+set_location_assignment PIN_T2 -to vga_g_o[4]
+set_location_assignment PIN_P2 -to vga_g_o[3]
+set_location_assignment PIN_N2 -to vga_g_o[2]
+set_location_assignment PIN_L2 -to vga_g_o[1]
+set_location_assignment PIN_M10 -to vga_g_o[0]
+set_location_assignment PIN_R1 -to vga_b_o[4]
+set_location_assignment PIN_P1 -to vga_b_o[3]
+set_location_assignment PIN_N1 -to vga_b_o[2]
+set_location_assignment PIN_L1 -to vga_b_o[1]
+set_location_assignment PIN_K5 -to vga_b_o[0]
+set_location_assignment PIN_K1 -to vga_hsync_n_o
+set_location_assignment PIN_K2 -to vga_vsync_n_o
+
+set_location_assignment PIN_E7 -to ps2_clk_io
+set_location_assignment PIN_F1 -to ps2_data_io
+set_location_assignment PIN_T4 -to ps2_mouse_clk_io
+set_location_assignment PIN_R5 -to ps2_mouse_data_io
+
+set_location_assignment PIN_F16 -to sram_addr_o[18]
+set_location_assignment PIN_T11 -to sram_addr_o[17]
+set_location_assignment PIN_J13 -to sram_addr_o[16]
+set_location_assignment PIN_F14 -to sram_addr_o[15]
+set_location_assignment PIN_K15 -to sram_addr_o[14]
+set_location_assignment PIN_E10 -to sram_addr_o[13]
+set_location_assignment PIN_F9 -to sram_addr_o[12]
+set_location_assignment PIN_L14 -to sram_addr_o[11]
+set_location_assignment PIN_L13 -to sram_addr_o[10]
+set_location_assignment PIN_N14 -to sram_addr_o[9]
+set_location_assignment PIN_P16 -to sram_addr_o[8]
+set_location_assignment PIN_N15 -to sram_addr_o[7]
+set_location_assignment PIN_N16 -to sram_addr_o[6]
+set_location_assignment PIN_J16 -to sram_addr_o[5]
+set_location_assignment PIN_F15 -to sram_addr_o[4]
+set_location_assignment PIN_C16 -to sram_addr_o[3]
+set_location_assignment PIN_D15 -to sram_addr_o[2]
+set_location_assignment PIN_B16 -to sram_addr_o[1]
+set_location_assignment PIN_C15 -to sram_addr_o[0]
+set_location_assignment PIN_F13 -to sram_data_io[7]
+set_location_assignment PIN_K16 -to sram_data_io[6]
+set_location_assignment PIN_J14 -to sram_data_io[5]
+set_location_assignment PIN_R11 -to sram_data_io[4]
+set_location_assignment PIN_J15 -to sram_data_io[3]
+set_location_assignment PIN_L15 -to sram_data_io[2]
+set_location_assignment PIN_G15 -to sram_data_io[1]
+set_location_assignment PIN_D16 -to sram_data_io[0]
+set_location_assignment PIN_N12 -to sram_we_n_o
+set_location_assignment PIN_R7 -to sram_oe_n_o
+
+set_location_assignment PIN_P15 -to joyX_p7_o
+set_location_assignment PIN_R4 -to joy1_up_i
+set_location_assignment PIN_R3 -to joy1_down_i
+set_location_assignment PIN_N5 -to joy1_left_i
+set_location_assignment PIN_P3 -to joy1_right_i
+set_location_assignment PIN_N3 -to joy1_p6_i
+set_location_assignment PIN_T3 -to joy1_p9_i
+set_location_assignment PIN_N8 -to joy2_up_i
+set_location_assignment PIN_P9 -to joy2_down_i
+set_location_assignment PIN_T10 -to joy2_left_i
+set_location_assignment PIN_N11 -to joy2_right_i
+set_location_assignment PIN_P8 -to joy2_p6_i
+set_location_assignment PIN_P11 -to joy2_p9_i
+
+set_location_assignment PIN_J2 -to dac_l_o
+set_location_assignment PIN_J1 -to dac_r_o
+
+set_location_assignment PIN_N9 -to btn_n_i[4]
+set_location_assignment PIN_M16 -to btn_n_i[3]
+set_location_assignment PIN_L7 -to btn_n_i[2]
+set_location_assignment PIN_T7 -to btn_n_i[1]
+
+set_location_assignment PIN_D1 -to sd_cs_n_o
+set_location_assignment PIN_G2 -to sd_miso_i
+set_location_assignment PIN_F2 -to sd_mosi_o
+set_location_assignment PIN_F3 -to sd_sclk_o
+
+
+
+
+
+
+
+
+set_global_assignment -name CYCLONEIII_CONFIGURATION_SCHEME "PASSIVE SERIAL"
+set_global_assignment -name ON_CHIP_BITSTREAM_DECOMPRESSION ON
+set_global_assignment -name GENERATE_RBF_FILE ON
+set_location_assignment PIN_H1 -to ~ALTERA_DCLK~
+set_location_assignment PIN_H2 -to ~ALTERA_DATA0~
+set_global_assignment -name ENABLE_OCT_DONE OFF
+set_global_assignment -name ENABLE_CONFIGURATION_PINS OFF
+set_global_assignment -name ENABLE_BOOT_SEL_PIN OFF
+set_global_assignment -name VHDL_FILE "../../src/syn-unamiga/unamiga_top.vhd"
+set_global_assignment -name QIP_FILE "../../src/syn-unamiga/pll1.qip"
+set_global_assignment -name VHDL_FILE ../../src/HDMI/hdmi_out_altera.vhd
+set_global_assignment -name VHDL_FILE ../../src/HDMI/hdmidelay.vhd
+set_global_assignment -name VHDL_FILE ../../src/clocks.vhd
+set_global_assignment -name VHDL_FILE ../../src/colecovision.vhd
+set_global_assignment -name VHDL_FILE ../../src/ram/dpSRAM_5128.vhd
+set_global_assignment -name VHDL_FILE ../../src/ram/spram.vhd
+set_global_assignment -name VHDL_FILE ../../src/ram/dpram.vhd
+set_global_assignment -name VHDL_FILE ../../src/rom/loaderrom.vhd
+set_global_assignment -name VHDL_FILE ../../src/peripheral/spi.vhd
+set_global_assignment -name VHDL_FILE ../../src/peripheral/cv_keys_pack.vhd
+set_global_assignment -name VHDL_FILE ../../src/peripheral/cv_ctrl.vhd
+set_global_assignment -name VHDL_FILE ../../src/peripheral/ps2kbd_pkg.vhd
+set_global_assignment -name VHDL_FILE ../../src/peripheral/ps2kbd.vhd
+set_global_assignment -name VHDL_FILE ../../src/peripheral/keyboard.vhd
+set_global_assignment -name VHDL_FILE ../../src/shared/debounce.vhd
+set_global_assignment -name VHDL_FILE ../../src/cpu/t80a.vhd
+set_global_assignment -name VHDL_FILE ../../src/cpu/t80_reg.vhd
+set_global_assignment -name VHDL_FILE ../../src/cpu/t80_pack.vhd
+set_global_assignment -name VHDL_FILE ../../src/cpu/t80_mcode.vhd
+set_global_assignment -name VHDL_FILE ../../src/cpu/t80_alu.vhd
+set_global_assignment -name VHDL_FILE ../../src/cpu/t80.vhd
+set_global_assignment -name VHDL_FILE ../../src/audio/dac.vhd
+set_global_assignment -name VHDL_FILE ../../src/audio/sn76489/sn76489_top.vhd
+set_global_assignment -name VHDL_FILE ../../src/audio/sn76489/sn76489_tone.vhd
+set_global_assignment -name VHDL_FILE ../../src/audio/sn76489/sn76489_noise.vhd
+set_global_assignment -name VHDL_FILE ../../src/audio/sn76489/sn76489_latch_ctrl.vhd
+set_global_assignment -name VHDL_FILE ../../src/audio/sn76489/sn76489_comp_pack.vhd
+set_global_assignment -name VHDL_FILE ../../src/audio/sn76489/sn76489_clock_div.vhd
+set_global_assignment -name VHDL_FILE ../../src/audio/sn76489/sn76489_attenuator.vhd
+set_global_assignment -name VHDL_FILE ../../src/video/vdp18/vdp18_sprite.vhd
+set_global_assignment -name VHDL_FILE ../../src/video/vdp18/vdp18_pattern.vhd
+set_global_assignment -name VHDL_FILE "../../src/video/vdp18/vdp18_pack-p.vhd"
+set_global_assignment -name VHDL_FILE ../../src/video/vdp18/vdp18_hor_vert.vhd
+set_global_assignment -name VHDL_FILE ../../src/video/vdp18/vdp18_ctrl.vhd
+set_global_assignment -name VHDL_FILE ../../src/video/vdp18/vdp18_cpuio.vhd
+set_global_assignment -name VHDL_FILE "../../src/video/vdp18/vdp18_core_comp_pack-p.vhd"
+set_global_assignment -name VHDL_FILE ../../src/video/vdp18/vdp18_core.vhd
+set_global_assignment -name VHDL_FILE "../../src/video/vdp18/vdp18_comp_pack-p.vhd"
+set_global_assignment -name VHDL_FILE "../../src/video/vdp18/vdp18_col_pack-p.vhd"
+set_global_assignment -name VHDL_FILE ../../src/video/vdp18/vdp18_col_mux.vhd
+set_global_assignment -name VHDL_FILE ../../src/video/vdp18/vdp18_addr_mux.vhd
+set_global_assignment -name VHDL_FILE ../../src/video/vga.vhd
+set_global_assignment -name QIP_FILE ../../src/video/framebuffer.qip
+set_global_assignment -name VHDL_FILE ../../src/hdmi/hdmi.vhd
+set_global_assignment -name VHDL_FILE ../../src/hdmi/encoder.vhd
+set_global_assignment -name QIP_FILE ../../src/hdmi/altddio_out1.qip
+set_global_assignment -name VERILOG_FILE ../../src/hdmi/hdmidataencoder.v
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to tmds_o[7]
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to tmds_o[6]
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to tmds_o[5]
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to tmds_o[4]
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to tmds_o[3]
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to tmds_o[2]
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to tmds_o[1]
+set_instance_assignment -name CURRENT_STRENGTH_NEW "MAXIMUM CURRENT" -to tmds_o[0]
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to ps2_clk_io
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to ps2_data_io
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to ps2_mouse_clk_io
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to ps2_mouse_data_io
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to sd_miso_i
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to joy1_up_i
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to joy1_down_i
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to joy1_left_i
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to joy1_right_i
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to joy1_p6_i
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to joy1_p9_i
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to joy2_up_i
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to joy2_down_i
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to joy2_left_i
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to joy2_right_i
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to joy2_p6_i
+set_instance_assignment -name WEAK_PULL_UP_RESISTOR ON -to joy2_p9_i
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

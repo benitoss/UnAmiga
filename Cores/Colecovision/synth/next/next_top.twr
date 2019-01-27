@@ -1,0 +1,377 @@
+--------------------------------------------------------------------------------
+Release 14.7 Trace  (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+
+f:\Xilinx\14.7\ISE_DS\ISE\bin\nt64\unwrapped\trce.exe -filter
+D:/Documentacao/Eletronica/FPGA/Multicore/SRC/Multicore/ColecovisionFPGA/synth/next/iseconfig/filter.filter
+-intstyle ise -v 3 -s 2 -n 3 -fastpaths -xml next_top.twx next_top.ncd -o
+next_top.twr next_top.pcf -ucf next_pins_issue2.ucf
+
+Design file:              next_top.ncd
+Physical constraint file: next_top.pcf
+Device,package,speed:     xc6slx16,ftg256,C,-2 (PRODUCTION 1.23 2013-10-13)
+Report level:             verbose report
+
+Environment Variable      Effect 
+--------------------      ------ 
+NONE                      No environment variables were set
+--------------------------------------------------------------------------------
+
+INFO:Timing:3412 - To improve timing, see the Timing Closure User Guide (UG612).
+INFO:Timing:2752 - To get complete path coverage, use the unconstrained paths 
+   option. All paths that are not constrained will be reported in the 
+   unconstrained paths section(s) of the report.
+INFO:Timing:3339 - The clock-to-out numbers in this timing report are based on 
+   a 50 Ohm transmission line loading model.  For the details of this model, 
+   and for more information on accounting for different loading conditions, 
+   please see the device datasheet.
+
+================================================================================
+Timing constraint: TSF2P = MAXDELAY FROM TIMEGRP "FFS" TO TIMEGRP "PADS" 20 ns;
+For more information, see From:To (Multicycle) Analysis in the Timing Closure User Guide (UG612).
+
+ 68 paths analyzed, 47 endpoints analyzed, 0 failing endpoints
+ 0 timing errors detected. (0 setup errors, 0 hold errors)
+ Maximum delay is   8.034ns.
+--------------------------------------------------------------------------------
+
+Paths for end point ram_data_io<5> (R3.PAD), 2 paths
+--------------------------------------------------------------------------------
+Slack (slowest paths):  11.966ns (requirement - data path)
+  Source:               sram0/p1_req_v_clk_i_DFF_203 (FF)
+  Destination:          ram_data_io<5> (PAD)
+  Requirement:          20.000ns
+  Data Path Delay:      8.034ns (Levels of Logic = 2)
+  Source Clock:         clock_mem_s rising
+
+  Maximum Data Path at Slow Process Corner: sram0/p1_req_v_clk_i_DFF_203 to ram_data_io<5>
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X1Y27.AQ       Tcko                  0.430   sram0/p1_req_v_clk_i_DFF_203
+                                                       sram0/p1_req_v_clk_i_DFF_203
+    SLICE_X1Y27.B1       net (fanout=1)        0.525   sram0/p1_req_v_clk_i_DFF_203
+    SLICE_X1Y27.B        Tilo                  0.259   sram0/p1_req_v_clk_i_DFF_203
+                                                       sram0/p1_req_v_clk_i_DFF_203_inv1_INV_0
+    R3.T                 net (fanout=8)        4.008   sram0/p1_req_v_clk_i_DFF_203_inv
+    R3.PAD               Tiotp                 2.812   ram_data_io<5>
+                                                       ram_data_io_5_IOBUF/OBUFT
+                                                       ram_data_io<5>
+    -------------------------------------------------  ---------------------------
+    Total                                      8.034ns (3.501ns logic, 4.533ns route)
+                                                       (43.6% logic, 56.4% route)
+
+--------------------------------------------------------------------------------
+Slack (slowest paths):  12.923ns (requirement - data path)
+  Source:               sram0/sram_data_io_5 (FF)
+  Destination:          ram_data_io<5> (PAD)
+  Requirement:          20.000ns
+  Data Path Delay:      7.077ns (Levels of Logic = 1)
+  Source Clock:         clock_mem_s rising
+
+  Maximum Data Path at Slow Process Corner: sram0/sram_data_io_5 to ram_data_io<5>
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X6Y20.CQ       Tcko                  0.525   sram0/sram_data_io<5>
+                                                       sram0/sram_data_io_5
+    R3.O                 net (fanout=1)        3.740   sram0/sram_data_io<5>
+    R3.PAD               Tioop                 2.812   ram_data_io<5>
+                                                       ram_data_io_5_IOBUF/OBUFT
+                                                       ram_data_io<5>
+    -------------------------------------------------  ---------------------------
+    Total                                      7.077ns (3.337ns logic, 3.740ns route)
+                                                       (47.2% logic, 52.8% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point vsync_o (A11.PAD), 9 paths
+--------------------------------------------------------------------------------
+Slack (slowest paths):  12.108ns (requirement - data path)
+  Source:               vga/vcnt_4 (FF)
+  Destination:          vsync_o (PAD)
+  Requirement:          20.000ns
+  Data Path Delay:      7.892ns (Levels of Logic = 3)
+  Source Clock:         clock_vga_s rising
+
+  Maximum Data Path at Slow Process Corner: vga/vcnt_4 to vsync_o
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X20Y47.AQ      Tcko                  0.476   vga/vcnt<7>
+                                                       vga/vcnt_4
+    SLICE_X19Y47.D2      net (fanout=7)        0.776   vga/vcnt<4>
+    SLICE_X19Y47.D       Tilo                  0.259   N450
+                                                       vga/O_VSYNC_SW0
+    SLICE_X19Y47.C6      net (fanout=1)        0.143   N450
+    SLICE_X19Y47.C       Tilo                  0.259   N450
+                                                       vga/O_VSYNC
+    A11.O                net (fanout=1)        3.327   vsync_o_OBUF
+    A11.PAD              Tioop                 2.652   vsync_o
+                                                       vsync_o_OBUF
+                                                       vsync_o
+    -------------------------------------------------  ---------------------------
+    Total                                      7.892ns (3.646ns logic, 4.246ns route)
+                                                       (46.2% logic, 53.8% route)
+
+--------------------------------------------------------------------------------
+Slack (slowest paths):  12.221ns (requirement - data path)
+  Source:               vga/vcnt_8 (FF)
+  Destination:          vsync_o (PAD)
+  Requirement:          20.000ns
+  Data Path Delay:      7.779ns (Levels of Logic = 3)
+  Source Clock:         clock_vga_s rising
+
+  Maximum Data Path at Slow Process Corner: vga/vcnt_8 to vsync_o
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X20Y48.AQ      Tcko                  0.476   vga/vcnt<9>
+                                                       vga/vcnt_8
+    SLICE_X19Y47.D3      net (fanout=6)        0.663   vga/vcnt<8>
+    SLICE_X19Y47.D       Tilo                  0.259   N450
+                                                       vga/O_VSYNC_SW0
+    SLICE_X19Y47.C6      net (fanout=1)        0.143   N450
+    SLICE_X19Y47.C       Tilo                  0.259   N450
+                                                       vga/O_VSYNC
+    A11.O                net (fanout=1)        3.327   vsync_o_OBUF
+    A11.PAD              Tioop                 2.652   vsync_o
+                                                       vsync_o_OBUF
+                                                       vsync_o
+    -------------------------------------------------  ---------------------------
+    Total                                      7.779ns (3.646ns logic, 4.133ns route)
+                                                       (46.9% logic, 53.1% route)
+
+--------------------------------------------------------------------------------
+Slack (slowest paths):  12.319ns (requirement - data path)
+  Source:               vga/vcnt_9 (FF)
+  Destination:          vsync_o (PAD)
+  Requirement:          20.000ns
+  Data Path Delay:      7.681ns (Levels of Logic = 3)
+  Source Clock:         clock_vga_s rising
+
+  Maximum Data Path at Slow Process Corner: vga/vcnt_9 to vsync_o
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X20Y48.BQ      Tcko                  0.476   vga/vcnt<9>
+                                                       vga/vcnt_9
+    SLICE_X19Y47.D4      net (fanout=6)        0.565   vga/vcnt<9>
+    SLICE_X19Y47.D       Tilo                  0.259   N450
+                                                       vga/O_VSYNC_SW0
+    SLICE_X19Y47.C6      net (fanout=1)        0.143   N450
+    SLICE_X19Y47.C       Tilo                  0.259   N450
+                                                       vga/O_VSYNC
+    A11.O                net (fanout=1)        3.327   vsync_o_OBUF
+    A11.PAD              Tioop                 2.652   vsync_o
+                                                       vsync_o_OBUF
+                                                       vsync_o
+    -------------------------------------------------  ---------------------------
+    Total                                      7.681ns (3.646ns logic, 4.035ns route)
+                                                       (47.5% logic, 52.5% route)
+
+--------------------------------------------------------------------------------
+
+Paths for end point ram_data_io<3> (M6.PAD), 2 paths
+--------------------------------------------------------------------------------
+Slack (slowest paths):  12.185ns (requirement - data path)
+  Source:               sram0/p1_req_v_clk_i_DFF_203 (FF)
+  Destination:          ram_data_io<3> (PAD)
+  Requirement:          20.000ns
+  Data Path Delay:      7.815ns (Levels of Logic = 2)
+  Source Clock:         clock_mem_s rising
+
+  Maximum Data Path at Slow Process Corner: sram0/p1_req_v_clk_i_DFF_203 to ram_data_io<3>
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X1Y27.AQ       Tcko                  0.430   sram0/p1_req_v_clk_i_DFF_203
+                                                       sram0/p1_req_v_clk_i_DFF_203
+    SLICE_X1Y27.B1       net (fanout=1)        0.525   sram0/p1_req_v_clk_i_DFF_203
+    SLICE_X1Y27.B        Tilo                  0.259   sram0/p1_req_v_clk_i_DFF_203
+                                                       sram0/p1_req_v_clk_i_DFF_203_inv1_INV_0
+    M6.T                 net (fanout=8)        3.789   sram0/p1_req_v_clk_i_DFF_203_inv
+    M6.PAD               Tiotp                 2.812   ram_data_io<3>
+                                                       ram_data_io_3_IOBUF/OBUFT
+                                                       ram_data_io<3>
+    -------------------------------------------------  ---------------------------
+    Total                                      7.815ns (3.501ns logic, 4.314ns route)
+                                                       (44.8% logic, 55.2% route)
+
+--------------------------------------------------------------------------------
+Slack (slowest paths):  12.806ns (requirement - data path)
+  Source:               sram0/sram_data_io_3 (FF)
+  Destination:          ram_data_io<3> (PAD)
+  Requirement:          20.000ns
+  Data Path Delay:      7.194ns (Levels of Logic = 1)
+  Source Clock:         clock_mem_s rising
+
+  Maximum Data Path at Slow Process Corner: sram0/sram_data_io_3 to ram_data_io<3>
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X4Y24.CQ       Tcko                  0.476   sram0/sram_data_io<3>
+                                                       sram0/sram_data_io_3
+    M6.O                 net (fanout=1)        3.906   sram0/sram_data_io<3>
+    M6.PAD               Tioop                 2.812   ram_data_io<3>
+                                                       ram_data_io_3_IOBUF/OBUFT
+                                                       ram_data_io<3>
+    -------------------------------------------------  ---------------------------
+    Total                                      7.194ns (3.288ns logic, 3.906ns route)
+                                                       (45.7% logic, 54.3% route)
+
+--------------------------------------------------------------------------------
+Hold Paths: TSF2P = MAXDELAY FROM TIMEGRP "FFS" TO TIMEGRP "PADS" 20 ns;
+--------------------------------------------------------------------------------
+
+Paths for end point sd_cs0_n_o (L1.PAD), 1 path
+--------------------------------------------------------------------------------
+Delay (fastest path):   2.102ns (data path)
+  Source:               vg/sd/spi_cs_o (FF)
+  Destination:          sd_cs0_n_o (PAD)
+  Data Path Delay:      2.102ns (Levels of Logic = 1)
+  Source Clock:         clock_3m_en_s_BUFG rising
+
+  Minimum Data Path at Fast Process Corner: vg/sd/spi_cs_o to sd_cs0_n_o
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    OLOGIC_X0Y18.OQ      Tockq                 0.336   vg/sd/spi_cs_o
+                                                       vg/sd/spi_cs_o
+    L1.O                 net (fanout=1)        0.191   vg/sd/spi_cs_o
+    L1.PAD               Tioop                 1.575   sd_cs0_n_o
+                                                       sd_cs0_n_o_OBUF
+                                                       sd_cs0_n_o
+    -------------------------------------------------  ---------------------------
+    Total                                      2.102ns (1.911ns logic, 0.191ns route)
+                                                       (90.9% logic, 9.1% route)
+--------------------------------------------------------------------------------
+
+Paths for end point ram_addr_o<17> (G1.PAD), 1 path
+--------------------------------------------------------------------------------
+Delay (fastest path):   2.699ns (data path)
+  Source:               sram0/sram_addr_o_17 (FF)
+  Destination:          ram_addr_o<17> (PAD)
+  Data Path Delay:      2.699ns (Levels of Logic = 1)
+  Source Clock:         clock_mem_s rising
+
+  Minimum Data Path at Fast Process Corner: sram0/sram_addr_o_17 to ram_addr_o<17>
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X3Y29.DQ       Tcko                  0.198   sram0/sram_addr_o<17>
+                                                       sram0/sram_addr_o_17
+    G1.O                 net (fanout=2)        1.020   sram0/sram_addr_o<17>
+    G1.PAD               Tioop                 1.481   ram_addr_o<17>
+                                                       ram_addr_o_17_OBUF
+                                                       ram_addr_o<17>
+    -------------------------------------------------  ---------------------------
+    Total                                      2.699ns (1.679ns logic, 1.020ns route)
+                                                       (62.2% logic, 37.8% route)
+--------------------------------------------------------------------------------
+
+Paths for end point ram_addr_o<18> (H2.PAD), 1 path
+--------------------------------------------------------------------------------
+Delay (fastest path):   2.725ns (data path)
+  Source:               sram0/sram_addr_o_17 (FF)
+  Destination:          ram_addr_o<18> (PAD)
+  Data Path Delay:      2.725ns (Levels of Logic = 1)
+  Source Clock:         clock_mem_s rising
+
+  Minimum Data Path at Fast Process Corner: sram0/sram_addr_o_17 to ram_addr_o<18>
+    Location             Delay type         Delay(ns)  Physical Resource
+                                                       Logical Resource(s)
+    -------------------------------------------------  -------------------
+    SLICE_X3Y29.DQ       Tcko                  0.198   sram0/sram_addr_o<17>
+                                                       sram0/sram_addr_o_17
+    H2.O                 net (fanout=2)        1.046   sram0/sram_addr_o<17>
+    H2.PAD               Tioop                 1.481   ram_addr_o<18>
+                                                       ram_addr_o_18_OBUF
+                                                       ram_addr_o<18>
+    -------------------------------------------------  ---------------------------
+    Total                                      2.725ns (1.679ns logic, 1.046ns route)
+                                                       (61.6% logic, 38.4% route)
+--------------------------------------------------------------------------------
+
+
+All constraints were met.
+
+
+Data Sheet report:
+-----------------
+All values displayed in nanoseconds (ns)
+
+Clock clock_50_i to Pad
+--------------+-----------------+------------+-----------------+------------+------------------+--------+
+              |Max (slowest) clk|  Process   |Min (fastest) clk|  Process   |                  | Clock  |
+Destination   |  (edge) to PAD  |   Corner   |  (edge) to PAD  |   Corner   |Internal Clock(s) | Phase  |
+--------------+-----------------+------------+-----------------+------------+------------------+--------+
+audioext_l_o  |         7.368(R)|      SLOW  |         3.776(R)|      FAST  |clock_master_s    |   0.000|
+audioext_r_o  |         7.287(R)|      SLOW  |         3.700(R)|      FAST  |clock_master_s    |   0.000|
+hsync_o       |         9.040(R)|      SLOW  |         4.488(R)|      FAST  |clock_vga_s       |   0.000|
+joysel_o      |         7.988(R)|      SLOW  |         4.151(R)|      FAST  |clock_master_s    |   0.000|
+ram_addr_o<0> |         7.405(R)|      SLOW  |         3.774(R)|      FAST  |clock_mem_s       |   0.000|
+ram_addr_o<1> |         7.382(R)|      SLOW  |         3.797(R)|      FAST  |clock_mem_s       |   0.000|
+ram_addr_o<2> |         7.576(R)|      SLOW  |         3.908(R)|      FAST  |clock_mem_s       |   0.000|
+ram_addr_o<3> |         7.633(R)|      SLOW  |         3.916(R)|      FAST  |clock_mem_s       |   0.000|
+ram_addr_o<4> |         7.704(R)|      SLOW  |         3.945(R)|      FAST  |clock_mem_s       |   0.000|
+ram_addr_o<5> |         7.442(R)|      SLOW  |         3.774(R)|      FAST  |clock_mem_s       |   0.000|
+ram_addr_o<6> |         8.138(R)|      SLOW  |         4.185(R)|      FAST  |clock_mem_s       |   0.000|
+ram_addr_o<7> |         8.091(R)|      SLOW  |         4.175(R)|      FAST  |clock_mem_s       |   0.000|
+ram_addr_o<8> |         8.255(R)|      SLOW  |         4.265(R)|      FAST  |clock_mem_s       |   0.000|
+ram_addr_o<9> |         7.829(R)|      SLOW  |         4.004(R)|      FAST  |clock_mem_s       |   0.000|
+ram_addr_o<10>|         9.142(R)|      SLOW  |         4.801(R)|      FAST  |clock_mem_s       |   0.000|
+ram_addr_o<11>|         7.588(R)|      SLOW  |         3.944(R)|      FAST  |clock_mem_s       |   0.000|
+ram_addr_o<12>|         8.235(R)|      SLOW  |         4.260(R)|      FAST  |clock_mem_s       |   0.000|
+ram_addr_o<13>|         8.659(R)|      SLOW  |         4.490(R)|      FAST  |clock_mem_s       |   0.000|
+ram_addr_o<14>|         8.632(R)|      SLOW  |         4.483(R)|      FAST  |clock_mem_s       |   0.000|
+ram_addr_o<15>|         7.099(R)|      SLOW  |         3.638(R)|      FAST  |clock_mem_s       |   0.000|
+ram_addr_o<16>|         7.000(R)|      SLOW  |         3.584(R)|      FAST  |clock_mem_s       |   0.000|
+ram_addr_o<17>|         6.865(R)|      SLOW  |         3.506(R)|      FAST  |clock_mem_s       |   0.000|
+ram_addr_o<18>|         6.908(R)|      SLOW  |         3.532(R)|      FAST  |clock_mem_s       |   0.000|
+ram_ce_n_o<0> |         7.834(R)|      SLOW  |         4.011(R)|      FAST  |clock_mem_s       |   0.000|
+ram_data_io<0>|         7.639(R)|      SLOW  |         3.928(R)|      FAST  |clock_mem_s       |   0.000|
+ram_data_io<1>|         8.039(R)|      SLOW  |         3.915(R)|      FAST  |clock_mem_s       |   0.000|
+ram_data_io<2>|         8.003(R)|      SLOW  |         4.091(R)|      FAST  |clock_mem_s       |   0.000|
+ram_data_io<3>|         9.151(R)|      SLOW  |         4.468(R)|      FAST  |clock_mem_s       |   0.000|
+ram_data_io<4>|         8.961(R)|      SLOW  |         4.429(R)|      FAST  |clock_mem_s       |   0.000|
+ram_data_io<5>|         9.370(R)|      SLOW  |         4.412(R)|      FAST  |clock_mem_s       |   0.000|
+ram_data_io<6>|         8.961(R)|      SLOW  |         4.245(R)|      FAST  |clock_mem_s       |   0.000|
+ram_data_io<7>|         9.151(R)|      SLOW  |         4.492(R)|      FAST  |clock_mem_s       |   0.000|
+ram_oe_n_o    |         7.412(R)|      SLOW  |         3.788(R)|      FAST  |clock_mem_s       |   0.000|
+ram_we_n_o    |         7.384(F)|      SLOW  |         3.760(F)|      FAST  |clock_mem_s       |   0.000|
+rgb_b_o<0>    |         7.658(R)|      SLOW  |         3.898(R)|      FAST  |clock_vga_s       |   0.000|
+rgb_b_o<1>    |         7.255(R)|      SLOW  |         3.722(R)|      FAST  |clock_vga_s       |   0.000|
+rgb_b_o<2>    |         7.947(R)|      SLOW  |         4.073(R)|      FAST  |clock_vga_s       |   0.000|
+rgb_g_o<0>    |         7.803(R)|      SLOW  |         3.991(R)|      FAST  |clock_vga_s       |   0.000|
+rgb_g_o<1>    |         7.864(R)|      SLOW  |         4.029(R)|      FAST  |clock_vga_s       |   0.000|
+rgb_g_o<2>    |         7.591(R)|      SLOW  |         3.900(R)|      FAST  |clock_vga_s       |   0.000|
+rgb_r_o<0>    |         7.266(R)|      SLOW  |         3.705(R)|      FAST  |clock_vga_s       |   0.000|
+rgb_r_o<1>    |         7.458(R)|      SLOW  |         3.785(R)|      FAST  |clock_vga_s       |   0.000|
+rgb_r_o<2>    |         7.391(R)|      SLOW  |         3.757(R)|      FAST  |clock_vga_s       |   0.000|
+vsync_o       |         9.191(R)|      SLOW  |         4.287(R)|      FAST  |clock_vga_s       |   0.000|
+--------------+-----------------+------------+-----------------+------------+------------------+--------+
+
+
+Timing summary:
+---------------
+
+Timing errors: 0  Score: 0  (Setup/Max: 0, Hold: 0)
+
+Constraints cover 68 paths, 0 nets, and 110 connections
+
+Design statistics:
+   Maximum path delay from/to any node:   8.034ns
+
+
+Analysis completed Fri Feb 16 08:34:46 2018 
+--------------------------------------------------------------------------------
+
+Trace Settings:
+-------------------------
+Trace Settings 
+
+Peak Memory Usage: 282 MB
+
+
+

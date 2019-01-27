@@ -1,0 +1,237 @@
+Release 14.7 par P.20131013 (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+
+DESKTOP-84RDELE::  Fri Feb 16 08:34:25 2018
+
+par -filter
+D:/Documentacao/Eletronica/FPGA/Multicore/SRC/Multicore/ColecovisionFPGA/synth/n
+ext/iseconfig/filter.filter -w -intstyle ise -ol high -mt off next_top_map.ncd
+next_top.ncd next_top.pcf 
+
+
+Constraints file: next_top.pcf.
+Loading device for application Rf_Device from file '6slx16.nph' in environment f:\Xilinx\14.7\ISE_DS\ISE\.
+   "next_top" is an NCD, version 3.2, device xc6slx16, package ftg256, speed -2
+
+Initializing temperature to 85.000 Celsius. (default - Range: 0.000 to 85.000 Celsius)
+Initializing voltage to 1.140 Volts. (default - Range: 1.140 to 1.260 Volts)
+
+
+Device speed data version:  "PRODUCTION 1.23 2013-10-13".
+
+
+
+Device Utilization Summary:
+
+Slice Logic Utilization:
+  Number of Slice Registers:                 1,061 out of  18,224    5%
+    Number used as Flip Flops:               1,054
+    Number used as Latches:                      1
+    Number used as Latch-thrus:                  0
+    Number used as AND/OR logics:                6
+  Number of Slice LUTs:                      2,598 out of   9,112   28%
+    Number used as logic:                    2,554 out of   9,112   28%
+      Number using O6 output only:           2,085
+      Number using O5 output only:             101
+      Number using O5 and O6:                  368
+      Number used as ROM:                        0
+    Number used as Memory:                      36 out of   2,176    1%
+      Number used as Dual Port RAM:             36
+        Number using O6 output only:            12
+        Number using O5 output only:             4
+        Number using O5 and O6:                 20
+      Number used as Single Port RAM:            0
+      Number used as Shift Register:             0
+    Number used exclusively as route-thrus:      8
+      Number with same-slice register load:      1
+      Number with same-slice carry load:         7
+      Number with other load:                    0
+
+Slice Logic Distribution:
+  Number of occupied Slices:                   959 out of   2,278   42%
+  Number of MUXCYs used:                       348 out of   4,556    7%
+  Number of LUT Flip Flop pairs used:        2,745
+    Number with an unused Flip Flop:         1,724 out of   2,745   62%
+    Number with an unused LUT:                 147 out of   2,745    5%
+    Number of fully used LUT-FF pairs:         874 out of   2,745   31%
+    Number of slice register sites lost
+      to control set restrictions:               0 out of  18,224    0%
+
+  A LUT Flip Flop pair for this architecture represents one LUT paired with
+  one Flip Flop within a slice.  A control set is a unique combination of
+  clock, reset, set, and enable signals for a registered element.
+  The Slice Logic Distribution report is not meaningful if the design is
+  over-mapped for a non-slice resource or if Placement fails.
+
+IO Utilization:
+  Number of bonded IOBs:                       146 out of     186   78%
+    Number of LOCed IOBs:                      146 out of     146  100%
+    IOB Flip Flops:                              1
+    IOB Master Pads:                             4
+    IOB Slave Pads:                              4
+
+Specific Feature Utilization:
+  Number of RAMB16BWERs:                        20 out of      32   62%
+  Number of RAMB8BWERs:                          0 out of      64    0%
+  Number of BUFIO2/BUFIO2_2CLKs:                 1 out of      32    3%
+    Number used as BUFIO2s:                      1
+    Number used as BUFIO2_2CLKs:                 0
+  Number of BUFIO2FB/BUFIO2FB_2CLKs:             1 out of      32    3%
+    Number used as BUFIO2FBs:                    1
+    Number used as BUFIO2FB_2CLKs:               0
+  Number of BUFG/BUFGMUXs:                       5 out of      16   31%
+    Number used as BUFGs:                        5
+    Number used as BUFGMUX:                      0
+  Number of DCM/DCM_CLKGENs:                     0 out of       4    0%
+  Number of ILOGIC2/ISERDES2s:                   0 out of     248    0%
+  Number of IODELAY2/IODRP2/IODRP2_MCBs:         0 out of     248    0%
+  Number of OLOGIC2/OSERDES2s:                   1 out of     248    1%
+    Number used as OLOGIC2s:                     1
+    Number used as OSERDES2s:                    0
+  Number of BSCANs:                              0 out of       4    0%
+  Number of BUFHs:                               0 out of     128    0%
+  Number of BUFPLLs:                             0 out of       8    0%
+  Number of BUFPLL_MCBs:                         0 out of       4    0%
+  Number of DSP48A1s:                            2 out of      32    6%
+  Number of ICAPs:                               0 out of       1    0%
+  Number of MCBs:                                0 out of       2    0%
+  Number of PCILOGICSEs:                         0 out of       2    0%
+  Number of PLL_ADVs:                            1 out of       2   50%
+  Number of PMVs:                                0 out of       1    0%
+  Number of STARTUPs:                            0 out of       1    0%
+  Number of SUSPEND_SYNCs:                       0 out of       1    0%
+
+
+Overall effort level (-ol):   High 
+Router effort level (-rl):    High 
+
+Starting initial Timing Analysis.  REAL time: 3 secs 
+Finished initial Timing Analysis.  REAL time: 3 secs 
+
+WARNING:Par:288 - The signal bus_wait_n_i_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal ps2_pin2_io_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal ps2_pin6_io_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal bus_busreq_n_i_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal btn_multiface_n_i_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal extras_io<0>_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal extras_io<1>_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal extras_io<2>_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal ear_port_i_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal flash_miso_i_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal bus_int_n_i_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal bus_ramcs_i_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal bus_nmi_n_i_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal bus_romcs_i_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal esp_rx_i_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal keyb_col_i<0>_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal keyb_col_i<1>_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal keyb_col_i<2>_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal keyb_col_i<3>_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal keyb_col_i<4>_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal bus_iorqula_n_i_IBUF has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal vg/cpu/u0/Regs/Mram_RegsL11_RAMD_D1_O has no load.  PAR will not attempt to route this signal.
+WARNING:Par:288 - The signal vg/cpu/u0/Regs/Mram_RegsH11_RAMD_D1_O has no load.  PAR will not attempt to route this signal.
+Starting Router
+
+
+Phase  1  : 16266 unrouted;      REAL time: 3 secs 
+
+Phase  2  : 14780 unrouted;      REAL time: 4 secs 
+
+Phase  3  : 7034 unrouted;      REAL time: 7 secs 
+
+Phase  4  : 7034 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 8 secs 
+
+Updating file: next_top.ncd with current fully routed design.
+
+Phase  5  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 13 secs 
+
+Phase  6  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 13 secs 
+
+Phase  7  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 13 secs 
+
+Phase  8  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 13 secs 
+
+Phase  9  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 13 secs 
+
+Phase 10  : 0 unrouted; (Setup:0, Hold:0, Component Switching Limit:0)     REAL time: 13 secs 
+Total REAL time to Router completion: 13 secs 
+Total CPU time to Router completion: 13 secs 
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+Generating "PAR" statistics.
+
+**************************
+Generating Clock Report
+**************************
+
++---------------------+--------------+------+------+------------+-------------+
+|        Clock Net    |   Resource   |Locked|Fanout|Net Skew(ns)|Max Delay(ns)|
++---------------------+--------------+------+------+------------+-------------+
+|      clock_master_s |  BUFGMUX_X2Y1| No   |  378 |  0.066     |  1.138      |
++---------------------+--------------+------+------+------------+-------------+
+|         clock_vga_s |  BUFGMUX_X2Y2| No   |   35 |  0.043     |  1.130      |
++---------------------+--------------+------+------+------------+-------------+
+|         clock_mem_s |  BUFGMUX_X2Y4| No   |   45 |  0.035     |  1.133      |
++---------------------+--------------+------+------+------------+-------------+
+|  clock_3m_en_s_BUFG | BUFGMUX_X3Y13| No   |   11 |  0.625     |  1.699      |
++---------------------+--------------+------+------+------------+-------------+
+|ps2if_inst/ps2kbd_in |              |      |      |            |             |
+|        st/Rst_n_inv |         Local|      |   88 |  0.000     |  3.361      |
++---------------------+--------------+------+------+------------+-------------+
+
+* Net Skew is the difference between the minimum and maximum routing
+only delays for the net. Note this is different from Clock Skew which
+is reported in TRCE timing report. Clock Skew is the difference between
+the minimum and maximum path delays which includes logic delays.
+
+* The fanout is the number of component pins not the individual BEL loads,
+for example SLICE loads not FF loads.
+
+Timing Score: 0 (Setup: 0, Hold: 0, Component Switching Limit: 0)
+
+Asterisk (*) preceding a constraint indicates it was not met.
+   This may be due to a setup or hold violation.
+
+----------------------------------------------------------------------------------------------------------
+  Constraint                                |    Check    | Worst Case |  Best Case | Timing |   Timing   
+                                            |             |    Slack   | Achievable | Errors |    Score   
+----------------------------------------------------------------------------------------------------------
+  TSF2P = MAXDELAY FROM TIMEGRP "FFS" TO TI | MAXDELAY    |    11.966ns|     8.034ns|       0|           0
+  MEGRP "PADS" 20 ns                        |             |            |            |        |            
+----------------------------------------------------------------------------------------------------------
+
+
+All constraints were met.
+
+
+Generating Pad Report.
+
+All signals are completely routed.
+
+WARNING:Par:283 - There are 23 loadless signals in this design. This design will cause Bitgen to issue DRC warnings.
+
+Total REAL time to PAR completion: 14 secs 
+Total CPU time to PAR completion: 13 secs 
+
+Peak Memory Usage:  386 MB
+
+Placer: Placement generated during map.
+Routing: Completed - No errors found.
+Timing: Completed - No errors found.
+
+Number of error messages: 0
+Number of warning messages: 25
+Number of info messages: 0
+
+Writing design to file next_top.ncd
+
+
+
+PAR done!

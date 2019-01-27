@@ -1,0 +1,381 @@
+Release 14.7 Map P.20131013 (nt64)
+Xilinx Map Application Log File for Design 'next_top'
+
+Design Information
+------------------
+Command Line   : map -filter
+D:/Documentacao/Eletronica/FPGA/Multicore/SRC/Multicore/ColecovisionFPGA/synth/n
+ext/iseconfig/filter.filter -intstyle ise -p xc6slx16-ftg256-2 -w -logic_opt off
+-ol high -xe n -t 1 -xt 0 -register_duplication off -r 4 -global_opt off -mt off
+-ir off -pr off -lc off -power off -o next_top_map.ncd next_top.ngd next_top.pcf
+ 
+Target Device  : xc6slx16
+Target Package : ftg256
+Target Speed   : -2
+Mapper Version : spartan6 -- $Revision: 1.55 $
+Mapped Date    : Fri Feb 16 08:34:04 2018
+
+Mapping design into LUTs...
+WARNING:MapLib:701 - Signal ram_data_io<15> connected to top level port
+   ram_data_io<15> has been removed.
+WARNING:MapLib:701 - Signal ram_data_io<14> connected to top level port
+   ram_data_io<14> has been removed.
+WARNING:MapLib:701 - Signal ram_data_io<13> connected to top level port
+   ram_data_io<13> has been removed.
+WARNING:MapLib:701 - Signal ram_data_io<12> connected to top level port
+   ram_data_io<12> has been removed.
+WARNING:MapLib:701 - Signal ram_data_io<11> connected to top level port
+   ram_data_io<11> has been removed.
+WARNING:MapLib:701 - Signal ram_data_io<10> connected to top level port
+   ram_data_io<10> has been removed.
+WARNING:MapLib:701 - Signal ram_data_io<9> connected to top level port
+   ram_data_io<9> has been removed.
+WARNING:MapLib:701 - Signal ram_data_io<8> connected to top level port
+   ram_data_io<8> has been removed.
+WARNING:MapLib:701 - Signal flash_wp_o connected to top level port flash_wp_o
+   has been removed.
+WARNING:MapLib:701 - Signal flash_hold_o connected to top level port
+   flash_hold_o has been removed.
+WARNING:MapLib:701 - Signal accel_io_27 connected to top level port accel_io_27
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_26 connected to top level port accel_io_26
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_25 connected to top level port accel_io_25
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_24 connected to top level port accel_io_24
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_23 connected to top level port accel_io_23
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_22 connected to top level port accel_io_22
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_21 connected to top level port accel_io_21
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_20 connected to top level port accel_io_20
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_19 connected to top level port accel_io_19
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_18 connected to top level port accel_io_18
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_17 connected to top level port accel_io_17
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_16 connected to top level port accel_io_16
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_15 connected to top level port accel_io_15
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_14 connected to top level port accel_io_14
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_13 connected to top level port accel_io_13
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_12 connected to top level port accel_io_12
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_11 connected to top level port accel_io_11
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_10 connected to top level port accel_io_10
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_9 connected to top level port accel_io_9
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_8 connected to top level port accel_io_8
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_7 connected to top level port accel_io_7
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_6 connected to top level port accel_io_6
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_5 connected to top level port accel_io_5
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_4 connected to top level port accel_io_4
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_3 connected to top level port accel_io_3
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_2 connected to top level port accel_io_2
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_1 connected to top level port accel_io_1
+   has been removed.
+WARNING:MapLib:701 - Signal accel_io_0 connected to top level port accel_io_0
+   has been removed.
+Running directed packing...
+Running delay-based LUT packing...
+Updating timing models...
+INFO:Map:215 - The Interim Design Summary has been generated in the MAP Report
+   (.mrp).
+Running timing-driven placement...
+Total REAL time at the beginning of Placer: 7 secs 
+Total CPU  time at the beginning of Placer: 6 secs 
+
+Phase 1.1  Initial Placement Analysis
+Phase 1.1  Initial Placement Analysis (Checksum:84b2251f) REAL time: 9 secs 
+
+Phase 2.7  Design Feasibility Check
+Phase 2.7  Design Feasibility Check (Checksum:84b2251f) REAL time: 9 secs 
+
+Phase 3.31  Local Placement Optimization
+Phase 3.31  Local Placement Optimization (Checksum:84b2251f) REAL time: 9 secs 
+
+Phase 4.2  Initial Placement for Architecture Specific Features
+
+Phase 4.2  Initial Placement for Architecture Specific Features
+(Checksum:4bfad77) REAL time: 10 secs 
+
+Phase 5.36  Local Placement Optimization
+Phase 5.36  Local Placement Optimization (Checksum:4bfad77) REAL time: 10 secs 
+
+Phase 6.30  Global Clock Region Assignment
+Phase 6.30  Global Clock Region Assignment (Checksum:4bfad77) REAL time: 10 secs 
+
+Phase 7.3  Local Placement Optimization
+Phase 7.3  Local Placement Optimization (Checksum:4bfad77) REAL time: 10 secs 
+
+Phase 8.5  Local Placement Optimization
+Phase 8.5  Local Placement Optimization (Checksum:4bfad77) REAL time: 10 secs 
+
+Phase 9.8  Global Placement
+..................
+....................................................................
+.....
+Phase 9.8  Global Placement (Checksum:993f2f75) REAL time: 12 secs 
+
+Phase 10.5  Local Placement Optimization
+Phase 10.5  Local Placement Optimization (Checksum:993f2f75) REAL time: 12 secs 
+
+Phase 11.18  Placement Optimization
+Phase 11.18  Placement Optimization (Checksum:bf5ca9cc) REAL time: 14 secs 
+
+Phase 12.5  Local Placement Optimization
+Phase 12.5  Local Placement Optimization (Checksum:bf5ca9cc) REAL time: 14 secs 
+
+Phase 13.34  Placement Validation
+Phase 13.34  Placement Validation (Checksum:57fded65) REAL time: 14 secs 
+
+Total REAL time to Placer completion: 14 secs 
+Total CPU  time to Placer completion: 12 secs 
+Running post-placement packing...
+Writing output files...
+WARNING:PhysDesignRules:372 - Gated clock. Clock net
+   ps2if_inst/ps2kbd_inst/Rst_n_inv is sourced by a combinatorial pin. This is
+   not good design practice. Use the CE pin to control the loading of data into
+   the flip-flop.
+WARNING:PhysDesignRules:367 - The signal <vg/cpu/u0/Regs/Mram_RegsL11_RAMD_D1_O>
+   is incomplete. The signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:367 - The signal <vg/cpu/u0/Regs/Mram_RegsH11_RAMD_D1_O>
+   is incomplete. The signal does not drive any load pins in the design.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q10) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q11) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q12) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q13) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q14) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q15) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q16) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q1) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q2) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q3) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q4) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q5) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q6) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q7) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q8) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+WARNING:PhysDesignRules:2212 - Async clocking for BRAM (comp
+   vga/frbuff/Mram_ram_q9) port(s) with READ_FIRST mode has certain
+   restrictions. Make sure that there is no address collision. A read/write on
+   one port and a write operation from the other port at the same address is not
+   allowed. RAMB16BWER, when both ports are 18 bits wide or smaller, A13-6
+   including A4 cannot be same. When any one port is 36 bits wide, A13-7
+   including A5 cannot be the same. Violating this restriction may result in the
+   incorrect operation of the BRAM.
+
+Design Summary
+--------------
+
+Design Summary:
+Number of errors:      0
+Number of warnings:   57
+Slice Logic Utilization:
+  Number of Slice Registers:                 1,061 out of  18,224    5%
+    Number used as Flip Flops:               1,054
+    Number used as Latches:                      1
+    Number used as Latch-thrus:                  0
+    Number used as AND/OR logics:                6
+  Number of Slice LUTs:                      2,598 out of   9,112   28%
+    Number used as logic:                    2,554 out of   9,112   28%
+      Number using O6 output only:           2,085
+      Number using O5 output only:             101
+      Number using O5 and O6:                  368
+      Number used as ROM:                        0
+    Number used as Memory:                      36 out of   2,176    1%
+      Number used as Dual Port RAM:             36
+        Number using O6 output only:            12
+        Number using O5 output only:             4
+        Number using O5 and O6:                 20
+      Number used as Single Port RAM:            0
+      Number used as Shift Register:             0
+    Number used exclusively as route-thrus:      8
+      Number with same-slice register load:      1
+      Number with same-slice carry load:         7
+      Number with other load:                    0
+
+Slice Logic Distribution:
+  Number of occupied Slices:                   959 out of   2,278   42%
+  Number of MUXCYs used:                       348 out of   4,556    7%
+  Number of LUT Flip Flop pairs used:        2,745
+    Number with an unused Flip Flop:         1,724 out of   2,745   62%
+    Number with an unused LUT:                 147 out of   2,745    5%
+    Number of fully used LUT-FF pairs:         874 out of   2,745   31%
+    Number of unique control sets:             144
+    Number of slice register sites lost
+      to control set restrictions:             649 out of  18,224    3%
+
+  A LUT Flip Flop pair for this architecture represents one LUT paired with
+  one Flip Flop within a slice.  A control set is a unique combination of
+  clock, reset, set, and enable signals for a registered element.
+  The Slice Logic Distribution report is not meaningful if the design is
+  over-mapped for a non-slice resource or if Placement fails.
+
+IO Utilization:
+  Number of bonded IOBs:                       146 out of     186   78%
+    Number of LOCed IOBs:                      146 out of     146  100%
+    IOB Flip Flops:                              1
+    IOB Master Pads:                             4
+    IOB Slave Pads:                              4
+
+Specific Feature Utilization:
+  Number of RAMB16BWERs:                        20 out of      32   62%
+  Number of RAMB8BWERs:                          0 out of      64    0%
+  Number of BUFIO2/BUFIO2_2CLKs:                 1 out of      32    3%
+    Number used as BUFIO2s:                      1
+    Number used as BUFIO2_2CLKs:                 0
+  Number of BUFIO2FB/BUFIO2FB_2CLKs:             1 out of      32    3%
+    Number used as BUFIO2FBs:                    1
+    Number used as BUFIO2FB_2CLKs:               0
+  Number of BUFG/BUFGMUXs:                       5 out of      16   31%
+    Number used as BUFGs:                        5
+    Number used as BUFGMUX:                      0
+  Number of DCM/DCM_CLKGENs:                     0 out of       4    0%
+  Number of ILOGIC2/ISERDES2s:                   0 out of     248    0%
+  Number of IODELAY2/IODRP2/IODRP2_MCBs:         0 out of     248    0%
+  Number of OLOGIC2/OSERDES2s:                   1 out of     248    1%
+    Number used as OLOGIC2s:                     1
+    Number used as OSERDES2s:                    0
+  Number of BSCANs:                              0 out of       4    0%
+  Number of BUFHs:                               0 out of     128    0%
+  Number of BUFPLLs:                             0 out of       8    0%
+  Number of BUFPLL_MCBs:                         0 out of       4    0%
+  Number of DSP48A1s:                            2 out of      32    6%
+  Number of ICAPs:                               0 out of       1    0%
+  Number of MCBs:                                0 out of       2    0%
+  Number of PCILOGICSEs:                         0 out of       2    0%
+  Number of PLL_ADVs:                            1 out of       2   50%
+  Number of PMVs:                                0 out of       1    0%
+  Number of STARTUPs:                            0 out of       1    0%
+  Number of SUSPEND_SYNCs:                       0 out of       1    0%
+
+Average Fanout of Non-Clock Nets:                4.59
+
+Peak Memory Usage:  461 MB
+Total REAL time to MAP completion:  17 secs 
+Total CPU time to MAP completion:   14 secs 
+
+Mapping completed.
+See MAP report file "next_top_map.mrp" for details.

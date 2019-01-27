@@ -1,0 +1,43 @@
+Release 14.7 ngdbuild P.20131013 (nt64)
+Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
+
+Command Line: f:\Xilinx\14.7\ISE_DS\ISE\bin\nt64\unwrapped\ngdbuild.exe -filter
+iseconfig/filter.filter -intstyle ise -dd _ngo -sd ipcore_dir -nt timestamp -uc
+next_pins_issue2.ucf -p xc6slx16-ftg256-2 next_top.ngc next_top.ngd
+
+Reading NGO file
+"D:/Documentacao/Eletronica/FPGA/Multicore/SRC/Multicore/ColecovisionFPGA/synth/
+next/next_top.ngc" ...
+Gathering constraint information from source properties...
+Done.
+
+Annotating constraints to design from ucf file "next_pins_issue2.ucf" ...
+Resolving constraint associations...
+Checking Constraint Associations...
+Done...
+
+Checking expanded design ...
+WARNING:NgdBuild:470 - bidirect pad net 'extras_io<2>' has no legal driver
+WARNING:NgdBuild:470 - bidirect pad net 'extras_io<1>' has no legal driver
+WARNING:NgdBuild:470 - bidirect pad net 'extras_io<0>' has no legal driver
+WARNING:NgdBuild:470 - bidirect pad net 'ps2_pin6_io' has no legal driver
+WARNING:NgdBuild:470 - bidirect pad net 'ps2_pin2_io' has no legal driver
+
+Partition Implementation Status
+-------------------------------
+
+  No Partitions were found in this design.
+
+-------------------------------
+
+NGDBUILD Design Results Summary:
+  Number of errors:     0
+  Number of warnings:   5
+
+Total memory usage is 210560 kilobytes
+
+Writing NGD file "next_top.ngd" ...
+Total REAL time to NGDBUILD completion:  5 sec
+Total CPU time to NGDBUILD completion:   5 sec
+
+Writing NGDBUILD log file "next_top.bld"...

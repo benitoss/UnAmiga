@@ -1,0 +1,8 @@
+INTSTYLE=impact
+INFILE=D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\synth\next\impact.xsl
+OUTFILE=D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\synth\next\impact.xsl
+FAMILY=Single
+PART=Single
+WORKINGDIR=D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\synth\next
+LICENSE=iMPACT
+USER_INFO=iMPACT

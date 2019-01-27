@@ -1,0 +1,8 @@
+INTSTYLE=ise
+INFILE=D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\synth\next\next_top.ncd
+OUTFILE=D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\synth\next\next_top.bit
+FAMILY=Spartan6
+PART=xc6slx16-2ftg256
+WORKINGDIR=D:\Documentacao\Eletronica\FPGA\Multicore\SRC\Multicore\ColecovisionFPGA\synth\next
+LICENSE=WebPack
+USER_INFO=206335900_0_0_917
