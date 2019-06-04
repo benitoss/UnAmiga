@@ -8,5 +8,5 @@ The first works on the STM32 microcontroller (_STM32-SPI) and controls the loadi
 while the second (_Multicore) is directly on the flash memory of the FPGA, mounting the initial menu and reading the keyboard and joystick.
 
 For more information visit this [page](http://www.forofpga.es/viewtopic.php?f=141&t=263)
-<BR?___________________________________________________________________________<BR><BR>
+<BR>___________________________________________________________________________<BR><BR>
 For more information, visit [ForoFPGA pages](http://unamiga.forofpga.es).<BR>
