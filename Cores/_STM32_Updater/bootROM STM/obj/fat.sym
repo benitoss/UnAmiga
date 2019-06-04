@@ -1,0 +1,66 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  2710 L
+    .__.ABS.                                                    =  0000 G
+    .__.CPU.                                                    =  0000 L
+    .__.H$L.                                                    =  0000 L
+  0 _FileOpen                                                      0B8A GR
+  0 _FileRead                                                      0F4A GR
+  0 _FindDrive                                                     0218 GR
+  0 _GetCluster                                                    0000 R
+    _HROW0                                                      =  FEFE 
+    _HROW1                                                      =  FDFE 
+    _HROW2                                                      =  FBFE 
+    _HROW3                                                      =  F7FE 
+    _HROW4                                                      =  EFFE 
+    _HROW5                                                      =  DFFE 
+    _HROW6                                                      =  BFFE 
+    _HROW7                                                      =  7FFE 
+    _LED                                                        =  103B 
+    _MMC_Read                                                      **** GX
+    _REG_NUM                                                    =  243B 
+    _REG_RX                                                     =  143B 
+    _REG_STM32_RESET                                            =  303B 
+    _REG_TX                                                     =  133B 
+    _REG_VAL                                                    =  253B 
+    _SD_CONTROL                                                 =  00E7 
+    _SD_DATA                                                    =  00EB 
+    _SD_STATUS                                                  =  00E7 
+    _ULAPORT                                                    =  00FE 
+  0 ___str_0                                                       0B78 R
+  0 ___str_1                                                       0B81 R
+    __mullong                                                      **** GX
+  1 _buffered_fat_index                                            022A GR
+  1 _cluster_mask                                                  001C GR
+  1 _cluster_size                                                  0018 GR
+  0 _compare                                                       019E GR
+  1 _data_start                                                    0006 GR
+  1 _dir_entries                                                   0020 GR
+  1 _fat32                                                         0000 GR
+  1 _fat_number                                                    0016 GR
+  1 _fat_size                                                      0024 GR
+  1 _fat_start                                                     0002 GR
+  1 _partitioncount                                                0228 GR
+  1 _root_directory_cluster                                        000A GR
+  1 _root_directory_size                                           0012 GR
+  1 _root_directory_start                                          000E GR
+  1 _sector_buffer                                                 0028 GR
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE                                      size 10D1   flags    0
+   1 _DATA                                      size  22E   flags    0
+   2 _INITIALIZED                               size    0   flags    0
+   3 _DABS                                      size    0   flags    8
+   4 _HOME                                      size    0   flags    0
+   5 _GSINIT                                    size    0   flags    0
+   6 _GSFINAL                                   size    0   flags    0
+   7 _INITIALIZER                               size    0   flags    0
+   8 _CABS                                      size    0   flags    8
+

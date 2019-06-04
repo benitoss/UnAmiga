@@ -1,0 +1,2362 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.5.0 #9253 (Apr  3 2018) (Linux)
+                              4 ; This file was generated Sat Jun  1 21:33:05 2019
+                              5 ;--------------------------------------------------------
+                              6 	.module fat
+                              7 	.optsdcc -mz80
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _MMC_Read
+                             13 	.globl _buffered_fat_index
+                             14 	.globl _partitioncount
+                             15 	.globl _sector_buffer
+                             16 	.globl _fat_size
+                             17 	.globl _dir_entries
+                             18 	.globl _cluster_mask
+                             19 	.globl _cluster_size
+                             20 	.globl _fat_number
+                             21 	.globl _root_directory_size
+                             22 	.globl _root_directory_start
+                             23 	.globl _root_directory_cluster
+                             24 	.globl _data_start
+                             25 	.globl _fat_start
+                             26 	.globl _fat32
+                             27 	.globl _compare
+                             28 	.globl _FindDrive
+                             29 	.globl _FileOpen
+                             30 	.globl _FileRead
+                             31 ;--------------------------------------------------------
+                             32 ; special function registers
+                             33 ;--------------------------------------------------------
+                     00E7    34 _SD_CONTROL	=	0x00e7
+                     00E7    35 _SD_STATUS	=	0x00e7
+                     00EB    36 _SD_DATA	=	0x00eb
+                     00FE    37 _ULAPORT	=	0x00fe
+                     243B    38 _REG_NUM	=	0x243b
+                     253B    39 _REG_VAL	=	0x253b
+                     303B    40 _REG_STM32_RESET	=	0x303b
+                     103B    41 _LED	=	0x103b
+                     133B    42 _REG_TX	=	0x133b
+                     143B    43 _REG_RX	=	0x143b
+                     FEFE    44 _HROW0	=	0xfefe
+                     FDFE    45 _HROW1	=	0xfdfe
+                     FBFE    46 _HROW2	=	0xfbfe
+                     F7FE    47 _HROW3	=	0xf7fe
+                     EFFE    48 _HROW4	=	0xeffe
+                     DFFE    49 _HROW5	=	0xdffe
+                     BFFE    50 _HROW6	=	0xbffe
+                     7FFE    51 _HROW7	=	0x7ffe
+                             52 ;--------------------------------------------------------
+                             53 ; ram data
+                             54 ;--------------------------------------------------------
+                             55 	.area _DATA
+   0000                      56 _fat32::
+   0000                      57 	.ds 2
+   0002                      58 _fat_start::
+   0002                      59 	.ds 4
+   0006                      60 _data_start::
+   0006                      61 	.ds 4
+   000A                      62 _root_directory_cluster::
+   000A                      63 	.ds 4
+   000E                      64 _root_directory_start::
+   000E                      65 	.ds 4
+   0012                      66 _root_directory_size::
+   0012                      67 	.ds 4
+   0016                      68 _fat_number::
+   0016                      69 	.ds 2
+   0018                      70 _cluster_size::
+   0018                      71 	.ds 4
+   001C                      72 _cluster_mask::
+   001C                      73 	.ds 4
+   0020                      74 _dir_entries::
+   0020                      75 	.ds 4
+   0024                      76 _fat_size::
+   0024                      77 	.ds 4
+   0028                      78 _sector_buffer::
+   0028                      79 	.ds 512
+   0228                      80 _partitioncount::
+   0228                      81 	.ds 2
+   022A                      82 _buffered_fat_index::
+   022A                      83 	.ds 4
+                             84 ;--------------------------------------------------------
+                             85 ; ram data
+                             86 ;--------------------------------------------------------
+                             87 	.area _INITIALIZED
+                             88 ;--------------------------------------------------------
+                             89 ; absolute external ram data
+                             90 ;--------------------------------------------------------
+                             91 	.area _DABS (ABS)
+                             92 ;--------------------------------------------------------
+                             93 ; global & static initialisations
+                             94 ;--------------------------------------------------------
+                             95 	.area _HOME
+                             96 	.area _GSINIT
+                             97 	.area _GSFINAL
+                             98 	.area _GSINIT
+                             99 ;--------------------------------------------------------
+                            100 ; Home
+                            101 ;--------------------------------------------------------
+                            102 	.area _HOME
+                            103 	.area _HOME
+                            104 ;--------------------------------------------------------
+                            105 ; code
+                            106 ;--------------------------------------------------------
+                            107 	.area _CODE
+                            108 ;src/fat.c:89: static unsigned long GetCluster(unsigned long cluster)
+                            109 ;	---------------------------------
+                            110 ; Function GetCluster
+                            111 ; ---------------------------------
+   0000                     112 _GetCluster:
+   0000 F5            [11]  113 	push	af
+   0001 F5            [11]  114 	push	af
+   0002 F5            [11]  115 	push	af
+   0003 F5            [11]  116 	push	af
+                            117 ;src/fat.c:93: if (fat32) {
+   0004 3Ar01r00      [13]  118 	ld	a,(#_fat32 + 1)
+   0007 21r00r00      [10]  119 	ld	hl,#_fat32 + 0
+   000A B6            [ 7]  120 	or	a,(hl)
+   000B 28 5C         [12]  121 	jr	Z,00102$
+                            122 ;src/fat.c:94: sb = cluster >> 7; // calculate sector number containing FAT-link
+   000D F5            [11]  123 	push	af
+   000E 21 0C 00      [10]  124 	ld	hl, #12+0
+   0011 39            [11]  125 	add	hl, sp
+   0012 7E            [ 7]  126 	ld	a, (hl)
+   0013 FD 21 02 00   [14]  127 	ld	iy,#2
+   0017 FD 39         [15]  128 	add	iy,sp
+   0019 FD 77 00      [19]  129 	ld	0 (iy),a
+   001C 21 0D 00      [10]  130 	ld	hl, #12+1
+   001F 39            [11]  131 	add	hl, sp
+   0020 7E            [ 7]  132 	ld	a, (hl)
+   0021 FD 21 02 00   [14]  133 	ld	iy,#2
+   0025 FD 39         [15]  134 	add	iy,sp
+   0027 FD 77 01      [19]  135 	ld	1 (iy),a
+   002A 21 0E 00      [10]  136 	ld	hl, #12+2
+   002D 39            [11]  137 	add	hl, sp
+   002E 7E            [ 7]  138 	ld	a, (hl)
+   002F FD 21 02 00   [14]  139 	ld	iy,#2
+   0033 FD 39         [15]  140 	add	iy,sp
+   0035 FD 77 02      [19]  141 	ld	2 (iy),a
+   0038 21 0F 00      [10]  142 	ld	hl, #12+3
+   003B 39            [11]  143 	add	hl, sp
+   003C 7E            [ 7]  144 	ld	a, (hl)
+   003D FD 21 02 00   [14]  145 	ld	iy,#2
+   0041 FD 39         [15]  146 	add	iy,sp
+   0043 FD 77 03      [19]  147 	ld	3 (iy),a
+   0046 F1            [10]  148 	pop	af
+   0047 06 07         [ 7]  149 	ld	b,#0x07
+   0049                     150 00128$:
+   0049 FD CB 03 3E   [23]  151 	srl	3 (iy)
+   004D FD CB 02 1E   [23]  152 	rr	2 (iy)
+   0051 FD CB 01 1E   [23]  153 	rr	1 (iy)
+   0055 FD CB 00 1E   [23]  154 	rr	0 (iy)
+   0059 10 EE         [13]  155 	djnz	00128$
+                            156 ;src/fat.c:95: i = cluster & 0x7F; // calculate link offsset within sector
+   005B 21 0A 00      [10]  157 	ld	hl, #10+0
+   005E 39            [11]  158 	add	hl, sp
+   005F 5E            [ 7]  159 	ld	e, (hl)
+   0060 CB BB         [ 8]  160 	res	7, e
+   0062 16 00         [ 7]  161 	ld	d,#0x00
+   0064 01 00 00      [10]  162 	ld	bc,#0x0000
+   0067 18 58         [12]  163 	jr	00103$
+   0069                     164 00102$:
+                            165 ;src/fat.c:97: sb = cluster >> 8; // calculate sector number containing FAT-link
+   0069 F5            [11]  166 	push	af
+   006A 21 0C 00      [10]  167 	ld	hl, #12+0
+   006D 39            [11]  168 	add	hl, sp
+   006E 7E            [ 7]  169 	ld	a, (hl)
+   006F FD 21 02 00   [14]  170 	ld	iy,#2
+   0073 FD 39         [15]  171 	add	iy,sp
+   0075 FD 77 00      [19]  172 	ld	0 (iy),a
+   0078 21 0D 00      [10]  173 	ld	hl, #12+1
+   007B 39            [11]  174 	add	hl, sp
+   007C 7E            [ 7]  175 	ld	a, (hl)
+   007D FD 21 02 00   [14]  176 	ld	iy,#2
+   0081 FD 39         [15]  177 	add	iy,sp
+   0083 FD 77 01      [19]  178 	ld	1 (iy),a
+   0086 21 0E 00      [10]  179 	ld	hl, #12+2
+   0089 39            [11]  180 	add	hl, sp
+   008A 7E            [ 7]  181 	ld	a, (hl)
+   008B FD 21 02 00   [14]  182 	ld	iy,#2
+   008F FD 39         [15]  183 	add	iy,sp
+   0091 FD 77 02      [19]  184 	ld	2 (iy),a
+   0094 21 0F 00      [10]  185 	ld	hl, #12+3
+   0097 39            [11]  186 	add	hl, sp
+   0098 7E            [ 7]  187 	ld	a, (hl)
+   0099 FD 21 02 00   [14]  188 	ld	iy,#2
+   009D FD 39         [15]  189 	add	iy,sp
+   009F FD 77 03      [19]  190 	ld	3 (iy),a
+   00A2 F1            [10]  191 	pop	af
+   00A3 06 08         [ 7]  192 	ld	b,#0x08
+   00A5                     193 00130$:
+   00A5 FD CB 03 3E   [23]  194 	srl	3 (iy)
+   00A9 FD CB 02 1E   [23]  195 	rr	2 (iy)
+   00AD FD CB 01 1E   [23]  196 	rr	1 (iy)
+   00B1 FD CB 00 1E   [23]  197 	rr	0 (iy)
+   00B5 10 EE         [13]  198 	djnz	00130$
+                            199 ;src/fat.c:98: i = cluster & 0xFF; // calculate link offsset within sector
+   00B7 21 0A 00      [10]  200 	ld	hl, #10+0
+   00BA 39            [11]  201 	add	hl, sp
+   00BB 5E            [ 7]  202 	ld	e, (hl)
+   00BC 16 00         [ 7]  203 	ld	d,#0x00
+   00BE 01 00 00      [10]  204 	ld	bc,#0x0000
+   00C1                     205 00103$:
+                            206 ;src/fat.c:102: if (sb != buffered_fat_index) {
+   00C1 21 00 00      [10]  207 	ld	hl, #0+0
+   00C4 39            [11]  208 	add	hl, sp
+   00C5 7E            [ 7]  209 	ld	a, (hl)
+   00C6 FD 21r2Ar02   [14]  210 	ld	iy,#_buffered_fat_index
+   00CA FD 96 00      [19]  211 	sub	a, 0 (iy)
+   00CD 20 2A         [12]  212 	jr	NZ,00132$
+   00CF 21 01 00      [10]  213 	ld	hl, #0+1
+   00D2 39            [11]  214 	add	hl, sp
+   00D3 7E            [ 7]  215 	ld	a, (hl)
+   00D4 FD 21r2Ar02   [14]  216 	ld	iy,#_buffered_fat_index
+   00D8 FD 96 01      [19]  217 	sub	a, 1 (iy)
+   00DB 20 1C         [12]  218 	jr	NZ,00132$
+   00DD 21 02 00      [10]  219 	ld	hl, #0+2
+   00E0 39            [11]  220 	add	hl, sp
+   00E1 7E            [ 7]  221 	ld	a, (hl)
+   00E2 FD 21r2Ar02   [14]  222 	ld	iy,#_buffered_fat_index
+   00E6 FD 96 02      [19]  223 	sub	a, 2 (iy)
+   00E9 20 0E         [12]  224 	jr	NZ,00132$
+   00EB 21 03 00      [10]  225 	ld	hl, #0+3
+   00EE 39            [11]  226 	add	hl, sp
+   00EF 7E            [ 7]  227 	ld	a, (hl)
+   00F0 FD 21r2Ar02   [14]  228 	ld	iy,#_buffered_fat_index
+   00F4 FD 96 03      [19]  229 	sub	a, 3 (iy)
+   00F7 28 66         [12]  230 	jr	Z,00107$
+   00F9                     231 00132$:
+                            232 ;src/fat.c:103: if (!MMC_Read(fat_start + sb, (unsigned char*)&fat_buffer)) {
+   00F9 21 00 00      [10]  233 	ld	hl,#0
+   00FC 39            [11]  234 	add	hl,sp
+   00FD D5            [11]  235 	push	de
+   00FE FD 21 06 00   [14]  236 	ld	iy,#6
+   0102 FD 39         [15]  237 	add	iy,sp
+   0104 FD E5         [15]  238 	push	iy
+   0106 D1            [10]  239 	pop	de
+   0107 3Ar02r00      [13]  240 	ld	a,(#_fat_start + 0)
+   010A 86            [ 7]  241 	add	a, (hl)
+   010B 12            [ 7]  242 	ld	(de),a
+   010C 3Ar03r00      [13]  243 	ld	a,(#_fat_start + 1)
+   010F 23            [ 6]  244 	inc	hl
+   0110 8E            [ 7]  245 	adc	a, (hl)
+   0111 13            [ 6]  246 	inc	de
+   0112 12            [ 7]  247 	ld	(de),a
+   0113 3Ar04r00      [13]  248 	ld	a,(#_fat_start + 2)
+   0116 23            [ 6]  249 	inc	hl
+   0117 8E            [ 7]  250 	adc	a, (hl)
+   0118 13            [ 6]  251 	inc	de
+   0119 12            [ 7]  252 	ld	(de),a
+   011A 3Ar05r00      [13]  253 	ld	a,(#_fat_start + 3)
+   011D 23            [ 6]  254 	inc	hl
+   011E 8E            [ 7]  255 	adc	a, (hl)
+   011F 13            [ 6]  256 	inc	de
+   0120 12            [ 7]  257 	ld	(de),a
+   0121 D1            [10]  258 	pop	de
+   0122 C5            [11]  259 	push	bc
+   0123 D5            [11]  260 	push	de
+   0124 21r28r00      [10]  261 	ld	hl,#_sector_buffer
+   0127 E5            [11]  262 	push	hl
+   0128 FD 21 0A 00   [14]  263 	ld	iy,#10
+   012C FD 39         [15]  264 	add	iy,sp
+   012E FD 6E 02      [19]  265 	ld	l,2 (iy)
+   0131 FD 66 03      [19]  266 	ld	h,3 (iy)
+   0134 E5            [11]  267 	push	hl
+   0135 FD 6E 00      [19]  268 	ld	l,0 (iy)
+   0138 FD 66 01      [19]  269 	ld	h,1 (iy)
+   013B E5            [11]  270 	push	hl
+   013C CDr00r00      [17]  271 	call	_MMC_Read
+   013F F1            [10]  272 	pop	af
+   0140 F1            [10]  273 	pop	af
+   0141 F1            [10]  274 	pop	af
+   0142 7D            [ 4]  275 	ld	a,l
+   0143 D1            [10]  276 	pop	de
+   0144 C1            [10]  277 	pop	bc
+   0145 B7            [ 4]  278 	or	a, a
+   0146 20 07         [12]  279 	jr	NZ,00105$
+                            280 ;src/fat.c:104: return 0;
+   0148 21 00 00      [10]  281 	ld	hl,#0x0000
+   014B 5D            [ 4]  282 	ld	e,l
+   014C 54            [ 4]  283 	ld	d,h
+   014D 18 4A         [12]  284 	jr	00108$
+   014F                     285 00105$:
+                            286 ;src/fat.c:107: buffered_fat_index = sb;
+   014F D5            [11]  287 	push	de
+   0150 C5            [11]  288 	push	bc
+   0151 11r2Ar02      [10]  289 	ld	de, #_buffered_fat_index
+   0154 21 04 00      [10]  290 	ld	hl, #4
+   0157 39            [11]  291 	add	hl, sp
+   0158 01 04 00      [10]  292 	ld	bc, #4
+   015B ED B0         [21]  293 	ldir
+   015D C1            [10]  294 	pop	bc
+   015E D1            [10]  295 	pop	de
+   015F                     296 00107$:
+                            297 ;src/fat.c:109: i = fat32 ? SwapBBBB(fat_buffer.fat32[i]) & 0x0FFFFFFF : SwapBB(fat_buffer.fat16[i]); // get FAT link for 68000 
+   015F 3Ar01r00      [13]  298 	ld	a,(#_fat32 + 1)
+   0162 21r00r00      [10]  299 	ld	hl,#_fat32 + 0
+   0165 B6            [ 7]  300 	or	a,(hl)
+   0166 28 1D         [12]  301 	jr	Z,00110$
+   0168 21r28r00      [10]  302 	ld	hl,#_sector_buffer
+   016B 3E 02         [ 7]  303 	ld	a,#0x02
+   016D                     304 00133$:
+   016D CB 23         [ 8]  305 	sla	e
+   016F CB 12         [ 8]  306 	rl	d
+   0171 CB 11         [ 8]  307 	rl	c
+   0173 CB 10         [ 8]  308 	rl	b
+   0175 3D            [ 4]  309 	dec	a
+   0176 20 F5         [12]  310 	jr	NZ,00133$
+   0178 19            [11]  311 	add	hl,de
+   0179 4E            [ 7]  312 	ld	c,(hl)
+   017A 23            [ 6]  313 	inc	hl
+   017B 46            [ 7]  314 	ld	b,(hl)
+   017C 23            [ 6]  315 	inc	hl
+   017D 5E            [ 7]  316 	ld	e,(hl)
+   017E 23            [ 6]  317 	inc	hl
+   017F 7E            [ 7]  318 	ld	a, (hl)
+   0180 E6 0F         [ 7]  319 	and	a, #0x0F
+   0182 57            [ 4]  320 	ld	d,a
+   0183 18 12         [12]  321 	jr	00111$
+   0185                     322 00110$:
+   0185 21r28r00      [10]  323 	ld	hl,#_sector_buffer
+   0188 CB 23         [ 8]  324 	sla	e
+   018A CB 12         [ 8]  325 	rl	d
+   018C CB 11         [ 8]  326 	rl	c
+   018E CB 10         [ 8]  327 	rl	b
+   0190 19            [11]  328 	add	hl,de
+   0191 4E            [ 7]  329 	ld	c,(hl)
+   0192 23            [ 6]  330 	inc	hl
+   0193 46            [ 7]  331 	ld	b,(hl)
+   0194 11 00 00      [10]  332 	ld	de,#0x0000
+   0197                     333 00111$:
+   0197 69            [ 4]  334 	ld	l,c
+   0198 60            [ 4]  335 	ld	h,b
+                            336 ;src/fat.c:110: return i;
+   0199                     337 00108$:
+   0199 F1            [10]  338 	pop	af
+   019A F1            [10]  339 	pop	af
+   019B F1            [10]  340 	pop	af
+   019C F1            [10]  341 	pop	af
+   019D C9            [10]  342 	ret
+                            343 ;src/fat.c:114: int compare(const char *s1, const char *s2, int b) {
+                            344 ;	---------------------------------
+                            345 ; Function compare
+                            346 ; ---------------------------------
+   019E                     347 _compare::
+   019E F5            [11]  348 	push	af
+   019F F5            [11]  349 	push	af
+                            350 ;src/fat.c:117: for(i = 0; i < b; ++i) {
+   01A0 21 06 00      [10]  351 	ld	hl, #6
+   01A3 39            [11]  352 	add	hl, sp
+   01A4 5E            [ 7]  353 	ld	e, (hl)
+   01A5 23            [ 6]  354 	inc	hl
+   01A6 56            [ 7]  355 	ld	d, (hl)
+   01A7 21 08 00      [10]  356 	ld	hl, #8+0
+   01AA 39            [11]  357 	add	hl, sp
+   01AB 7E            [ 7]  358 	ld	a, (hl)
+   01AC FD 21 02 00   [14]  359 	ld	iy,#2
+   01B0 FD 39         [15]  360 	add	iy,sp
+   01B2 FD 77 00      [19]  361 	ld	0 (iy),a
+   01B5 21 09 00      [10]  362 	ld	hl, #8+1
+   01B8 39            [11]  363 	add	hl, sp
+   01B9 7E            [ 7]  364 	ld	a, (hl)
+   01BA FD 21 02 00   [14]  365 	ld	iy,#2
+   01BE FD 39         [15]  366 	add	iy,sp
+   01C0 FD 77 01      [19]  367 	ld	1 (iy),a
+   01C3 01 00 00      [10]  368 	ld	bc,#0x0000
+   01C6                     369 00105$:
+   01C6 21 0A 00      [10]  370 	ld	hl,#10
+   01C9 39            [11]  371 	add	hl,sp
+   01CA 79            [ 4]  372 	ld	a,c
+   01CB 96            [ 7]  373 	sub	a, (hl)
+   01CC 78            [ 4]  374 	ld	a,b
+   01CD 23            [ 6]  375 	inc	hl
+   01CE 9E            [ 7]  376 	sbc	a, (hl)
+   01CF E2rD4r01      [10]  377 	jp	PO, 00121$
+   01D2 EE 80         [ 7]  378 	xor	a, #0x80
+   01D4                     379 00121$:
+   01D4 F2r12r02      [10]  380 	jp	P,00103$
+                            381 ;src/fat.c:118: if(*s1++ != *s2++)
+   01D7 1A            [ 7]  382 	ld	a,(de)
+   01D8 FD 21 01 00   [14]  383 	ld	iy,#1
+   01DC FD 39         [15]  384 	add	iy,sp
+   01DE FD 77 00      [19]  385 	ld	0 (iy),a
+   01E1 13            [ 6]  386 	inc	de
+   01E2 FD 21 02 00   [14]  387 	ld	iy,#2
+   01E6 FD 39         [15]  388 	add	iy,sp
+   01E8 FD 6E 00      [19]  389 	ld	l,0 (iy)
+   01EB FD 66 01      [19]  390 	ld	h,1 (iy)
+   01EE 7E            [ 7]  391 	ld	a,(hl)
+   01EF 33            [ 6]  392 	inc	sp
+   01F0 F5            [11]  393 	push	af
+   01F1 33            [ 6]  394 	inc	sp
+   01F2 FD 34 00      [23]  395 	inc	0 (iy)
+   01F5 20 03         [12]  396 	jr	NZ,00122$
+   01F7 FD 34 01      [23]  397 	inc	1 (iy)
+   01FA                     398 00122$:
+   01FA 21 01 00      [10]  399 	ld	hl, #1+0
+   01FD 39            [11]  400 	add	hl, sp
+   01FE 7E            [ 7]  401 	ld	a, (hl)
+   01FF FD 21 00 00   [14]  402 	ld	iy,#0
+   0203 FD 39         [15]  403 	add	iy,sp
+   0205 FD 96 00      [19]  404 	sub	a, 0 (iy)
+   0208 28 05         [12]  405 	jr	Z,00106$
+                            406 ;src/fat.c:119: return 1;
+   020A 21 01 00      [10]  407 	ld	hl,#0x0001
+   020D 18 06         [12]  408 	jr	00107$
+   020F                     409 00106$:
+                            410 ;src/fat.c:117: for(i = 0; i < b; ++i) {
+   020F 03            [ 6]  411 	inc	bc
+   0210 18 B4         [12]  412 	jr	00105$
+   0212                     413 00103$:
+                            414 ;src/fat.c:121: return 0;
+   0212 21 00 00      [10]  415 	ld	hl,#0x0000
+   0215                     416 00107$:
+   0215 F1            [10]  417 	pop	af
+   0216 F1            [10]  418 	pop	af
+   0217 C9            [10]  419 	ret
+                            420 ;src/fat.c:126: unsigned char FindDrive(void)
+                            421 ;	---------------------------------
+                            422 ; Function FindDrive
+                            423 ; ---------------------------------
+   0218                     424 _FindDrive::
+   0218 21 EF FF      [10]  425 	ld	hl,#-17
+   021B 39            [11]  426 	add	hl,sp
+   021C F9            [ 6]  427 	ld	sp,hl
+                            428 ;src/fat.c:129: buffered_fat_index = 0xFFFFFFFF;
+   021D 21r2Ar02      [10]  429 	ld	hl,#_buffered_fat_index + 0
+   0220 36 FF         [10]  430 	ld	(hl), #0xFF
+   0222 21r2Br02      [10]  431 	ld	hl,#_buffered_fat_index + 1
+   0225 36 FF         [10]  432 	ld	(hl), #0xFF
+   0227 21r2Cr02      [10]  433 	ld	hl,#_buffered_fat_index + 2
+   022A 36 FF         [10]  434 	ld	(hl), #0xFF
+   022C 21r2Dr02      [10]  435 	ld	hl,#_buffered_fat_index + 3
+   022F 36 FF         [10]  436 	ld	(hl), #0xFF
+                            437 ;src/fat.c:130: fat32=0;
+   0231 21 00 00      [10]  438 	ld	hl,#0x0000
+   0234 22r00r00      [16]  439 	ld	(_fat32),hl
+                            440 ;src/fat.c:132: if (!MMC_Read(0, sector_buffer)) // read MBR
+   0237 21r28r00      [10]  441 	ld	hl,#_sector_buffer
+   023A E5            [11]  442 	push	hl
+   023B 21 00 00      [10]  443 	ld	hl,#0x0000
+   023E E5            [11]  444 	push	hl
+   023F 21 00 00      [10]  445 	ld	hl,#0x0000
+   0242 E5            [11]  446 	push	hl
+   0243 CDr00r00      [17]  447 	call	_MMC_Read
+   0246 F1            [10]  448 	pop	af
+   0247 F1            [10]  449 	pop	af
+   0248 F1            [10]  450 	pop	af
+   0249 FD 21 08 00   [14]  451 	ld	iy,#8
+   024D FD 39         [15]  452 	add	iy,sp
+   024F FD 75 00      [19]  453 	ld	0 (iy),l
+   0252 21 08 00      [10]  454 	ld	hl, #8+0
+   0255 39            [11]  455 	add	hl, sp
+   0256 7E            [ 7]  456 	ld	a, (hl)
+                            457 ;src/fat.c:133: return(0);
+   0257 B7            [ 4]  458 	or	a,a
+   0258 20 04         [12]  459 	jr	NZ,00102$
+   025A 6F            [ 4]  460 	ld	l,a
+   025B C3r6Fr0B      [10]  461 	jp	00135$
+   025E                     462 00102$:
+                            463 ;src/fat.c:135: boot_sector=0;
+   025E AF            [ 4]  464 	xor	a, a
+   025F FD 21 09 00   [14]  465 	ld	iy,#9
+   0263 FD 39         [15]  466 	add	iy,sp
+   0265 FD 77 00      [19]  467 	ld	0 (iy),a
+   0268 FD 77 01      [19]  468 	ld	1 (iy),a
+   026B FD 77 02      [19]  469 	ld	2 (iy),a
+   026E FD 77 03      [19]  470 	ld	3 (iy),a
+                            471 ;src/fat.c:136: partitioncount=1;
+   0271 21 01 00      [10]  472 	ld	hl,#0x0001
+   0274 22r28r02      [16]  473 	ld	(_partitioncount),hl
+                            474 ;src/fat.c:139: if (compare((const char*)&sector_buffer[0x36], "FAT16   ",8)==0) // check for FAT16
+   0277 FD 21 06 00   [14]  475 	ld	iy,#6
+   027B FD 39         [15]  476 	add	iy,sp
+   027D FD 36 00r5E   [19]  477 	ld	0 (iy),#<((_sector_buffer + 0x0036))
+   0281 FD 36 01s00   [19]  478 	ld	1 (iy),#>((_sector_buffer + 0x0036))
+   0285 2E 08         [ 7]  479 	ld	l, #0x08
+   0287 E5            [11]  480 	push	hl
+   0288 21r78r0B      [10]  481 	ld	hl,#___str_0
+   028B E5            [11]  482 	push	hl
+   028C FD 6E 00      [19]  483 	ld	l,0 (iy)
+   028F FD 66 01      [19]  484 	ld	h,1 (iy)
+   0292 E5            [11]  485 	push	hl
+   0293 CDr9Er01      [17]  486 	call	_compare
+   0296 F1            [10]  487 	pop	af
+   0297 F1            [10]  488 	pop	af
+   0298 F1            [10]  489 	pop	af
+   0299 7C            [ 4]  490 	ld	a,h
+   029A B5            [ 4]  491 	or	a,l
+   029B 20 06         [12]  492 	jr	NZ,00104$
+                            493 ;src/fat.c:140: partitioncount=0;
+   029D 21 00 00      [10]  494 	ld	hl,#0x0000
+   02A0 22r28r02      [16]  495 	ld	(_partitioncount),hl
+   02A3                     496 00104$:
+                            497 ;src/fat.c:141: if (compare((const char*)&sector_buffer[0x52], "FAT32   ",8)==0) // check for FAT32
+   02A3 FD 21 06 00   [14]  498 	ld	iy,#6
+   02A7 FD 39         [15]  499 	add	iy,sp
+   02A9 FD 36 00r7A   [19]  500 	ld	0 (iy),#<((_sector_buffer + 0x0052))
+   02AD FD 36 01s00   [19]  501 	ld	1 (iy),#>((_sector_buffer + 0x0052))
+   02B1 21 08 00      [10]  502 	ld	hl,#0x0008
+   02B4 E5            [11]  503 	push	hl
+   02B5 21r81r0B      [10]  504 	ld	hl,#___str_1
+   02B8 E5            [11]  505 	push	hl
+   02B9 FD 6E 00      [19]  506 	ld	l,0 (iy)
+   02BC FD 66 01      [19]  507 	ld	h,1 (iy)
+   02BF E5            [11]  508 	push	hl
+   02C0 CDr9Er01      [17]  509 	call	_compare
+   02C3 F1            [10]  510 	pop	af
+   02C4 F1            [10]  511 	pop	af
+   02C5 F1            [10]  512 	pop	af
+   02C6 FD 21 06 00   [14]  513 	ld	iy,#6
+   02CA FD 39         [15]  514 	add	iy,sp
+   02CC FD 74 01      [19]  515 	ld	1 (iy),h
+   02CF FD 75 00      [19]  516 	ld	0 (iy),l
+   02D2 21 07 00      [10]  517 	ld	hl, #6+1
+   02D5 39            [11]  518 	add	hl, sp
+   02D6 7E            [ 7]  519 	ld	a, (hl)
+   02D7 2B            [ 6]  520 	dec	hl
+   02D8 B6            [ 7]  521 	or	a,(hl)
+   02D9 20 06         [12]  522 	jr	NZ,00106$
+                            523 ;src/fat.c:142: partitioncount=0;
+   02DB 21 00 00      [10]  524 	ld	hl,#0x0000
+   02DE 22r28r02      [16]  525 	ld	(_partitioncount),hl
+   02E1                     526 00106$:
+                            527 ;src/fat.c:144: if(partitioncount)
+   02E1 3Ar29r02      [13]  528 	ld	a,(#_partitioncount + 1)
+   02E4 21r28r02      [10]  529 	ld	hl,#_partitioncount + 0
+   02E7 B6            [ 7]  530 	or	a,(hl)
+   02E8 CArEAr03      [10]  531 	jp	Z,00115$
+                            532 ;src/fat.c:147: struct MasterBootRecord *mbr=(struct MasterBootRecord *)sector_buffer;
+   02EB FD 21 06 00   [14]  533 	ld	iy,#6
+   02EF FD 39         [15]  534 	add	iy,sp
+   02F1 FD 36 00r28   [19]  535 	ld	0 (iy),#<(_sector_buffer)
+   02F5 FD 36 01s00   [19]  536 	ld	1 (iy),#>(_sector_buffer)
+   02F9 FD 7E 00      [19]  537 	ld	a,0 (iy)
+   02FC FD 21 00 00   [14]  538 	ld	iy,#0
+   0300 FD 39         [15]  539 	add	iy,sp
+   0302 FD 77 00      [19]  540 	ld	0 (iy),a
+   0305 21 07 00      [10]  541 	ld	hl, #6+1
+   0308 39            [11]  542 	add	hl, sp
+   0309 7E            [ 7]  543 	ld	a, (hl)
+   030A FD 21 00 00   [14]  544 	ld	iy,#0
+   030E FD 39         [15]  545 	add	iy,sp
+   0310 FD 77 01      [19]  546 	ld	1 (iy),a
+                            547 ;src/fat.c:149: boot_sector = mbr->Partition[0].startlba;
+   0313 FD 7E 00      [19]  548 	ld	a,0 (iy)
+   0316 FD 21 06 00   [14]  549 	ld	iy,#6
+   031A FD 39         [15]  550 	add	iy,sp
+   031C FD 77 00      [19]  551 	ld	0 (iy),a
+   031F 21 01 00      [10]  552 	ld	hl, #0+1
+   0322 39            [11]  553 	add	hl, sp
+   0323 7E            [ 7]  554 	ld	a, (hl)
+   0324 FD 21 06 00   [14]  555 	ld	iy,#6
+   0328 FD 39         [15]  556 	add	iy,sp
+   032A FD 77 01      [19]  557 	ld	1 (iy),a
+   032D FD 6E 00      [19]  558 	ld	l,0 (iy)
+   0330 FD 66 01      [19]  559 	ld	h,1 (iy)
+   0333 11 C6 01      [10]  560 	ld	de, #0x01C6
+   0336 19            [11]  561 	add	hl, de
+   0337 7E            [ 7]  562 	ld	a,(hl)
+   0338 FD 21 02 00   [14]  563 	ld	iy,#2
+   033C FD 39         [15]  564 	add	iy,sp
+   033E FD 77 00      [19]  565 	ld	0 (iy),a
+   0341 23            [ 6]  566 	inc	hl
+   0342 7E            [ 7]  567 	ld	a,(hl)
+   0343 FD 77 01      [19]  568 	ld	1 (iy),a
+   0346 23            [ 6]  569 	inc	hl
+   0347 7E            [ 7]  570 	ld	a,(hl)
+   0348 FD 77 02      [19]  571 	ld	2 (iy),a
+   034B 23            [ 6]  572 	inc	hl
+   034C 7E            [ 7]  573 	ld	a,(hl)
+   034D FD 77 03      [19]  574 	ld	3 (iy),a
+   0350 21 09 00      [10]  575 	ld	hl, #9
+   0353 39            [11]  576 	add	hl, sp
+   0354 EB            [ 4]  577 	ex	de, hl
+   0355 21 02 00      [10]  578 	ld	hl, #2
+   0358 39            [11]  579 	add	hl, sp
+   0359 01 04 00      [10]  580 	ld	bc, #4
+   035C ED B0         [21]  581 	ldir
+                            582 ;src/fat.c:150: if(mbr->Signature==0x55aa)
+   035E 21 00 00      [10]  583 	ld	hl, #0+0
+   0361 39            [11]  584 	add	hl, sp
+   0362 7E            [ 7]  585 	ld	a, (hl)
+   0363 FD 21 06 00   [14]  586 	ld	iy,#6
+   0367 FD 39         [15]  587 	add	iy,sp
+   0369 FD 77 00      [19]  588 	ld	0 (iy),a
+   036C 21 01 00      [10]  589 	ld	hl, #0+1
+   036F 39            [11]  590 	add	hl, sp
+   0370 7E            [ 7]  591 	ld	a, (hl)
+   0371 FD 21 06 00   [14]  592 	ld	iy,#6
+   0375 FD 39         [15]  593 	add	iy,sp
+   0377 FD 77 01      [19]  594 	ld	1 (iy),a
+   037A FD 6E 00      [19]  595 	ld	l,0 (iy)
+   037D FD 66 01      [19]  596 	ld	h,1 (iy)
+   0380 11 FE 01      [10]  597 	ld	de, #0x01FE
+   0383 19            [11]  598 	add	hl, de
+   0384 7E            [ 7]  599 	ld	a,(hl)
+   0385 FD 77 00      [19]  600 	ld	0 (iy),a
+   0388 23            [ 6]  601 	inc	hl
+   0389 7E            [ 7]  602 	ld	a,(hl)
+   038A FD 77 01      [19]  603 	ld	1 (iy),a
+   038D FD 7E 00      [19]  604 	ld	a,0 (iy)
+   0390 D6 AA         [ 7]  605 	sub	a, #0xAA
+   0392 20 17         [12]  606 	jr	NZ,00110$
+   0394 FD 7E 01      [19]  607 	ld	a,1 (iy)
+   0397 D6 55         [ 7]  608 	sub	a, #0x55
+   0399 20 10         [12]  609 	jr	NZ,00110$
+                            610 ;src/fat.c:151: boot_sector=SwapBBBB(mbr->Partition[0].startlba);
+   039B 21 09 00      [10]  611 	ld	hl, #9
+   039E 39            [11]  612 	add	hl, sp
+   039F EB            [ 4]  613 	ex	de, hl
+   03A0 21 02 00      [10]  614 	ld	hl, #2
+   03A3 39            [11]  615 	add	hl, sp
+   03A4 01 04 00      [10]  616 	ld	bc, #4
+   03A7 ED B0         [21]  617 	ldir
+   03A9 18 19         [12]  618 	jr	00111$
+   03AB                     619 00110$:
+                            620 ;src/fat.c:152: else if(mbr->Signature!=0xaa55)
+   03AB FD 21 06 00   [14]  621 	ld	iy,#6
+   03AF FD 39         [15]  622 	add	iy,sp
+   03B1 FD 7E 00      [19]  623 	ld	a,0 (iy)
+   03B4 D6 55         [ 7]  624 	sub	a, #0x55
+   03B6 20 07         [12]  625 	jr	NZ,00199$
+   03B8 FD 7E 01      [19]  626 	ld	a,1 (iy)
+   03BB D6 AA         [ 7]  627 	sub	a, #0xAA
+   03BD 28 05         [12]  628 	jr	Z,00111$
+   03BF                     629 00199$:
+                            630 ;src/fat.c:155: return(0);
+   03BF 2E 00         [ 7]  631 	ld	l,#0x00
+   03C1 C3r6Fr0B      [10]  632 	jp	00135$
+   03C4                     633 00111$:
+                            634 ;src/fat.c:157: if (!MMC_Read(boot_sector, sector_buffer)) // read discriptor
+   03C4 21r28r00      [10]  635 	ld	hl,#_sector_buffer
+   03C7 E5            [11]  636 	push	hl
+   03C8 FD 21 0B 00   [14]  637 	ld	iy,#11
+   03CC FD 39         [15]  638 	add	iy,sp
+   03CE FD 6E 02      [19]  639 	ld	l,2 (iy)
+   03D1 FD 66 03      [19]  640 	ld	h,3 (iy)
+   03D4 E5            [11]  641 	push	hl
+   03D5 FD 6E 00      [19]  642 	ld	l,0 (iy)
+   03D8 FD 66 01      [19]  643 	ld	h,1 (iy)
+   03DB E5            [11]  644 	push	hl
+   03DC CDr00r00      [17]  645 	call	_MMC_Read
+   03DF F1            [10]  646 	pop	af
+   03E0 F1            [10]  647 	pop	af
+   03E1 F1            [10]  648 	pop	af
+   03E2 7D            [ 4]  649 	ld	a,l
+                            650 ;src/fat.c:158: return(0);
+   03E3 B7            [ 4]  651 	or	a,a
+   03E4 20 04         [12]  652 	jr	NZ,00115$
+   03E6 6F            [ 4]  653 	ld	l,a
+   03E7 C3r6Fr0B      [10]  654 	jp	00135$
+   03EA                     655 00115$:
+                            656 ;src/fat.c:162: if (compare(sector_buffer+0x52, "FAT32   ",8)==0) // check for FAT32
+   03EA 21 08 00      [10]  657 	ld	hl,#0x0008
+   03ED E5            [11]  658 	push	hl
+   03EE 21r81r0B      [10]  659 	ld	hl,#___str_1
+   03F1 E5            [11]  660 	push	hl
+   03F2 21r7Ar00      [10]  661 	ld	hl,#(_sector_buffer + 0x0052)
+   03F5 E5            [11]  662 	push	hl
+   03F6 CDr9Er01      [17]  663 	call	_compare
+   03F9 F1            [10]  664 	pop	af
+   03FA F1            [10]  665 	pop	af
+   03FB F1            [10]  666 	pop	af
+   03FC 7C            [ 4]  667 	ld	a,h
+   03FD B5            [ 4]  668 	or	a,l
+   03FE 20 08         [12]  669 	jr	NZ,00119$
+                            670 ;src/fat.c:163: fat32=1;
+   0400 21 01 00      [10]  671 	ld	hl,#0x0001
+   0403 22r00r00      [16]  672 	ld	(_fat32),hl
+   0406 18 1B         [12]  673 	jr	00120$
+   0408                     674 00119$:
+                            675 ;src/fat.c:164: else if (compare(sector_buffer+0x36, "FAT16   ",8)!=0) // check for FAT16
+   0408 21 08 00      [10]  676 	ld	hl,#0x0008
+   040B E5            [11]  677 	push	hl
+   040C 21r78r0B      [10]  678 	ld	hl,#___str_0
+   040F E5            [11]  679 	push	hl
+   0410 21r5Er00      [10]  680 	ld	hl,#(_sector_buffer + 0x0036)
+   0413 E5            [11]  681 	push	hl
+   0414 CDr9Er01      [17]  682 	call	_compare
+   0417 F1            [10]  683 	pop	af
+   0418 F1            [10]  684 	pop	af
+   0419 F1            [10]  685 	pop	af
+   041A 7C            [ 4]  686 	ld	a,h
+   041B B5            [ 4]  687 	or	a,l
+   041C 28 05         [12]  688 	jr	Z,00120$
+                            689 ;src/fat.c:167: return(0);
+   041E 2E 00         [ 7]  690 	ld	l,#0x00
+   0420 C3r6Fr0B      [10]  691 	jp	00135$
+   0423                     692 00120$:
+                            693 ;src/fat.c:170: if (sector_buffer[510] != 0x55 || sector_buffer[511] != 0xaa)  // check signature
+   0423 3Ar26r02      [13]  694 	ld	a, (#_sector_buffer + 510)
+   0426 D6 55         [ 7]  695 	sub	a, #0x55
+   0428 20 07         [12]  696 	jr	NZ,00121$
+   042A 3Ar27r02      [13]  697 	ld	a, (#_sector_buffer + 511)
+   042D D6 AA         [ 7]  698 	sub	a, #0xAA
+   042F 28 05         [12]  699 	jr	Z,00122$
+   0431                     700 00121$:
+                            701 ;src/fat.c:171: return(0);
+   0431 2E 00         [ 7]  702 	ld	l,#0x00
+   0433 C3r6Fr0B      [10]  703 	jp	00135$
+   0436                     704 00122$:
+                            705 ;src/fat.c:174: if (sector_buffer[0] != 0xe9 && sector_buffer[0] != 0xeb)
+   0436 3Ar28r00      [13]  706 	ld	a,(#_sector_buffer + 0)
+   0439 FE E9         [ 7]  707 	cp	a,#0xE9
+   043B 28 09         [12]  708 	jr	Z,00125$
+   043D D6 EB         [ 7]  709 	sub	a, #0xEB
+   043F 28 05         [12]  710 	jr	Z,00125$
+                            711 ;src/fat.c:175: return(0);
+   0441 2E 00         [ 7]  712 	ld	l,#0x00
+   0443 C3r6Fr0B      [10]  713 	jp	00135$
+   0446                     714 00125$:
+                            715 ;src/fat.c:178: if (sector_buffer[11] != 0x00 || sector_buffer[12] != 0x02)
+   0446 3Ar33r00      [13]  716 	ld	a, (#_sector_buffer + 11)
+   0449 B7            [ 4]  717 	or	a, a
+   044A 20 07         [12]  718 	jr	NZ,00127$
+   044C 3Ar34r00      [13]  719 	ld	a, (#_sector_buffer + 12)
+   044F D6 02         [ 7]  720 	sub	a, #0x02
+   0451 28 05         [12]  721 	jr	Z,00128$
+   0453                     722 00127$:
+                            723 ;src/fat.c:179: return(0);
+   0453 2E 00         [ 7]  724 	ld	l,#0x00
+   0455 C3r6Fr0B      [10]  725 	jp	00135$
+   0458                     726 00128$:
+                            727 ;src/fat.c:182: cluster_size = sector_buffer[13];
+   0458 3Ar35r00      [13]  728 	ld	a, (#_sector_buffer + 13)
+   045B 32r18r00      [13]  729 	ld	(#_cluster_size + 0),a
+   045E 21r19r00      [10]  730 	ld	hl,#_cluster_size + 1
+   0461 36 00         [10]  731 	ld	(hl), #0x00
+   0463 21r1Ar00      [10]  732 	ld	hl,#_cluster_size + 2
+   0466 36 00         [10]  733 	ld	(hl), #0x00
+   0468 21r1Br00      [10]  734 	ld	hl,#_cluster_size + 3
+   046B 36 00         [10]  735 	ld	(hl), #0x00
+                            736 ;src/fat.c:185: cluster_mask = cluster_size - 1;
+   046D 21r1Cr00      [10]  737 	ld	hl,#_cluster_mask
+   0470 3Ar18r00      [13]  738 	ld	a,(#_cluster_size + 0)
+   0473 C6 FF         [ 7]  739 	add	a,#0xFF
+   0475 77            [ 7]  740 	ld	(hl),a
+   0476 3Ar19r00      [13]  741 	ld	a,(#_cluster_size + 1)
+   0479 CE FF         [ 7]  742 	adc	a,#0xFF
+   047B 23            [ 6]  743 	inc	hl
+   047C 77            [ 7]  744 	ld	(hl),a
+   047D 3Ar1Ar00      [13]  745 	ld	a,(#_cluster_size + 2)
+   0480 CE FF         [ 7]  746 	adc	a,#0xFF
+   0482 23            [ 6]  747 	inc	hl
+   0483 77            [ 7]  748 	ld	(hl),a
+   0484 3Ar1Br00      [13]  749 	ld	a,(#_cluster_size + 3)
+   0487 CE FF         [ 7]  750 	adc	a,#0xFF
+   0489 23            [ 6]  751 	inc	hl
+   048A 77            [ 7]  752 	ld	(hl),a
+                            753 ;src/fat.c:187: fat_start = boot_sector + sector_buffer[0x0E] + (sector_buffer[0x0F] << 8); // reserved sector count before FAT table (usually 32 for FAT32)
+   048B 3Ar36r00      [13]  754 	ld	a,(#_sector_buffer + 14)
+   048E FD 21 06 00   [14]  755 	ld	iy,#6
+   0492 FD 39         [15]  756 	add	iy,sp
+   0494 FD 77 00      [19]  757 	ld	0 (iy),a
+   0497 FD 7E 00      [19]  758 	ld	a,0 (iy)
+   049A FD 21 0D 00   [14]  759 	ld	iy,#13
+   049E FD 39         [15]  760 	add	iy,sp
+   04A0 FD 77 00      [19]  761 	ld	0 (iy),a
+   04A3 FD 36 01 00   [19]  762 	ld	1 (iy),#0x00
+   04A7 FD 36 02 00   [19]  763 	ld	2 (iy),#0x00
+   04AB FD 36 03 00   [19]  764 	ld	3 (iy),#0x00
+   04AF 21 0D 00      [10]  765 	ld	hl,#13
+   04B2 39            [11]  766 	add	hl,sp
+   04B3 FD 21 09 00   [14]  767 	ld	iy,#9
+   04B7 FD 39         [15]  768 	add	iy,sp
+   04B9 FD 7E 00      [19]  769 	ld	a,0 (iy)
+   04BC 86            [ 7]  770 	add	a, (hl)
+   04BD 77            [ 7]  771 	ld	(hl),a
+   04BE FD 7E 01      [19]  772 	ld	a,1 (iy)
+   04C1 23            [ 6]  773 	inc	hl
+   04C2 8E            [ 7]  774 	adc	a, (hl)
+   04C3 77            [ 7]  775 	ld	(hl),a
+   04C4 FD 7E 02      [19]  776 	ld	a,2 (iy)
+   04C7 23            [ 6]  777 	inc	hl
+   04C8 8E            [ 7]  778 	adc	a, (hl)
+   04C9 77            [ 7]  779 	ld	(hl),a
+   04CA FD 7E 03      [19]  780 	ld	a,3 (iy)
+   04CD 23            [ 6]  781 	inc	hl
+   04CE 8E            [ 7]  782 	adc	a, (hl)
+   04CF 77            [ 7]  783 	ld	(hl),a
+   04D0 3Ar37r00      [13]  784 	ld	a,(#_sector_buffer + 15)
+   04D3 FD 21 06 00   [14]  785 	ld	iy,#6
+   04D7 FD 39         [15]  786 	add	iy,sp
+   04D9 FD 77 00      [19]  787 	ld	0 (iy),a
+   04DC FD 7E 00      [19]  788 	ld	a,0 (iy)
+   04DF FD 77 00      [19]  789 	ld	0 (iy),a
+   04E2 FD 36 01 00   [19]  790 	ld	1 (iy),#0x00
+   04E6 FD 7E 00      [19]  791 	ld	a,0 (iy)
+   04E9 FD 77 01      [19]  792 	ld	1 (iy),a
+   04EC FD 36 00 00   [19]  793 	ld	0 (iy),#0x00
+   04F0 FD 7E 00      [19]  794 	ld	a,0 (iy)
+   04F3 FD 21 09 00   [14]  795 	ld	iy,#9
+   04F7 FD 39         [15]  796 	add	iy,sp
+   04F9 FD 77 00      [19]  797 	ld	0 (iy),a
+   04FC 21 07 00      [10]  798 	ld	hl, #6+1
+   04FF 39            [11]  799 	add	hl, sp
+   0500 7E            [ 7]  800 	ld	a, (hl)
+   0501 FD 21 09 00   [14]  801 	ld	iy,#9
+   0505 FD 39         [15]  802 	add	iy,sp
+   0507 FD 77 01      [19]  803 	ld	1 (iy),a
+   050A 21 07 00      [10]  804 	ld	hl, #6+1
+   050D 39            [11]  805 	add	hl, sp
+   050E 7E            [ 7]  806 	ld	a, (hl)
+   050F 17            [ 4]  807 	rla
+   0510 9F            [ 4]  808 	sbc	a, a
+   0511 FD 21 09 00   [14]  809 	ld	iy,#9
+   0515 FD 39         [15]  810 	add	iy,sp
+   0517 FD 77 02      [19]  811 	ld	2 (iy),a
+   051A FD 77 03      [19]  812 	ld	3 (iy),a
+   051D 21 09 00      [10]  813 	ld	hl,#9
+   0520 39            [11]  814 	add	hl,sp
+   0521 D5            [11]  815 	push	de
+   0522 11r02r00      [10]  816 	ld	de,#_fat_start
+   0525 FD 21 0F 00   [14]  817 	ld	iy,#15
+   0529 FD 39         [15]  818 	add	iy,sp
+   052B FD 7E 00      [19]  819 	ld	a,0 (iy)
+   052E 86            [ 7]  820 	add	a, (hl)
+   052F 12            [ 7]  821 	ld	(de),a
+   0530 FD 7E 01      [19]  822 	ld	a,1 (iy)
+   0533 23            [ 6]  823 	inc	hl
+   0534 8E            [ 7]  824 	adc	a, (hl)
+   0535 13            [ 6]  825 	inc	de
+   0536 12            [ 7]  826 	ld	(de),a
+   0537 FD 7E 02      [19]  827 	ld	a,2 (iy)
+   053A 23            [ 6]  828 	inc	hl
+   053B 8E            [ 7]  829 	adc	a, (hl)
+   053C 13            [ 6]  830 	inc	de
+   053D 12            [ 7]  831 	ld	(de),a
+   053E FD 7E 03      [19]  832 	ld	a,3 (iy)
+   0541 23            [ 6]  833 	inc	hl
+   0542 8E            [ 7]  834 	adc	a, (hl)
+   0543 13            [ 6]  835 	inc	de
+   0544 12            [ 7]  836 	ld	(de),a
+   0545 D1            [10]  837 	pop	de
+                            838 ;src/fat.c:188: fat_number = sector_buffer[0x10];
+   0546 3Ar38r00      [13]  839 	ld	a, (#_sector_buffer + 16)
+   0549 32r16r00      [13]  840 	ld	(#_fat_number + 0),a
+   054C 21r17r00      [10]  841 	ld	hl,#_fat_number + 1
+   054F 36 00         [10]  842 	ld	(hl), #0x00
+                            843 ;src/fat.c:190: if (fat32)
+   0551 3Ar01r00      [13]  844 	ld	a,(#_fat32 + 1)
+   0554 21r00r00      [10]  845 	ld	hl,#_fat32 + 0
+   0557 B6            [ 7]  846 	or	a,(hl)
+   0558 CAr57r09      [10]  847 	jp	Z,00133$
+                            848 ;src/fat.c:192: if (compare((const char*)&sector_buffer[0x52], "FAT32   ",8) != 0) // check file system type
+   055B FD 21 0D 00   [14]  849 	ld	iy,#13
+   055F FD 39         [15]  850 	add	iy,sp
+   0561 FD 36 00r7A   [19]  851 	ld	0 (iy),#<((_sector_buffer + 0x0052))
+   0565 FD 36 01s00   [19]  852 	ld	1 (iy),#>((_sector_buffer + 0x0052))
+   0569 FD 7E 00      [19]  853 	ld	a,0 (iy)
+   056C FD 77 00      [19]  854 	ld	0 (iy),a
+   056F FD 7E 01      [19]  855 	ld	a,1 (iy)
+   0572 FD 77 01      [19]  856 	ld	1 (iy),a
+   0575 21 08 00      [10]  857 	ld	hl,#0x0008
+   0578 E5            [11]  858 	push	hl
+   0579 21r81r0B      [10]  859 	ld	hl,#___str_1
+   057C E5            [11]  860 	push	hl
+   057D FD 6E 00      [19]  861 	ld	l,0 (iy)
+   0580 FD 66 01      [19]  862 	ld	h,1 (iy)
+   0583 E5            [11]  863 	push	hl
+   0584 CDr9Er01      [17]  864 	call	_compare
+   0587 F1            [10]  865 	pop	af
+   0588 F1            [10]  866 	pop	af
+   0589 F1            [10]  867 	pop	af
+   058A 7C            [ 4]  868 	ld	a,h
+   058B B5            [ 4]  869 	or	a,l
+   058C 28 05         [12]  870 	jr	Z,00131$
+                            871 ;src/fat.c:193: return(0);
+   058E 2E 00         [ 7]  872 	ld	l,#0x00
+   0590 C3r6Fr0B      [10]  873 	jp	00135$
+   0593                     874 00131$:
+                            875 ;src/fat.c:195: dir_entries = cluster_size << 4; // total number of dir entries (16 entries per sector)
+   0593 F5            [11]  876 	push	af
+   0594 3Ar18r00      [13]  877 	ld	a,(#_cluster_size + 0)
+   0597 FD 21r20r00   [14]  878 	ld	iy,#_dir_entries
+   059B FD 77 00      [19]  879 	ld	0 (iy),a
+   059E 3Ar19r00      [13]  880 	ld	a,(#_cluster_size + 1)
+   05A1 FD 21r20r00   [14]  881 	ld	iy,#_dir_entries
+   05A5 FD 77 01      [19]  882 	ld	1 (iy),a
+   05A8 3Ar1Ar00      [13]  883 	ld	a,(#_cluster_size + 2)
+   05AB FD 21r20r00   [14]  884 	ld	iy,#_dir_entries
+   05AF FD 77 02      [19]  885 	ld	2 (iy),a
+   05B2 3Ar1Br00      [13]  886 	ld	a,(#_cluster_size + 3)
+   05B5 FD 21r20r00   [14]  887 	ld	iy,#_dir_entries
+   05B9 FD 77 03      [19]  888 	ld	3 (iy),a
+   05BC F1            [10]  889 	pop	af
+   05BD 06 04         [ 7]  890 	ld	b,#0x04
+   05BF                     891 00206$:
+   05BF FD 21r20r00   [14]  892 	ld	iy,#_dir_entries
+   05C3 FD CB 00 26   [23]  893 	sla	0 (iy)
+   05C7 FD 21r20r00   [14]  894 	ld	iy,#_dir_entries
+   05CB FD CB 01 16   [23]  895 	rl	1 (iy)
+   05CF FD 21r20r00   [14]  896 	ld	iy,#_dir_entries
+   05D3 FD CB 02 16   [23]  897 	rl	2 (iy)
+   05D7 FD 21r20r00   [14]  898 	ld	iy,#_dir_entries
+   05DB FD CB 03 16   [23]  899 	rl	3 (iy)
+   05DF 10 DE         [13]  900 	djnz	00206$
+                            901 ;src/fat.c:196: root_directory_size = cluster_size; // root directory size in sectors
+   05E1 11r12r00      [10]  902 	ld	de, #_root_directory_size
+   05E4 21r18r00      [10]  903 	ld	hl, #_cluster_size
+   05E7 01 04 00      [10]  904 	ld	bc, #4
+   05EA ED B0         [21]  905 	ldir
+                            906 ;src/fat.c:197: fat_size = sector_buffer[0x24] + (((unsigned long)sector_buffer[0x25]) << 8) + (((unsigned long)sector_buffer[0x26]) << 16) + (((unsigned long)sector_buffer[0x27]) << 24);
+   05EC 3Ar4Cr00      [13]  907 	ld	a,(#_sector_buffer + 36)
+   05EF FD 21 0D 00   [14]  908 	ld	iy,#13
+   05F3 FD 39         [15]  909 	add	iy,sp
+   05F5 FD 77 00      [19]  910 	ld	0 (iy),a
+   05F8 3Ar4Dr00      [13]  911 	ld	a,(#_sector_buffer + 37)
+   05FB FD 21 06 00   [14]  912 	ld	iy,#6
+   05FF FD 39         [15]  913 	add	iy,sp
+   0601 FD 77 00      [19]  914 	ld	0 (iy),a
+   0604 FD 7E 00      [19]  915 	ld	a,0 (iy)
+   0607 FD 21 09 00   [14]  916 	ld	iy,#9
+   060B FD 39         [15]  917 	add	iy,sp
+   060D FD 77 00      [19]  918 	ld	0 (iy),a
+   0610 FD 36 01 00   [19]  919 	ld	1 (iy),#0x00
+   0614 FD 36 02 00   [19]  920 	ld	2 (iy),#0x00
+   0618 FD 36 03 00   [19]  921 	ld	3 (iy),#0x00
+   061C F5            [11]  922 	push	af
+   061D F1            [10]  923 	pop	af
+   061E 06 08         [ 7]  924 	ld	b,#0x08
+   0620                     925 00208$:
+   0620 FD CB 00 26   [23]  926 	sla	0 (iy)
+   0624 FD CB 01 16   [23]  927 	rl	1 (iy)
+   0628 FD CB 02 16   [23]  928 	rl	2 (iy)
+   062C FD CB 03 16   [23]  929 	rl	3 (iy)
+   0630 10 EE         [13]  930 	djnz	00208$
+   0632 FD 21 0D 00   [14]  931 	ld	iy,#13
+   0636 FD 39         [15]  932 	add	iy,sp
+   0638 FD 7E 00      [19]  933 	ld	a,0 (iy)
+   063B FD 77 00      [19]  934 	ld	0 (iy),a
+   063E FD 36 01 00   [19]  935 	ld	1 (iy),#0x00
+   0642 FD 36 02 00   [19]  936 	ld	2 (iy),#0x00
+   0646 FD 36 03 00   [19]  937 	ld	3 (iy),#0x00
+   064A 21 09 00      [10]  938 	ld	hl,#9
+   064D 39            [11]  939 	add	hl,sp
+   064E D5            [11]  940 	push	de
+   064F FD E5         [15]  941 	push	iy
+   0651 D1            [10]  942 	pop	de
+   0652 1A            [ 7]  943 	ld	a,(de)
+   0653 86            [ 7]  944 	add	a, (hl)
+   0654 12            [ 7]  945 	ld	(de),a
+   0655 13            [ 6]  946 	inc	de
+   0656 1A            [ 7]  947 	ld	a,(de)
+   0657 23            [ 6]  948 	inc	hl
+   0658 8E            [ 7]  949 	adc	a, (hl)
+   0659 12            [ 7]  950 	ld	(de),a
+   065A 13            [ 6]  951 	inc	de
+   065B 1A            [ 7]  952 	ld	a,(de)
+   065C 23            [ 6]  953 	inc	hl
+   065D 8E            [ 7]  954 	adc	a, (hl)
+   065E 12            [ 7]  955 	ld	(de),a
+   065F 13            [ 6]  956 	inc	de
+   0660 1A            [ 7]  957 	ld	a,(de)
+   0661 23            [ 6]  958 	inc	hl
+   0662 8E            [ 7]  959 	adc	a, (hl)
+   0663 12            [ 7]  960 	ld	(de),a
+   0664 D1            [10]  961 	pop	de
+   0665 3Ar4Er00      [13]  962 	ld	a,(#_sector_buffer + 38)
+   0668 FD 21 06 00   [14]  963 	ld	iy,#6
+   066C FD 39         [15]  964 	add	iy,sp
+   066E FD 77 00      [19]  965 	ld	0 (iy),a
+   0671 FD 7E 00      [19]  966 	ld	a,0 (iy)
+   0674 FD 21 09 00   [14]  967 	ld	iy,#9
+   0678 FD 39         [15]  968 	add	iy,sp
+   067A FD 77 00      [19]  969 	ld	0 (iy),a
+   067D FD 36 01 00   [19]  970 	ld	1 (iy),#0x00
+   0681 FD 36 02 00   [19]  971 	ld	2 (iy),#0x00
+   0685 FD 36 03 00   [19]  972 	ld	3 (iy),#0x00
+   0689 F5            [11]  973 	push	af
+   068A F1            [10]  974 	pop	af
+   068B 06 10         [ 7]  975 	ld	b,#0x10
+   068D                     976 00210$:
+   068D FD CB 00 26   [23]  977 	sla	0 (iy)
+   0691 FD CB 01 16   [23]  978 	rl	1 (iy)
+   0695 FD CB 02 16   [23]  979 	rl	2 (iy)
+   0699 FD CB 03 16   [23]  980 	rl	3 (iy)
+   069D 10 EE         [13]  981 	djnz	00210$
+   069F 21 09 00      [10]  982 	ld	hl,#9
+   06A2 39            [11]  983 	add	hl,sp
+   06A3 D5            [11]  984 	push	de
+   06A4 FD 21 0F 00   [14]  985 	ld	iy,#15
+   06A8 FD 39         [15]  986 	add	iy,sp
+   06AA FD E5         [15]  987 	push	iy
+   06AC D1            [10]  988 	pop	de
+   06AD 1A            [ 7]  989 	ld	a,(de)
+   06AE 86            [ 7]  990 	add	a, (hl)
+   06AF 12            [ 7]  991 	ld	(de),a
+   06B0 13            [ 6]  992 	inc	de
+   06B1 1A            [ 7]  993 	ld	a,(de)
+   06B2 23            [ 6]  994 	inc	hl
+   06B3 8E            [ 7]  995 	adc	a, (hl)
+   06B4 12            [ 7]  996 	ld	(de),a
+   06B5 13            [ 6]  997 	inc	de
+   06B6 1A            [ 7]  998 	ld	a,(de)
+   06B7 23            [ 6]  999 	inc	hl
+   06B8 8E            [ 7] 1000 	adc	a, (hl)
+   06B9 12            [ 7] 1001 	ld	(de),a
+   06BA 13            [ 6] 1002 	inc	de
+   06BB 1A            [ 7] 1003 	ld	a,(de)
+   06BC 23            [ 6] 1004 	inc	hl
+   06BD 8E            [ 7] 1005 	adc	a, (hl)
+   06BE 12            [ 7] 1006 	ld	(de),a
+   06BF D1            [10] 1007 	pop	de
+   06C0 3Ar4Fr00      [13] 1008 	ld	a,(#_sector_buffer + 39)
+   06C3 FD 21 06 00   [14] 1009 	ld	iy,#6
+   06C7 FD 39         [15] 1010 	add	iy,sp
+   06C9 FD 77 00      [19] 1011 	ld	0 (iy),a
+   06CC FD 7E 00      [19] 1012 	ld	a,0 (iy)
+   06CF FD 21 09 00   [14] 1013 	ld	iy,#9
+   06D3 FD 39         [15] 1014 	add	iy,sp
+   06D5 FD 77 00      [19] 1015 	ld	0 (iy),a
+   06D8 FD 36 01 00   [19] 1016 	ld	1 (iy),#0x00
+   06DC FD 36 02 00   [19] 1017 	ld	2 (iy),#0x00
+   06E0 FD 36 03 00   [19] 1018 	ld	3 (iy),#0x00
+   06E4 F5            [11] 1019 	push	af
+   06E5 F1            [10] 1020 	pop	af
+   06E6 06 18         [ 7] 1021 	ld	b,#0x18
+   06E8                    1022 00212$:
+   06E8 FD CB 00 26   [23] 1023 	sla	0 (iy)
+   06EC FD CB 01 16   [23] 1024 	rl	1 (iy)
+   06F0 FD CB 02 16   [23] 1025 	rl	2 (iy)
+   06F4 FD CB 03 16   [23] 1026 	rl	3 (iy)
+   06F8 10 EE         [13] 1027 	djnz	00212$
+   06FA 21 09 00      [10] 1028 	ld	hl,#9
+   06FD 39            [11] 1029 	add	hl,sp
+   06FE D5            [11] 1030 	push	de
+   06FF 11r24r00      [10] 1031 	ld	de,#_fat_size
+   0702 FD 21 0F 00   [14] 1032 	ld	iy,#15
+   0706 FD 39         [15] 1033 	add	iy,sp
+   0708 FD 7E 00      [19] 1034 	ld	a,0 (iy)
+   070B 86            [ 7] 1035 	add	a, (hl)
+   070C 12            [ 7] 1036 	ld	(de),a
+   070D FD 7E 01      [19] 1037 	ld	a,1 (iy)
+   0710 23            [ 6] 1038 	inc	hl
+   0711 8E            [ 7] 1039 	adc	a, (hl)
+   0712 13            [ 6] 1040 	inc	de
+   0713 12            [ 7] 1041 	ld	(de),a
+   0714 FD 7E 02      [19] 1042 	ld	a,2 (iy)
+   0717 23            [ 6] 1043 	inc	hl
+   0718 8E            [ 7] 1044 	adc	a, (hl)
+   0719 13            [ 6] 1045 	inc	de
+   071A 12            [ 7] 1046 	ld	(de),a
+   071B FD 7E 03      [19] 1047 	ld	a,3 (iy)
+   071E 23            [ 6] 1048 	inc	hl
+   071F 8E            [ 7] 1049 	adc	a, (hl)
+   0720 13            [ 6] 1050 	inc	de
+   0721 12            [ 7] 1051 	ld	(de),a
+   0722 D1            [10] 1052 	pop	de
+                           1053 ;src/fat.c:198: data_start = fat_start + (fat_number * fat_size);
+   0723 3Ar16r00      [13] 1054 	ld	a,(#_fat_number + 0)
+   0726 FD 21 0D 00   [14] 1055 	ld	iy,#13
+   072A FD 39         [15] 1056 	add	iy,sp
+   072C FD 77 00      [19] 1057 	ld	0 (iy),a
+   072F 3Ar17r00      [13] 1058 	ld	a,(#_fat_number + 1)
+   0732 FD 21 0D 00   [14] 1059 	ld	iy,#13
+   0736 FD 39         [15] 1060 	add	iy,sp
+   0738 FD 77 01      [19] 1061 	ld	1 (iy),a
+   073B FD 36 02 00   [19] 1062 	ld	2 (iy),#0x00
+   073F FD 36 03 00   [19] 1063 	ld	3 (iy),#0x00
+   0743 2Ar26r00      [16] 1064 	ld	hl,(_fat_size + 2)
+   0746 E5            [11] 1065 	push	hl
+   0747 2Ar24r00      [16] 1066 	ld	hl,(_fat_size)
+   074A E5            [11] 1067 	push	hl
+   074B FD 6E 02      [19] 1068 	ld	l,2 (iy)
+   074E FD 66 03      [19] 1069 	ld	h,3 (iy)
+   0751 E5            [11] 1070 	push	hl
+   0752 FD 6E 00      [19] 1071 	ld	l,0 (iy)
+   0755 FD 66 01      [19] 1072 	ld	h,1 (iy)
+   0758 E5            [11] 1073 	push	hl
+   0759 CDr00r00      [17] 1074 	call	__mullong
+   075C F1            [10] 1075 	pop	af
+   075D F1            [10] 1076 	pop	af
+   075E F1            [10] 1077 	pop	af
+   075F F1            [10] 1078 	pop	af
+   0760 FD 21 0D 00   [14] 1079 	ld	iy,#13
+   0764 FD 39         [15] 1080 	add	iy,sp
+   0766 FD 72 03      [19] 1081 	ld	3 (iy),d
+   0769 FD 73 02      [19] 1082 	ld	2 (iy),e
+   076C FD 74 01      [19] 1083 	ld	1 (iy),h
+   076F FD 75 00      [19] 1084 	ld	0 (iy),l
+   0772 21 0D 00      [10] 1085 	ld	hl,#13
+   0775 39            [11] 1086 	add	hl,sp
+   0776 D5            [11] 1087 	push	de
+   0777 FD 21r06r00   [14] 1088 	ld	iy,#_data_start
+   077B FD E5         [15] 1089 	push	iy
+   077D D1            [10] 1090 	pop	de
+   077E 3Ar02r00      [13] 1091 	ld	a,(#_fat_start + 0)
+   0781 86            [ 7] 1092 	add	a, (hl)
+   0782 12            [ 7] 1093 	ld	(de),a
+   0783 3Ar03r00      [13] 1094 	ld	a,(#_fat_start + 1)
+   0786 23            [ 6] 1095 	inc	hl
+   0787 8E            [ 7] 1096 	adc	a, (hl)
+   0788 13            [ 6] 1097 	inc	de
+   0789 12            [ 7] 1098 	ld	(de),a
+   078A 3Ar04r00      [13] 1099 	ld	a,(#_fat_start + 2)
+   078D 23            [ 6] 1100 	inc	hl
+   078E 8E            [ 7] 1101 	adc	a, (hl)
+   078F 13            [ 6] 1102 	inc	de
+   0790 12            [ 7] 1103 	ld	(de),a
+   0791 3Ar05r00      [13] 1104 	ld	a,(#_fat_start + 3)
+   0794 23            [ 6] 1105 	inc	hl
+   0795 8E            [ 7] 1106 	adc	a, (hl)
+   0796 13            [ 6] 1107 	inc	de
+   0797 12            [ 7] 1108 	ld	(de),a
+   0798 D1            [10] 1109 	pop	de
+                           1110 ;src/fat.c:199: root_directory_cluster = sector_buffer[0x2C] + (((unsigned long)sector_buffer[0x2D]) << 8) + (((unsigned long)sector_buffer[0x2E]) << 16) + ((unsigned long)(sector_buffer[0x2F] & 0x0F) << 24);
+   0799 3Ar54r00      [13] 1111 	ld	a,(#_sector_buffer + 44)
+   079C FD 21 0D 00   [14] 1112 	ld	iy,#13
+   07A0 FD 39         [15] 1113 	add	iy,sp
+   07A2 FD 77 00      [19] 1114 	ld	0 (iy),a
+   07A5 3Ar55r00      [13] 1115 	ld	a,(#_sector_buffer + 45)
+   07A8 FD 21 06 00   [14] 1116 	ld	iy,#6
+   07AC FD 39         [15] 1117 	add	iy,sp
+   07AE FD 77 00      [19] 1118 	ld	0 (iy),a
+   07B1 FD 7E 00      [19] 1119 	ld	a,0 (iy)
+   07B4 FD 21 09 00   [14] 1120 	ld	iy,#9
+   07B8 FD 39         [15] 1121 	add	iy,sp
+   07BA FD 77 00      [19] 1122 	ld	0 (iy),a
+   07BD FD 36 01 00   [19] 1123 	ld	1 (iy),#0x00
+   07C1 FD 36 02 00   [19] 1124 	ld	2 (iy),#0x00
+   07C5 FD 36 03 00   [19] 1125 	ld	3 (iy),#0x00
+   07C9 F5            [11] 1126 	push	af
+   07CA F1            [10] 1127 	pop	af
+   07CB 06 08         [ 7] 1128 	ld	b,#0x08
+   07CD                    1129 00214$:
+   07CD FD CB 00 26   [23] 1130 	sla	0 (iy)
+   07D1 FD CB 01 16   [23] 1131 	rl	1 (iy)
+   07D5 FD CB 02 16   [23] 1132 	rl	2 (iy)
+   07D9 FD CB 03 16   [23] 1133 	rl	3 (iy)
+   07DD 10 EE         [13] 1134 	djnz	00214$
+   07DF FD 21 0D 00   [14] 1135 	ld	iy,#13
+   07E3 FD 39         [15] 1136 	add	iy,sp
+   07E5 FD 7E 00      [19] 1137 	ld	a,0 (iy)
+   07E8 FD 77 00      [19] 1138 	ld	0 (iy),a
+   07EB FD 36 01 00   [19] 1139 	ld	1 (iy),#0x00
+   07EF FD 36 02 00   [19] 1140 	ld	2 (iy),#0x00
+   07F3 FD 36 03 00   [19] 1141 	ld	3 (iy),#0x00
+   07F7 21 09 00      [10] 1142 	ld	hl,#9
+   07FA 39            [11] 1143 	add	hl,sp
+   07FB D5            [11] 1144 	push	de
+   07FC FD E5         [15] 1145 	push	iy
+   07FE D1            [10] 1146 	pop	de
+   07FF 1A            [ 7] 1147 	ld	a,(de)
+   0800 86            [ 7] 1148 	add	a, (hl)
+   0801 12            [ 7] 1149 	ld	(de),a
+   0802 13            [ 6] 1150 	inc	de
+   0803 1A            [ 7] 1151 	ld	a,(de)
+   0804 23            [ 6] 1152 	inc	hl
+   0805 8E            [ 7] 1153 	adc	a, (hl)
+   0806 12            [ 7] 1154 	ld	(de),a
+   0807 13            [ 6] 1155 	inc	de
+   0808 1A            [ 7] 1156 	ld	a,(de)
+   0809 23            [ 6] 1157 	inc	hl
+   080A 8E            [ 7] 1158 	adc	a, (hl)
+   080B 12            [ 7] 1159 	ld	(de),a
+   080C 13            [ 6] 1160 	inc	de
+   080D 1A            [ 7] 1161 	ld	a,(de)
+   080E 23            [ 6] 1162 	inc	hl
+   080F 8E            [ 7] 1163 	adc	a, (hl)
+   0810 12            [ 7] 1164 	ld	(de),a
+   0811 D1            [10] 1165 	pop	de
+   0812 3Ar56r00      [13] 1166 	ld	a,(#_sector_buffer + 46)
+   0815 FD 21 06 00   [14] 1167 	ld	iy,#6
+   0819 FD 39         [15] 1168 	add	iy,sp
+   081B FD 77 00      [19] 1169 	ld	0 (iy),a
+   081E FD 7E 00      [19] 1170 	ld	a,0 (iy)
+   0821 FD 21 09 00   [14] 1171 	ld	iy,#9
+   0825 FD 39         [15] 1172 	add	iy,sp
+   0827 FD 77 00      [19] 1173 	ld	0 (iy),a
+   082A FD 36 01 00   [19] 1174 	ld	1 (iy),#0x00
+   082E FD 36 02 00   [19] 1175 	ld	2 (iy),#0x00
+   0832 FD 36 03 00   [19] 1176 	ld	3 (iy),#0x00
+   0836 F5            [11] 1177 	push	af
+   0837 F1            [10] 1178 	pop	af
+   0838 06 10         [ 7] 1179 	ld	b,#0x10
+   083A                    1180 00216$:
+   083A FD CB 00 26   [23] 1181 	sla	0 (iy)
+   083E FD CB 01 16   [23] 1182 	rl	1 (iy)
+   0842 FD CB 02 16   [23] 1183 	rl	2 (iy)
+   0846 FD CB 03 16   [23] 1184 	rl	3 (iy)
+   084A 10 EE         [13] 1185 	djnz	00216$
+   084C 21 09 00      [10] 1186 	ld	hl,#9
+   084F 39            [11] 1187 	add	hl,sp
+   0850 D5            [11] 1188 	push	de
+   0851 FD 21 0F 00   [14] 1189 	ld	iy,#15
+   0855 FD 39         [15] 1190 	add	iy,sp
+   0857 FD E5         [15] 1191 	push	iy
+   0859 D1            [10] 1192 	pop	de
+   085A 1A            [ 7] 1193 	ld	a,(de)
+   085B 86            [ 7] 1194 	add	a, (hl)
+   085C 12            [ 7] 1195 	ld	(de),a
+   085D 13            [ 6] 1196 	inc	de
+   085E 1A            [ 7] 1197 	ld	a,(de)
+   085F 23            [ 6] 1198 	inc	hl
+   0860 8E            [ 7] 1199 	adc	a, (hl)
+   0861 12            [ 7] 1200 	ld	(de),a
+   0862 13            [ 6] 1201 	inc	de
+   0863 1A            [ 7] 1202 	ld	a,(de)
+   0864 23            [ 6] 1203 	inc	hl
+   0865 8E            [ 7] 1204 	adc	a, (hl)
+   0866 12            [ 7] 1205 	ld	(de),a
+   0867 13            [ 6] 1206 	inc	de
+   0868 1A            [ 7] 1207 	ld	a,(de)
+   0869 23            [ 6] 1208 	inc	hl
+   086A 8E            [ 7] 1209 	adc	a, (hl)
+   086B 12            [ 7] 1210 	ld	(de),a
+   086C D1            [10] 1211 	pop	de
+   086D 3Ar57r00      [13] 1212 	ld	a,(#_sector_buffer + 47)
+   0870 FD 21 06 00   [14] 1213 	ld	iy,#6
+   0874 FD 39         [15] 1214 	add	iy,sp
+   0876 FD 77 00      [19] 1215 	ld	0 (iy),a
+   0879 FD 7E 00      [19] 1216 	ld	a,0 (iy)
+   087C E6 0F         [ 7] 1217 	and	a, #0x0F
+   087E FD 77 00      [19] 1218 	ld	0 (iy),a
+   0881 FD 7E 00      [19] 1219 	ld	a,0 (iy)
+   0884 FD 21 09 00   [14] 1220 	ld	iy,#9
+   0888 FD 39         [15] 1221 	add	iy,sp
+   088A FD 77 00      [19] 1222 	ld	0 (iy),a
+   088D FD 36 01 00   [19] 1223 	ld	1 (iy),#0x00
+   0891 FD 36 02 00   [19] 1224 	ld	2 (iy),#0x00
+   0895 FD 36 03 00   [19] 1225 	ld	3 (iy),#0x00
+   0899 F5            [11] 1226 	push	af
+   089A F1            [10] 1227 	pop	af
+   089B 06 18         [ 7] 1228 	ld	b,#0x18
+   089D                    1229 00218$:
+   089D FD CB 00 26   [23] 1230 	sla	0 (iy)
+   08A1 FD CB 01 16   [23] 1231 	rl	1 (iy)
+   08A5 FD CB 02 16   [23] 1232 	rl	2 (iy)
+   08A9 FD CB 03 16   [23] 1233 	rl	3 (iy)
+   08AD 10 EE         [13] 1234 	djnz	00218$
+   08AF 21 09 00      [10] 1235 	ld	hl,#9
+   08B2 39            [11] 1236 	add	hl,sp
+   08B3 D5            [11] 1237 	push	de
+   08B4 11r0Ar00      [10] 1238 	ld	de,#_root_directory_cluster
+   08B7 FD 21 0F 00   [14] 1239 	ld	iy,#15
+   08BB FD 39         [15] 1240 	add	iy,sp
+   08BD FD 7E 00      [19] 1241 	ld	a,0 (iy)
+   08C0 86            [ 7] 1242 	add	a, (hl)
+   08C1 12            [ 7] 1243 	ld	(de),a
+   08C2 FD 7E 01      [19] 1244 	ld	a,1 (iy)
+   08C5 23            [ 6] 1245 	inc	hl
+   08C6 8E            [ 7] 1246 	adc	a, (hl)
+   08C7 13            [ 6] 1247 	inc	de
+   08C8 12            [ 7] 1248 	ld	(de),a
+   08C9 FD 7E 02      [19] 1249 	ld	a,2 (iy)
+   08CC 23            [ 6] 1250 	inc	hl
+   08CD 8E            [ 7] 1251 	adc	a, (hl)
+   08CE 13            [ 6] 1252 	inc	de
+   08CF 12            [ 7] 1253 	ld	(de),a
+   08D0 FD 7E 03      [19] 1254 	ld	a,3 (iy)
+   08D3 23            [ 6] 1255 	inc	hl
+   08D4 8E            [ 7] 1256 	adc	a, (hl)
+   08D5 13            [ 6] 1257 	inc	de
+   08D6 12            [ 7] 1258 	ld	(de),a
+   08D7 D1            [10] 1259 	pop	de
+                           1260 ;src/fat.c:200: root_directory_start = (root_directory_cluster - 2) * cluster_size + data_start;
+   08D8 21 0D 00      [10] 1261 	ld	hl,#13
+   08DB 39            [11] 1262 	add	hl,sp
+   08DC 3Ar0Ar00      [13] 1263 	ld	a,(#_root_directory_cluster + 0)
+   08DF C6 FE         [ 7] 1264 	add	a,#0xFE
+   08E1 77            [ 7] 1265 	ld	(hl),a
+   08E2 3Ar0Br00      [13] 1266 	ld	a,(#_root_directory_cluster + 1)
+   08E5 CE FF         [ 7] 1267 	adc	a,#0xFF
+   08E7 23            [ 6] 1268 	inc	hl
+   08E8 77            [ 7] 1269 	ld	(hl),a
+   08E9 3Ar0Cr00      [13] 1270 	ld	a,(#_root_directory_cluster + 2)
+   08EC CE FF         [ 7] 1271 	adc	a,#0xFF
+   08EE 23            [ 6] 1272 	inc	hl
+   08EF 77            [ 7] 1273 	ld	(hl),a
+   08F0 3Ar0Dr00      [13] 1274 	ld	a,(#_root_directory_cluster + 3)
+   08F3 CE FF         [ 7] 1275 	adc	a,#0xFF
+   08F5 23            [ 6] 1276 	inc	hl
+   08F6 77            [ 7] 1277 	ld	(hl),a
+   08F7 2Ar1Ar00      [16] 1278 	ld	hl,(_cluster_size + 2)
+   08FA E5            [11] 1279 	push	hl
+   08FB 2Ar18r00      [16] 1280 	ld	hl,(_cluster_size)
+   08FE E5            [11] 1281 	push	hl
+   08FF FD 21 11 00   [14] 1282 	ld	iy,#17
+   0903 FD 39         [15] 1283 	add	iy,sp
+   0905 FD 6E 02      [19] 1284 	ld	l,2 (iy)
+   0908 FD 66 03      [19] 1285 	ld	h,3 (iy)
+   090B E5            [11] 1286 	push	hl
+   090C FD 6E 00      [19] 1287 	ld	l,0 (iy)
+   090F FD 66 01      [19] 1288 	ld	h,1 (iy)
+   0912 E5            [11] 1289 	push	hl
+   0913 CDr00r00      [17] 1290 	call	__mullong
+   0916 F1            [10] 1291 	pop	af
+   0917 F1            [10] 1292 	pop	af
+   0918 F1            [10] 1293 	pop	af
+   0919 F1            [10] 1294 	pop	af
+   091A FD 21 0D 00   [14] 1295 	ld	iy,#13
+   091E FD 39         [15] 1296 	add	iy,sp
+   0920 FD 72 03      [19] 1297 	ld	3 (iy),d
+   0923 FD 73 02      [19] 1298 	ld	2 (iy),e
+   0926 FD 74 01      [19] 1299 	ld	1 (iy),h
+   0929 FD 75 00      [19] 1300 	ld	0 (iy),l
+   092C 21r06r00      [10] 1301 	ld	hl,#_data_start
+   092F D5            [11] 1302 	push	de
+   0930 11r0Er00      [10] 1303 	ld	de,#_root_directory_start
+   0933 FD 21 0F 00   [14] 1304 	ld	iy,#15
+   0937 FD 39         [15] 1305 	add	iy,sp
+   0939 FD 7E 00      [19] 1306 	ld	a,0 (iy)
+   093C 86            [ 7] 1307 	add	a, (hl)
+   093D 12            [ 7] 1308 	ld	(de),a
+   093E FD 7E 01      [19] 1309 	ld	a,1 (iy)
+   0941 23            [ 6] 1310 	inc	hl
+   0942 8E            [ 7] 1311 	adc	a, (hl)
+   0943 13            [ 6] 1312 	inc	de
+   0944 12            [ 7] 1313 	ld	(de),a
+   0945 FD 7E 02      [19] 1314 	ld	a,2 (iy)
+   0948 23            [ 6] 1315 	inc	hl
+   0949 8E            [ 7] 1316 	adc	a, (hl)
+   094A 13            [ 6] 1317 	inc	de
+   094B 12            [ 7] 1318 	ld	(de),a
+   094C FD 7E 03      [19] 1319 	ld	a,3 (iy)
+   094F 23            [ 6] 1320 	inc	hl
+   0950 8E            [ 7] 1321 	adc	a, (hl)
+   0951 13            [ 6] 1322 	inc	de
+   0952 12            [ 7] 1323 	ld	(de),a
+   0953 D1            [10] 1324 	pop	de
+   0954 C3r6Dr0B      [10] 1325 	jp	00134$
+   0957                    1326 00133$:
+                           1327 ;src/fat.c:205: dir_entries = sector_buffer[17] + (sector_buffer[18] << 8);
+   0957 3Ar39r00      [13] 1328 	ld	a, (#_sector_buffer + 17)
+   095A FD 21 0D 00   [14] 1329 	ld	iy,#13
+   095E FD 39         [15] 1330 	add	iy,sp
+   0960 FD 77 00      [19] 1331 	ld	0 (iy),a
+   0963 FD 36 01 00   [19] 1332 	ld	1 (iy),#0x00
+   0967 3Ar3Ar00      [13] 1333 	ld	a,(#_sector_buffer + 18)
+   096A FD 21 06 00   [14] 1334 	ld	iy,#6
+   096E FD 39         [15] 1335 	add	iy,sp
+   0970 FD 77 00      [19] 1336 	ld	0 (iy),a
+   0973 FD 7E 00      [19] 1337 	ld	a,0 (iy)
+   0976 FD 77 00      [19] 1338 	ld	0 (iy),a
+   0979 FD 36 01 00   [19] 1339 	ld	1 (iy),#0x00
+   097D FD 7E 00      [19] 1340 	ld	a,0 (iy)
+   0980 FD 77 01      [19] 1341 	ld	1 (iy),a
+   0983 FD 36 00 00   [19] 1342 	ld	0 (iy),#0x00
+   0987 21 06 00      [10] 1343 	ld	hl,#6
+   098A 39            [11] 1344 	add	hl,sp
+   098B D5            [11] 1345 	push	de
+   098C FD 21 0F 00   [14] 1346 	ld	iy,#15
+   0990 FD 39         [15] 1347 	add	iy,sp
+   0992 FD E5         [15] 1348 	push	iy
+   0994 D1            [10] 1349 	pop	de
+   0995 FD 7E 00      [19] 1350 	ld	a,0 (iy)
+   0998 86            [ 7] 1351 	add	a, (hl)
+   0999 12            [ 7] 1352 	ld	(de),a
+   099A FD 7E 01      [19] 1353 	ld	a,1 (iy)
+   099D 23            [ 6] 1354 	inc	hl
+   099E 8E            [ 7] 1355 	adc	a, (hl)
+   099F 13            [ 6] 1356 	inc	de
+   09A0 12            [ 7] 1357 	ld	(de),a
+   09A1 D1            [10] 1358 	pop	de
+   09A2 FD 7E 00      [19] 1359 	ld	a,0 (iy)
+   09A5 32r20r00      [13] 1360 	ld	(#_dir_entries + 0),a
+   09A8 21 0E 00      [10] 1361 	ld	hl, #13+1
+   09AB 39            [11] 1362 	add	hl, sp
+   09AC 7E            [ 7] 1363 	ld	a, (hl)
+   09AD 32r21r00      [13] 1364 	ld	(#_dir_entries + 1),a
+   09B0 21 0E 00      [10] 1365 	ld	hl, #13+1
+   09B3 39            [11] 1366 	add	hl, sp
+   09B4 7E            [ 7] 1367 	ld	a, (hl)
+   09B5 17            [ 4] 1368 	rla
+   09B6 9F            [ 4] 1369 	sbc	a, a
+   09B7 32r22r00      [13] 1370 	ld	(#_dir_entries + 2),a
+   09BA 32r23r00      [13] 1371 	ld	(#_dir_entries + 3),a
+                           1372 ;src/fat.c:206: root_directory_size = ((dir_entries << 5) + 511) >> 9;
+   09BD F5            [11] 1373 	push	af
+   09BE 3Ar20r00      [13] 1374 	ld	a,(#_dir_entries + 0)
+   09C1 FD 21 0F 00   [14] 1375 	ld	iy,#15
+   09C5 FD 39         [15] 1376 	add	iy,sp
+   09C7 FD 77 00      [19] 1377 	ld	0 (iy),a
+   09CA 3Ar21r00      [13] 1378 	ld	a,(#_dir_entries + 1)
+   09CD FD 21 0F 00   [14] 1379 	ld	iy,#15
+   09D1 FD 39         [15] 1380 	add	iy,sp
+   09D3 FD 77 01      [19] 1381 	ld	1 (iy),a
+   09D6 3Ar22r00      [13] 1382 	ld	a,(#_dir_entries + 2)
+   09D9 FD 21 0F 00   [14] 1383 	ld	iy,#15
+   09DD FD 39         [15] 1384 	add	iy,sp
+   09DF FD 77 02      [19] 1385 	ld	2 (iy),a
+   09E2 3Ar23r00      [13] 1386 	ld	a,(#_dir_entries + 3)
+   09E5 FD 21 0F 00   [14] 1387 	ld	iy,#15
+   09E9 FD 39         [15] 1388 	add	iy,sp
+   09EB FD 77 03      [19] 1389 	ld	3 (iy),a
+   09EE F1            [10] 1390 	pop	af
+   09EF 06 05         [ 7] 1391 	ld	b,#0x05
+   09F1                    1392 00220$:
+   09F1 FD CB 00 26   [23] 1393 	sla	0 (iy)
+   09F5 FD CB 01 16   [23] 1394 	rl	1 (iy)
+   09F9 FD CB 02 16   [23] 1395 	rl	2 (iy)
+   09FD FD CB 03 16   [23] 1396 	rl	3 (iy)
+   0A01 10 EE         [13] 1397 	djnz	00220$
+   0A03 21 0D 00      [10] 1398 	ld	hl,#13
+   0A06 39            [11] 1399 	add	hl,sp
+   0A07 7E            [ 7] 1400 	ld	a,(hl)
+   0A08 C6 FF         [ 7] 1401 	add	a, #0xFF
+   0A0A 77            [ 7] 1402 	ld	(hl),a
+   0A0B 23            [ 6] 1403 	inc	hl
+   0A0C 7E            [ 7] 1404 	ld	a,(hl)
+   0A0D CE 01         [ 7] 1405 	adc	a, #0x01
+   0A0F 77            [ 7] 1406 	ld	(hl),a
+   0A10 23            [ 6] 1407 	inc	hl
+   0A11 7E            [ 7] 1408 	ld	a,(hl)
+   0A12 CE 00         [ 7] 1409 	adc	a, #0x00
+   0A14 77            [ 7] 1410 	ld	(hl),a
+   0A15 23            [ 6] 1411 	inc	hl
+   0A16 7E            [ 7] 1412 	ld	a,(hl)
+   0A17 CE 00         [ 7] 1413 	adc	a, #0x00
+   0A19 77            [ 7] 1414 	ld	(hl),a
+   0A1A F5            [11] 1415 	push	af
+   0A1B FD 7E 00      [19] 1416 	ld	a,0 (iy)
+   0A1E 32r12r00      [13] 1417 	ld	(#_root_directory_size + 0),a
+   0A21 21 10 00      [10] 1418 	ld	hl, #15+1
+   0A24 39            [11] 1419 	add	hl, sp
+   0A25 7E            [ 7] 1420 	ld	a, (hl)
+   0A26 32r13r00      [13] 1421 	ld	(#_root_directory_size + 1),a
+   0A29 21 11 00      [10] 1422 	ld	hl, #15+2
+   0A2C 39            [11] 1423 	add	hl, sp
+   0A2D 7E            [ 7] 1424 	ld	a, (hl)
+   0A2E 32r14r00      [13] 1425 	ld	(#_root_directory_size + 2),a
+   0A31 21 12 00      [10] 1426 	ld	hl, #15+3
+   0A34 39            [11] 1427 	add	hl, sp
+   0A35 7E            [ 7] 1428 	ld	a, (hl)
+   0A36 32r15r00      [13] 1429 	ld	(#_root_directory_size + 3),a
+   0A39 F1            [10] 1430 	pop	af
+   0A3A 06 09         [ 7] 1431 	ld	b,#0x09
+   0A3C                    1432 00222$:
+   0A3C FD 21r12r00   [14] 1433 	ld	iy,#_root_directory_size
+   0A40 FD CB 03 3E   [23] 1434 	srl	3 (iy)
+   0A44 FD 21r12r00   [14] 1435 	ld	iy,#_root_directory_size
+   0A48 FD CB 02 1E   [23] 1436 	rr	2 (iy)
+   0A4C FD 21r12r00   [14] 1437 	ld	iy,#_root_directory_size
+   0A50 FD CB 01 1E   [23] 1438 	rr	1 (iy)
+   0A54 FD 21r12r00   [14] 1439 	ld	iy,#_root_directory_size
+   0A58 FD CB 00 1E   [23] 1440 	rr	0 (iy)
+   0A5C 10 DE         [13] 1441 	djnz	00222$
+                           1442 ;src/fat.c:209: fat_size = sector_buffer[22] + (sector_buffer[23] << 8);
+   0A5E 3Ar3Er00      [13] 1443 	ld	a, (#_sector_buffer + 22)
+   0A61 FD 21 0D 00   [14] 1444 	ld	iy,#13
+   0A65 FD 39         [15] 1445 	add	iy,sp
+   0A67 FD 77 00      [19] 1446 	ld	0 (iy),a
+   0A6A FD 36 01 00   [19] 1447 	ld	1 (iy),#0x00
+   0A6E 3Ar3Fr00      [13] 1448 	ld	a,(#_sector_buffer + 23)
+   0A71 FD 21 06 00   [14] 1449 	ld	iy,#6
+   0A75 FD 39         [15] 1450 	add	iy,sp
+   0A77 FD 77 00      [19] 1451 	ld	0 (iy),a
+   0A7A FD 7E 00      [19] 1452 	ld	a,0 (iy)
+   0A7D FD 77 00      [19] 1453 	ld	0 (iy),a
+   0A80 FD 36 01 00   [19] 1454 	ld	1 (iy),#0x00
+   0A84 FD 7E 00      [19] 1455 	ld	a,0 (iy)
+   0A87 FD 77 01      [19] 1456 	ld	1 (iy),a
+   0A8A FD 36 00 00   [19] 1457 	ld	0 (iy),#0x00
+   0A8E 21 06 00      [10] 1458 	ld	hl,#6
+   0A91 39            [11] 1459 	add	hl,sp
+   0A92 D5            [11] 1460 	push	de
+   0A93 FD 21 0F 00   [14] 1461 	ld	iy,#15
+   0A97 FD 39         [15] 1462 	add	iy,sp
+   0A99 FD E5         [15] 1463 	push	iy
+   0A9B D1            [10] 1464 	pop	de
+   0A9C FD 7E 00      [19] 1465 	ld	a,0 (iy)
+   0A9F 86            [ 7] 1466 	add	a, (hl)
+   0AA0 12            [ 7] 1467 	ld	(de),a
+   0AA1 FD 7E 01      [19] 1468 	ld	a,1 (iy)
+   0AA4 23            [ 6] 1469 	inc	hl
+   0AA5 8E            [ 7] 1470 	adc	a, (hl)
+   0AA6 13            [ 6] 1471 	inc	de
+   0AA7 12            [ 7] 1472 	ld	(de),a
+   0AA8 D1            [10] 1473 	pop	de
+   0AA9 FD 7E 00      [19] 1474 	ld	a,0 (iy)
+   0AAC 32r24r00      [13] 1475 	ld	(#_fat_size + 0),a
+   0AAF 21 0E 00      [10] 1476 	ld	hl, #13+1
+   0AB2 39            [11] 1477 	add	hl, sp
+   0AB3 7E            [ 7] 1478 	ld	a, (hl)
+   0AB4 32r25r00      [13] 1479 	ld	(#_fat_size + 1),a
+   0AB7 21 0E 00      [10] 1480 	ld	hl, #13+1
+   0ABA 39            [11] 1481 	add	hl, sp
+   0ABB 7E            [ 7] 1482 	ld	a, (hl)
+   0ABC 17            [ 4] 1483 	rla
+   0ABD 9F            [ 4] 1484 	sbc	a, a
+   0ABE 32r26r00      [13] 1485 	ld	(#_fat_size + 2),a
+   0AC1 32r27r00      [13] 1486 	ld	(#_fat_size + 3),a
+                           1487 ;src/fat.c:212: root_directory_start = fat_start + (fat_number * fat_size);
+   0AC4 3Ar16r00      [13] 1488 	ld	a,(#_fat_number + 0)
+   0AC7 FD 21 0D 00   [14] 1489 	ld	iy,#13
+   0ACB FD 39         [15] 1490 	add	iy,sp
+   0ACD FD 77 00      [19] 1491 	ld	0 (iy),a
+   0AD0 3Ar17r00      [13] 1492 	ld	a,(#_fat_number + 1)
+   0AD3 FD 21 0D 00   [14] 1493 	ld	iy,#13
+   0AD7 FD 39         [15] 1494 	add	iy,sp
+   0AD9 FD 77 01      [19] 1495 	ld	1 (iy),a
+   0ADC FD 36 02 00   [19] 1496 	ld	2 (iy),#0x00
+   0AE0 FD 36 03 00   [19] 1497 	ld	3 (iy),#0x00
+   0AE4 2Ar26r00      [16] 1498 	ld	hl,(_fat_size + 2)
+   0AE7 E5            [11] 1499 	push	hl
+   0AE8 2Ar24r00      [16] 1500 	ld	hl,(_fat_size)
+   0AEB E5            [11] 1501 	push	hl
+   0AEC FD 6E 02      [19] 1502 	ld	l,2 (iy)
+   0AEF FD 66 03      [19] 1503 	ld	h,3 (iy)
+   0AF2 E5            [11] 1504 	push	hl
+   0AF3 FD 6E 00      [19] 1505 	ld	l,0 (iy)
+   0AF6 FD 66 01      [19] 1506 	ld	h,1 (iy)
+   0AF9 E5            [11] 1507 	push	hl
+   0AFA CDr00r00      [17] 1508 	call	__mullong
+   0AFD F1            [10] 1509 	pop	af
+   0AFE F1            [10] 1510 	pop	af
+   0AFF F1            [10] 1511 	pop	af
+   0B00 F1            [10] 1512 	pop	af
+   0B01 FD 21 0D 00   [14] 1513 	ld	iy,#13
+   0B05 FD 39         [15] 1514 	add	iy,sp
+   0B07 FD 72 03      [19] 1515 	ld	3 (iy),d
+   0B0A FD 73 02      [19] 1516 	ld	2 (iy),e
+   0B0D FD 74 01      [19] 1517 	ld	1 (iy),h
+   0B10 FD 75 00      [19] 1518 	ld	0 (iy),l
+   0B13 21 0D 00      [10] 1519 	ld	hl,#13
+   0B16 39            [11] 1520 	add	hl,sp
+   0B17 D5            [11] 1521 	push	de
+   0B18 FD 21r0Er00   [14] 1522 	ld	iy,#_root_directory_start
+   0B1C FD E5         [15] 1523 	push	iy
+   0B1E D1            [10] 1524 	pop	de
+   0B1F 3Ar02r00      [13] 1525 	ld	a,(#_fat_start + 0)
+   0B22 86            [ 7] 1526 	add	a, (hl)
+   0B23 12            [ 7] 1527 	ld	(de),a
+   0B24 3Ar03r00      [13] 1528 	ld	a,(#_fat_start + 1)
+   0B27 23            [ 6] 1529 	inc	hl
+   0B28 8E            [ 7] 1530 	adc	a, (hl)
+   0B29 13            [ 6] 1531 	inc	de
+   0B2A 12            [ 7] 1532 	ld	(de),a
+   0B2B 3Ar04r00      [13] 1533 	ld	a,(#_fat_start + 2)
+   0B2E 23            [ 6] 1534 	inc	hl
+   0B2F 8E            [ 7] 1535 	adc	a, (hl)
+   0B30 13            [ 6] 1536 	inc	de
+   0B31 12            [ 7] 1537 	ld	(de),a
+   0B32 3Ar05r00      [13] 1538 	ld	a,(#_fat_start + 3)
+   0B35 23            [ 6] 1539 	inc	hl
+   0B36 8E            [ 7] 1540 	adc	a, (hl)
+   0B37 13            [ 6] 1541 	inc	de
+   0B38 12            [ 7] 1542 	ld	(de),a
+   0B39 D1            [10] 1543 	pop	de
+                           1544 ;src/fat.c:213: root_directory_cluster = 0; // unused
+   0B3A AF            [ 4] 1545 	xor	a, a
+   0B3B 32r0Ar00      [13] 1546 	ld	(#_root_directory_cluster + 0),a
+   0B3E 32r0Br00      [13] 1547 	ld	(#_root_directory_cluster + 1),a
+   0B41 32r0Cr00      [13] 1548 	ld	(#_root_directory_cluster + 2),a
+   0B44 32r0Dr00      [13] 1549 	ld	(#_root_directory_cluster + 3),a
+                           1550 ;src/fat.c:216: data_start = root_directory_start + root_directory_size;
+   0B47 21r12r00      [10] 1551 	ld	hl,#_root_directory_size
+   0B4A D5            [11] 1552 	push	de
+   0B4B FD 21r06r00   [14] 1553 	ld	iy,#_data_start
+   0B4F FD E5         [15] 1554 	push	iy
+   0B51 D1            [10] 1555 	pop	de
+   0B52 3Ar0Er00      [13] 1556 	ld	a,(#_root_directory_start + 0)
+   0B55 86            [ 7] 1557 	add	a, (hl)
+   0B56 12            [ 7] 1558 	ld	(de),a
+   0B57 3Ar0Fr00      [13] 1559 	ld	a,(#_root_directory_start + 1)
+   0B5A 23            [ 6] 1560 	inc	hl
+   0B5B 8E            [ 7] 1561 	adc	a, (hl)
+   0B5C 13            [ 6] 1562 	inc	de
+   0B5D 12            [ 7] 1563 	ld	(de),a
+   0B5E 3Ar10r00      [13] 1564 	ld	a,(#_root_directory_start + 2)
+   0B61 23            [ 6] 1565 	inc	hl
+   0B62 8E            [ 7] 1566 	adc	a, (hl)
+   0B63 13            [ 6] 1567 	inc	de
+   0B64 12            [ 7] 1568 	ld	(de),a
+   0B65 3Ar11r00      [13] 1569 	ld	a,(#_root_directory_start + 3)
+   0B68 23            [ 6] 1570 	inc	hl
+   0B69 8E            [ 7] 1571 	adc	a, (hl)
+   0B6A 13            [ 6] 1572 	inc	de
+   0B6B 12            [ 7] 1573 	ld	(de),a
+   0B6C D1            [10] 1574 	pop	de
+   0B6D                    1575 00134$:
+                           1576 ;src/fat.c:219: return(1);
+   0B6D 2E 01         [ 7] 1577 	ld	l,#0x01
+   0B6F                    1578 00135$:
+   0B6F FD 21 11 00   [14] 1579 	ld	iy,#17
+   0B73 FD 39         [15] 1580 	add	iy,sp
+   0B75 FD F9         [10] 1581 	ld	sp,iy
+   0B77 C9            [10] 1582 	ret
+   0B78                    1583 ___str_0:
+   0B78 46 41 54 31 36 20  1584 	.ascii "FAT16   "
+        20 20
+   0B80 00                 1585 	.db 0x00
+   0B81                    1586 ___str_1:
+   0B81 46 41 54 33 32 20  1587 	.ascii "FAT32   "
+        20 20
+   0B89 00                 1588 	.db 0x00
+                           1589 ;src/fat.c:223: unsigned char FileOpen(fileTYPE *file, const char *name)
+                           1590 ;	---------------------------------
+                           1591 ; Function FileOpen
+                           1592 ; ---------------------------------
+   0B8A                    1593 _FileOpen::
+   0B8A 21 E0 FF      [10] 1594 	ld	hl,#-32
+   0B8D 39            [11] 1595 	add	hl,sp
+   0B8E F9            [ 6] 1596 	ld	sp,hl
+                           1597 ;src/fat.c:226: DIRENTRY       *pEntry = 0;          // pointer to current entry in sector buffer
+   0B8F 21 04 00      [10] 1598 	ld	hl, #4
+   0B92 39            [11] 1599 	add	hl, sp
+   0B93 36 00         [10] 1600 	ld	(hl), #0x00
+   0B95 23            [ 6] 1601 	inc	hl
+   0B96 36 00         [10] 1602 	ld	(hl), #0x00
+                           1603 ;src/fat.c:232: buffered_fat_index = 0xFFFFFFFF;
+   0B98 21r2Ar02      [10] 1604 	ld	hl,#_buffered_fat_index + 0
+   0B9B 36 FF         [10] 1605 	ld	(hl), #0xFF
+   0B9D 21r2Br02      [10] 1606 	ld	hl,#_buffered_fat_index + 1
+   0BA0 36 FF         [10] 1607 	ld	(hl), #0xFF
+   0BA2 21r2Cr02      [10] 1608 	ld	hl,#_buffered_fat_index + 2
+   0BA5 36 FF         [10] 1609 	ld	(hl), #0xFF
+   0BA7 FD 21r2Ar02   [14] 1610 	ld	iy,#_buffered_fat_index
+   0BAB FD 36 03 FF   [19] 1611 	ld	3 (iy),#0xFF
+                           1612 ;src/fat.c:234: iDirectoryCluster = root_directory_cluster;
+   0BAF 21 00 00      [10] 1613 	ld	hl, #0
+   0BB2 39            [11] 1614 	add	hl, sp
+   0BB3 EB            [ 4] 1615 	ex	de, hl
+   0BB4 21r0Ar00      [10] 1616 	ld	hl, #_root_directory_cluster
+   0BB7 01 04 00      [10] 1617 	ld	bc, #4
+   0BBA ED B0         [21] 1618 	ldir
+                           1619 ;src/fat.c:235: iDirectorySector = root_directory_start;
+   0BBC 21 1C 00      [10] 1620 	ld	hl, #28
+   0BBF 39            [11] 1621 	add	hl, sp
+   0BC0 EB            [ 4] 1622 	ex	de, hl
+   0BC1 21r0Er00      [10] 1623 	ld	hl, #_root_directory_start
+   0BC4 01 04 00      [10] 1624 	ld	bc, #4
+   0BC7 ED B0         [21] 1625 	ldir
+                           1626 ;src/fat.c:236: nEntries = fat32 ?  cluster_size << 4 : root_directory_size << 4; // 16 entries per sector
+   0BC9 3Ar01r00      [13] 1627 	ld	a,(#_fat32 + 1)
+   0BCC 21r00r00      [10] 1628 	ld	hl,#_fat32 + 0
+   0BCF B6            [ 7] 1629 	or	a,(hl)
+   0BD0 28 29         [12] 1630 	jr	Z,00125$
+   0BD2 F5            [11] 1631 	push	af
+   0BD3 FD 21r18r00   [14] 1632 	ld	iy,#_cluster_size
+   0BD7 FD 6E 00      [19] 1633 	ld	l,0 (iy)
+   0BDA FD 21r18r00   [14] 1634 	ld	iy,#_cluster_size
+   0BDE FD 66 01      [19] 1635 	ld	h,1 (iy)
+   0BE1 FD 21r18r00   [14] 1636 	ld	iy,#_cluster_size
+   0BE5 FD 5E 02      [19] 1637 	ld	e,2 (iy)
+   0BE8 FD 21r18r00   [14] 1638 	ld	iy,#_cluster_size
+   0BEC FD 56 03      [19] 1639 	ld	d,3 (iy)
+   0BEF F1            [10] 1640 	pop	af
+   0BF0 06 04         [ 7] 1641 	ld	b,#0x04
+   0BF2                    1642 00177$:
+   0BF2 29            [11] 1643 	add	hl, hl
+   0BF3 CB 13         [ 8] 1644 	rl	e
+   0BF5 CB 12         [ 8] 1645 	rl	d
+   0BF7 10 F9         [13] 1646 	djnz	00177$
+   0BF9 18 27         [12] 1647 	jr	00126$
+   0BFB                    1648 00125$:
+   0BFB F5            [11] 1649 	push	af
+   0BFC FD 21r12r00   [14] 1650 	ld	iy,#_root_directory_size
+   0C00 FD 6E 00      [19] 1651 	ld	l,0 (iy)
+   0C03 FD 21r12r00   [14] 1652 	ld	iy,#_root_directory_size
+   0C07 FD 66 01      [19] 1653 	ld	h,1 (iy)
+   0C0A FD 21r12r00   [14] 1654 	ld	iy,#_root_directory_size
+   0C0E FD 5E 02      [19] 1655 	ld	e,2 (iy)
+   0C11 FD 21r12r00   [14] 1656 	ld	iy,#_root_directory_size
+   0C15 FD 56 03      [19] 1657 	ld	d,3 (iy)
+   0C18 F1            [10] 1658 	pop	af
+   0C19 06 04         [ 7] 1659 	ld	b,#0x04
+   0C1B                    1660 00179$:
+   0C1B 29            [11] 1661 	add	hl, hl
+   0C1C CB 13         [ 8] 1662 	rl	e
+   0C1E CB 12         [ 8] 1663 	rl	d
+   0C20 10 F9         [13] 1664 	djnz	00179$
+   0C22                    1665 00126$:
+   0C22 FD 21 0A 00   [14] 1666 	ld	iy,#10
+   0C26 FD 39         [15] 1667 	add	iy,sp
+   0C28 FD 75 00      [19] 1668 	ld	0 (iy),l
+   0C2B FD 74 01      [19] 1669 	ld	1 (iy),h
+   0C2E FD 73 02      [19] 1670 	ld	2 (iy),e
+   0C31 FD 72 03      [19] 1671 	ld	3 (iy),d
+                           1672 ;src/fat.c:238: while (1)
+                           1673 ;src/fat.c:240: for (iEntry = 0; iEntry < nEntries; iEntry++)
+   0C34                    1674 00137$:
+   0C34 21 18 00      [10] 1675 	ld	hl, #24
+   0C37 39            [11] 1676 	add	hl, sp
+   0C38 EB            [ 4] 1677 	ex	de, hl
+   0C39 21 1C 00      [10] 1678 	ld	hl, #28
+   0C3C 39            [11] 1679 	add	hl, sp
+   0C3D 01 04 00      [10] 1680 	ld	bc, #4
+   0C40 ED B0         [21] 1681 	ldir
+   0C42 AF            [ 4] 1682 	xor	a, a
+   0C43 FD 21 06 00   [14] 1683 	ld	iy,#6
+   0C47 FD 39         [15] 1684 	add	iy,sp
+   0C49 FD 77 00      [19] 1685 	ld	0 (iy),a
+   0C4C FD 77 01      [19] 1686 	ld	1 (iy),a
+   0C4F FD 77 02      [19] 1687 	ld	2 (iy),a
+   0C52 FD 77 03      [19] 1688 	ld	3 (iy),a
+   0C55                    1689 00121$:
+   0C55 21 0A 00      [10] 1690 	ld	hl,#10
+   0C58 39            [11] 1691 	add	hl,sp
+   0C59 FD 21 06 00   [14] 1692 	ld	iy,#6
+   0C5D FD 39         [15] 1693 	add	iy,sp
+   0C5F FD 7E 00      [19] 1694 	ld	a,0 (iy)
+   0C62 96            [ 7] 1695 	sub	a, (hl)
+   0C63 FD 7E 01      [19] 1696 	ld	a,1 (iy)
+   0C66 23            [ 6] 1697 	inc	hl
+   0C67 9E            [ 7] 1698 	sbc	a, (hl)
+   0C68 FD 7E 02      [19] 1699 	ld	a,2 (iy)
+   0C6B 23            [ 6] 1700 	inc	hl
+   0C6C 9E            [ 7] 1701 	sbc	a, (hl)
+   0C6D FD 7E 03      [19] 1702 	ld	a,3 (iy)
+   0C70 23            [ 6] 1703 	inc	hl
+   0C71 9E            [ 7] 1704 	sbc	a, (hl)
+   0C72 D2r4Cr0E      [10] 1705 	jp	NC,00111$
+                           1706 ;src/fat.c:242: if ((iEntry & 0x0F) == 0) // first entry in sector, load the sector
+   0C75 FD 7E 00      [19] 1707 	ld	a,0 (iy)
+   0C78 E6 0F         [ 7] 1708 	and	a, #0x0F
+   0C7A 20 3B         [12] 1709 	jr	NZ,00102$
+                           1710 ;src/fat.c:245: MMC_Read(iDirectorySector++, sector_buffer); // root directory is linear
+   0C7C FD 21 18 00   [14] 1711 	ld	iy,#24
+   0C80 FD 39         [15] 1712 	add	iy,sp
+   0C82 FD 5E 00      [19] 1713 	ld	e,0 (iy)
+   0C85 FD 56 01      [19] 1714 	ld	d,1 (iy)
+   0C88 FD 4E 02      [19] 1715 	ld	c,2 (iy)
+   0C8B FD 46 03      [19] 1716 	ld	b,3 (iy)
+   0C8E FD 34 00      [23] 1717 	inc	0 (iy)
+   0C91 20 0D         [12] 1718 	jr	NZ,00183$
+   0C93 FD 34 01      [23] 1719 	inc	1 (iy)
+   0C96 20 08         [12] 1720 	jr	NZ,00183$
+   0C98 FD 34 02      [23] 1721 	inc	2 (iy)
+   0C9B 20 03         [12] 1722 	jr	NZ,00183$
+   0C9D FD 34 03      [23] 1723 	inc	3 (iy)
+   0CA0                    1724 00183$:
+   0CA0 21r28r00      [10] 1725 	ld	hl,#_sector_buffer
+   0CA3 E5            [11] 1726 	push	hl
+   0CA4 C5            [11] 1727 	push	bc
+   0CA5 D5            [11] 1728 	push	de
+   0CA6 CDr00r00      [17] 1729 	call	_MMC_Read
+   0CA9 F1            [10] 1730 	pop	af
+   0CAA F1            [10] 1731 	pop	af
+   0CAB F1            [10] 1732 	pop	af
+                           1733 ;src/fat.c:246: pEntry = (DIRENTRY*)sector_buffer;
+   0CAC 21 04 00      [10] 1734 	ld	hl, #4
+   0CAF 39            [11] 1735 	add	hl, sp
+   0CB0 36r28         [10] 1736 	ld	(hl), #<(_sector_buffer)
+   0CB2 23            [ 6] 1737 	inc	hl
+   0CB3 36s00         [10] 1738 	ld	(hl), #>(_sector_buffer)
+   0CB5 18 0D         [12] 1739 	jr	00103$
+   0CB7                    1740 00102$:
+                           1741 ;src/fat.c:249: pEntry++;
+   0CB7 21 04 00      [10] 1742 	ld	hl,#4
+   0CBA 39            [11] 1743 	add	hl,sp
+   0CBB 7E            [ 7] 1744 	ld	a,(hl)
+   0CBC C6 20         [ 7] 1745 	add	a, #0x20
+   0CBE 77            [ 7] 1746 	ld	(hl),a
+   0CBF 23            [ 6] 1747 	inc	hl
+   0CC0 7E            [ 7] 1748 	ld	a,(hl)
+   0CC1 CE 00         [ 7] 1749 	adc	a, #0x00
+   0CC3 77            [ 7] 1750 	ld	(hl),a
+   0CC4                    1751 00103$:
+                           1752 ;src/fat.c:252: if (pEntry->Name[0] != SLOT_EMPTY && pEntry->Name[0] != SLOT_DELETED) // valid entry??
+   0CC4 FD 21 04 00   [14] 1753 	ld	iy,#4
+   0CC8 FD 39         [15] 1754 	add	iy,sp
+   0CCA FD 6E 00      [19] 1755 	ld	l,0 (iy)
+   0CCD FD 66 01      [19] 1756 	ld	h,1 (iy)
+   0CD0 7E            [ 7] 1757 	ld	a,(hl)
+   0CD1 B7            [ 4] 1758 	or	a, a
+   0CD2 CAr2Er0E      [10] 1759 	jp	Z,00122$
+   0CD5 D6 E5         [ 7] 1760 	sub	a, #0xE5
+   0CD7 CAr2Er0E      [10] 1761 	jp	Z,00122$
+                           1762 ;src/fat.c:254: if (!(pEntry->Attributes & (ATTR_VOLUME | ATTR_DIRECTORY))) // not a volume nor directory
+   0CDA FD 6E 00      [19] 1763 	ld	l,0 (iy)
+   0CDD FD 66 01      [19] 1764 	ld	h,1 (iy)
+   0CE0 11 0B 00      [10] 1765 	ld	de, #0x000B
+   0CE3 19            [11] 1766 	add	hl, de
+   0CE4 7E            [ 7] 1767 	ld	a,(hl)
+   0CE5 E6 18         [ 7] 1768 	and	a, #0x18
+   0CE7 C2r2Er0E      [10] 1769 	jp	NZ,00122$
+                           1770 ;src/fat.c:257: if (compare((const char*)pEntry->Name, name, 11) == 0)
+   0CEA 21 04 00      [10] 1771 	ld	hl, #4
+   0CED 39            [11] 1772 	add	hl, sp
+   0CEE 7E            [ 7] 1773 	ld	a, (hl)
+   0CEF 23            [ 6] 1774 	inc	hl
+   0CF0 66            [ 7] 1775 	ld	h, (hl)
+   0CF1 6F            [ 4] 1776 	ld	l, a
+   0CF2 01 0B 00      [10] 1777 	ld	bc,#0x000B
+   0CF5 C5            [11] 1778 	push	bc
+   0CF6 FD 21 26 00   [14] 1779 	ld	iy,#38
+   0CFA FD 39         [15] 1780 	add	iy,sp
+   0CFC FD 4E 00      [19] 1781 	ld	c,0 (iy)
+   0CFF FD 46 01      [19] 1782 	ld	b,1 (iy)
+   0D02 C5            [11] 1783 	push	bc
+   0D03 E5            [11] 1784 	push	hl
+   0D04 CDr9Er01      [17] 1785 	call	_compare
+   0D07 F1            [10] 1786 	pop	af
+   0D08 F1            [10] 1787 	pop	af
+   0D09 F1            [10] 1788 	pop	af
+   0D0A 7C            [ 4] 1789 	ld	a,h
+   0D0B B5            [ 4] 1790 	or	a,l
+   0D0C C2r2Er0E      [10] 1791 	jp	NZ,00122$
+                           1792 ;src/fat.c:259: file->size = SwapBBBB(pEntry->FileSize); 		// for 68000
+   0D0F 21 22 00      [10] 1793 	ld	hl, #34+0
+   0D12 39            [11] 1794 	add	hl, sp
+   0D13 7E            [ 7] 1795 	ld	a, (hl)
+   0D14 FD 21 16 00   [14] 1796 	ld	iy,#22
+   0D18 FD 39         [15] 1797 	add	iy,sp
+   0D1A FD 77 00      [19] 1798 	ld	0 (iy),a
+   0D1D 21 23 00      [10] 1799 	ld	hl, #34+1
+   0D20 39            [11] 1800 	add	hl, sp
+   0D21 7E            [ 7] 1801 	ld	a, (hl)
+   0D22 FD 21 16 00   [14] 1802 	ld	iy,#22
+   0D26 FD 39         [15] 1803 	add	iy,sp
+   0D28 FD 77 01      [19] 1804 	ld	1 (iy),a
+   0D2B 21 14 00      [10] 1805 	ld	hl,#20
+   0D2E 39            [11] 1806 	add	hl,sp
+   0D2F FD 7E 00      [19] 1807 	ld	a,0 (iy)
+   0D32 C6 04         [ 7] 1808 	add	a, #0x04
+   0D34 77            [ 7] 1809 	ld	(hl),a
+   0D35 FD 7E 01      [19] 1810 	ld	a,1 (iy)
+   0D38 CE 00         [ 7] 1811 	adc	a, #0x00
+   0D3A 23            [ 6] 1812 	inc	hl
+   0D3B 77            [ 7] 1813 	ld	(hl),a
+   0D3C 21 04 00      [10] 1814 	ld	hl, #4
+   0D3F 39            [11] 1815 	add	hl, sp
+   0D40 7E            [ 7] 1816 	ld	a, (hl)
+   0D41 23            [ 6] 1817 	inc	hl
+   0D42 66            [ 7] 1818 	ld	h, (hl)
+   0D43 6F            [ 4] 1819 	ld	l, a
+   0D44 11 1C 00      [10] 1820 	ld	de, #0x001C
+   0D47 19            [11] 1821 	add	hl, de
+   0D48 5E            [ 7] 1822 	ld	e,(hl)
+   0D49 23            [ 6] 1823 	inc	hl
+   0D4A 56            [ 7] 1824 	ld	d,(hl)
+   0D4B 23            [ 6] 1825 	inc	hl
+   0D4C 46            [ 7] 1826 	ld	b,(hl)
+   0D4D 23            [ 6] 1827 	inc	hl
+   0D4E 4E            [ 7] 1828 	ld	c,(hl)
+   0D4F 21 14 00      [10] 1829 	ld	hl, #20
+   0D52 39            [11] 1830 	add	hl, sp
+   0D53 7E            [ 7] 1831 	ld	a, (hl)
+   0D54 23            [ 6] 1832 	inc	hl
+   0D55 66            [ 7] 1833 	ld	h, (hl)
+   0D56 6F            [ 4] 1834 	ld	l, a
+   0D57 73            [ 7] 1835 	ld	(hl),e
+   0D58 23            [ 6] 1836 	inc	hl
+   0D59 72            [ 7] 1837 	ld	(hl),d
+   0D5A 23            [ 6] 1838 	inc	hl
+   0D5B 70            [ 7] 1839 	ld	(hl),b
+   0D5C 23            [ 6] 1840 	inc	hl
+   0D5D 71            [ 7] 1841 	ld	(hl),c
+                           1842 ;src/fat.c:260: file->cluster = SwapBB(pEntry->StartCluster) + (fat32 ? ((unsigned long)(SwapBB(pEntry->HighCluster) & 0x0FFF)) << 16 : 0);
+   0D5E 21 14 00      [10] 1843 	ld	hl,#20
+   0D61 39            [11] 1844 	add	hl,sp
+   0D62 FD 21 16 00   [14] 1845 	ld	iy,#22
+   0D66 FD 39         [15] 1846 	add	iy,sp
+   0D68 FD 7E 00      [19] 1847 	ld	a,0 (iy)
+   0D6B C6 08         [ 7] 1848 	add	a, #0x08
+   0D6D 77            [ 7] 1849 	ld	(hl),a
+   0D6E FD 7E 01      [19] 1850 	ld	a,1 (iy)
+   0D71 CE 00         [ 7] 1851 	adc	a, #0x00
+   0D73 23            [ 6] 1852 	inc	hl
+   0D74 77            [ 7] 1853 	ld	(hl),a
+   0D75 21 04 00      [10] 1854 	ld	hl, #4
+   0D78 39            [11] 1855 	add	hl, sp
+   0D79 7E            [ 7] 1856 	ld	a, (hl)
+   0D7A 23            [ 6] 1857 	inc	hl
+   0D7B 66            [ 7] 1858 	ld	h, (hl)
+   0D7C 6F            [ 4] 1859 	ld	l, a
+   0D7D 11 1A 00      [10] 1860 	ld	de, #0x001A
+   0D80 19            [11] 1861 	add	hl, de
+   0D81 7E            [ 7] 1862 	ld	a,(hl)
+   0D82 FD 21 12 00   [14] 1863 	ld	iy,#18
+   0D86 FD 39         [15] 1864 	add	iy,sp
+   0D88 FD 77 00      [19] 1865 	ld	0 (iy),a
+   0D8B 23            [ 6] 1866 	inc	hl
+   0D8C 7E            [ 7] 1867 	ld	a,(hl)
+   0D8D FD 77 01      [19] 1868 	ld	1 (iy),a
+   0D90 3Ar01r00      [13] 1869 	ld	a,(#_fat32 + 1)
+   0D93 21r00r00      [10] 1870 	ld	hl,#_fat32 + 0
+   0D96 B6            [ 7] 1871 	or	a,(hl)
+   0D97 28 40         [12] 1872 	jr	Z,00127$
+   0D99 21 04 00      [10] 1873 	ld	hl, #4
+   0D9C 39            [11] 1874 	add	hl, sp
+   0D9D 7E            [ 7] 1875 	ld	a, (hl)
+   0D9E 23            [ 6] 1876 	inc	hl
+   0D9F 66            [ 7] 1877 	ld	h, (hl)
+   0DA0 6F            [ 4] 1878 	ld	l, a
+   0DA1 11 14 00      [10] 1879 	ld	de, #0x0014
+   0DA4 19            [11] 1880 	add	hl, de
+   0DA5 5E            [ 7] 1881 	ld	e,(hl)
+   0DA6 23            [ 6] 1882 	inc	hl
+   0DA7 7E            [ 7] 1883 	ld	a, (hl)
+   0DA8 E6 0F         [ 7] 1884 	and	a, #0x0F
+   0DAA 57            [ 4] 1885 	ld	d,a
+   0DAB 21 00 00      [10] 1886 	ld	hl,#0x0000
+   0DAE F5            [11] 1887 	push	af
+   0DAF FD 21 10 00   [14] 1888 	ld	iy,#16
+   0DB3 FD 39         [15] 1889 	add	iy,sp
+   0DB5 FD 73 00      [19] 1890 	ld	0 (iy),e
+   0DB8 FD 72 01      [19] 1891 	ld	1 (iy),d
+   0DBB FD 74 02      [19] 1892 	ld	2 (iy),h
+   0DBE FD 75 03      [19] 1893 	ld	3 (iy),l
+   0DC1 F1            [10] 1894 	pop	af
+   0DC2 3E 10         [ 7] 1895 	ld	a,#0x10
+   0DC4                    1896 00187$:
+   0DC4 FD CB 00 26   [23] 1897 	sla	0 (iy)
+   0DC8 FD CB 01 16   [23] 1898 	rl	1 (iy)
+   0DCC FD CB 02 16   [23] 1899 	rl	2 (iy)
+   0DD0 FD CB 03 16   [23] 1900 	rl	3 (iy)
+   0DD4 3D            [ 4] 1901 	dec	a
+   0DD5 20 ED         [12] 1902 	jr	NZ,00187$
+   0DD7 18 13         [12] 1903 	jr	00128$
+   0DD9                    1904 00127$:
+   0DD9 AF            [ 4] 1905 	xor	a, a
+   0DDA FD 21 0E 00   [14] 1906 	ld	iy,#14
+   0DDE FD 39         [15] 1907 	add	iy,sp
+   0DE0 FD 77 00      [19] 1908 	ld	0 (iy),a
+   0DE3 FD 77 01      [19] 1909 	ld	1 (iy),a
+   0DE6 FD 77 02      [19] 1910 	ld	2 (iy),a
+   0DE9 FD 77 03      [19] 1911 	ld	3 (iy),a
+   0DEC                    1912 00128$:
+   0DEC 21 12 00      [10] 1913 	ld	hl, #18
+   0DEF 39            [11] 1914 	add	hl, sp
+   0DF0 5E            [ 7] 1915 	ld	e, (hl)
+   0DF1 23            [ 6] 1916 	inc	hl
+   0DF2 56            [ 7] 1917 	ld	d, (hl)
+   0DF3 01 00 00      [10] 1918 	ld	bc,#0x0000
+   0DF6 7B            [ 4] 1919 	ld	a,e
+   0DF7 21 0E 00      [10] 1920 	ld	hl,#14
+   0DFA 39            [11] 1921 	add	hl,sp
+   0DFB 86            [ 7] 1922 	add	a, (hl)
+   0DFC 5F            [ 4] 1923 	ld	e,a
+   0DFD 7A            [ 4] 1924 	ld	a,d
+   0DFE 23            [ 6] 1925 	inc	hl
+   0DFF 8E            [ 7] 1926 	adc	a, (hl)
+   0E00 57            [ 4] 1927 	ld	d,a
+   0E01 79            [ 4] 1928 	ld	a,c
+   0E02 23            [ 6] 1929 	inc	hl
+   0E03 8E            [ 7] 1930 	adc	a, (hl)
+   0E04 4F            [ 4] 1931 	ld	c,a
+   0E05 78            [ 4] 1932 	ld	a,b
+   0E06 23            [ 6] 1933 	inc	hl
+   0E07 8E            [ 7] 1934 	adc	a, (hl)
+   0E08 47            [ 4] 1935 	ld	b,a
+   0E09 21 14 00      [10] 1936 	ld	hl, #20
+   0E0C 39            [11] 1937 	add	hl, sp
+   0E0D 7E            [ 7] 1938 	ld	a, (hl)
+   0E0E 23            [ 6] 1939 	inc	hl
+   0E0F 66            [ 7] 1940 	ld	h, (hl)
+   0E10 6F            [ 4] 1941 	ld	l, a
+   0E11 73            [ 7] 1942 	ld	(hl),e
+   0E12 23            [ 6] 1943 	inc	hl
+   0E13 72            [ 7] 1944 	ld	(hl),d
+   0E14 23            [ 6] 1945 	inc	hl
+   0E15 71            [ 7] 1946 	ld	(hl),c
+   0E16 23            [ 6] 1947 	inc	hl
+   0E17 70            [ 7] 1948 	ld	(hl),b
+                           1949 ;src/fat.c:261: file->sector = 0;
+   0E18 21 16 00      [10] 1950 	ld	hl, #22
+   0E1B 39            [11] 1951 	add	hl, sp
+   0E1C 7E            [ 7] 1952 	ld	a, (hl)
+   0E1D 23            [ 6] 1953 	inc	hl
+   0E1E 66            [ 7] 1954 	ld	h, (hl)
+   0E1F 6F            [ 4] 1955 	ld	l, a
+   0E20 AF            [ 4] 1956 	xor	a, a
+   0E21 77            [ 7] 1957 	ld	(hl), a
+   0E22 23            [ 6] 1958 	inc	hl
+   0E23 77            [ 7] 1959 	ld	(hl), a
+   0E24 23            [ 6] 1960 	inc	hl
+   0E25 AF            [ 4] 1961 	xor	a, a
+   0E26 77            [ 7] 1962 	ld	(hl), a
+   0E27 23            [ 6] 1963 	inc	hl
+   0E28 77            [ 7] 1964 	ld	(hl), a
+                           1965 ;src/fat.c:265: return(1);
+   0E29 2E 01         [ 7] 1966 	ld	l,#0x01
+   0E2B C3r41r0F      [10] 1967 	jp	00123$
+   0E2E                    1968 00122$:
+                           1969 ;src/fat.c:240: for (iEntry = 0; iEntry < nEntries; iEntry++)
+   0E2E FD 21 06 00   [14] 1970 	ld	iy,#6
+   0E32 FD 39         [15] 1971 	add	iy,sp
+   0E34 FD 34 00      [23] 1972 	inc	0 (iy)
+   0E37 C2r55r0C      [10] 1973 	jp	NZ,00121$
+   0E3A FD 34 01      [23] 1974 	inc	1 (iy)
+   0E3D C2r55r0C      [10] 1975 	jp	NZ,00121$
+   0E40 FD 34 02      [23] 1976 	inc	2 (iy)
+   0E43 C2r55r0C      [10] 1977 	jp	NZ,00121$
+   0E46 FD 34 03      [23] 1978 	inc	3 (iy)
+   0E49 C3r55r0C      [10] 1979 	jp	00121$
+   0E4C                    1980 00111$:
+                           1981 ;src/fat.c:271: if (fat32) // subdirectory is a linked cluster chain
+   0E4C 3Ar01r00      [13] 1982 	ld	a,(#_fat32 + 1)
+   0E4F 21r00r00      [10] 1983 	ld	hl,#_fat32 + 0
+   0E52 B6            [ 7] 1984 	or	a,(hl)
+   0E53 CAr3Fr0F      [10] 1985 	jp	Z,00119$
+                           1986 ;src/fat.c:273: iDirectoryCluster = GetCluster(iDirectoryCluster); // get next cluster in chain
+   0E56 FD 21 00 00   [14] 1987 	ld	iy,#0
+   0E5A FD 39         [15] 1988 	add	iy,sp
+   0E5C FD 6E 02      [19] 1989 	ld	l,2 (iy)
+   0E5F FD 66 03      [19] 1990 	ld	h,3 (iy)
+   0E62 E5            [11] 1991 	push	hl
+   0E63 FD 6E 00      [19] 1992 	ld	l,0 (iy)
+   0E66 FD 66 01      [19] 1993 	ld	h,1 (iy)
+   0E69 E5            [11] 1994 	push	hl
+   0E6A CDr00r00      [17] 1995 	call	_GetCluster
+   0E6D F1            [10] 1996 	pop	af
+   0E6E F1            [10] 1997 	pop	af
+   0E6F FD 21 0E 00   [14] 1998 	ld	iy,#14
+   0E73 FD 39         [15] 1999 	add	iy,sp
+   0E75 FD 72 03      [19] 2000 	ld	3 (iy),d
+   0E78 FD 73 02      [19] 2001 	ld	2 (iy),e
+   0E7B FD 74 01      [19] 2002 	ld	1 (iy),h
+   0E7E FD 75 00      [19] 2003 	ld	0 (iy),l
+   0E81 21 00 00      [10] 2004 	ld	hl, #0
+   0E84 39            [11] 2005 	add	hl, sp
+   0E85 EB            [ 4] 2006 	ex	de, hl
+   0E86 21 0E 00      [10] 2007 	ld	hl, #14
+   0E89 39            [11] 2008 	add	hl, sp
+   0E8A 01 04 00      [10] 2009 	ld	bc, #4
+   0E8D ED B0         [21] 2010 	ldir
+                           2011 ;src/fat.c:277: if ((iDirectoryCluster & 0x0FFFFFF8) == 0x0FFFFFF8) // check if end of cluster chain
+   0E8F 21 00 00      [10] 2012 	ld	hl, #0+0
+   0E92 39            [11] 2013 	add	hl, sp
+   0E93 7E            [ 7] 2014 	ld	a, (hl)
+   0E94 E6 F8         [ 7] 2015 	and	a, #0xF8
+   0E96 FD 21 0E 00   [14] 2016 	ld	iy,#14
+   0E9A FD 39         [15] 2017 	add	iy,sp
+   0E9C FD 77 00      [19] 2018 	ld	0 (iy),a
+   0E9F 21 01 00      [10] 2019 	ld	hl, #0+1
+   0EA2 39            [11] 2020 	add	hl, sp
+   0EA3 7E            [ 7] 2021 	ld	a, (hl)
+   0EA4 FD 21 0E 00   [14] 2022 	ld	iy,#14
+   0EA8 FD 39         [15] 2023 	add	iy,sp
+   0EAA FD 77 01      [19] 2024 	ld	1 (iy),a
+   0EAD 21 02 00      [10] 2025 	ld	hl, #0+2
+   0EB0 39            [11] 2026 	add	hl, sp
+   0EB1 7E            [ 7] 2027 	ld	a, (hl)
+   0EB2 FD 21 0E 00   [14] 2028 	ld	iy,#14
+   0EB6 FD 39         [15] 2029 	add	iy,sp
+   0EB8 FD 77 02      [19] 2030 	ld	2 (iy),a
+   0EBB 21 03 00      [10] 2031 	ld	hl, #0+3
+   0EBE 39            [11] 2032 	add	hl, sp
+   0EBF 7E            [ 7] 2033 	ld	a, (hl)
+   0EC0 E6 0F         [ 7] 2034 	and	a, #0x0F
+   0EC2 FD 21 0E 00   [14] 2035 	ld	iy,#14
+   0EC6 FD 39         [15] 2036 	add	iy,sp
+   0EC8 FD 77 03      [19] 2037 	ld	3 (iy),a
+   0ECB FD 7E 00      [19] 2038 	ld	a,0 (iy)
+   0ECE D6 F8         [ 7] 2039 	sub	a, #0xF8
+   0ED0 20 13         [12] 2040 	jr	NZ,00190$
+   0ED2 FD 7E 01      [19] 2041 	ld	a,1 (iy)
+   0ED5 3C            [ 4] 2042 	inc	a
+   0ED6 20 0D         [12] 2043 	jr	NZ,00190$
+   0ED8 FD 7E 02      [19] 2044 	ld	a,2 (iy)
+   0EDB 3C            [ 4] 2045 	inc	a
+   0EDC 20 07         [12] 2046 	jr	NZ,00190$
+   0EDE FD 7E 03      [19] 2047 	ld	a,3 (iy)
+   0EE1 D6 0F         [ 7] 2048 	sub	a, #0x0F
+   0EE3 28 5A         [12] 2049 	jr	Z,00119$
+   0EE5                    2050 00190$:
+                           2051 ;src/fat.c:280: iDirectorySector = data_start + cluster_size * (iDirectoryCluster - 2); // calculate first sector address of the new cluster
+   0EE5 FD 21 00 00   [14] 2052 	ld	iy,#0
+   0EE9 FD 39         [15] 2053 	add	iy,sp
+   0EEB FD 7E 00      [19] 2054 	ld	a,0 (iy)
+   0EEE C6 FE         [ 7] 2055 	add	a,#0xFE
+   0EF0 5F            [ 4] 2056 	ld	e,a
+   0EF1 FD 7E 01      [19] 2057 	ld	a,1 (iy)
+   0EF4 CE FF         [ 7] 2058 	adc	a,#0xFF
+   0EF6 57            [ 4] 2059 	ld	d,a
+   0EF7 FD 7E 02      [19] 2060 	ld	a,2 (iy)
+   0EFA CE FF         [ 7] 2061 	adc	a,#0xFF
+   0EFC 4F            [ 4] 2062 	ld	c,a
+   0EFD FD 7E 03      [19] 2063 	ld	a,3 (iy)
+   0F00 CE FF         [ 7] 2064 	adc	a,#0xFF
+   0F02 47            [ 4] 2065 	ld	b,a
+   0F03 C5            [11] 2066 	push	bc
+   0F04 D5            [11] 2067 	push	de
+   0F05 2Ar1Ar00      [16] 2068 	ld	hl,(_cluster_size + 2)
+   0F08 E5            [11] 2069 	push	hl
+   0F09 2Ar18r00      [16] 2070 	ld	hl,(_cluster_size)
+   0F0C E5            [11] 2071 	push	hl
+   0F0D CDr00r00      [17] 2072 	call	__mullong
+   0F10 F1            [10] 2073 	pop	af
+   0F11 F1            [10] 2074 	pop	af
+   0F12 F1            [10] 2075 	pop	af
+   0F13 F1            [10] 2076 	pop	af
+   0F14 4D            [ 4] 2077 	ld	c,l
+   0F15 44            [ 4] 2078 	ld	b,h
+   0F16 3Ar06r00      [13] 2079 	ld	a,(#_data_start + 0)
+   0F19 81            [ 4] 2080 	add	a, c
+   0F1A 4F            [ 4] 2081 	ld	c,a
+   0F1B 3Ar07r00      [13] 2082 	ld	a,(#_data_start + 1)
+   0F1E 88            [ 4] 2083 	adc	a, b
+   0F1F 47            [ 4] 2084 	ld	b,a
+   0F20 3Ar08r00      [13] 2085 	ld	a,(#_data_start + 2)
+   0F23 8B            [ 4] 2086 	adc	a, e
+   0F24 5F            [ 4] 2087 	ld	e,a
+   0F25 3Ar09r00      [13] 2088 	ld	a,(#_data_start + 3)
+   0F28 8A            [ 4] 2089 	adc	a, d
+   0F29 57            [ 4] 2090 	ld	d,a
+   0F2A FD 21 1C 00   [14] 2091 	ld	iy,#28
+   0F2E FD 39         [15] 2092 	add	iy,sp
+   0F30 FD 71 00      [19] 2093 	ld	0 (iy),c
+   0F33 FD 70 01      [19] 2094 	ld	1 (iy),b
+   0F36 FD 73 02      [19] 2095 	ld	2 (iy),e
+   0F39 FD 72 03      [19] 2096 	ld	3 (iy),d
+   0F3C C3r34r0C      [10] 2097 	jp	00137$
+                           2098 ;src/fat.c:283: break;
+   0F3F                    2099 00119$:
+                           2100 ;src/fat.c:286: return(0);
+   0F3F 2E 00         [ 7] 2101 	ld	l,#0x00
+   0F41                    2102 00123$:
+   0F41 FD 21 20 00   [14] 2103 	ld	iy,#32
+   0F45 FD 39         [15] 2104 	add	iy,sp
+   0F47 FD F9         [10] 2105 	ld	sp,iy
+   0F49 C9            [10] 2106 	ret
+                           2107 ;src/fat.c:290: unsigned char FileRead(fileTYPE *file, unsigned char *pBuffer)
+                           2108 ;	---------------------------------
+                           2109 ; Function FileRead
+                           2110 ; ---------------------------------
+   0F4A                    2111 _FileRead::
+   0F4A 21 F4 FF      [10] 2112 	ld	hl,#-12
+   0F4D 39            [11] 2113 	add	hl,sp
+   0F4E F9            [ 6] 2114 	ld	sp,hl
+                           2115 ;src/fat.c:294: sb = data_start;							// start of data in partition
+   0F4F 21 04 00      [10] 2116 	ld	hl, #4
+   0F52 39            [11] 2117 	add	hl, sp
+   0F53 EB            [ 4] 2118 	ex	de, hl
+   0F54 21r06r00      [10] 2119 	ld	hl, #_data_start
+   0F57 01 04 00      [10] 2120 	ld	bc, #4
+   0F5A ED B0         [21] 2121 	ldir
+                           2122 ;src/fat.c:295: sb += cluster_size * (file->cluster-2);		// cluster offset
+   0F5C 21 0E 00      [10] 2123 	ld	hl, #14+0
+   0F5F 39            [11] 2124 	add	hl, sp
+   0F60 7E            [ 7] 2125 	ld	a, (hl)
+   0F61 FD 21 0A 00   [14] 2126 	ld	iy,#10
+   0F65 FD 39         [15] 2127 	add	iy,sp
+   0F67 FD 77 00      [19] 2128 	ld	0 (iy),a
+   0F6A 21 0F 00      [10] 2129 	ld	hl, #14+1
+   0F6D 39            [11] 2130 	add	hl, sp
+   0F6E 7E            [ 7] 2131 	ld	a, (hl)
+   0F6F FD 21 0A 00   [14] 2132 	ld	iy,#10
+   0F73 FD 39         [15] 2133 	add	iy,sp
+   0F75 FD 77 01      [19] 2134 	ld	1 (iy),a
+   0F78 21 08 00      [10] 2135 	ld	hl,#8
+   0F7B 39            [11] 2136 	add	hl,sp
+   0F7C FD 7E 00      [19] 2137 	ld	a,0 (iy)
+   0F7F C6 08         [ 7] 2138 	add	a, #0x08
+   0F81 77            [ 7] 2139 	ld	(hl),a
+   0F82 FD 7E 01      [19] 2140 	ld	a,1 (iy)
+   0F85 CE 00         [ 7] 2141 	adc	a, #0x00
+   0F87 23            [ 6] 2142 	inc	hl
+   0F88 77            [ 7] 2143 	ld	(hl),a
+   0F89 21 08 00      [10] 2144 	ld	hl, #8
+   0F8C 39            [11] 2145 	add	hl, sp
+   0F8D 7E            [ 7] 2146 	ld	a, (hl)
+   0F8E 23            [ 6] 2147 	inc	hl
+   0F8F 66            [ 7] 2148 	ld	h, (hl)
+   0F90 6F            [ 4] 2149 	ld	l, a
+   0F91 5E            [ 7] 2150 	ld	e,(hl)
+   0F92 23            [ 6] 2151 	inc	hl
+   0F93 56            [ 7] 2152 	ld	d,(hl)
+   0F94 23            [ 6] 2153 	inc	hl
+   0F95 4E            [ 7] 2154 	ld	c,(hl)
+   0F96 23            [ 6] 2155 	inc	hl
+   0F97 46            [ 7] 2156 	ld	b,(hl)
+   0F98 7B            [ 4] 2157 	ld	a,e
+   0F99 C6 FE         [ 7] 2158 	add	a,#0xFE
+   0F9B 5F            [ 4] 2159 	ld	e,a
+   0F9C 7A            [ 4] 2160 	ld	a,d
+   0F9D CE FF         [ 7] 2161 	adc	a,#0xFF
+   0F9F 57            [ 4] 2162 	ld	d,a
+   0FA0 79            [ 4] 2163 	ld	a,c
+   0FA1 CE FF         [ 7] 2164 	adc	a,#0xFF
+   0FA3 4F            [ 4] 2165 	ld	c,a
+   0FA4 78            [ 4] 2166 	ld	a,b
+   0FA5 CE FF         [ 7] 2167 	adc	a,#0xFF
+   0FA7 47            [ 4] 2168 	ld	b,a
+   0FA8 C5            [11] 2169 	push	bc
+   0FA9 D5            [11] 2170 	push	de
+   0FAA 2Ar1Ar00      [16] 2171 	ld	hl,(_cluster_size + 2)
+   0FAD E5            [11] 2172 	push	hl
+   0FAE 2Ar18r00      [16] 2173 	ld	hl,(_cluster_size)
+   0FB1 E5            [11] 2174 	push	hl
+   0FB2 CDr00r00      [17] 2175 	call	__mullong
+   0FB5 F1            [10] 2176 	pop	af
+   0FB6 F1            [10] 2177 	pop	af
+   0FB7 F1            [10] 2178 	pop	af
+   0FB8 F1            [10] 2179 	pop	af
+   0FB9 4D            [ 4] 2180 	ld	c,l
+   0FBA 44            [ 4] 2181 	ld	b,h
+   0FBB FD 21 04 00   [14] 2182 	ld	iy,#4
+   0FBF FD 39         [15] 2183 	add	iy,sp
+   0FC1 FD 7E 00      [19] 2184 	ld	a,0 (iy)
+   0FC4 81            [ 4] 2185 	add	a, c
+   0FC5 4F            [ 4] 2186 	ld	c,a
+   0FC6 FD 7E 01      [19] 2187 	ld	a,1 (iy)
+   0FC9 88            [ 4] 2188 	adc	a, b
+   0FCA 47            [ 4] 2189 	ld	b,a
+   0FCB FD 7E 02      [19] 2190 	ld	a,2 (iy)
+   0FCE 8B            [ 4] 2191 	adc	a, e
+   0FCF 5F            [ 4] 2192 	ld	e,a
+   0FD0 FD 7E 03      [19] 2193 	ld	a,3 (iy)
+   0FD3 8A            [ 4] 2194 	adc	a, d
+   0FD4 57            [ 4] 2195 	ld	d,a
+   0FD5 FD 21 00 00   [14] 2196 	ld	iy,#0
+   0FD9 FD 39         [15] 2197 	add	iy,sp
+   0FDB FD 71 00      [19] 2198 	ld	0 (iy),c
+   0FDE FD 70 01      [19] 2199 	ld	1 (iy),b
+   0FE1 FD 73 02      [19] 2200 	ld	2 (iy),e
+   0FE4 FD 72 03      [19] 2201 	ld	3 (iy),d
+                           2202 ;src/fat.c:296: sb += file->sector & cluster_mask;			// sector offset in cluster
+   0FE7 21 0A 00      [10] 2203 	ld	hl, #10
+   0FEA 39            [11] 2204 	add	hl, sp
+   0FEB 7E            [ 7] 2205 	ld	a, (hl)
+   0FEC 23            [ 6] 2206 	inc	hl
+   0FED 66            [ 7] 2207 	ld	h, (hl)
+   0FEE 6F            [ 4] 2208 	ld	l, a
+   0FEF 5E            [ 7] 2209 	ld	e,(hl)
+   0FF0 23            [ 6] 2210 	inc	hl
+   0FF1 56            [ 7] 2211 	ld	d,(hl)
+   0FF2 23            [ 6] 2212 	inc	hl
+   0FF3 4E            [ 7] 2213 	ld	c,(hl)
+   0FF4 23            [ 6] 2214 	inc	hl
+   0FF5 46            [ 7] 2215 	ld	b,(hl)
+   0FF6 7B            [ 4] 2216 	ld	a,e
+   0FF7 FD 21r1Cr00   [14] 2217 	ld	iy,#_cluster_mask
+   0FFB FD A6 00      [19] 2218 	and	a, 0 (iy)
+   0FFE 5F            [ 4] 2219 	ld	e,a
+   0FFF 7A            [ 4] 2220 	ld	a,d
+   1000 FD 21r1Cr00   [14] 2221 	ld	iy,#_cluster_mask
+   1004 FD A6 01      [19] 2222 	and	a, 1 (iy)
+   1007 57            [ 4] 2223 	ld	d,a
+   1008 79            [ 4] 2224 	ld	a,c
+   1009 FD 21r1Cr00   [14] 2225 	ld	iy,#_cluster_mask
+   100D FD A6 02      [19] 2226 	and	a, 2 (iy)
+   1010 4F            [ 4] 2227 	ld	c,a
+   1011 78            [ 4] 2228 	ld	a,b
+   1012 FD 21r1Cr00   [14] 2229 	ld	iy,#_cluster_mask
+   1016 FD A6 03      [19] 2230 	and	a, 3 (iy)
+   1019 47            [ 4] 2231 	ld	b,a
+   101A FD 21 00 00   [14] 2232 	ld	iy,#0
+   101E FD 39         [15] 2233 	add	iy,sp
+   1020 FD 7E 00      [19] 2234 	ld	a,0 (iy)
+   1023 83            [ 4] 2235 	add	a, e
+   1024 5F            [ 4] 2236 	ld	e,a
+   1025 FD 7E 01      [19] 2237 	ld	a,1 (iy)
+   1028 8A            [ 4] 2238 	adc	a, d
+   1029 57            [ 4] 2239 	ld	d,a
+   102A FD 7E 02      [19] 2240 	ld	a,2 (iy)
+   102D 89            [ 4] 2241 	adc	a, c
+   102E 4F            [ 4] 2242 	ld	c,a
+   102F FD 7E 03      [19] 2243 	ld	a,3 (iy)
+   1032 88            [ 4] 2244 	adc	a, b
+   1033 47            [ 4] 2245 	ld	b,a
+                           2246 ;src/fat.c:298: if (!MMC_Read(sb, pBuffer)) {				// read sector from drive
+   1034 21 10 00      [10] 2247 	ld	hl, #16
+   1037 39            [11] 2248 	add	hl, sp
+   1038 7E            [ 7] 2249 	ld	a, (hl)
+   1039 23            [ 6] 2250 	inc	hl
+   103A 66            [ 7] 2251 	ld	h, (hl)
+   103B 6F            [ 4] 2252 	ld	l, a
+   103C E5            [11] 2253 	push	hl
+   103D C5            [11] 2254 	push	bc
+   103E D5            [11] 2255 	push	de
+   103F CDr00r00      [17] 2256 	call	_MMC_Read
+   1042 F1            [10] 2257 	pop	af
+   1043 F1            [10] 2258 	pop	af
+   1044 F1            [10] 2259 	pop	af
+   1045 7D            [ 4] 2260 	ld	a,l
+                           2261 ;src/fat.c:299: return 0;
+   1046 B7            [ 4] 2262 	or	a,a
+   1047 20 04         [12] 2263 	jr	NZ,00104$
+   1049 6F            [ 4] 2264 	ld	l,a
+   104A C3rC8r10      [10] 2265 	jp	00106$
+   104D                    2266 00104$:
+                           2267 ;src/fat.c:302: file->sector++;
+   104D FD 21 0A 00   [14] 2268 	ld	iy,#10
+   1051 FD 39         [15] 2269 	add	iy,sp
+   1053 FD 6E 00      [19] 2270 	ld	l,0 (iy)
+   1056 FD 66 01      [19] 2271 	ld	h,1 (iy)
+   1059 4E            [ 7] 2272 	ld	c,(hl)
+   105A 23            [ 6] 2273 	inc	hl
+   105B 46            [ 7] 2274 	ld	b,(hl)
+   105C 23            [ 6] 2275 	inc	hl
+   105D 5E            [ 7] 2276 	ld	e,(hl)
+   105E 23            [ 6] 2277 	inc	hl
+   105F 56            [ 7] 2278 	ld	d,(hl)
+   1060 0C            [ 4] 2279 	inc	c
+   1061 20 07         [12] 2280 	jr	NZ,00116$
+   1063 04            [ 4] 2281 	inc	b
+   1064 20 04         [12] 2282 	jr	NZ,00116$
+   1066 1C            [ 4] 2283 	inc	e
+   1067 20 01         [12] 2284 	jr	NZ,00116$
+   1069 14            [ 4] 2285 	inc	d
+   106A                    2286 00116$:
+   106A FD 6E 00      [19] 2287 	ld	l,0 (iy)
+   106D FD 66 01      [19] 2288 	ld	h,1 (iy)
+   1070 71            [ 7] 2289 	ld	(hl),c
+   1071 23            [ 6] 2290 	inc	hl
+   1072 70            [ 7] 2291 	ld	(hl),b
+   1073 23            [ 6] 2292 	inc	hl
+   1074 73            [ 7] 2293 	ld	(hl),e
+   1075 23            [ 6] 2294 	inc	hl
+   1076 72            [ 7] 2295 	ld	(hl),d
+                           2296 ;src/fat.c:305: if ((file->sector & cluster_mask) == 0) {
+   1077 79            [ 4] 2297 	ld	a,c
+   1078 FD 21r1Cr00   [14] 2298 	ld	iy,#_cluster_mask
+   107C FD A6 00      [19] 2299 	and	a, 0 (iy)
+   107F 4F            [ 4] 2300 	ld	c,a
+   1080 78            [ 4] 2301 	ld	a,b
+   1081 FD 21r1Cr00   [14] 2302 	ld	iy,#_cluster_mask
+   1085 FD A6 01      [19] 2303 	and	a, 1 (iy)
+   1088 47            [ 4] 2304 	ld	b,a
+   1089 7B            [ 4] 2305 	ld	a,e
+   108A FD 21r1Cr00   [14] 2306 	ld	iy,#_cluster_mask
+   108E FD A6 02      [19] 2307 	and	a, 2 (iy)
+   1091 5F            [ 4] 2308 	ld	e,a
+   1092 7A            [ 4] 2309 	ld	a,d
+   1093 FD 21r1Cr00   [14] 2310 	ld	iy,#_cluster_mask
+   1097 FD A6 03      [19] 2311 	and	a, 3 (iy)
+   109A B3            [ 4] 2312 	or	a, e
+   109B B0            [ 4] 2313 	or	a, b
+   109C B1            [ 4] 2314 	or	a,c
+   109D 20 27         [12] 2315 	jr	NZ,00105$
+                           2316 ;src/fat.c:306: file->cluster = GetCluster(file->cluster);
+   109F 21 08 00      [10] 2317 	ld	hl, #8
+   10A2 39            [11] 2318 	add	hl, sp
+   10A3 7E            [ 7] 2319 	ld	a, (hl)
+   10A4 23            [ 6] 2320 	inc	hl
+   10A5 66            [ 7] 2321 	ld	h, (hl)
+   10A6 6F            [ 4] 2322 	ld	l, a
+   10A7 5E            [ 7] 2323 	ld	e,(hl)
+   10A8 23            [ 6] 2324 	inc	hl
+   10A9 56            [ 7] 2325 	ld	d,(hl)
+   10AA 23            [ 6] 2326 	inc	hl
+   10AB 4E            [ 7] 2327 	ld	c,(hl)
+   10AC 23            [ 6] 2328 	inc	hl
+   10AD 46            [ 7] 2329 	ld	b,(hl)
+   10AE C5            [11] 2330 	push	bc
+   10AF D5            [11] 2331 	push	de
+   10B0 CDr00r00      [17] 2332 	call	_GetCluster
+   10B3 F1            [10] 2333 	pop	af
+   10B4 F1            [10] 2334 	pop	af
+   10B5 45            [ 4] 2335 	ld	b,l
+   10B6 4C            [ 4] 2336 	ld	c,h
+   10B7 21 08 00      [10] 2337 	ld	hl, #8
+   10BA 39            [11] 2338 	add	hl, sp
+   10BB 7E            [ 7] 2339 	ld	a, (hl)
+   10BC 23            [ 6] 2340 	inc	hl
+   10BD 66            [ 7] 2341 	ld	h, (hl)
+   10BE 6F            [ 4] 2342 	ld	l, a
+   10BF 70            [ 7] 2343 	ld	(hl),b
+   10C0 23            [ 6] 2344 	inc	hl
+   10C1 71            [ 7] 2345 	ld	(hl),c
+   10C2 23            [ 6] 2346 	inc	hl
+   10C3 73            [ 7] 2347 	ld	(hl),e
+   10C4 23            [ 6] 2348 	inc	hl
+   10C5 72            [ 7] 2349 	ld	(hl),d
+   10C6                    2350 00105$:
+                           2351 ;src/fat.c:309: return 1;
+   10C6 2E 01         [ 7] 2352 	ld	l,#0x01
+   10C8                    2353 00106$:
+   10C8 FD 21 0C 00   [14] 2354 	ld	iy,#12
+   10CC FD 39         [15] 2355 	add	iy,sp
+   10CE FD F9         [10] 2356 	ld	sp,iy
+   10D0 C9            [10] 2357 	ret
+                           2358 	.area _CODE
+                           2359 	.area _INITIALIZER
+                           2360 	.area _CABS (ABS)

@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<pin_planner>
+	<pin_info>
+		<pin name="sdram_ad_o[12]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_ad_o[11]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_ad_o[10]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_ad_o[9]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_ad_o[8]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_ad_o[7]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_ad_o[6]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_ad_o[5]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_ad_o[4]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_ad_o[3]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_ad_o[2]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_ad_o[1]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_ad_o[0]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_ba_o[1]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_ba_o[0]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_cas_o" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_cke_o" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_clk_o" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_cs_o" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_da_io[15]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_da_io[14]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_da_io[13]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_da_io[12]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_da_io[11]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_da_io[10]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_da_io[9]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_da_io[8]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_da_io[7]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_da_io[6]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_da_io[5]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_da_io[4]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_da_io[3]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_da_io[2]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_da_io[1]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_da_io[0]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_dqm_o[1]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_dqm_o[0]" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_ras_o" source="Pin Planner" >
+		</pin>
+		<pin name="sdram_we_o" source="Pin Planner" >
+		</pin>
+		<pin name="sram2_addr_o[18]" source="Pin Planner" >
+		</pin>
+		<pin name="sram2_addr_o[17]" source="Pin Planner" >
+		</pin>
+		<pin name="sram2_addr_o[16]" source="Pin Planner" >
+		</pin>
+		<pin name="sram2_addr_o[15]" source="Pin Planner" >
+		</pin>
+		<pin name="sram2_addr_o[14]" source="Pin Planner" >
+		</pin>
+		<pin name="sram2_addr_o[13]" source="Pin Planner" >
+		</pin>
+		<pin name="sram2_addr_o[12]" source="Pin Planner" >
+		</pin>
+		<pin name="sram2_addr_o[11]" source="Pin Planner" >
+		</pin>
+		<pin name="sram2_addr_o[10]" source="Pin Planner" >
+		</pin>
+		<pin name="sram2_addr_o[9]" source="Pin Planner" >
+		</pin>
+		<pin name="sram2_addr_o[8]" source="Pin Planner" >
+		</pin>
+		<pin name="sram2_addr_o[7]" source="Pin Planner" >
+		</pin>
+		<pin name="sram2_addr_o[6]" source="Pin Planner" >
+		</pin>
+		<pin name="sram2_addr_o[5]" source="Pin Planner" >
+		</pin>
+		<pin name="sram2_addr_o[4]" source="Pin Planner" >
+		</pin>
+		<pin name="sram2_addr_o[3]" source="Pin Planner" >
+		</pin>
+		<pin name="sram2_addr_o[2]" source="Pin Planner" >
+		</pin>
+		<pin name="sram2_addr_o[1]" source="Pin Planner" >
+		</pin>
+		<pin name="sram2_addr_o[0]" source="Pin Planner" >
+		</pin>
+		<pin name="sram2_data_io[7]" source="Pin Planner" >
+		</pin>
+		<pin name="sram2_data_io[6]" source="Pin Planner" >
+		</pin>
+		<pin name="sram2_data_io[5]" source="Pin Planner" >
+		</pin>
+		<pin name="sram2_data_io[4]" source="Pin Planner" >
+		</pin>
+		<pin name="sram2_data_io[3]" source="Pin Planner" >
+		</pin>
+		<pin name="sram2_data_io[2]" source="Pin Planner" >
+		</pin>
+		<pin name="sram2_data_io[1]" source="Pin Planner" >
+		</pin>
+		<pin name="sram2_data_io[0]" source="Pin Planner" >
+		</pin>
+		<pin name="sram2_we_n_o" source="Pin Planner" >
+		</pin>
+		<pin name="sram2_oe_n_o" source="Pin Planner" >
+		</pin>
+		<pin name="dac_l_o" source="Pin Planner" >
+		</pin>
+		<pin name="dac_r_o" source="Pin Planner" >
+		</pin>
+		<pin name="mic_o" source="Pin Planner" >
+		</pin>
+		<pin name="ear_i" source="Pin Planner" >
+		</pin>
+		<pin name="sd_cs_n_o" source="Pin Planner" >
+		</pin>
+		<pin name="sd_mosi_o" source="Pin Planner" >
+		</pin>
+		<pin name="sd_sclk_o" source="Pin Planner" >
+		</pin>
+		<pin name="stm_tx_i" source="Pin Planner" >
+		</pin>
+		<pin name="stm_rx_o" source="Pin Planner" >
+		</pin>
+		<pin name="stm_b8_io" source="Pin Planner" >
+		</pin>
+		<pin name="stm_b9_io" source="Pin Planner" >
+		</pin>
+		<pin name="stm_a15_io" source="Pin Planner" >
+		</pin>
+	</pin_info>
+	<buses>
+	</buses>
+	<group_file_association>
+	</group_file_association>
+	<pin_planner_file_specifies>
+	</pin_planner_file_specifies>
+</pin_planner>

@@ -1,0 +1,110 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 1.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  2710 L
+    .__.ABS.                                                    =  0000 G
+    .__.CPU.                                                    =  0000 L
+    .__.H$L.                                                    =  0000 L
+    _FileOpen                                                      **** GX
+    _FileRead                                                      **** GX
+    _FindDrive                                                     **** GX
+    _HROW0                                                      =  FEFE 
+    _HROW1                                                      =  FDFE 
+    _HROW2                                                      =  FBFE 
+    _HROW3                                                      =  F7FE 
+    _HROW4                                                      =  EFFE 
+    _HROW5                                                      =  DFFE 
+    _HROW6                                                      =  BFFE 
+    _HROW7                                                      =  7FFE 
+    _LED                                                        =  103B 
+    _MMC_Init                                                      **** GX
+    _REG_NUM                                                    =  243B 
+    _REG_RX                                                     =  143B 
+    _REG_STM32_RESET                                            =  303B 
+    _REG_TX                                                     =  133B 
+    _REG_VAL                                                    =  253B 
+    _SD_CONTROL                                                 =  00E7 
+    _SD_DATA                                                    =  00EB 
+    _SD_STATUS                                                  =  00E7 
+    _ULAPORT                                                    =  00FE 
+  0 ___str_0                                                       0033 R
+  0 ___str_1                                                       003B R
+  0 ___str_10                                                      0A19 R
+  0 ___str_11                                                      0A20 R
+  0 ___str_12                                                      0A34 R
+  0 ___str_13                                                      0A4D R
+  0 ___str_14                                                      0A67 R
+  0 ___str_15                                                      0A7F R
+  0 ___str_16                                                      0A93 R
+  0 ___str_17                                                      0A97 R
+  0 ___str_18                                                      0AAF R
+  0 ___str_19                                                      0AC6 R
+  0 ___str_2                                                       01D2 R
+  0 ___str_20                                                      0AD8 R
+  0 ___str_21                                                      0AE6 R
+  0 ___str_22                                                      0AFC R
+  0 ___str_23                                                      0B10 R
+  0 ___str_24                                                      0B26 R
+  0 ___str_25                                                      0B3A R
+  0 ___str_26                                                      0B50 R
+  0 ___str_27                                                      0B52 R
+  0 ___str_28                                                      0B57 R
+  0 ___str_29                                                      0B63 R
+  0 ___str_3                                                       0248 R
+  0 ___str_30                                                      0B84 R
+  0 ___str_31                                                      0B9F R
+  0 ___str_32                                                      0BB6 R
+  0 ___str_33                                                      0BCF R
+  0 ___str_34                                                      0BE6 R
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 2.
+Hexadecimal [16-Bits]
+
+Symbol Table
+
+  0 ___str_35                                                      0BF1 R
+  0 ___str_36                                                      0C0A R
+  0 ___str_37                                                      0C21 R
+  0 ___str_4                                                       098A R
+  0 ___str_5                                                       09A0 R
+  0 ___str_6                                                       09BE R
+  0 ___str_7                                                       09DB R
+  0 ___str_8                                                       09EB R
+  0 ___str_9                                                       0A05 R
+  0 __read                                                         00C0 GR
+  0 __send_command                                                 01E5 GR
+  0 __talk                                                         011D GR
+  0 __write                                                        0098 GR
+  7 __xinit__fn_firmware                                           0000 R
+  1 _buffer_rd                                                     0002 R
+  1 _buffer_wr                                                     0202 R
+  0 _clear_rx_buffer                                               006D R
+  0 _delay                                                         0057 R
+  0 _display_error                                                 0000 R
+  1 _error_count                                                   0000 R
+  2 _fn_firmware                                                   0000 R
+  1 _l                                                             0001 R
+  0 _main                                                          025B GR
+  0 _send_char_tx                                                  0085 R
+  1 _temp                                                          0402 R
+    _vdp_clear                                                     **** GX
+    _vdp_gotoxy                                                    **** GX
+    _vdp_prints                                                    **** GX
+
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (Zilog Z80 / Hitachi HD64180), page 3.
+Hexadecimal [16-Bits]
+
+Area Table
+
+   0 _CODE                                      size  C2D   flags    0
+   1 _DATA                                      size  502   flags    0
+   2 _INITIALIZED                               size    2   flags    0
+   3 _DABS                                      size    0   flags    8
+   4 _HOME                                      size    0   flags    0
+   5 _GSINIT                                    size    0   flags    0
+   6 _GSFINAL                                   size    0   flags    0
+   7 _INITIALIZER                               size    2   flags    0
+   8 _CABS                                      size    0   flags    8
+

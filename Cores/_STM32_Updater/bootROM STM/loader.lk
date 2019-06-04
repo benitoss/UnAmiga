@@ -1,0 +1,14 @@
+-mjwx
+-i loader.ihx
+-b _CODE = 0x0100
+-b _DATA = 0xf800
+-k /usr/bin/../share/sdcc/lib/z80
+-k /usr/share/sdcc/lib/z80
+-l z80
+obj/crt0.rel
+obj/main.rel
+obj/mmc.rel
+obj/fat.rel
+obj/vdp.rel
+
+-e

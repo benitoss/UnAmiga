@@ -1,0 +1,1852 @@
+                              1 ;--------------------------------------------------------
+                              2 ; File Created by SDCC : free open source ANSI-C Compiler
+                              3 ; Version 3.5.0 #9253 (Apr  3 2018) (Linux)
+                              4 ; This file was generated Sun Jun  2 21:16:46 2019
+                              5 ;--------------------------------------------------------
+                              6 	.module main
+                              7 	.optsdcc -mz80
+                              8 	
+                              9 ;--------------------------------------------------------
+                             10 ; Public variables in this module
+                             11 ;--------------------------------------------------------
+                             12 	.globl _main
+                             13 	.globl __send_command
+                             14 	.globl __talk
+                             15 	.globl __read
+                             16 	.globl __write
+                             17 	.globl _FileRead
+                             18 	.globl _FileOpen
+                             19 	.globl _FindDrive
+                             20 	.globl _MMC_Init
+                             21 	.globl _vdp_prints
+                             22 	.globl _vdp_gotoxy
+                             23 	.globl _vdp_clear
+                             24 ;--------------------------------------------------------
+                             25 ; special function registers
+                             26 ;--------------------------------------------------------
+                     00E7    27 _SD_CONTROL	=	0x00e7
+                     00E7    28 _SD_STATUS	=	0x00e7
+                     00EB    29 _SD_DATA	=	0x00eb
+                     00FE    30 _ULAPORT	=	0x00fe
+                     243B    31 _REG_NUM	=	0x243b
+                     253B    32 _REG_VAL	=	0x253b
+                     303B    33 _REG_STM32_RESET	=	0x303b
+                     103B    34 _LED	=	0x103b
+                     133B    35 _REG_TX	=	0x133b
+                     143B    36 _REG_RX	=	0x143b
+                     FEFE    37 _HROW0	=	0xfefe
+                     FDFE    38 _HROW1	=	0xfdfe
+                     FBFE    39 _HROW2	=	0xfbfe
+                     F7FE    40 _HROW3	=	0xf7fe
+                     EFFE    41 _HROW4	=	0xeffe
+                     DFFE    42 _HROW5	=	0xdffe
+                     BFFE    43 _HROW6	=	0xbffe
+                     7FFE    44 _HROW7	=	0x7ffe
+                             45 ;--------------------------------------------------------
+                             46 ; ram data
+                             47 ;--------------------------------------------------------
+                             48 	.area _DATA
+   0000                      49 _error_count:
+   0000                      50 	.ds 1
+   0001                      51 _l:
+   0001                      52 	.ds 1
+   0002                      53 _buffer_rd:
+   0002                      54 	.ds 512
+   0202                      55 _buffer_wr:
+   0202                      56 	.ds 512
+   0402                      57 _temp:
+   0402                      58 	.ds 256
+                             59 ;--------------------------------------------------------
+                             60 ; ram data
+                             61 ;--------------------------------------------------------
+                             62 	.area _INITIALIZED
+   0000                      63 _fn_firmware:
+   0000                      64 	.ds 2
+                             65 ;--------------------------------------------------------
+                             66 ; absolute external ram data
+                             67 ;--------------------------------------------------------
+                             68 	.area _DABS (ABS)
+                             69 ;--------------------------------------------------------
+                             70 ; global & static initialisations
+                             71 ;--------------------------------------------------------
+                             72 	.area _HOME
+                             73 	.area _GSINIT
+                             74 	.area _GSFINAL
+                             75 	.area _GSINIT
+                             76 ;--------------------------------------------------------
+                             77 ; Home
+                             78 ;--------------------------------------------------------
+                             79 	.area _HOME
+                             80 	.area _HOME
+                             81 ;--------------------------------------------------------
+                             82 ; code
+                             83 ;--------------------------------------------------------
+                             84 	.area _CODE
+                             85 ;src/main.c:40: static void display_error(unsigned char *message)
+                             86 ;	---------------------------------
+                             87 ; Function display_error
+                             88 ; ---------------------------------
+   0000                      89 _display_error:
+                             90 ;src/main.c:42: vdp_clear();
+   0000 CDr00r00      [17]   91 	call	_vdp_clear
+                             92 ;src/main.c:44: vdp_gotoxy(1, 11);
+   0003 21 01 0B      [10]   93 	ld	hl,#0x0B01
+   0006 E5            [11]   94 	push	hl
+   0007 CDr00r00      [17]   95 	call	_vdp_gotoxy
+                             96 ;src/main.c:45: vdp_prints("Error: ");
+   000A 21r33r00      [10]   97 	ld	hl, #___str_0
+   000D E3            [19]   98 	ex	(sp),hl
+   000E CDr00r00      [17]   99 	call	_vdp_prints
+   0011 F1            [10]  100 	pop	af
+                            101 ;src/main.c:46: vdp_prints(message);
+   0012 C1            [10]  102 	pop	bc
+   0013 E1            [10]  103 	pop	hl
+   0014 E5            [11]  104 	push	hl
+   0015 C5            [11]  105 	push	bc
+   0016 E5            [11]  106 	push	hl
+   0017 CDr00r00      [17]  107 	call	_vdp_prints
+                            108 ;src/main.c:47: vdp_gotoxy(1, 13);
+   001A 21 01 0D      [10]  109 	ld	hl, #0x0D01
+   001D E3            [19]  110 	ex	(sp),hl
+   001E CDr00r00      [17]  111 	call	_vdp_gotoxy
+                            112 ;src/main.c:48: vdp_prints("Press button 1 to try again");
+   0021 21r3Br00      [10]  113 	ld	hl, #___str_1
+   0024 E3            [19]  114 	ex	(sp),hl
+   0025 CDr00r00      [17]  115 	call	_vdp_prints
+   0028 F1            [10]  116 	pop	af
+                            117 ;src/main.c:50: DisableCard();
+   0029 3E FF         [ 7]  118 	ld	a,#0xFF
+   002B D3 E7         [11]  119 	out	(_SD_CONTROL),a
+                            120 ;src/main.c:51: ULAPORT = COLOR_RED;
+   002D 3E 02         [ 7]  121 	ld	a,#0x02
+   002F D3 FE         [11]  122 	out	(_ULAPORT),a
+   0031                     123 00103$:
+   0031 18 FE         [12]  124 	jr	00103$
+   0033                     125 ___str_0:
+   0033 45 72 72 6F 72 3A   126 	.ascii "Error: "
+        20
+   003A 00                  127 	.db 0x00
+   003B                     128 ___str_1:
+   003B 50 72 65 73 73 20   129 	.ascii "Press button 1 to try again"
+        62 75 74 74 6F 6E
+        20 31 20 74 6F 20
+        74 72 79 20 61 67
+        61 69 6E
+   0056 00                  130 	.db 0x00
+                            131 ;src/main.c:55: static void delay(int v)
+                            132 ;	---------------------------------
+                            133 ; Function delay
+                            134 ; ---------------------------------
+   0057                     135 _delay:
+                            136 ;src/main.c:59: for (f = 0; f < v; f++)
+   0057 11 00 00      [10]  137 	ld	de,#0x0000
+   005A                     138 00103$:
+   005A 21 02 00      [10]  139 	ld	hl,#2
+   005D 39            [11]  140 	add	hl,sp
+   005E 7B            [ 4]  141 	ld	a,e
+   005F 96            [ 7]  142 	sub	a, (hl)
+   0060 7A            [ 4]  143 	ld	a,d
+   0061 23            [ 6]  144 	inc	hl
+   0062 9E            [ 7]  145 	sbc	a, (hl)
+   0063 E2r68r00      [10]  146 	jp	PO, 00116$
+   0066 EE 80         [ 7]  147 	xor	a, #0x80
+   0068                     148 00116$:
+   0068 F0            [11]  149 	ret	P
+                            150 ;src/main.c:61: __asm__("nop");
+   0069 00            [ 4]  151 	nop
+                            152 ;src/main.c:59: for (f = 0; f < v; f++)
+   006A 13            [ 6]  153 	inc	de
+   006B 18 ED         [12]  154 	jr	00103$
+                            155 ;src/main.c:66: static void clear_rx_buffer()
+                            156 ;	---------------------------------
+                            157 ; Function clear_rx_buffer
+                            158 ; ---------------------------------
+   006D                     159 _clear_rx_buffer:
+                            160 ;src/main.c:71: for (f = 0; f< 256; f++)
+   006D 11 00 00      [10]  161 	ld	de,#0x0000
+   0070                     162 00102$:
+                            163 ;src/main.c:73: temp = REG_RX;
+   0070 3E 14         [ 7]  164 	ld	a,#>(_REG_RX)
+   0072 DB 3B         [11]  165 	in	a,(#<(_REG_RX))
+                            166 ;src/main.c:75: delay(8);
+   0074 D5            [11]  167 	push	de
+   0075 21 08 00      [10]  168 	ld	hl,#0x0008
+   0078 E5            [11]  169 	push	hl
+   0079 CDr57r00      [17]  170 	call	_delay
+   007C F1            [10]  171 	pop	af
+   007D D1            [10]  172 	pop	de
+                            173 ;src/main.c:71: for (f = 0; f< 256; f++)
+   007E 13            [ 6]  174 	inc	de
+   007F 7A            [ 4]  175 	ld	a,d
+   0080 D6 01         [ 7]  176 	sub	a, #0x01
+   0082 38 EC         [12]  177 	jr	C,00102$
+   0084 C9            [10]  178 	ret
+                            179 ;src/main.c:80: static void send_char_tx(unsigned char v)
+                            180 ;	---------------------------------
+                            181 ; Function send_char_tx
+                            182 ; ---------------------------------
+   0085                     183 _send_char_tx:
+                            184 ;src/main.c:84: REG_TX = v;
+   0085 21 02 00      [10]  185 	ld	hl, #2+0
+   0088 39            [11]  186 	add	hl, sp
+   0089 7E            [ 7]  187 	ld	a, (hl)
+   008A 01 3B 13      [10]  188 	ld	bc,#_REG_TX
+   008D ED 79         [12]  189 	out	(c),a
+                            190 ;src/main.c:86: delay(8);
+   008F 21 08 00      [10]  191 	ld	hl,#0x0008
+   0092 E5            [11]  192 	push	hl
+   0093 CDr57r00      [17]  193 	call	_delay
+   0096 F1            [10]  194 	pop	af
+   0097 C9            [10]  195 	ret
+                            196 ;src/main.c:96: int _write( int cnt_wr )
+                            197 ;	---------------------------------
+                            198 ; Function _write
+                            199 ; ---------------------------------
+   0098                     200 __write::
+                            201 ;src/main.c:102: for (i = 0; i < cnt_wr; i++ ) send_char_tx( buffer_wr[ i ] );
+   0098 11 00 00      [10]  202 	ld	de,#0x0000
+   009B                     203 00103$:
+   009B 21 02 00      [10]  204 	ld	hl,#2
+   009E 39            [11]  205 	add	hl,sp
+   009F 7B            [ 4]  206 	ld	a,e
+   00A0 96            [ 7]  207 	sub	a, (hl)
+   00A1 7A            [ 4]  208 	ld	a,d
+   00A2 23            [ 6]  209 	inc	hl
+   00A3 9E            [ 7]  210 	sbc	a, (hl)
+   00A4 E2rA9r00      [10]  211 	jp	PO, 00116$
+   00A7 EE 80         [ 7]  212 	xor	a, #0x80
+   00A9                     213 00116$:
+   00A9 F2rBCr00      [10]  214 	jp	P,00101$
+   00AC 21r02r02      [10]  215 	ld	hl,#_buffer_wr
+   00AF 19            [11]  216 	add	hl,de
+   00B0 66            [ 7]  217 	ld	h,(hl)
+   00B1 D5            [11]  218 	push	de
+   00B2 E5            [11]  219 	push	hl
+   00B3 33            [ 6]  220 	inc	sp
+   00B4 CDr85r00      [17]  221 	call	_send_char_tx
+   00B7 33            [ 6]  222 	inc	sp
+   00B8 D1            [10]  223 	pop	de
+   00B9 13            [ 6]  224 	inc	de
+   00BA 18 DF         [12]  225 	jr	00103$
+   00BC                     226 00101$:
+                            227 ;src/main.c:104: return 0;
+   00BC 21 00 00      [10]  228 	ld	hl,#0x0000
+   00BF C9            [10]  229 	ret
+                            230 ;src/main.c:108: int _read(int cnt_rd, int timeout)
+                            231 ;	---------------------------------
+                            232 ; Function _read
+                            233 ; ---------------------------------
+   00C0                     234 __read::
+                            235 ;src/main.c:114: for (i = 0; i < cnt_rd; i++ ) 
+   00C0 11 00 00      [10]  236 	ld	de,#0x0000
+   00C3                     237 00109$:
+   00C3 21 02 00      [10]  238 	ld	hl,#2
+   00C6 39            [11]  239 	add	hl,sp
+   00C7 7B            [ 4]  240 	ld	a,e
+   00C8 96            [ 7]  241 	sub	a, (hl)
+   00C9 7A            [ 4]  242 	ld	a,d
+   00CA 23            [ 6]  243 	inc	hl
+   00CB 9E            [ 7]  244 	sbc	a, (hl)
+   00CC E2rD1r00      [10]  245 	jp	PO, 00138$
+   00CF EE 80         [ 7]  246 	xor	a, #0x80
+   00D1                     247 00138$:
+   00D1 F2r19r01      [10]  248 	jp	P,00107$
+                            249 ;src/main.c:117: temp = timeout;
+   00D4 FD 21 04 00   [14]  250 	ld	iy,#4
+   00D8 FD 39         [15]  251 	add	iy,sp
+   00DA FD 4E 00      [19]  252 	ld	c,0 (iy)
+   00DD FD 46 01      [19]  253 	ld	b,1 (iy)
+                            254 ;src/main.c:119: empty = REG_TX;
+   00E0 3E 13         [ 7]  255 	ld	a,#>(_REG_TX)
+   00E2 DB 3B         [11]  256 	in	a,(#<(_REG_TX))
+                            257 ;src/main.c:121: while (((empty & 1) == 0) && temp > 0) // nothing to read yet
+   00E4                     258 00102$:
+   00E4 0F            [ 4]  259 	rrca
+   00E5 38 1E         [12]  260 	jr	C,00104$
+   00E7 AF            [ 4]  261 	xor	a, a
+   00E8 B9            [ 4]  262 	cp	a, c
+   00E9 98            [ 4]  263 	sbc	a, b
+   00EA E2rEFr00      [10]  264 	jp	PO, 00141$
+   00ED EE 80         [ 7]  265 	xor	a, #0x80
+   00EF                     266 00141$:
+   00EF F2r05r01      [10]  267 	jp	P,00104$
+                            268 ;src/main.c:123: delay(8);
+   00F2 C5            [11]  269 	push	bc
+   00F3 D5            [11]  270 	push	de
+   00F4 21 08 00      [10]  271 	ld	hl,#0x0008
+   00F7 E5            [11]  272 	push	hl
+   00F8 CDr57r00      [17]  273 	call	_delay
+   00FB F1            [10]  274 	pop	af
+   00FC D1            [10]  275 	pop	de
+   00FD C1            [10]  276 	pop	bc
+                            277 ;src/main.c:124: temp -= 1;
+   00FE 0B            [ 6]  278 	dec	bc
+                            279 ;src/main.c:125: empty = REG_TX;
+   00FF 3E 13         [ 7]  280 	ld	a,#>(_REG_TX)
+   0101 DB 3B         [11]  281 	in	a,(#<(_REG_TX))
+   0103 18 DF         [12]  282 	jr	00102$
+   0105                     283 00104$:
+                            284 ;src/main.c:128: if ( temp == 0) return -1;
+   0105 78            [ 4]  285 	ld	a,b
+   0106 B1            [ 4]  286 	or	a,c
+   0107 20 04         [12]  287 	jr	NZ,00106$
+   0109 21 FF FF      [10]  288 	ld	hl,#0xFFFF
+   010C C9            [10]  289 	ret
+   010D                     290 00106$:
+                            291 ;src/main.c:130: buffer_rd[ i ] = REG_RX;
+   010D 21r02r00      [10]  292 	ld	hl,#_buffer_rd
+   0110 19            [11]  293 	add	hl,de
+   0111 3E 14         [ 7]  294 	ld	a,#>(_REG_RX)
+   0113 DB 3B         [11]  295 	in	a,(#<(_REG_RX))
+   0115 77            [ 7]  296 	ld	(hl),a
+                            297 ;src/main.c:114: for (i = 0; i < cnt_rd; i++ ) 
+   0116 13            [ 6]  298 	inc	de
+   0117 18 AA         [12]  299 	jr	00109$
+   0119                     300 00107$:
+                            301 ;src/main.c:135: return 0;
+   0119 21 00 00      [10]  302 	ld	hl,#0x0000
+   011C C9            [10]  303 	ret
+                            304 ;src/main.c:139: int _talk(int cnt_rd, int cnt_wr, int timeout)
+                            305 ;	---------------------------------
+                            306 ; Function _talk
+                            307 ; ---------------------------------
+   011D                     308 __talk::
+   011D F5            [11]  309 	push	af
+   011E 3B            [ 6]  310 	dec	sp
+                            311 ;src/main.c:141: unsigned char xor = buffer_wr[0];
+   011F 01r02r02      [10]  312 	ld	bc,#_buffer_wr+0
+   0122 0A            [ 7]  313 	ld	a,(bc)
+   0123 57            [ 4]  314 	ld	d,a
+   0124 33            [ 6]  315 	inc	sp
+   0125 D5            [11]  316 	push	de
+   0126 33            [ 6]  317 	inc	sp
+                            318 ;src/main.c:145: if ( cnt_wr > 1 )
+   0127 3E 01         [ 7]  319 	ld	a,#0x01
+   0129 FD 21 07 00   [14]  320 	ld	iy,#7
+   012D FD 39         [15]  321 	add	iy,sp
+   012F FD BE 00      [19]  322 	cp	a, 0 (iy)
+   0132 3E 00         [ 7]  323 	ld	a,#0x00
+   0134 FD 9E 01      [19]  324 	sbc	a, 1 (iy)
+   0137 E2r3Cr01      [10]  325 	jp	PO, 00129$
+   013A EE 80         [ 7]  326 	xor	a, #0x80
+   013C                     327 00129$:
+   013C F2r8Ar01      [10]  328 	jp	P,00103$
+                            329 ;src/main.c:147: for (i=1; i < cnt_wr; i++)
+   013F 11 01 00      [10]  330 	ld	de,#0x0001
+   0142                     331 00108$:
+                            332 ;src/main.c:149: xor ^= buffer_wr[i];	
+   0142 79            [ 4]  333 	ld	a,c
+   0143 21 01 00      [10]  334 	ld	hl,#1
+   0146 39            [11]  335 	add	hl,sp
+   0147 83            [ 4]  336 	add	a, e
+   0148 77            [ 7]  337 	ld	(hl),a
+   0149 78            [ 4]  338 	ld	a,b
+   014A 8A            [ 4]  339 	adc	a, d
+   014B 23            [ 6]  340 	inc	hl
+   014C 77            [ 7]  341 	ld	(hl),a
+                            342 ;src/main.c:147: for (i=1; i < cnt_wr; i++)
+   014D 21 07 00      [10]  343 	ld	hl,#7
+   0150 39            [11]  344 	add	hl,sp
+   0151 7B            [ 4]  345 	ld	a,e
+   0152 96            [ 7]  346 	sub	a, (hl)
+   0153 7A            [ 4]  347 	ld	a,d
+   0154 23            [ 6]  348 	inc	hl
+   0155 9E            [ 7]  349 	sbc	a, (hl)
+   0156 E2r5Br01      [10]  350 	jp	PO, 00130$
+   0159 EE 80         [ 7]  351 	xor	a, #0x80
+   015B                     352 00130$:
+   015B F2r76r01      [10]  353 	jp	P,00101$
+                            354 ;src/main.c:149: xor ^= buffer_wr[i];	
+   015E 21 01 00      [10]  355 	ld	hl, #1
+   0161 39            [11]  356 	add	hl, sp
+   0162 7E            [ 7]  357 	ld	a, (hl)
+   0163 23            [ 6]  358 	inc	hl
+   0164 66            [ 7]  359 	ld	h, (hl)
+   0165 6F            [ 4]  360 	ld	l, a
+   0166 7E            [ 7]  361 	ld	a,(hl)
+   0167 FD 21 00 00   [14]  362 	ld	iy,#0
+   016B FD 39         [15]  363 	add	iy,sp
+   016D FD AE 00      [19]  364 	xor	a, 0 (iy)
+   0170 33            [ 6]  365 	inc	sp
+   0171 F5            [11]  366 	push	af
+   0172 33            [ 6]  367 	inc	sp
+                            368 ;src/main.c:147: for (i=1; i < cnt_wr; i++)
+   0173 13            [ 6]  369 	inc	de
+   0174 18 CC         [12]  370 	jr	00108$
+   0176                     371 00101$:
+                            372 ;src/main.c:151: buffer_wr[i] = xor;
+   0176 21 01 00      [10]  373 	ld	hl, #1
+   0179 39            [11]  374 	add	hl, sp
+   017A 7E            [ 7]  375 	ld	a, (hl)
+   017B 23            [ 6]  376 	inc	hl
+   017C 66            [ 7]  377 	ld	h, (hl)
+   017D 6F            [ 4]  378 	ld	l, a
+   017E FD 21 00 00   [14]  379 	ld	iy,#0
+   0182 FD 39         [15]  380 	add	iy,sp
+   0184 FD 7E 00      [19]  381 	ld	a,0 (iy)
+   0187 77            [ 7]  382 	ld	(hl),a
+   0188 18 05         [12]  383 	jr	00104$
+   018A                     384 00103$:
+                            385 ;src/main.c:155: buffer_wr[1] = buffer_wr[0] ^ 0xff;
+   018A 03            [ 6]  386 	inc	bc
+   018B 7A            [ 4]  387 	ld	a,d
+   018C EE FF         [ 7]  388 	xor	a, #0xFF
+   018E 02            [ 7]  389 	ld	(bc),a
+   018F                     390 00104$:
+                            391 ;src/main.c:158: cnt_wr++; //because the XOR at the end
+   018F FD 21 07 00   [14]  392 	ld	iy,#7
+   0193 FD 39         [15]  393 	add	iy,sp
+   0195 FD 34 00      [23]  394 	inc	0 (iy)
+   0198 20 03         [12]  395 	jr	NZ,00131$
+   019A FD 34 01      [23]  396 	inc	1 (iy)
+   019D                     397 00131$:
+                            398 ;src/main.c:159: _write(cnt_wr);
+   019D FD 6E 00      [19]  399 	ld	l,0 (iy)
+   01A0 FD 66 01      [19]  400 	ld	h,1 (iy)
+   01A3 E5            [11]  401 	push	hl
+   01A4 CDr98r00      [17]  402 	call	__write
+   01A7 F1            [10]  403 	pop	af
+                            404 ;src/main.c:161: res = _read(cnt_rd, timeout);
+   01A8 21 09 00      [10]  405 	ld	hl, #9
+   01AB 39            [11]  406 	add	hl, sp
+   01AC 4E            [ 7]  407 	ld	c, (hl)
+   01AD 23            [ 6]  408 	inc	hl
+   01AE 46            [ 7]  409 	ld	b, (hl)
+   01AF C5            [11]  410 	push	bc
+   01B0 21 07 00      [10]  411 	ld	hl, #7
+   01B3 39            [11]  412 	add	hl, sp
+   01B4 4E            [ 7]  413 	ld	c, (hl)
+   01B5 23            [ 6]  414 	inc	hl
+   01B6 46            [ 7]  415 	ld	b, (hl)
+   01B7 C5            [11]  416 	push	bc
+   01B8 CDrC0r00      [17]  417 	call	__read
+   01BB F1            [10]  418 	pop	af
+   01BC F1            [10]  419 	pop	af
+                            420 ;src/main.c:163: if (res == -1)
+   01BD 7D            [ 4]  421 	ld	a,l
+   01BE 3C            [ 4]  422 	inc	a
+   01BF 20 0E         [12]  423 	jr	NZ,00106$
+   01C1 7C            [ 4]  424 	ld	a,h
+   01C2 3C            [ 4]  425 	inc	a
+   01C3 20 0A         [12]  426 	jr	NZ,00106$
+                            427 ;src/main.c:164: display_error("No answer from STM");
+   01C5 11rD2r01      [10]  428 	ld	de,#___str_2+0
+   01C8 E5            [11]  429 	push	hl
+   01C9 D5            [11]  430 	push	de
+   01CA CDr00r00      [17]  431 	call	_display_error
+   01CD F1            [10]  432 	pop	af
+   01CE E1            [10]  433 	pop	hl
+   01CF                     434 00106$:
+                            435 ;src/main.c:166: return res;
+   01CF F1            [10]  436 	pop	af
+   01D0 33            [ 6]  437 	inc	sp
+   01D1 C9            [10]  438 	ret
+   01D2                     439 ___str_2:
+   01D2 4E 6F 20 61 6E 73   440 	.ascii "No answer from STM"
+        77 65 72 20 66 72
+        6F 6D 20 53 54 4D
+   01E4 00                  441 	.db 0x00
+                            442 ;src/main.c:170: int _send_command(unsigned char cmd, int cnt_rd, int cnt_wr)
+                            443 ;	---------------------------------
+                            444 ; Function _send_command
+                            445 ; ---------------------------------
+   01E5                     446 __send_command::
+                            447 ;src/main.c:175: if ( cnt_rd == 0 )
+   01E5 FD 21 03 00   [14]  448 	ld	iy,#3
+   01E9 FD 39         [15]  449 	add	iy,sp
+   01EB FD 7E 01      [19]  450 	ld	a,1 (iy)
+   01EE FD B6 00      [19]  451 	or	a,0 (iy)
+   01F1 20 0A         [12]  452 	jr	NZ,00102$
+                            453 ;src/main.c:176: cnt_rd = 1;
+   01F3 FD 36 00 01   [19]  454 	ld	0 (iy),#0x01
+   01F7 FD 36 01 00   [19]  455 	ld	1 (iy),#0x00
+   01FB 18 0D         [12]  456 	jr	00103$
+   01FD                     457 00102$:
+                            458 ;src/main.c:178: cnt_rd += 2;
+   01FD 21 03 00      [10]  459 	ld	hl,#3
+   0200 39            [11]  460 	add	hl,sp
+   0201 7E            [ 7]  461 	ld	a,(hl)
+   0202 C6 02         [ 7]  462 	add	a, #0x02
+   0204 77            [ 7]  463 	ld	(hl),a
+   0205 23            [ 6]  464 	inc	hl
+   0206 7E            [ 7]  465 	ld	a,(hl)
+   0207 CE 00         [ 7]  466 	adc	a, #0x00
+   0209 77            [ 7]  467 	ld	(hl),a
+   020A                     468 00103$:
+                            469 ;src/main.c:180: buffer_wr[0] = cmd;
+   020A 21r02r02      [10]  470 	ld	hl,#_buffer_wr+0
+   020D FD 21 02 00   [14]  471 	ld	iy,#2
+   0211 FD 39         [15]  472 	add	iy,sp
+   0213 FD 7E 00      [19]  473 	ld	a,0 (iy)
+   0216 77            [ 7]  474 	ld	(hl),a
+                            475 ;src/main.c:182: res = _talk( cnt_rd, cnt_wr, 1000 );
+   0217 21 E8 03      [10]  476 	ld	hl,#0x03E8
+   021A E5            [11]  477 	push	hl
+   021B 21 07 00      [10]  478 	ld	hl, #7
+   021E 39            [11]  479 	add	hl, sp
+   021F 4E            [ 7]  480 	ld	c, (hl)
+   0220 23            [ 6]  481 	inc	hl
+   0221 46            [ 7]  482 	ld	b, (hl)
+   0222 C5            [11]  483 	push	bc
+   0223 21 07 00      [10]  484 	ld	hl, #7
+   0226 39            [11]  485 	add	hl, sp
+   0227 4E            [ 7]  486 	ld	c, (hl)
+   0228 23            [ 6]  487 	inc	hl
+   0229 46            [ 7]  488 	ld	b, (hl)
+   022A C5            [11]  489 	push	bc
+   022B CDr1Dr01      [17]  490 	call	__talk
+   022E F1            [10]  491 	pop	af
+   022F F1            [10]  492 	pop	af
+   0230 F1            [10]  493 	pop	af
+                            494 ;src/main.c:184: if (buffer_rd[0] != CMD_ACK)
+   0231 3Ar02r00      [13]  495 	ld	a, (#_buffer_rd + 0)
+   0234 D6 79         [ 7]  496 	sub	a, #0x79
+   0236 28 0C         [12]  497 	jr	Z,00105$
+                            498 ;src/main.c:186: display_error("No ACK for command");
+   0238 21r48r02      [10]  499 	ld	hl,#___str_3
+   023B E5            [11]  500 	push	hl
+   023C CDr00r00      [17]  501 	call	_display_error
+   023F F1            [10]  502 	pop	af
+                            503 ;src/main.c:187: return -1;
+   0240 21 FF FF      [10]  504 	ld	hl,#0xFFFF
+   0243 C9            [10]  505 	ret
+   0244                     506 00105$:
+                            507 ;src/main.c:190: return 0;
+   0244 21 00 00      [10]  508 	ld	hl,#0x0000
+   0247 C9            [10]  509 	ret
+   0248                     510 ___str_3:
+   0248 4E 6F 20 41 43 4B   511 	.ascii "No ACK for command"
+        20 66 6F 72 20 63
+        6F 6D 6D 61 6E 64
+   025A 00                  512 	.db 0x00
+                            513 ;src/main.c:194: void main()
+                            514 ;	---------------------------------
+                            515 ; Function main
+                            516 ; ---------------------------------
+   025B                     517 _main::
+   025B 21 DA FF      [10]  518 	ld	hl,#-38
+   025E 39            [11]  519 	add	hl,sp
+   025F F9            [ 6]  520 	ld	sp,hl
+                            521 ;src/main.c:196: unsigned char *mem   = (unsigned char *)0x6000;
+   0260 21 14 00      [10]  522 	ld	hl, #20
+   0263 39            [11]  523 	add	hl, sp
+   0264 36 00         [10]  524 	ld	(hl), #0x00
+   0266 23            [ 6]  525 	inc	hl
+   0267 36 60         [10]  526 	ld	(hl), #0x60
+                            527 ;src/main.c:216: REG_NUM = REG_MACHID;
+   0269 3E 00         [ 7]  528 	ld	a,#0x00
+   026B 01 3B 24      [10]  529 	ld	bc,#_REG_NUM
+   026E ED 79         [12]  530 	out	(c),a
+                            531 ;src/main.c:217: mach_id = REG_VAL;
+   0270 3E 25         [ 7]  532 	ld	a,#>(_REG_VAL)
+   0272 DB 3B         [11]  533 	in	a,(#<(_REG_VAL))
+                            534 ;src/main.c:218: REG_NUM = REG_VERSION;
+   0274 3E 01         [ 7]  535 	ld	a,#0x01
+   0276 01 3B 24      [10]  536 	ld	bc,#_REG_NUM
+   0279 ED 79         [12]  537 	out	(c),a
+                            538 ;src/main.c:219: mach_version = REG_VAL;
+   027B 3E 25         [ 7]  539 	ld	a,#>(_REG_VAL)
+   027D DB 3B         [11]  540 	in	a,(#<(_REG_VAL))
+                            541 ;src/main.c:220: REG_NUM = REG_RESET;
+   027F 3E 02         [ 7]  542 	ld	a,#0x02
+   0281 01 3B 24      [10]  543 	ld	bc,#_REG_NUM
+   0284 ED 79         [12]  544 	out	(c),a
+                            545 ;src/main.c:221: reset_type = REG_VAL & RESET_POWERON;
+   0286 3E 25         [ 7]  546 	ld	a,#>(_REG_VAL)
+   0288 DB 3B         [11]  547 	in	a,(#<(_REG_VAL))
+                            548 ;src/main.c:222: REG_NUM = REG_ANTIBRICK;
+   028A 3E 10         [ 7]  549 	ld	a,#0x10
+   028C 01 3B 24      [10]  550 	ld	bc,#_REG_NUM
+   028F ED 79         [12]  551 	out	(c),a
+                            552 ;src/main.c:223: buttons = REG_VAL & (AB_BTN_DIVMMC | AB_BTN_MULTIFACE);
+   0291 3E 25         [ 7]  553 	ld	a,#>(_REG_VAL)
+   0293 DB 3B         [11]  554 	in	a,(#<(_REG_VAL))
+                            555 ;src/main.c:226: vdp_clear();
+   0295 CDr00r00      [17]  556 	call	_vdp_clear
+                            557 ;src/main.c:228: ULAPORT = COLOR_CYAN;				// Cyan border 
+   0298 3E 05         [ 7]  558 	ld	a,#0x05
+   029A D3 FE         [11]  559 	out	(_ULAPORT),a
+                            560 ;src/main.c:230: vdp_gotoxy(4, 5);
+   029C 21 04 05      [10]  561 	ld	hl,#0x0504
+   029F E5            [11]  562 	push	hl
+   02A0 CDr00r00      [17]  563 	call	_vdp_gotoxy
+                            564 ;src/main.c:231: vdp_prints("UnAmiga STM32 Updater");
+   02A3 21r8Ar09      [10]  565 	ld	hl, #___str_4
+   02A6 E3            [19]  566 	ex	(sp),hl
+   02A7 CDr00r00      [17]  567 	call	_vdp_prints
+                            568 ;src/main.c:233: vdp_gotoxy(1, 9);
+   02AA 21 01 09      [10]  569 	ld	hl, #0x0901
+   02AD E3            [19]  570 	ex	(sp),hl
+   02AE CDr00r00      [17]  571 	call	_vdp_gotoxy
+                            572 ;src/main.c:234: vdp_prints("Change the STM32 boot0 jumper");
+   02B1 21rA0r09      [10]  573 	ld	hl, #___str_5
+   02B4 E3            [19]  574 	ex	(sp),hl
+   02B5 CDr00r00      [17]  575 	call	_vdp_prints
+                            576 ;src/main.c:235: vdp_gotoxy(1, 10);
+   02B8 21 01 0A      [10]  577 	ld	hl, #0x0A01
+   02BB E3            [19]  578 	ex	(sp),hl
+   02BC CDr00r00      [17]  579 	call	_vdp_gotoxy
+                            580 ;src/main.c:236: vdp_prints("press the STM32 reset button");
+   02BF 21rBEr09      [10]  581 	ld	hl, #___str_6
+   02C2 E3            [19]  582 	ex	(sp),hl
+   02C3 CDr00r00      [17]  583 	call	_vdp_prints
+                            584 ;src/main.c:237: vdp_gotoxy(8, 11);
+   02C6 21 08 0B      [10]  585 	ld	hl, #0x0B08
+   02C9 E3            [19]  586 	ex	(sp),hl
+   02CA CDr00r00      [17]  587 	call	_vdp_gotoxy
+                            588 ;src/main.c:238: vdp_prints("and press ENTER");
+   02CD 21rDBr09      [10]  589 	ld	hl, #___str_7
+   02D0 E3            [19]  590 	ex	(sp),hl
+   02D1 CDr00r00      [17]  591 	call	_vdp_prints
+                            592 ;src/main.c:242: vdp_gotoxy(3, 19);
+   02D4 21 03 13      [10]  593 	ld	hl, #0x1303
+   02D7 E3            [19]  594 	ex	(sp),hl
+   02D8 CDr00r00      [17]  595 	call	_vdp_gotoxy
+                            596 ;src/main.c:243: vdp_prints("Original by Victor Trucco");
+   02DB 21rEBr09      [10]  597 	ld	hl, #___str_8
+   02DE E3            [19]  598 	ex	(sp),hl
+   02DF CDr00r00      [17]  599 	call	_vdp_prints
+                            600 ;src/main.c:245: vdp_gotoxy(5, 21);
+   02E2 21 05 15      [10]  601 	ld	hl, #0x1505
+   02E5 E3            [19]  602 	ex	(sp),hl
+   02E6 CDr00r00      [17]  603 	call	_vdp_gotoxy
+                            604 ;src/main.c:246: vdp_prints("Adapted by Benitoss");
+   02E9 21r05r0A      [10]  605 	ld	hl, #___str_9
+   02EC E3            [19]  606 	ex	(sp),hl
+   02ED CDr00r00      [17]  607 	call	_vdp_prints
+                            608 ;src/main.c:248: vdp_gotoxy(25, 23);
+   02F0 21 19 17      [10]  609 	ld	hl, #0x1719
+   02F3 E3            [19]  610 	ex	(sp),hl
+   02F4 CDr00r00      [17]  611 	call	_vdp_gotoxy
+                            612 ;src/main.c:249: vdp_prints("V 1.01");
+   02F7 21r19r0A      [10]  613 	ld	hl, #___str_10
+   02FA E3            [19]  614 	ex	(sp),hl
+   02FB CDr00r00      [17]  615 	call	_vdp_prints
+   02FE F1            [10]  616 	pop	af
+                            617 ;src/main.c:253: while ((HROW6 & 0x01) == 1) { }
+   02FF                     618 00101$:
+   02FF 3E BF         [ 7]  619 	ld	a,#>(_HROW6)
+   0301 DB FE         [11]  620 	in	a,(#<(_HROW6))
+   0303 E6 01         [ 7]  621 	and	a, #0x01
+   0305 3D            [ 4]  622 	dec	a
+   0306 28 F7         [12]  623 	jr	Z,00101$
+                            624 ;src/main.c:256: vdp_gotoxy(6, 15);
+   0308 21 06 0F      [10]  625 	ld	hl,#0x0F06
+   030B E5            [11]  626 	push	hl
+   030C CDr00r00      [17]  627 	call	_vdp_gotoxy
+                            628 ;src/main.c:257: vdp_prints("Are you sure? (Y/N)");
+   030F 21r20r0A      [10]  629 	ld	hl, #___str_11
+   0312 E3            [19]  630 	ex	(sp),hl
+   0313 CDr00r00      [17]  631 	call	_vdp_prints
+   0316 F1            [10]  632 	pop	af
+                            633 ;src/main.c:260: while (((HROW5 & 0x10) >> 4) == 1) { }
+   0317                     634 00104$:
+   0317 3E DF         [ 7]  635 	ld	a,#>(_HROW5)
+   0319 DB FE         [11]  636 	in	a,(#<(_HROW5))
+   031B E6 10         [ 7]  637 	and	a, #0x10
+   031D 07            [ 4]  638 	rlca
+   031E 07            [ 4]  639 	rlca
+   031F 07            [ 4]  640 	rlca
+   0320 07            [ 4]  641 	rlca
+   0321 E6 0F         [ 7]  642 	and	a,#0x0F
+   0323 3D            [ 4]  643 	dec	a
+   0324 28 F1         [12]  644 	jr	Z,00104$
+                            645 ;src/main.c:262: vdp_clear();	
+   0326 CDr00r00      [17]  646 	call	_vdp_clear
+                            647 ;src/main.c:267: REG_STM32_RESET = 1;
+   0329 3E 01         [ 7]  648 	ld	a,#0x01
+   032B 01 3B 30      [10]  649 	ld	bc,#_REG_STM32_RESET
+   032E ED 79         [12]  650 	out	(c),a
+                            651 ;src/main.c:268: for (c=0; c< 30000; c++) __asm__("nop");	
+   0330 11 30 75      [10]  652 	ld	de,#0x7530
+   0333                     653 00172$:
+   0333 00            [ 4]  654 	nop
+   0334 1B            [ 6]  655 	dec	de
+   0335 7A            [ 4]  656 	ld	a,d
+                            657 ;src/main.c:269: REG_STM32_RESET = 0;
+   0336 B3            [ 4]  658 	or	a,e
+   0337 20 FA         [12]  659 	jr	NZ,00172$
+   0339 01 3B 30      [10]  660 	ld	bc,#_REG_STM32_RESET
+   033C ED 79         [12]  661 	out	(c),a
+                            662 ;src/main.c:278: error_count = 10;
+   033E 21r00r00      [10]  663 	ld	hl,#_error_count + 0
+   0341 36 0A         [10]  664 	ld	(hl), #0x0A
+                            665 ;src/main.c:279: while(error_count > 0) {
+   0343                     666 00114$:
+   0343 3Ar00r00      [13]  667 	ld	a,(#_error_count + 0)
+   0346 B7            [ 4]  668 	or	a, a
+   0347 28 24         [12]  669 	jr	Z,00116$
+                            670 ;src/main.c:280: if (!MMC_Init()) {
+   0349 CDr00r00      [17]  671 	call	_MMC_Init
+   034C 7D            [ 4]  672 	ld	a,l
+   034D B7            [ 4]  673 	or	a, a
+   034E 20 08         [12]  674 	jr	NZ,00109$
+                            675 ;src/main.c:282: display_error("Fail to init the SD card");
+   0350 21r34r0A      [10]  676 	ld	hl,#___str_12
+   0353 E5            [11]  677 	push	hl
+   0354 CDr00r00      [17]  678 	call	_display_error
+   0357 F1            [10]  679 	pop	af
+   0358                     680 00109$:
+                            681 ;src/main.c:285: if (!FindDrive()) {
+   0358 CDr00r00      [17]  682 	call	_FindDrive
+   035B 7D            [ 4]  683 	ld	a,l
+   035C B7            [ 4]  684 	or	a, a
+   035D 20 0E         [12]  685 	jr	NZ,00116$
+                            686 ;src/main.c:286: --error_count;
+   035F 21r00r00      [10]  687 	ld	hl, #_error_count+0
+   0362 35            [11]  688 	dec	(hl)
+                            689 ;src/main.c:287: for (c = 0; c < 65000; c++);
+   0363 11 E8 FD      [10]  690 	ld	de,#0xFDE8
+   0366                     691 00175$:
+   0366 1B            [ 6]  692 	dec	de
+   0367 7A            [ 4]  693 	ld	a,d
+   0368 B3            [ 4]  694 	or	a,e
+   0369 20 FB         [12]  695 	jr	NZ,00175$
+   036B 18 D6         [12]  696 	jr	00114$
+                            697 ;src/main.c:289: break;
+   036D                     698 00116$:
+                            699 ;src/main.c:292: if (error_count == 0) {
+   036D 3Ar00r00      [13]  700 	ld	a,(#_error_count + 0)
+   0370 B7            [ 4]  701 	or	a, a
+   0371 20 08         [12]  702 	jr	NZ,00118$
+                            703 ;src/main.c:294: display_error("Fail to mount the SD card");
+   0373 21r4Dr0A      [10]  704 	ld	hl,#___str_13
+   0376 E5            [11]  705 	push	hl
+   0377 CDr00r00      [17]  706 	call	_display_error
+   037A F1            [10]  707 	pop	af
+   037B                     708 00118$:
+                            709 ;src/main.c:304: if (!FileOpen(&file, fn_firmware)) 
+   037B 21 02 00      [10]  710 	ld	hl,#0x0002
+   037E 39            [11]  711 	add	hl,sp
+   037F FD 21 24 00   [14]  712 	ld	iy,#36
+   0383 FD 39         [15]  713 	add	iy,sp
+   0385 FD 75 00      [19]  714 	ld	0 (iy),l
+   0388 FD 74 01      [19]  715 	ld	1 (iy),h
+   038B FD 5E 00      [19]  716 	ld	e,0 (iy)
+   038E FD 56 01      [19]  717 	ld	d,1 (iy)
+   0391 2Ar00r00      [16]  718 	ld	hl,(_fn_firmware)
+   0394 E5            [11]  719 	push	hl
+   0395 D5            [11]  720 	push	de
+   0396 CDr00r00      [17]  721 	call	_FileOpen
+   0399 F1            [10]  722 	pop	af
+   039A F1            [10]  723 	pop	af
+   039B 7D            [ 4]  724 	ld	a,l
+   039C B7            [ 4]  725 	or	a, a
+   039D 20 08         [12]  726 	jr	NZ,00120$
+                            727 ;src/main.c:307: display_error("Fail to open UPDATE.STM");
+   039F 21r67r0A      [10]  728 	ld	hl,#___str_14
+   03A2 E5            [11]  729 	push	hl
+   03A3 CDr00r00      [17]  730 	call	_display_error
+   03A6 F1            [10]  731 	pop	af
+   03A7                     732 00120$:
+                            733 ;src/main.c:316: num_blocks = file.size / 512;
+   03A7 21 24 00      [10]  734 	ld	hl, #36
+   03AA 39            [11]  735 	add	hl, sp
+   03AB 7E            [ 7]  736 	ld	a, (hl)
+   03AC 23            [ 6]  737 	inc	hl
+   03AD 66            [ 7]  738 	ld	h, (hl)
+   03AE 6F            [ 4]  739 	ld	l, a
+   03AF 11 04 00      [10]  740 	ld	de, #0x0004
+   03B2 19            [11]  741 	add	hl, de
+   03B3 7E            [ 7]  742 	ld	a,(hl)
+   03B4 FD 21 1A 00   [14]  743 	ld	iy,#26
+   03B8 FD 39         [15]  744 	add	iy,sp
+   03BA FD 77 00      [19]  745 	ld	0 (iy),a
+   03BD 23            [ 6]  746 	inc	hl
+   03BE 7E            [ 7]  747 	ld	a,(hl)
+   03BF FD 77 01      [19]  748 	ld	1 (iy),a
+   03C2 23            [ 6]  749 	inc	hl
+   03C3 7E            [ 7]  750 	ld	a,(hl)
+   03C4 FD 77 02      [19]  751 	ld	2 (iy),a
+   03C7 23            [ 6]  752 	inc	hl
+   03C8 7E            [ 7]  753 	ld	a,(hl)
+   03C9 FD 77 03      [19]  754 	ld	3 (iy),a
+   03CC F5            [11]  755 	push	af
+   03CD FD 6E 00      [19]  756 	ld	l,0 (iy)
+   03D0 FD 66 01      [19]  757 	ld	h,1 (iy)
+   03D3 FD 5E 02      [19]  758 	ld	e,2 (iy)
+   03D6 FD 56 03      [19]  759 	ld	d,3 (iy)
+   03D9 F1            [10]  760 	pop	af
+   03DA 06 09         [ 7]  761 	ld	b,#0x09
+   03DC                     762 00370$:
+   03DC CB 3A         [ 8]  763 	srl	d
+   03DE CB 1B         [ 8]  764 	rr	e
+   03E0 CB 1C         [ 8]  765 	rr	h
+   03E2 CB 1D         [ 8]  766 	rr	l
+   03E4 10 F6         [13]  767 	djnz	00370$
+   03E6 FD 21 12 00   [14]  768 	ld	iy,#18
+   03EA FD 39         [15]  769 	add	iy,sp
+   03EC FD 75 00      [19]  770 	ld	0 (iy),l
+   03EF FD 74 01      [19]  771 	ld	1 (iy),h
+                            772 ;src/main.c:318: if (num_blocks * 512 < file.size)
+   03F2 FD 7E 00      [19]  773 	ld	a,0 (iy)
+   03F5 87            [ 4]  774 	add	a, a
+   03F6 57            [ 4]  775 	ld	d,a
+   03F7 1E 00         [ 7]  776 	ld	e,#0x00
+   03F9 01 00 00      [10]  777 	ld	bc,#0x0000
+   03FC 21 1A 00      [10]  778 	ld	hl,#26
+   03FF 39            [11]  779 	add	hl,sp
+   0400 7B            [ 4]  780 	ld	a,e
+   0401 96            [ 7]  781 	sub	a, (hl)
+   0402 7A            [ 4]  782 	ld	a,d
+   0403 23            [ 6]  783 	inc	hl
+   0404 9E            [ 7]  784 	sbc	a, (hl)
+   0405 78            [ 4]  785 	ld	a,b
+   0406 23            [ 6]  786 	inc	hl
+   0407 9E            [ 7]  787 	sbc	a, (hl)
+   0408 79            [ 4]  788 	ld	a,c
+   0409 23            [ 6]  789 	inc	hl
+   040A 9E            [ 7]  790 	sbc	a, (hl)
+   040B 30 08         [12]  791 	jr	NC,00122$
+                            792 ;src/main.c:320: num_blocks++;
+   040D FD 34 00      [23]  793 	inc	0 (iy)
+   0410 20 03         [12]  794 	jr	NZ,00372$
+   0412 FD 34 01      [23]  795 	inc	1 (iy)
+   0415                     796 00372$:
+   0415                     797 00122$:
+                            798 ;src/main.c:353: vdp_gotoxy(0, 5);
+   0415 21 00 05      [10]  799 	ld	hl,#0x0500
+   0418 E5            [11]  800 	push	hl
+   0419 CDr00r00      [17]  801 	call	_vdp_gotoxy
+                            802 ;src/main.c:354: vdp_prints("Listening the STM: ");
+   041C 21r7Fr0A      [10]  803 	ld	hl, #___str_15
+   041F E3            [19]  804 	ex	(sp),hl
+   0420 CDr00r00      [17]  805 	call	_vdp_prints
+   0423 F1            [10]  806 	pop	af
+                            807 ;src/main.c:356: while (1)
+   0424                     808 00126$:
+                            809 ;src/main.c:359: send_char_tx(CMD_INIT);
+   0424 3E 7F         [ 7]  810 	ld	a,#0x7F
+   0426 F5            [11]  811 	push	af
+   0427 33            [ 6]  812 	inc	sp
+   0428 CDr85r00      [17]  813 	call	_send_char_tx
+   042B 33            [ 6]  814 	inc	sp
+                            815 ;src/main.c:360: delay(8);
+   042C 21 08 00      [10]  816 	ld	hl,#0x0008
+   042F E5            [11]  817 	push	hl
+   0430 CDr57r00      [17]  818 	call	_delay
+   0433 F1            [10]  819 	pop	af
+                            820 ;src/main.c:361: res = REG_RX;
+   0434 3E 14         [ 7]  821 	ld	a,#>(_REG_RX)
+   0436 DB 3B         [11]  822 	in	a,(#<(_REG_RX))
+                            823 ;src/main.c:362: if (res == CMD_NOACK) break;
+   0438 D6 1F         [ 7]  824 	sub	a, #0x1F
+   043A 20 E8         [12]  825 	jr	NZ,00126$
+                            826 ;src/main.c:365: clear_rx_buffer();
+   043C CDr6Dr00      [17]  827 	call	_clear_rx_buffer
+                            828 ;src/main.c:367: vdp_prints("OK!");
+   043F 21r93r0A      [10]  829 	ld	hl,#___str_16
+   0442 E5            [11]  830 	push	hl
+   0443 CDr00r00      [17]  831 	call	_vdp_prints
+                            832 ;src/main.c:370: vdp_gotoxy(0, 7);
+   0446 21 00 07      [10]  833 	ld	hl, #0x0700
+   0449 E3            [19]  834 	ex	(sp),hl
+   044A CDr00r00      [17]  835 	call	_vdp_gotoxy
+                            836 ;src/main.c:371: vdp_prints("Connecting to the STM: ");
+   044D 21r97r0A      [10]  837 	ld	hl, #___str_17
+   0450 E3            [19]  838 	ex	(sp),hl
+   0451 CDr00r00      [17]  839 	call	_vdp_prints
+   0454 F1            [10]  840 	pop	af
+                            841 ;src/main.c:373: ret = _send_command(CMD_GET, 13, 1);
+   0455 21 01 00      [10]  842 	ld	hl,#0x0001
+   0458 E5            [11]  843 	push	hl
+   0459 2E 0D         [ 7]  844 	ld	l, #0x0D
+   045B E5            [11]  845 	push	hl
+   045C AF            [ 4]  846 	xor	a, a
+   045D F5            [11]  847 	push	af
+   045E 33            [ 6]  848 	inc	sp
+   045F CDrE5r01      [17]  849 	call	__send_command
+   0462 F1            [10]  850 	pop	af
+   0463 F1            [10]  851 	pop	af
+   0464 33            [ 6]  852 	inc	sp
+   0465 4D            [ 4]  853 	ld	c, l
+                            854 ;src/main.c:375: if (ret == 0)
+   0466 7C            [ 4]  855 	ld	a, h
+   0467 B1            [ 4]  856 	or	a,c
+   0468 20 0A         [12]  857 	jr	NZ,00129$
+                            858 ;src/main.c:388: vdp_prints("OK!");
+   046A 21r93r0A      [10]  859 	ld	hl,#___str_16
+   046D E5            [11]  860 	push	hl
+   046E CDr00r00      [17]  861 	call	_vdp_prints
+   0471 F1            [10]  862 	pop	af
+   0472 18 08         [12]  863 	jr	00130$
+   0474                     864 00129$:
+                            865 ;src/main.c:393: display_error("Fail to connect to STM");
+   0474 21rAFr0A      [10]  866 	ld	hl,#___str_18
+   0477 E5            [11]  867 	push	hl
+   0478 CDr00r00      [17]  868 	call	_display_error
+   047B F1            [10]  869 	pop	af
+   047C                     870 00130$:
+                            871 ;src/main.c:398: vdp_gotoxy(0, 9);
+   047C 21 00 09      [10]  872 	ld	hl,#0x0900
+   047F E5            [11]  873 	push	hl
+   0480 CDr00r00      [17]  874 	call	_vdp_gotoxy
+                            875 ;src/main.c:399: vdp_prints("Erasing the STM: ");
+   0483 21rC6r0A      [10]  876 	ld	hl, #___str_19
+   0486 E3            [19]  877 	ex	(sp),hl
+   0487 CDr00r00      [17]  878 	call	_vdp_prints
+   048A F1            [10]  879 	pop	af
+                            880 ;src/main.c:402: ret = _send_command(CMD_ERASE, 0, 1);
+   048B 21 01 00      [10]  881 	ld	hl,#0x0001
+   048E E5            [11]  882 	push	hl
+   048F 2E 00         [ 7]  883 	ld	l, #0x00
+   0491 E5            [11]  884 	push	hl
+   0492 3E 43         [ 7]  885 	ld	a,#0x43
+   0494 F5            [11]  886 	push	af
+   0495 33            [ 6]  887 	inc	sp
+   0496 CDrE5r01      [17]  888 	call	__send_command
+   0499 F1            [10]  889 	pop	af
+   049A F1            [10]  890 	pop	af
+   049B 33            [ 6]  891 	inc	sp
+   049C 4D            [ 4]  892 	ld	c, l
+                            893 ;src/main.c:404: if (ret == 0)
+   049D 7C            [ 4]  894 	ld	a, h
+   049E B1            [ 4]  895 	or	a,c
+   049F 20 36         [12]  896 	jr	NZ,00135$
+                            897 ;src/main.c:406: buffer_wr[0] = 0xff;
+   04A1 21r02r02      [10]  898 	ld	hl,#_buffer_wr+0
+   04A4 36 FF         [10]  899 	ld	(hl),#0xFF
+                            900 ;src/main.c:407: buffer_wr[1] = 0x00;
+   04A6 23            [ 6]  901 	inc	hl
+   04A7 36 00         [10]  902 	ld	(hl),#0x00
+                            903 ;src/main.c:408: _write(2);
+   04A9 21 02 00      [10]  904 	ld	hl,#0x0002
+   04AC E5            [11]  905 	push	hl
+   04AD CDr98r00      [17]  906 	call	__write
+                            907 ;src/main.c:410: ret = _read(1, 1000);
+   04B0 21 E8 03      [10]  908 	ld	hl, #0x03E8
+   04B3 E3            [19]  909 	ex	(sp),hl
+   04B4 21 01 00      [10]  910 	ld	hl,#0x0001
+   04B7 E5            [11]  911 	push	hl
+   04B8 CDrC0r00      [17]  912 	call	__read
+   04BB F1            [10]  913 	pop	af
+   04BC F1            [10]  914 	pop	af
+                            915 ;src/main.c:412: if (ret == -1)
+   04BD 2C            [ 4]  916 	inc	l
+   04BE 20 0D         [12]  917 	jr	NZ,00132$
+   04C0 24            [ 4]  918 	inc	h
+   04C1 20 0A         [12]  919 	jr	NZ,00132$
+                            920 ;src/main.c:414: display_error("Fail to erase");
+   04C3 21rD8r0A      [10]  921 	ld	hl,#___str_20
+   04C6 E5            [11]  922 	push	hl
+   04C7 CDr00r00      [17]  923 	call	_display_error
+   04CA F1            [10]  924 	pop	af
+   04CB 18 12         [12]  925 	jr	00136$
+   04CD                     926 00132$:
+                            927 ;src/main.c:418: vdp_prints("OK!");
+   04CD 21r93r0A      [10]  928 	ld	hl,#___str_16
+   04D0 E5            [11]  929 	push	hl
+   04D1 CDr00r00      [17]  930 	call	_vdp_prints
+   04D4 F1            [10]  931 	pop	af
+   04D5 18 08         [12]  932 	jr	00136$
+   04D7                     933 00135$:
+                            934 ;src/main.c:424: display_error("Fail on erase command");
+   04D7 21rE6r0A      [10]  935 	ld	hl,#___str_21
+   04DA E5            [11]  936 	push	hl
+   04DB CDr00r00      [17]  937 	call	_display_error
+   04DE F1            [10]  938 	pop	af
+   04DF                     939 00136$:
+                            940 ;src/main.c:430: vdp_gotoxy(0, 11);
+   04DF 21 00 0B      [10]  941 	ld	hl,#0x0B00
+   04E2 E5            [11]  942 	push	hl
+   04E3 CDr00r00      [17]  943 	call	_vdp_gotoxy
+                            944 ;src/main.c:431: vdp_prints("Writing to memory: ");
+   04E6 21rFCr0A      [10]  945 	ld	hl, #___str_22
+   04E9 E3            [19]  946 	ex	(sp),hl
+   04EA CDr00r00      [17]  947 	call	_vdp_prints
+   04ED F1            [10]  948 	pop	af
+                            949 ;src/main.c:433: stm_addr = 0;
+   04EE 21 1A 00      [10]  950 	ld	hl, #26
+   04F1 39            [11]  951 	add	hl, sp
+   04F2 AF            [ 4]  952 	xor	a, a
+   04F3 77            [ 7]  953 	ld	(hl), a
+   04F4 23            [ 6]  954 	inc	hl
+   04F5 77            [ 7]  955 	ld	(hl), a
+                            956 ;src/main.c:435: if (!FileOpen(&file, fn_firmware)) {
+   04F6 21 24 00      [10]  957 	ld	hl, #36
+   04F9 39            [11]  958 	add	hl, sp
+   04FA 5E            [ 7]  959 	ld	e, (hl)
+   04FB 23            [ 6]  960 	inc	hl
+   04FC 56            [ 7]  961 	ld	d, (hl)
+   04FD 2Ar00r00      [16]  962 	ld	hl,(_fn_firmware)
+   0500 E5            [11]  963 	push	hl
+   0501 D5            [11]  964 	push	de
+   0502 CDr00r00      [17]  965 	call	_FileOpen
+   0505 F1            [10]  966 	pop	af
+   0506 F1            [10]  967 	pop	af
+   0507 7D            [ 4]  968 	ld	a,l
+   0508 B7            [ 4]  969 	or	a, a
+   0509 20 08         [12]  970 	jr	NZ,00217$
+                            971 ;src/main.c:437: display_error("Fail to open UPDATE.STM");
+   050B 21r67r0A      [10]  972 	ld	hl,#___str_14
+   050E E5            [11]  973 	push	hl
+   050F CDr00r00      [17]  974 	call	_display_error
+   0512 F1            [10]  975 	pop	af
+                            976 ;src/main.c:442: while  (blocks_read < num_blocks)
+   0513                     977 00217$:
+   0513 21 24 00      [10]  978 	ld	hl, #36+0
+   0516 39            [11]  979 	add	hl, sp
+   0517 7E            [ 7]  980 	ld	a, (hl)
+   0518 FD 21 20 00   [14]  981 	ld	iy,#32
+   051C FD 39         [15]  982 	add	iy,sp
+   051E FD 77 00      [19]  983 	ld	0 (iy),a
+   0521 21 25 00      [10]  984 	ld	hl, #36+1
+   0524 39            [11]  985 	add	hl, sp
+   0525 7E            [ 7]  986 	ld	a, (hl)
+   0526 FD 21 20 00   [14]  987 	ld	iy,#32
+   052A FD 39         [15]  988 	add	iy,sp
+   052C FD 77 01      [19]  989 	ld	1 (iy),a
+   052F 21 10 00      [10]  990 	ld	hl, #16
+   0532 39            [11]  991 	add	hl, sp
+   0533 AF            [ 4]  992 	xor	a, a
+   0534 77            [ 7]  993 	ld	(hl), a
+   0535 23            [ 6]  994 	inc	hl
+   0536 77            [ 7]  995 	ld	(hl), a
+   0537                     996 00148$:
+   0537 21 12 00      [10]  997 	ld	hl,#18
+   053A 39            [11]  998 	add	hl,sp
+   053B FD 21 10 00   [14]  999 	ld	iy,#16
+   053F FD 39         [15] 1000 	add	iy,sp
+   0541 FD 7E 00      [19] 1001 	ld	a,0 (iy)
+   0544 96            [ 7] 1002 	sub	a, (hl)
+   0545 FD 7E 01      [19] 1003 	ld	a,1 (iy)
+   0548 23            [ 6] 1004 	inc	hl
+   0549 9E            [ 7] 1005 	sbc	a, (hl)
+   054A D2r0Fr07      [10] 1006 	jp	NC,00150$
+                           1007 ;src/main.c:444: FileRead(&file, mem); //read 512 bytes from file
+   054D 21 20 00      [10] 1008 	ld	hl, #32
+   0550 39            [11] 1009 	add	hl, sp
+   0551 7E            [ 7] 1010 	ld	a, (hl)
+   0552 23            [ 6] 1011 	inc	hl
+   0553 66            [ 7] 1012 	ld	h, (hl)
+   0554 6F            [ 4] 1013 	ld	l, a
+   0555 FD 21 14 00   [14] 1014 	ld	iy,#20
+   0559 FD 39         [15] 1015 	add	iy,sp
+   055B FD 4E 00      [19] 1016 	ld	c,0 (iy)
+   055E FD 46 01      [19] 1017 	ld	b,1 (iy)
+   0561 C5            [11] 1018 	push	bc
+   0562 E5            [11] 1019 	push	hl
+   0563 CDr00r00      [17] 1020 	call	_FileRead
+   0566 F1            [10] 1021 	pop	af
+   0567 F1            [10] 1022 	pop	af
+                           1023 ;src/main.c:446: blocks_read++;
+   0568 FD 21 10 00   [14] 1024 	ld	iy,#16
+   056C FD 39         [15] 1025 	add	iy,sp
+   056E FD 34 00      [23] 1026 	inc	0 (iy)
+   0571 20 03         [12] 1027 	jr	NZ,00377$
+   0573 FD 34 01      [23] 1028 	inc	1 (iy)
+   0576                    1029 00377$:
+                           1030 ;src/main.c:448: for (i = 0; i < 2; i++)
+   0576 21 1A 00      [10] 1031 	ld	hl, #26+0
+   0579 39            [11] 1032 	add	hl, sp
+   057A 7E            [ 7] 1033 	ld	a, (hl)
+   057B FD 21 22 00   [14] 1034 	ld	iy,#34
+   057F FD 39         [15] 1035 	add	iy,sp
+   0581 FD 77 00      [19] 1036 	ld	0 (iy),a
+   0584 21 1B 00      [10] 1037 	ld	hl, #26+1
+   0587 39            [11] 1038 	add	hl, sp
+   0588 7E            [ 7] 1039 	ld	a, (hl)
+   0589 FD 21 22 00   [14] 1040 	ld	iy,#34
+   058D FD 39         [15] 1041 	add	iy,sp
+   058F FD 77 01      [19] 1042 	ld	1 (iy),a
+   0592 21 0E 00      [10] 1043 	ld	hl, #14
+   0595 39            [11] 1044 	add	hl, sp
+   0596 AF            [ 4] 1045 	xor	a, a
+   0597 77            [ 7] 1046 	ld	(hl), a
+   0598 23            [ 6] 1047 	inc	hl
+   0599 77            [ 7] 1048 	ld	(hl), a
+   059A                    1049 00178$:
+                           1050 ;src/main.c:451: addr = 0x6000 + (i * 256); //point to the memory holding the data
+   059A 21 0E 00      [10] 1051 	ld	hl, #14+0
+   059D 39            [11] 1052 	add	hl, sp
+   059E 56            [ 7] 1053 	ld	d, (hl)
+   059F 1E 00         [ 7] 1054 	ld	e,#0x00
+   05A1 21 00 60      [10] 1055 	ld	hl,#0x6000
+   05A4 19            [11] 1056 	add	hl,de
+   05A5 FD 21 1E 00   [14] 1057 	ld	iy,#30
+   05A9 FD 39         [15] 1058 	add	iy,sp
+   05AB FD 75 00      [19] 1059 	ld	0 (iy),l
+   05AE FD 74 01      [19] 1060 	ld	1 (iy),h
+                           1061 ;src/main.c:453: ret = _send_command(CMD_WRITE_MEMORY, 0, 1);
+   05B1 21 01 00      [10] 1062 	ld	hl,#0x0001
+   05B4 E5            [11] 1063 	push	hl
+   05B5 2E 00         [ 7] 1064 	ld	l, #0x00
+   05B7 E5            [11] 1065 	push	hl
+   05B8 3E 31         [ 7] 1066 	ld	a,#0x31
+   05BA F5            [11] 1067 	push	af
+   05BB 33            [ 6] 1068 	inc	sp
+   05BC CDrE5r01      [17] 1069 	call	__send_command
+   05BF F1            [10] 1070 	pop	af
+   05C0 F1            [10] 1071 	pop	af
+   05C1 33            [ 6] 1072 	inc	sp
+   05C2 4D            [ 4] 1073 	ld	c, l
+   05C3 44            [ 4] 1074 	ld	b, h
+                           1075 ;src/main.c:455: if (ret == 0)
+   05C4 78            [ 4] 1076 	ld	a,b
+   05C5 B1            [ 4] 1077 	or	a,c
+   05C6 C2rB5r06      [10] 1078 	jp	NZ,00145$
+                           1079 ;src/main.c:458: buffer_wr[0] = 0x08;
+   05C9 21r02r02      [10] 1080 	ld	hl,#_buffer_wr
+   05CC 36 08         [10] 1081 	ld	(hl),#0x08
+                           1082 ;src/main.c:459: buffer_wr[1] = 0x00;
+   05CE 21r03r02      [10] 1083 	ld	hl,#(_buffer_wr + 0x0001)
+   05D1 36 00         [10] 1084 	ld	(hl),#0x00
+                           1085 ;src/main.c:460: buffer_wr[2] = stm_addr >> 8;
+   05D3 FD 21 22 00   [14] 1086 	ld	iy,#34
+   05D7 FD 39         [15] 1087 	add	iy,sp
+   05D9 FD 5E 01      [19] 1088 	ld	e,1 (iy)
+   05DC 21r04r02      [10] 1089 	ld	hl,#(_buffer_wr + 0x0002)
+   05DF 73            [ 7] 1090 	ld	(hl),e
+                           1091 ;src/main.c:461: buffer_wr[3] = stm_addr & 0xff;
+   05E0 FD 56 00      [19] 1092 	ld	d,0 (iy)
+   05E3 21r05r02      [10] 1093 	ld	hl,#(_buffer_wr + 0x0003)
+   05E6 72            [ 7] 1094 	ld	(hl),d
+                           1095 ;src/main.c:462: buffer_wr[4] = buffer_wr[0] ^ buffer_wr[1] ^ buffer_wr[2] ^ buffer_wr[3]; // XOR
+   05E7 3Ar02r02      [13] 1096 	ld	a, (#_buffer_wr + 0)
+   05EA 21r03r02      [10] 1097 	ld	hl, #(_buffer_wr + 0x0001) + 0
+   05ED 6E            [ 7] 1098 	ld	l,(hl)
+   05EE AD            [ 4] 1099 	xor	a, l
+   05EF AB            [ 4] 1100 	xor	a, e
+   05F0 AA            [ 4] 1101 	xor	a, d
+   05F1 32r06r02      [13] 1102 	ld	(#(_buffer_wr + 0x0004)),a
+                           1103 ;src/main.c:463: _write(5);
+   05F4 21 05 00      [10] 1104 	ld	hl,#0x0005
+   05F7 E5            [11] 1105 	push	hl
+   05F8 CDr98r00      [17] 1106 	call	__write
+                           1107 ;src/main.c:465: ret = _read(1, 1000);
+   05FB 21 E8 03      [10] 1108 	ld	hl, #0x03E8
+   05FE E3            [19] 1109 	ex	(sp),hl
+   05FF 21 01 00      [10] 1110 	ld	hl,#0x0001
+   0602 E5            [11] 1111 	push	hl
+   0603 CDrC0r00      [17] 1112 	call	__read
+   0606 F1            [10] 1113 	pop	af
+   0607 F1            [10] 1114 	pop	af
+                           1115 ;src/main.c:467: if (ret == -1)
+   0608 2C            [ 4] 1116 	inc	l
+   0609 20 0B         [12] 1117 	jr	NZ,00140$
+   060B 24            [ 4] 1118 	inc	h
+   060C 20 08         [12] 1119 	jr	NZ,00140$
+                           1120 ;src/main.c:469: display_error("Fail to write address");
+   060E 21r10r0B      [10] 1121 	ld	hl,#___str_23
+   0611 E5            [11] 1122 	push	hl
+   0612 CDr00r00      [17] 1123 	call	_display_error
+   0615 F1            [10] 1124 	pop	af
+   0616                    1125 00140$:
+                           1126 ;src/main.c:472: buffer_wr[0] = 0xff; // will write 255 bytes
+   0616 21r02r02      [10] 1127 	ld	hl,#_buffer_wr
+   0619 36 FF         [10] 1128 	ld	(hl),#0xFF
+                           1129 ;src/main.c:474: XOR = buffer_wr[0];
+   061B 3Ar02r02      [13] 1130 	ld	a, (#_buffer_wr + 0)
+   061E FD 21 18 00   [14] 1131 	ld	iy,#24
+   0622 FD 39         [15] 1132 	add	iy,sp
+   0624 FD 77 00      [19] 1133 	ld	0 (iy),a
+   0627 FD 36 01 00   [19] 1134 	ld	1 (iy),#0x00
+                           1135 ;src/main.c:477: for (c=1; c<=256; c++)
+   062B 21 1E 00      [10] 1136 	ld	hl, #30
+   062E 39            [11] 1137 	add	hl, sp
+   062F 4E            [ 7] 1138 	ld	c, (hl)
+   0630 23            [ 6] 1139 	inc	hl
+   0631 46            [ 7] 1140 	ld	b, (hl)
+   0632 11 01 00      [10] 1141 	ld	de,#0x0001
+   0635                    1142 00176$:
+                           1143 ;src/main.c:479: buffer_wr[ c ] = peek(addr); 
+   0635 21r02r02      [10] 1144 	ld	hl,#_buffer_wr
+   0638 19            [11] 1145 	add	hl,de
+   0639 FD 21 1E 00   [14] 1146 	ld	iy,#30
+   063D FD 39         [15] 1147 	add	iy,sp
+   063F FD 75 00      [19] 1148 	ld	0 (iy),l
+   0642 FD 74 01      [19] 1149 	ld	1 (iy),h
+   0645 69            [ 4] 1150 	ld	l, c
+   0646 60            [ 4] 1151 	ld	h, b
+   0647 7E            [ 7] 1152 	ld	a,(hl)
+   0648 FD 6E 00      [19] 1153 	ld	l,0 (iy)
+   064B FD 66 01      [19] 1154 	ld	h,1 (iy)
+   064E 77            [ 7] 1155 	ld	(hl),a
+                           1156 ;src/main.c:481: XOR ^= buffer_wr[ c ];
+   064F FD 77 00      [19] 1157 	ld	0 (iy),a
+   0652 FD 36 01 00   [19] 1158 	ld	1 (iy),#0x00
+   0656 21 18 00      [10] 1159 	ld	hl, #24+0
+   0659 39            [11] 1160 	add	hl, sp
+   065A 7E            [ 7] 1161 	ld	a, (hl)
+   065B FD 21 1E 00   [14] 1162 	ld	iy,#30
+   065F FD 39         [15] 1163 	add	iy,sp
+   0661 FD AE 00      [19] 1164 	xor	a, 0 (iy)
+   0664 FD 21 18 00   [14] 1165 	ld	iy,#24
+   0668 FD 39         [15] 1166 	add	iy,sp
+   066A FD 77 00      [19] 1167 	ld	0 (iy),a
+   066D FD 7E 01      [19] 1168 	ld	a,1 (iy)
+   0670 FD 21 1E 00   [14] 1169 	ld	iy,#30
+   0674 FD 39         [15] 1170 	add	iy,sp
+   0676 FD AE 01      [19] 1171 	xor	a, 1 (iy)
+   0679 FD 21 18 00   [14] 1172 	ld	iy,#24
+   067D FD 39         [15] 1173 	add	iy,sp
+   067F FD 77 01      [19] 1174 	ld	1 (iy),a
+                           1175 ;src/main.c:483: addr++;
+   0682 03            [ 6] 1176 	inc	bc
+                           1177 ;src/main.c:477: for (c=1; c<=256; c++)
+   0683 13            [ 6] 1178 	inc	de
+   0684 AF            [ 4] 1179 	xor	a, a
+   0685 BB            [ 4] 1180 	cp	a, e
+   0686 3E 01         [ 7] 1181 	ld	a,#0x01
+   0688 9A            [ 4] 1182 	sbc	a, d
+   0689 30 AA         [12] 1183 	jr	NC,00176$
+                           1184 ;src/main.c:486: buffer_wr[257] = XOR;
+   068B FD 7E 00      [19] 1185 	ld	a,0 (iy)
+   068E 32r03r03      [13] 1186 	ld	(#(_buffer_wr + 0x0101)),a
+                           1187 ;src/main.c:488: _write(258);
+   0691 21 02 01      [10] 1188 	ld	hl,#0x0102
+   0694 E5            [11] 1189 	push	hl
+   0695 CDr98r00      [17] 1190 	call	__write
+                           1191 ;src/main.c:491: ret = _read(1, 1000);
+   0698 21 E8 03      [10] 1192 	ld	hl, #0x03E8
+   069B E3            [19] 1193 	ex	(sp),hl
+   069C 21 01 00      [10] 1194 	ld	hl,#0x0001
+   069F E5            [11] 1195 	push	hl
+   06A0 CDrC0r00      [17] 1196 	call	__read
+   06A3 F1            [10] 1197 	pop	af
+   06A4 F1            [10] 1198 	pop	af
+                           1199 ;src/main.c:493: if (ret == -1)
+   06A5 2C            [ 4] 1200 	inc	l
+   06A6 20 15         [12] 1201 	jr	NZ,00146$
+   06A8 24            [ 4] 1202 	inc	h
+   06A9 20 12         [12] 1203 	jr	NZ,00146$
+                           1204 ;src/main.c:495: display_error("Fail to write bytes");
+   06AB 21r26r0B      [10] 1205 	ld	hl,#___str_24
+   06AE E5            [11] 1206 	push	hl
+   06AF CDr00r00      [17] 1207 	call	_display_error
+   06B2 F1            [10] 1208 	pop	af
+   06B3 18 08         [12] 1209 	jr	00146$
+   06B5                    1210 00145$:
+                           1211 ;src/main.c:500: display_error("Fail on write command");
+   06B5 21r3Ar0B      [10] 1212 	ld	hl,#___str_25
+   06B8 E5            [11] 1213 	push	hl
+   06B9 CDr00r00      [17] 1214 	call	_display_error
+   06BC F1            [10] 1215 	pop	af
+   06BD                    1216 00146$:
+                           1217 ;src/main.c:504: stm_addr += 256;
+   06BD 21 22 00      [10] 1218 	ld	hl,#34
+   06C0 39            [11] 1219 	add	hl,sp
+   06C1 7E            [ 7] 1220 	ld	a,(hl)
+   06C2 C6 00         [ 7] 1221 	add	a, #0x00
+   06C4 77            [ 7] 1222 	ld	(hl),a
+   06C5 23            [ 6] 1223 	inc	hl
+   06C6 7E            [ 7] 1224 	ld	a,(hl)
+   06C7 CE 01         [ 7] 1225 	adc	a, #0x01
+   06C9 77            [ 7] 1226 	ld	(hl),a
+                           1227 ;src/main.c:448: for (i = 0; i < 2; i++)
+   06CA FD 21 0E 00   [14] 1228 	ld	iy,#14
+   06CE FD 39         [15] 1229 	add	iy,sp
+   06D0 FD 34 00      [23] 1230 	inc	0 (iy)
+   06D3 20 03         [12] 1231 	jr	NZ,00382$
+   06D5 FD 34 01      [23] 1232 	inc	1 (iy)
+   06D8                    1233 00382$:
+   06D8 FD 7E 00      [19] 1234 	ld	a,0 (iy)
+   06DB D6 02         [ 7] 1235 	sub	a, #0x02
+   06DD FD 7E 01      [19] 1236 	ld	a,1 (iy)
+   06E0 17            [ 4] 1237 	rla
+   06E1 3F            [ 4] 1238 	ccf
+   06E2 1F            [ 4] 1239 	rra
+   06E3 DE 80         [ 7] 1240 	sbc	a, #0x80
+   06E5 DAr9Ar05      [10] 1241 	jp	C,00178$
+                           1242 ;src/main.c:506: vdp_prints("*");
+   06E8 21 22 00      [10] 1243 	ld	hl, #34+0
+   06EB 39            [11] 1244 	add	hl, sp
+   06EC 7E            [ 7] 1245 	ld	a, (hl)
+   06ED FD 21 1A 00   [14] 1246 	ld	iy,#26
+   06F1 FD 39         [15] 1247 	add	iy,sp
+   06F3 FD 77 00      [19] 1248 	ld	0 (iy),a
+   06F6 21 23 00      [10] 1249 	ld	hl, #34+1
+   06F9 39            [11] 1250 	add	hl, sp
+   06FA 7E            [ 7] 1251 	ld	a, (hl)
+   06FB FD 21 1A 00   [14] 1252 	ld	iy,#26
+   06FF FD 39         [15] 1253 	add	iy,sp
+   0701 FD 77 01      [19] 1254 	ld	1 (iy),a
+   0704 21r50r0B      [10] 1255 	ld	hl,#___str_26
+   0707 E5            [11] 1256 	push	hl
+   0708 CDr00r00      [17] 1257 	call	_vdp_prints
+   070B F1            [10] 1258 	pop	af
+   070C C3r37r05      [10] 1259 	jp	00148$
+   070F                    1260 00150$:
+                           1261 ;src/main.c:509: vdp_prints(" OK!");
+   070F 21r52r0B      [10] 1262 	ld	hl,#___str_27
+   0712 E5            [11] 1263 	push	hl
+   0713 CDr00r00      [17] 1264 	call	_vdp_prints
+                           1265 ;src/main.c:513: vdp_gotoxy(0, 14);
+   0716 21 00 0E      [10] 1266 	ld	hl, #0x0E00
+   0719 E3            [19] 1267 	ex	(sp),hl
+   071A CDr00r00      [17] 1268 	call	_vdp_gotoxy
+                           1269 ;src/main.c:514: vdp_prints("Verifying: ");
+   071D 21r57r0B      [10] 1270 	ld	hl, #___str_28
+   0720 E3            [19] 1271 	ex	(sp),hl
+   0721 CDr00r00      [17] 1272 	call	_vdp_prints
+   0724 F1            [10] 1273 	pop	af
+                           1274 ;src/main.c:516: if (!FileOpen(&file, fn_firmware)) {
+   0725 21 24 00      [10] 1275 	ld	hl, #36
+   0728 39            [11] 1276 	add	hl, sp
+   0729 5E            [ 7] 1277 	ld	e, (hl)
+   072A 23            [ 6] 1278 	inc	hl
+   072B 56            [ 7] 1279 	ld	d, (hl)
+   072C 2Ar00r00      [16] 1280 	ld	hl,(_fn_firmware)
+   072F E5            [11] 1281 	push	hl
+   0730 D5            [11] 1282 	push	de
+   0731 CDr00r00      [17] 1283 	call	_FileOpen
+   0734 F1            [10] 1284 	pop	af
+   0735 F1            [10] 1285 	pop	af
+   0736 7D            [ 4] 1286 	ld	a,l
+   0737 B7            [ 4] 1287 	or	a, a
+   0738 20 08         [12] 1288 	jr	NZ,00152$
+                           1289 ;src/main.c:518: display_error("Fail to open UPDATE.STM");
+   073A 21r67r0A      [10] 1290 	ld	hl,#___str_14
+   073D E5            [11] 1291 	push	hl
+   073E CDr00r00      [17] 1292 	call	_display_error
+   0741 F1            [10] 1293 	pop	af
+   0742                    1294 00152$:
+                           1295 ;src/main.c:521: stm_addr = 0;
+   0742 01 00 00      [10] 1296 	ld	bc,#0x0000
+                           1297 ;src/main.c:525: while  ( blocks_read < num_blocks ) 
+   0745 21 24 00      [10] 1298 	ld	hl, #36+0
+   0748 39            [11] 1299 	add	hl, sp
+   0749 7E            [ 7] 1300 	ld	a, (hl)
+   074A FD 21 1E 00   [14] 1301 	ld	iy,#30
+   074E FD 39         [15] 1302 	add	iy,sp
+   0750 FD 77 00      [19] 1303 	ld	0 (iy),a
+   0753 21 25 00      [10] 1304 	ld	hl, #36+1
+   0756 39            [11] 1305 	add	hl, sp
+   0757 7E            [ 7] 1306 	ld	a, (hl)
+   0758 FD 21 1E 00   [14] 1307 	ld	iy,#30
+   075C FD 39         [15] 1308 	add	iy,sp
+   075E FD 77 01      [19] 1309 	ld	1 (iy),a
+   0761 21 10 00      [10] 1310 	ld	hl, #16
+   0764 39            [11] 1311 	add	hl, sp
+   0765 AF            [ 4] 1312 	xor	a, a
+   0766 77            [ 7] 1313 	ld	(hl), a
+   0767 23            [ 6] 1314 	inc	hl
+   0768 77            [ 7] 1315 	ld	(hl), a
+   0769                    1316 00166$:
+   0769 21 12 00      [10] 1317 	ld	hl,#18
+   076C 39            [11] 1318 	add	hl,sp
+   076D FD 21 10 00   [14] 1319 	ld	iy,#16
+   0771 FD 39         [15] 1320 	add	iy,sp
+   0773 FD 7E 00      [19] 1321 	ld	a,0 (iy)
+   0776 96            [ 7] 1322 	sub	a, (hl)
+   0777 FD 7E 01      [19] 1323 	ld	a,1 (iy)
+   077A 23            [ 6] 1324 	inc	hl
+   077B 9E            [ 7] 1325 	sbc	a, (hl)
+   077C D2r4Cr09      [10] 1326 	jp	NC,00168$
+                           1327 ;src/main.c:527: FileRead(&file, mem); //read 512 bytes from file
+   077F 21 1E 00      [10] 1328 	ld	hl, #30
+   0782 39            [11] 1329 	add	hl, sp
+   0783 7E            [ 7] 1330 	ld	a, (hl)
+   0784 23            [ 6] 1331 	inc	hl
+   0785 66            [ 7] 1332 	ld	h, (hl)
+   0786 6F            [ 4] 1333 	ld	l, a
+   0787 C5            [11] 1334 	push	bc
+   0788 FD 21 16 00   [14] 1335 	ld	iy,#22
+   078C FD 39         [15] 1336 	add	iy,sp
+   078E FD 5E 00      [19] 1337 	ld	e,0 (iy)
+   0791 FD 56 01      [19] 1338 	ld	d,1 (iy)
+   0794 D5            [11] 1339 	push	de
+   0795 E5            [11] 1340 	push	hl
+   0796 CDr00r00      [17] 1341 	call	_FileRead
+   0799 F1            [10] 1342 	pop	af
+   079A F1            [10] 1343 	pop	af
+   079B C1            [10] 1344 	pop	bc
+                           1345 ;src/main.c:529: blocks_read++;
+   079C FD 21 10 00   [14] 1346 	ld	iy,#16
+   07A0 FD 39         [15] 1347 	add	iy,sp
+   07A2 FD 34 00      [23] 1348 	inc	0 (iy)
+   07A5 20 03         [12] 1349 	jr	NZ,00383$
+   07A7 FD 34 01      [23] 1350 	inc	1 (iy)
+   07AA                    1351 00383$:
+                           1352 ;src/main.c:531: for (i = 0; i < 2; i++)
+   07AA FD 21 22 00   [14] 1353 	ld	iy,#34
+   07AE FD 39         [15] 1354 	add	iy,sp
+   07B0 FD 71 00      [19] 1355 	ld	0 (iy),c
+   07B3 FD 70 01      [19] 1356 	ld	1 (iy),b
+   07B6 21 0E 00      [10] 1357 	ld	hl, #14
+   07B9 39            [11] 1358 	add	hl, sp
+   07BA AF            [ 4] 1359 	xor	a, a
+   07BB 77            [ 7] 1360 	ld	(hl), a
+   07BC 23            [ 6] 1361 	inc	hl
+   07BD 77            [ 7] 1362 	ld	(hl), a
+   07BE                    1363 00182$:
+                           1364 ;src/main.c:533: addr = 0x6000 + (i * 256); //point to the memory holding the data
+   07BE 21 0E 00      [10] 1365 	ld	hl, #14+0
+   07C1 39            [11] 1366 	add	hl, sp
+   07C2 7E            [ 7] 1367 	ld	a, (hl)
+   07C3 FD 21 20 00   [14] 1368 	ld	iy,#32
+   07C7 FD 39         [15] 1369 	add	iy,sp
+   07C9 FD 77 01      [19] 1370 	ld	1 (iy),a
+   07CC FD 36 00 00   [19] 1371 	ld	0 (iy),#0x00
+   07D0 21 16 00      [10] 1372 	ld	hl,#22
+   07D3 39            [11] 1373 	add	hl,sp
+   07D4 FD 7E 00      [19] 1374 	ld	a,0 (iy)
+   07D7 C6 00         [ 7] 1375 	add	a, #0x00
+   07D9 77            [ 7] 1376 	ld	(hl),a
+   07DA FD 7E 01      [19] 1377 	ld	a,1 (iy)
+   07DD CE 60         [ 7] 1378 	adc	a, #0x60
+   07DF 23            [ 6] 1379 	inc	hl
+   07E0 77            [ 7] 1380 	ld	(hl),a
+                           1381 ;src/main.c:536: ret = _send_command(CMD_READ_MEMORY, 0, 1);
+   07E1 21 01 00      [10] 1382 	ld	hl,#0x0001
+   07E4 E5            [11] 1383 	push	hl
+   07E5 2E 00         [ 7] 1384 	ld	l, #0x00
+   07E7 E5            [11] 1385 	push	hl
+   07E8 3E 11         [ 7] 1386 	ld	a,#0x11
+   07EA F5            [11] 1387 	push	af
+   07EB 33            [ 6] 1388 	inc	sp
+   07EC CDrE5r01      [17] 1389 	call	__send_command
+   07EF F1            [10] 1390 	pop	af
+   07F0 F1            [10] 1391 	pop	af
+   07F1 33            [ 6] 1392 	inc	sp
+   07F2 FD 21 20 00   [14] 1393 	ld	iy,#32
+   07F6 FD 39         [15] 1394 	add	iy,sp
+   07F8 FD 75 00      [19] 1395 	ld	0 (iy),l
+   07FB FD 74 01      [19] 1396 	ld	1 (iy),h
+                           1397 ;src/main.c:538: if (ret == 0)
+   07FE FD 7E 01      [19] 1398 	ld	a,1 (iy)
+   0801 FD B6 00      [19] 1399 	or	a,0 (iy)
+   0804 C2r05r09      [10] 1400 	jp	NZ,00163$
+                           1401 ;src/main.c:541: buffer_wr[0] = 0x08;
+   0807 21r02r02      [10] 1402 	ld	hl,#_buffer_wr
+   080A 36 08         [10] 1403 	ld	(hl),#0x08
+                           1404 ;src/main.c:542: buffer_wr[1] = 0x00;
+   080C 11r03r02      [10] 1405 	ld	de,#_buffer_wr + 1
+   080F AF            [ 4] 1406 	xor	a, a
+   0810 12            [ 7] 1407 	ld	(de),a
+                           1408 ;src/main.c:543: buffer_wr[2] = stm_addr >> 8;
+   0811 FD 21 22 00   [14] 1409 	ld	iy,#34
+   0815 FD 39         [15] 1410 	add	iy,sp
+   0817 FD 4E 01      [19] 1411 	ld	c,1 (iy)
+   081A 21r04r02      [10] 1412 	ld	hl,#(_buffer_wr + 0x0002)
+   081D 71            [ 7] 1413 	ld	(hl),c
+                           1414 ;src/main.c:544: buffer_wr[3] = stm_addr & 0xff;
+   081E FD 46 00      [19] 1415 	ld	b,0 (iy)
+   0821 21r05r02      [10] 1416 	ld	hl,#(_buffer_wr + 0x0003)
+   0824 70            [ 7] 1417 	ld	(hl),b
+                           1418 ;src/main.c:545: buffer_wr[4] = buffer_wr[0] ^ buffer_wr[1] ^ buffer_wr[2] ^ buffer_wr[3]; // XOR
+   0825 3Ar02r02      [13] 1419 	ld	a, (#_buffer_wr + 0)
+   0828 F5            [11] 1420 	push	af
+   0829 1A            [ 7] 1421 	ld	a,(de)
+   082A 67            [ 4] 1422 	ld	h,a
+   082B F1            [10] 1423 	pop	af
+   082C AC            [ 4] 1424 	xor	a, h
+   082D A9            [ 4] 1425 	xor	a, c
+   082E A8            [ 4] 1426 	xor	a, b
+   082F 32r06r02      [13] 1427 	ld	(#(_buffer_wr + 0x0004)),a
+                           1428 ;src/main.c:546: _write(5);
+   0832 D5            [11] 1429 	push	de
+   0833 21 05 00      [10] 1430 	ld	hl,#0x0005
+   0836 E5            [11] 1431 	push	hl
+   0837 CDr98r00      [17] 1432 	call	__write
+   083A 21 E8 03      [10] 1433 	ld	hl, #0x03E8
+   083D E3            [19] 1434 	ex	(sp),hl
+   083E 21 01 00      [10] 1435 	ld	hl,#0x0001
+   0841 E5            [11] 1436 	push	hl
+   0842 CDrC0r00      [17] 1437 	call	__read
+   0845 F1            [10] 1438 	pop	af
+   0846 F1            [10] 1439 	pop	af
+   0847 D1            [10] 1440 	pop	de
+                           1441 ;src/main.c:550: if (ret == -1)
+   0848 2C            [ 4] 1442 	inc	l
+   0849 20 0D         [12] 1443 	jr	NZ,00154$
+   084B 24            [ 4] 1444 	inc	h
+   084C 20 0A         [12] 1445 	jr	NZ,00154$
+                           1446 ;src/main.c:552: display_error("Fail to write the verify address");
+   084E 21r63r0B      [10] 1447 	ld	hl,#___str_29
+   0851 D5            [11] 1448 	push	de
+   0852 E5            [11] 1449 	push	hl
+   0853 CDr00r00      [17] 1450 	call	_display_error
+   0856 F1            [10] 1451 	pop	af
+   0857 D1            [10] 1452 	pop	de
+   0858                    1453 00154$:
+                           1454 ;src/main.c:555: buffer_wr[0] = 0xff; // will read 255 bytes
+   0858 21r02r02      [10] 1455 	ld	hl,#_buffer_wr
+   085B 36 FF         [10] 1456 	ld	(hl),#0xFF
+                           1457 ;src/main.c:556: buffer_wr[1] = 0x00; // xor
+   085D AF            [ 4] 1458 	xor	a, a
+   085E 12            [ 7] 1459 	ld	(de),a
+                           1460 ;src/main.c:557: _write(2);
+   085F 21 02 00      [10] 1461 	ld	hl,#0x0002
+   0862 E5            [11] 1462 	push	hl
+   0863 CDr98r00      [17] 1463 	call	__write
+                           1464 ;src/main.c:559: ret = _read(1, 1000); //read the ACK
+   0866 21 E8 03      [10] 1465 	ld	hl, #0x03E8
+   0869 E3            [19] 1466 	ex	(sp),hl
+   086A 21 01 00      [10] 1467 	ld	hl,#0x0001
+   086D E5            [11] 1468 	push	hl
+   086E CDrC0r00      [17] 1469 	call	__read
+   0871 F1            [10] 1470 	pop	af
+   0872 F1            [10] 1471 	pop	af
+                           1472 ;src/main.c:561: if (ret == -1)
+   0873 2C            [ 4] 1473 	inc	l
+   0874 20 0B         [12] 1474 	jr	NZ,00156$
+   0876 24            [ 4] 1475 	inc	h
+   0877 20 08         [12] 1476 	jr	NZ,00156$
+                           1477 ;src/main.c:563: display_error("Fail to verify ACK command");
+   0879 21r84r0B      [10] 1478 	ld	hl,#___str_30
+   087C E5            [11] 1479 	push	hl
+   087D CDr00r00      [17] 1480 	call	_display_error
+   0880 F1            [10] 1481 	pop	af
+   0881                    1482 00156$:
+                           1483 ;src/main.c:566: ret = _read(256, 1000); //read the block
+   0881 21 E8 03      [10] 1484 	ld	hl,#0x03E8
+   0884 E5            [11] 1485 	push	hl
+   0885 21 00 01      [10] 1486 	ld	hl,#0x0100
+   0888 E5            [11] 1487 	push	hl
+   0889 CDrC0r00      [17] 1488 	call	__read
+   088C F1            [10] 1489 	pop	af
+   088D F1            [10] 1490 	pop	af
+                           1491 ;src/main.c:568: if (ret == -1)
+   088E 2C            [ 4] 1492 	inc	l
+   088F 20 0B         [12] 1493 	jr	NZ,00225$
+   0891 24            [ 4] 1494 	inc	h
+   0892 20 08         [12] 1495 	jr	NZ,00225$
+                           1496 ;src/main.c:570: display_error("Fail to verify command");
+   0894 21r9Fr0B      [10] 1497 	ld	hl,#___str_31
+   0897 E5            [11] 1498 	push	hl
+   0898 CDr00r00      [17] 1499 	call	_display_error
+   089B F1            [10] 1500 	pop	af
+                           1501 ;src/main.c:574: for (c=0; c<256; c++)
+   089C                    1502 00225$:
+   089C 21 16 00      [10] 1503 	ld	hl, #22+0
+   089F 39            [11] 1504 	add	hl, sp
+   08A0 7E            [ 7] 1505 	ld	a, (hl)
+   08A1 FD 21 20 00   [14] 1506 	ld	iy,#32
+   08A5 FD 39         [15] 1507 	add	iy,sp
+   08A7 FD 77 00      [19] 1508 	ld	0 (iy),a
+   08AA 21 17 00      [10] 1509 	ld	hl, #22+1
+   08AD 39            [11] 1510 	add	hl, sp
+   08AE 7E            [ 7] 1511 	ld	a, (hl)
+   08AF FD 21 20 00   [14] 1512 	ld	iy,#32
+   08B3 FD 39         [15] 1513 	add	iy,sp
+   08B5 FD 77 01      [19] 1514 	ld	1 (iy),a
+   08B8 21 00 00      [10] 1515 	ld	hl,#0x0000
+   08BB E3            [19] 1516 	ex	(sp), hl
+   08BC                    1517 00180$:
+                           1518 ;src/main.c:576: if (buffer_rd[ c ] != peek(addr))
+   08BC 3Er02         [ 7] 1519 	ld	a,#<(_buffer_rd)
+   08BE 21 00 00      [10] 1520 	ld	hl,#0
+   08C1 39            [11] 1521 	add	hl,sp
+   08C2 86            [ 7] 1522 	add	a, (hl)
+   08C3 5F            [ 4] 1523 	ld	e,a
+   08C4 3Es00         [ 7] 1524 	ld	a,#>(_buffer_rd)
+   08C6 23            [ 6] 1525 	inc	hl
+   08C7 8E            [ 7] 1526 	adc	a, (hl)
+   08C8 57            [ 4] 1527 	ld	d,a
+   08C9 1A            [ 7] 1528 	ld	a,(de)
+   08CA 57            [ 4] 1529 	ld	d,a
+   08CB 21 20 00      [10] 1530 	ld	hl, #32
+   08CE 39            [11] 1531 	add	hl, sp
+   08CF 7E            [ 7] 1532 	ld	a, (hl)
+   08D0 23            [ 6] 1533 	inc	hl
+   08D1 66            [ 7] 1534 	ld	h, (hl)
+   08D2 6F            [ 4] 1535 	ld	l, a
+   08D3 5E            [ 7] 1536 	ld	e,(hl)
+   08D4 7A            [ 4] 1537 	ld	a,d
+   08D5 93            [ 4] 1538 	sub	a, e
+   08D6 28 08         [12] 1539 	jr	Z,00160$
+                           1540 ;src/main.c:587: display_error("Fail to verify the bytes");
+   08D8 21rB6r0B      [10] 1541 	ld	hl,#___str_32
+   08DB E5            [11] 1542 	push	hl
+   08DC CDr00r00      [17] 1543 	call	_display_error
+   08DF F1            [10] 1544 	pop	af
+   08E0                    1545 00160$:
+                           1546 ;src/main.c:590: addr++;
+   08E0 FD 21 20 00   [14] 1547 	ld	iy,#32
+   08E4 FD 39         [15] 1548 	add	iy,sp
+   08E6 FD 34 00      [23] 1549 	inc	0 (iy)
+   08E9 20 03         [12] 1550 	jr	NZ,00391$
+   08EB FD 34 01      [23] 1551 	inc	1 (iy)
+   08EE                    1552 00391$:
+                           1553 ;src/main.c:574: for (c=0; c<256; c++)
+   08EE FD 21 00 00   [14] 1554 	ld	iy,#0
+   08F2 FD 39         [15] 1555 	add	iy,sp
+   08F4 FD 34 00      [23] 1556 	inc	0 (iy)
+   08F7 20 03         [12] 1557 	jr	NZ,00392$
+   08F9 FD 34 01      [23] 1558 	inc	1 (iy)
+   08FC                    1559 00392$:
+   08FC FD 7E 01      [19] 1560 	ld	a,1 (iy)
+   08FF D6 01         [ 7] 1561 	sub	a, #0x01
+   0901 38 B9         [12] 1562 	jr	C,00180$
+   0903 18 08         [12] 1563 	jr	00164$
+   0905                    1564 00163$:
+                           1565 ;src/main.c:597: display_error("Fail on verify command");
+   0905 21rCFr0B      [10] 1566 	ld	hl,#___str_33
+   0908 E5            [11] 1567 	push	hl
+   0909 CDr00r00      [17] 1568 	call	_display_error
+   090C F1            [10] 1569 	pop	af
+   090D                    1570 00164$:
+                           1571 ;src/main.c:601: stm_addr += 256;
+   090D 21 22 00      [10] 1572 	ld	hl,#34
+   0910 39            [11] 1573 	add	hl,sp
+   0911 7E            [ 7] 1574 	ld	a,(hl)
+   0912 C6 00         [ 7] 1575 	add	a, #0x00
+   0914 77            [ 7] 1576 	ld	(hl),a
+   0915 23            [ 6] 1577 	inc	hl
+   0916 7E            [ 7] 1578 	ld	a,(hl)
+   0917 CE 01         [ 7] 1579 	adc	a, #0x01
+   0919 77            [ 7] 1580 	ld	(hl),a
+                           1581 ;src/main.c:531: for (i = 0; i < 2; i++)
+   091A FD 21 0E 00   [14] 1582 	ld	iy,#14
+   091E FD 39         [15] 1583 	add	iy,sp
+   0920 FD 34 00      [23] 1584 	inc	0 (iy)
+   0923 20 03         [12] 1585 	jr	NZ,00393$
+   0925 FD 34 01      [23] 1586 	inc	1 (iy)
+   0928                    1587 00393$:
+   0928 FD 7E 00      [19] 1588 	ld	a,0 (iy)
+   092B D6 02         [ 7] 1589 	sub	a, #0x02
+   092D FD 7E 01      [19] 1590 	ld	a,1 (iy)
+   0930 17            [ 4] 1591 	rla
+   0931 3F            [ 4] 1592 	ccf
+   0932 1F            [ 4] 1593 	rra
+   0933 DE 80         [ 7] 1594 	sbc	a, #0x80
+   0935 DArBEr07      [10] 1595 	jp	C,00182$
+                           1596 ;src/main.c:603: vdp_prints("*");
+   0938 21 22 00      [10] 1597 	ld	hl, #34
+   093B 39            [11] 1598 	add	hl, sp
+   093C 4E            [ 7] 1599 	ld	c, (hl)
+   093D 23            [ 6] 1600 	inc	hl
+   093E 46            [ 7] 1601 	ld	b, (hl)
+   093F 21r50r0B      [10] 1602 	ld	hl,#___str_26
+   0942 C5            [11] 1603 	push	bc
+   0943 E5            [11] 1604 	push	hl
+   0944 CDr00r00      [17] 1605 	call	_vdp_prints
+   0947 F1            [10] 1606 	pop	af
+   0948 C1            [10] 1607 	pop	bc
+   0949 C3r69r07      [10] 1608 	jp	00166$
+   094C                    1609 00168$:
+                           1610 ;src/main.c:612: DisableCard();
+   094C 3E FF         [ 7] 1611 	ld	a,#0xFF
+   094E D3 E7         [11] 1612 	out	(_SD_CONTROL),a
+                           1613 ;src/main.c:615: vdp_clear();
+   0950 CDr00r00      [17] 1614 	call	_vdp_clear
+                           1615 ;src/main.c:617: ULAPORT = COLOR_GREEN;				// green border 
+   0953 3E 04         [ 7] 1616 	ld	a,#0x04
+   0955 D3 FE         [11] 1617 	out	(_ULAPORT),a
+                           1618 ;src/main.c:619: vdp_gotoxy(11, 9);
+   0957 21 0B 09      [10] 1619 	ld	hl,#0x090B
+   095A E5            [11] 1620 	push	hl
+   095B CDr00r00      [17] 1621 	call	_vdp_gotoxy
+                           1622 ;src/main.c:620: vdp_prints("UPDATE OK!");
+   095E 21rE6r0B      [10] 1623 	ld	hl, #___str_34+0
+   0961 E3            [19] 1624 	ex	(sp),hl
+   0962 CDr00r00      [17] 1625 	call	_vdp_prints
+                           1626 ;src/main.c:621: vdp_gotoxy(4, 11);
+   0965 21 04 0B      [10] 1627 	ld	hl, #0x0B04
+   0968 E3            [19] 1628 	ex	(sp),hl
+   0969 CDr00r00      [17] 1629 	call	_vdp_gotoxy
+                           1630 ;src/main.c:622: vdp_prints("Restore the boot0 jumper");
+   096C 21rF1r0B      [10] 1631 	ld	hl, #___str_35+0
+   096F E3            [19] 1632 	ex	(sp),hl
+   0970 CDr00r00      [17] 1633 	call	_vdp_prints
+                           1634 ;src/main.c:623: vdp_gotoxy(5, 12);
+   0973 21 05 0C      [10] 1635 	ld	hl, #0x0C05
+   0976 E3            [19] 1636 	ex	(sp),hl
+   0977 CDr00r00      [17] 1637 	call	_vdp_gotoxy
+                           1638 ;src/main.c:624: vdp_prints("and turn off the power");
+   097A 21r0Ar0C      [10] 1639 	ld	hl, #___str_36+0
+   097D E3            [19] 1640 	ex	(sp),hl
+   097E CDr00r00      [17] 1641 	call	_vdp_prints
+   0981 F1            [10] 1642 	pop	af
+   0982                    1643 00185$:
+   0982 18 FE         [12] 1644 	jr	00185$
+   0984 21 26 00      [10] 1645 	ld	hl,#38
+   0987 39            [11] 1646 	add	hl,sp
+   0988 F9            [ 6] 1647 	ld	sp,hl
+   0989 C9            [10] 1648 	ret
+   098A                    1649 ___str_4:
+   098A 55 6E 41 6D 69 67  1650 	.ascii "UnAmiga STM32 Updater"
+        61 20 53 54 4D 33
+        32 20 55 70 64 61
+        74 65 72
+   099F 00                 1651 	.db 0x00
+   09A0                    1652 ___str_5:
+   09A0 43 68 61 6E 67 65  1653 	.ascii "Change the STM32 boot0 jumper"
+        20 74 68 65 20 53
+        54 4D 33 32 20 62
+        6F 6F 74 30 20 6A
+        75 6D 70 65 72
+   09BD 00                 1654 	.db 0x00
+   09BE                    1655 ___str_6:
+   09BE 70 72 65 73 73 20  1656 	.ascii "press the STM32 reset button"
+        74 68 65 20 53 54
+        4D 33 32 20 72 65
+        73 65 74 20 62 75
+        74 74 6F 6E
+   09DA 00                 1657 	.db 0x00
+   09DB                    1658 ___str_7:
+   09DB 61 6E 64 20 70 72  1659 	.ascii "and press ENTER"
+        65 73 73 20 45 4E
+        54 45 52
+   09EA 00                 1660 	.db 0x00
+   09EB                    1661 ___str_8:
+   09EB 4F 72 69 67 69 6E  1662 	.ascii "Original by Victor Trucco"
+        61 6C 20 62 79 20
+        56 69 63 74 6F 72
+        20 54 72 75 63 63
+        6F
+   0A04 00                 1663 	.db 0x00
+   0A05                    1664 ___str_9:
+   0A05 41 64 61 70 74 65  1665 	.ascii "Adapted by Benitoss"
+        64 20 62 79 20 42
+        65 6E 69 74 6F 73
+        73
+   0A18 00                 1666 	.db 0x00
+   0A19                    1667 ___str_10:
+   0A19 56 20 31 2E 30 31  1668 	.ascii "V 1.01"
+   0A1F 00                 1669 	.db 0x00
+   0A20                    1670 ___str_11:
+   0A20 41 72 65 20 79 6F  1671 	.ascii "Are you sure? (Y/N)"
+        75 20 73 75 72 65
+        3F 20 28 59 2F 4E
+        29
+   0A33 00                 1672 	.db 0x00
+   0A34                    1673 ___str_12:
+   0A34 46 61 69 6C 20 74  1674 	.ascii "Fail to init the SD card"
+        6F 20 69 6E 69 74
+        20 74 68 65 20 53
+        44 20 63 61 72 64
+   0A4C 00                 1675 	.db 0x00
+   0A4D                    1676 ___str_13:
+   0A4D 46 61 69 6C 20 74  1677 	.ascii "Fail to mount the SD card"
+        6F 20 6D 6F 75 6E
+        74 20 74 68 65 20
+        53 44 20 63 61 72
+        64
+   0A66 00                 1678 	.db 0x00
+   0A67                    1679 ___str_14:
+   0A67 46 61 69 6C 20 74  1680 	.ascii "Fail to open UPDATE.STM"
+        6F 20 6F 70 65 6E
+        20 55 50 44 41 54
+        45 2E 53 54 4D
+   0A7E 00                 1681 	.db 0x00
+   0A7F                    1682 ___str_15:
+   0A7F 4C 69 73 74 65 6E  1683 	.ascii "Listening the STM: "
+        69 6E 67 20 74 68
+        65 20 53 54 4D 3A
+        20
+   0A92 00                 1684 	.db 0x00
+   0A93                    1685 ___str_16:
+   0A93 4F 4B 21           1686 	.ascii "OK!"
+   0A96 00                 1687 	.db 0x00
+   0A97                    1688 ___str_17:
+   0A97 43 6F 6E 6E 65 63  1689 	.ascii "Connecting to the STM: "
+        74 69 6E 67 20 74
+        6F 20 74 68 65 20
+        53 54 4D 3A 20
+   0AAE 00                 1690 	.db 0x00
+   0AAF                    1691 ___str_18:
+   0AAF 46 61 69 6C 20 74  1692 	.ascii "Fail to connect to STM"
+        6F 20 63 6F 6E 6E
+        65 63 74 20 74 6F
+        20 53 54 4D
+   0AC5 00                 1693 	.db 0x00
+   0AC6                    1694 ___str_19:
+   0AC6 45 72 61 73 69 6E  1695 	.ascii "Erasing the STM: "
+        67 20 74 68 65 20
+        53 54 4D 3A 20
+   0AD7 00                 1696 	.db 0x00
+   0AD8                    1697 ___str_20:
+   0AD8 46 61 69 6C 20 74  1698 	.ascii "Fail to erase"
+        6F 20 65 72 61 73
+        65
+   0AE5 00                 1699 	.db 0x00
+   0AE6                    1700 ___str_21:
+   0AE6 46 61 69 6C 20 6F  1701 	.ascii "Fail on erase command"
+        6E 20 65 72 61 73
+        65 20 63 6F 6D 6D
+        61 6E 64
+   0AFB 00                 1702 	.db 0x00
+   0AFC                    1703 ___str_22:
+   0AFC 57 72 69 74 69 6E  1704 	.ascii "Writing to memory: "
+        67 20 74 6F 20 6D
+        65 6D 6F 72 79 3A
+        20
+   0B0F 00                 1705 	.db 0x00
+   0B10                    1706 ___str_23:
+   0B10 46 61 69 6C 20 74  1707 	.ascii "Fail to write address"
+        6F 20 77 72 69 74
+        65 20 61 64 64 72
+        65 73 73
+   0B25 00                 1708 	.db 0x00
+   0B26                    1709 ___str_24:
+   0B26 46 61 69 6C 20 74  1710 	.ascii "Fail to write bytes"
+        6F 20 77 72 69 74
+        65 20 62 79 74 65
+        73
+   0B39 00                 1711 	.db 0x00
+   0B3A                    1712 ___str_25:
+   0B3A 46 61 69 6C 20 6F  1713 	.ascii "Fail on write command"
+        6E 20 77 72 69 74
+        65 20 63 6F 6D 6D
+        61 6E 64
+   0B4F 00                 1714 	.db 0x00
+   0B50                    1715 ___str_26:
+   0B50 2A                 1716 	.ascii "*"
+   0B51 00                 1717 	.db 0x00
+   0B52                    1718 ___str_27:
+   0B52 20 4F 4B 21        1719 	.ascii " OK!"
+   0B56 00                 1720 	.db 0x00
+   0B57                    1721 ___str_28:
+   0B57 56 65 72 69 66 79  1722 	.ascii "Verifying: "
+        69 6E 67 3A 20
+   0B62 00                 1723 	.db 0x00
+   0B63                    1724 ___str_29:
+   0B63 46 61 69 6C 20 74  1725 	.ascii "Fail to write the verify address"
+        6F 20 77 72 69 74
+        65 20 74 68 65 20
+        76 65 72 69 66 79
+        20 61 64 64 72 65
+        73 73
+   0B83 00                 1726 	.db 0x00
+   0B84                    1727 ___str_30:
+   0B84 46 61 69 6C 20 74  1728 	.ascii "Fail to verify ACK command"
+        6F 20 76 65 72 69
+        66 79 20 41 43 4B
+        20 63 6F 6D 6D 61
+        6E 64
+   0B9E 00                 1729 	.db 0x00
+   0B9F                    1730 ___str_31:
+   0B9F 46 61 69 6C 20 74  1731 	.ascii "Fail to verify command"
+        6F 20 76 65 72 69
+        66 79 20 63 6F 6D
+        6D 61 6E 64
+   0BB5 00                 1732 	.db 0x00
+   0BB6                    1733 ___str_32:
+   0BB6 46 61 69 6C 20 74  1734 	.ascii "Fail to verify the bytes"
+        6F 20 76 65 72 69
+        66 79 20 74 68 65
+        20 62 79 74 65 73
+   0BCE 00                 1735 	.db 0x00
+   0BCF                    1736 ___str_33:
+   0BCF 46 61 69 6C 20 6F  1737 	.ascii "Fail on verify command"
+        6E 20 76 65 72 69
+        66 79 20 63 6F 6D
+        6D 61 6E 64
+   0BE5 00                 1738 	.db 0x00
+   0BE6                    1739 ___str_34:
+   0BE6 55 50 44 41 54 45  1740 	.ascii "UPDATE OK!"
+        20 4F 4B 21
+   0BF0 00                 1741 	.db 0x00
+   0BF1                    1742 ___str_35:
+   0BF1 52 65 73 74 6F 72  1743 	.ascii "Restore the boot0 jumper"
+        65 20 74 68 65 20
+        62 6F 6F 74 30 20
+        6A 75 6D 70 65 72
+   0C09 00                 1744 	.db 0x00
+   0C0A                    1745 ___str_36:
+   0C0A 61 6E 64 20 74 75  1746 	.ascii "and turn off the power"
+        72 6E 20 6F 66 66
+        20 74 68 65 20 70
+        6F 77 65 72
+   0C20 00                 1747 	.db 0x00
+                           1748 	.area _CODE
+   0C21                    1749 ___str_37:
+   0C21 55 50 44 41 54 45  1750 	.ascii "UPDATE  STM"
+        20 20 53 54 4D
+   0C2C 00                 1751 	.db 0x00
+                           1752 	.area _INITIALIZER
+   0000                    1753 __xinit__fn_firmware:
+   0000r21r0C              1754 	.dw ___str_37
+                           1755 	.area _CABS (ABS)

@@ -1,0 +1,3 @@
+call setsdcc
+make
+pause
