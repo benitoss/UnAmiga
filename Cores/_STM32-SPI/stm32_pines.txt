@@ -1,0 +1,32 @@
+//conected to FPGA JTAG
+PB0  --> TCK
+PB1  --> TDI 
+PB10 --> TMS
+PB11 --> TDO   
+
+// Reset 
+Reset --> Reset (stm_rst_o)
+
+
+//second SPI (OSD FPGA)
+PB12 --> SS/Cs (_b12_io)
+PB13 --> SCK   (_b13_io)
+PB14 --> MISO  (_b14_io)
+PB15 --> MOSI  (_b15_io)
+
+// Connected to the SD Card
+PA4  --> SS/CS
+PA5  --> SCK
+PA6  --> MISO
+PA7  --> MOSI
+
+
+// Serial for debbuging the OSD
+PA9  -->  RxD (stm_rx_o)  
+PA10 -->  TxD (stm_tx_i)
+
+
+// not connected
+PA15 --> DEsconocido (_a15_io)
+PB8  --> Desconocido (_b8_io)
+PB9  --> Deconocido  (_b9_io)
