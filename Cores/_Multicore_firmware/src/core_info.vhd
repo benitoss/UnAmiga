@@ -1,6 +1,7 @@
 
 library IEEE;
 use ieee.std_logic_1164.ALL;
+use ieee.std_logic_unsigned.ALL;
 use ieee.numeric_std.ALL;
 
 -- -----------------------------------------------------------------------
